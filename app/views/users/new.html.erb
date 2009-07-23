@@ -1,7 +1,9 @@
-<h1>Register</h1>
+<% content_for :title do %>
+  Sign Up
+<% end %>
  
-<% form_for @user, :url => account_path do |f| %>
+<% form_for @user, :url => profile_path do |f| %>
   <%= f.error_messages %>
   <%= render :partial => "form", :object => f %>
-  <%= f.submit "Register" %>
+  <%= f.submit "Sign Up" %>
 <% end %>

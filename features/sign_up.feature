@@ -1,7 +1,7 @@
 Feature: Sign up
   In order to register an account for the website
   As a site visitor
-  I want enter in some credentials and create an account
+  I want to enter in some credentials and create an account
   
   Scenario: Sign up with OpenID
     Given I am a site visitor who knows my OpenID
