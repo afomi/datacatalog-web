@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       flash[:notice] = "Sign up successful!"
-      redirect_back_or_default profile_url
+      redirect_to profile_url
     else
       render :action => :new
     end

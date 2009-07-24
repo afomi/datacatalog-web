@@ -10,6 +10,12 @@ module NavigationHelpers
     
     when /the homepage/
       '/'
+    when /sign up/
+      'signup'
+    when /sign in/
+      'signin'    
+    when /sign out/
+      'signout'      
     
     # Add more mappings here.
     # Here is a more fancy example:
