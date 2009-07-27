@@ -8,10 +8,10 @@ end
 
 Then /^my account should be created$/ do
   @user = User.find_by_email('john@test.com')
-  @user.should be_an_instance_of User
+  @user.should be_an_instance_of(User)
 end
 
 Then /^my account should not be created$/ do
-  @user = User.find_by_email('john@test.com')
-  @user.should be nil
+  @user = User.find_by_email('jack@test.com')
+  @user.should be(nil)
 end

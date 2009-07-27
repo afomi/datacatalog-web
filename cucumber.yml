@@ -1,0 +1,2 @@
+default: -i -e selenium* features
+selenium: -i -e simulated.rb features
