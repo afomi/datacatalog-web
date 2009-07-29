@@ -2,7 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   map.signout "/signout", :controller => "user_sessions", :action => "destroy"
   map.signin "/signin", :controller => "user_sessions", :action => "new"
   map.signup "/signup", :controller => "users", :action => "new"
-
+  map.confirm '/confirm/:token', :controller => 'users', :action => "confirm"
+  
   map.resources :users
   map.resource :profile, :controller => "users"
   map.resource :user_session

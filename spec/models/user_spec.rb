@@ -7,10 +7,33 @@ describe User do
       :password   => 's3krit',
       :password_confirmation => 's3krit'
     }
+    @user = User.create!(@valid_attributes)
   end
 
   it { should validate_presence_of(:email) }
-  it { should validate_presence_of(:password) }
-  it { should validate_presence_of(:password_confirmation) }
+
+  context "#confirmed?" do
+
+    it "should return false after initial creation" do
+      @user.confirmed?.should be(false)
+    end
+
+    it "should return true after confirmation" do
+      @user.confirm!
+      @user.confirmed?.should be(true)
+    end
+    
+  end # context "#confirmed?"
+  
+  context "#confirm!" do
+    
+    it "should set confirmed_at to the current_time" do
+      stubbed_time = Time.now
+      stub(Time).now {stubbed_time}
+      @user.confirm!
+      @user.confirmed_at.should == stubbed_time 
+    end
+    
+  end # context "#confirm!"
   
 end
