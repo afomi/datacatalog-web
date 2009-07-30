@@ -18,6 +18,12 @@ label, input {
 }
 input {
   margin-bottom: 15px;
+  border: 1px solid #999;
+  background: #fff;
+  padding: 3px 2px 3px 2px;
+}
+input[type="hidden"] {
+  display: none;
 }
 input.inline, label.inline {
   display: inline;
@@ -25,6 +31,14 @@ input.inline, label.inline {
 input[type="submit"], input[type="button"] {
   font-size: 14px;
 }
+
+input#user_openid_identifier, input#user_session_openid_identifier {
+  background: url(http://openid.net/images/login-bg.gif) no-repeat;
+  border: 1px solid #DF9845;
+  color: #000;
+  background-position: 0 50%;
+  padding-left: 18px;
+} 
 
 
 .clear {

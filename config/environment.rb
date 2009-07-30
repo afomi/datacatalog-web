@@ -12,6 +12,8 @@ Rails::Initializer.run do |config|
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
   
   config.gem 'authlogic', :version => '>= 2.1.1'
+  config.gem "authlogic-oid", :lib => "authlogic_openid", :version => '>= 1.0.4'
+  config.gem "ruby-openid", :lib => "openid", :version => '>= 2.1.7'
   config.gem 'nokogiri', :version => '>= 1.3.2'
   config.gem 'faker', :version => '>= 0.3.1'
 

@@ -6,18 +6,18 @@ Feature: Sign up
   Scenario: Sign up with email/password
     Given I am a site visitor
     When I go to sign up
+    And I fill in "Name" with "John D."
     And I fill in "Email" with "john@test.com"
     And I fill in "Password" with "s3krit"
     And I fill in "Confirm Password" with "s3krit"
     And I press "Sign Up"
     Then my account should be created
     And I should see "Please check your email inbox to confirm your email address"
-    # Then I should see "Please check your email inbox to confirm your email address"
-    # And my account should be created
 
   Scenario: Sign up with wrong password confirmation
     Given I am a site visitor
     When I go to sign up
+    And I fill in "Name" with "Jack D."
     And I fill in "Email" with "jack@test.com"
     And I fill in "Password" with "s3krit"
     And I fill in "Confirm Password" with "sekrit"
@@ -28,6 +28,7 @@ Feature: Sign up
   Scenario: Attempt to sign up with email address already in system
     Given I am a site visitor who already has signed up with "jane@test.com"
     When I go to sign up
+    And I fill in "Name" with "Jane D."
     And I fill in "Email" with "jane@test.com"
     And I fill in "Password" with "s3krit"
     And I fill in "Confirm Password" with "s3krit"
@@ -39,9 +40,9 @@ Feature: Sign up
     When I click on the confirmation link
     Then I should see "Your email address has been confirmed"
   
-  # Scenario: Sign up with OpenID
-  #   Given I am a site visitor who knows my OpenID
-  #   When I choose to Sign Up
-  #   And I select the OpenID option
-  #   And enter in my OpenID
-  #   Then an account is created for me from my OpenID
+  # Scenario: Sign up with OpenID that provides my email address
+  #   Given I am a site visitor
+  #   When I go to sign up
+  #   And I fill in "OpenID URL" with "http://johndoe.myopenid.com"
+  #   And I press "Sign Up"
+  #   Then my OpenID-enabled account should be created

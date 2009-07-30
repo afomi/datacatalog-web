@@ -1,8 +1,13 @@
+<%= form.label :display_name, "Name" %>
+<%= form.text_field :display_name %>
+
 <%= form.label :email %>
 <%= form.text_field :email %>
 
-<%= form.label :password, form.object.new_record? ? nil : "Change Password" %>
-<%= form.password_field :password %>
+<% if @user.openid_identifier.blank? -%> 
+  <%= form.label :password, form.object.new_record? ? nil : "Change Password" %>
+  <%= form.password_field :password %>
 
-<%= form.label :password_confirmation, 'Confirm Password' %>
-<%= form.password_field :password_confirmation %>
+  <%= form.label :password_confirmation, 'Confirm Password' %>
+  <%= form.password_field :password_confirmation %>
+<% end -%>

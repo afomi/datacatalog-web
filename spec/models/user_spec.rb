@@ -3,8 +3,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe User do
   before(:each) do
     @valid_attributes = {
-      :email      => 'joe@test.com',
-      :password   => 's3krit',
+      :display_name => 'John D.',
+      :email        => 'joe@test.com',
+      :password     => 's3krit',
       :password_confirmation => 's3krit'
     }
     @user = User.create!(@valid_attributes)

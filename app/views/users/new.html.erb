@@ -1,9 +1,18 @@
 <% content_for :title do %>
   Sign Up
 <% end %>
- 
+
+<% if @user.openid_identifier.blank? -%> 
+  <% form_for @user, :url => profile_path do |f| %>
+    <%= f.error_messages %>
+    <%= render :partial => "form", :object => f %>
+    <%= f.submit "Sign Up" %>
+  <% end %>
+<% end -%>
+
+<h3>Or, use OpenID:</h3>
 <% form_for @user, :url => profile_path do |f| %>
   <%= f.error_messages %>
-  <%= render :partial => "form", :object => f %>
+  <%= render :partial => "openid_form", :object => f %>
   <%= f.submit "Sign Up" %>
 <% end %>

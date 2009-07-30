@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   
-  validates_presence_of :email
+  validates_presence_of :email, :display_name
   
   acts_as_authentic do |config|
-
+    config.openid_required_fields = [:nickname, :email]  
   end
   
   def confirmed?
@@ -25,5 +25,11 @@ class User < ActiveRecord::Base
     Notifier.deliver_welcome_message(self)
   end
   
+  private
+  
+  def map_openid_registration(registration)
+    self.email = registration["email"] if email.blank?
+    self.display_name = registration["nickname"] if display_name.blank?
+  end
   
 end

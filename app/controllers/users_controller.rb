@@ -8,12 +8,14 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    if @user.save_without_session_maintenance
-      @user.deliver_confirmation_instructions!
-      flash[:notice] = "Your account has been created. Please check your email inbox to confirm your email address."
-      redirect_to signin_url
-    else
-      render :action => :new
+    @user.save do |result|
+      if result
+        @user.deliver_confirmation_instructions!
+        flash[:notice] = "Your account has been created. Please check your email inbox to confirm your email address."
+        redirect_to signin_url
+      else
+        render :action => :new
+      end
     end
   end
   
@@ -26,12 +28,15 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = @current_user # makes our views "cleaner" and more consistent
-    if @user.update_attributes(params[:user])
-      flash[:notice] = "Profile updated!"
-      redirect_to profile_url
-    else
-      render :action => :edit
+    @user = @current_user
+    @user.attributes = params[:user]
+    @user.save do |result|
+      if result
+        flash[:notice] = "Profile updated!"
+        redirect_to profile_url
+      else
+        render :action => :edit
+      end
     end
   end
   
