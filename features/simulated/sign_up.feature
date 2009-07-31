@@ -34,15 +34,18 @@ Feature: Sign up
     And I fill in "Confirm Password" with "s3krit"
     And I press "Sign Up"
     Then I should see "Email has already been taken"
- 
+
   Scenario: Confirm my email address after signing up
     Given I have signed up but not yet confirmed
     When I click on the confirmation link
     Then I should see "Your email address has been confirmed"
-  
-  # Scenario: Sign up with OpenID that provides my email address
-  #   Given I am a site visitor
-  #   When I go to sign up
-  #   And I fill in "OpenID URL" with "http://johndoe.myopenid.com"
-  #   And I press "Sign Up"
-  #   Then my OpenID-enabled account should be created
+
+  Scenario: Sign up with OpenID
+    Given I am a site visitor
+    When I go to sign up
+    And I fill in "OpenID URL" with "http://johndoe.myopenid.com/"
+    And I fill in "openid_name" with "John D."
+    And I fill in "openid_email" with "john@test.com"
+    And I press "Sign Up via OpenID"
+    Then my OpenID-enabled account should be created
+    

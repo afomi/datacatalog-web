@@ -21,7 +21,7 @@ Then /^my account should be created$/ do
 end
 
 Then /^my OpenID-enabled account should be created$/ do
-  @user = User.find_by_openid_identifier('http://johndoe.myopenid.com')
+  @user = User.find_by_openid_identifier('http://johndoe.myopenid.com/')
   @user.should be_an_instance_of(User)
 end
 

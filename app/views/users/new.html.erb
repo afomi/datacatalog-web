@@ -14,5 +14,5 @@
 <% form_for @user, :url => profile_path do |f| %>
   <%= f.error_messages %>
   <%= render :partial => "openid_form", :object => f %>
-  <%= f.submit "Sign Up" %>
+  <%= f.submit "Sign Up via OpenID" %>
 <% end %>
