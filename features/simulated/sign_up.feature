@@ -1,3 +1,4 @@
+@signup
 Feature: Sign up
   In order to register an account for the website
   As a site visitor
