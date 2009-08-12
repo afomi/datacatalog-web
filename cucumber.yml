@@ -1,2 +1,3 @@
-default: -i -e selenium* features
-selenium: -i -e simulated.rb features
+default: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* features/simulated
+selenium: -i -r features/support/env.rb -r features/step_definitions -r features/support/selenium.rb -e simulated.rb features/simulated features/selenium
+signup: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* -t signup features/simulated

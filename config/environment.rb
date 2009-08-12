@@ -23,8 +23,8 @@ Rails::Initializer.run do |config|
   config.gem 'rr', :version => '>= 0.10.0'
   config.gem 'notahat-machinist', :lib => 'machinist', :version => ">= 1.0.3", :source => 'http://gems.github.com'
   config.gem 'webrat', :version => '>= 0.4.4'
-  config.gem 'cucumber', :version => '>= 0.3.11'
-  config.gem 'bmabey-database_cleaner', :lib => 'database_cleaner', :version => '>= 0.2.2', :source => 'http://gems.github.com' 
+  config.gem 'cucumber', :version => '>= 0.3.94', :source => 'http://gems.github.com'
+  config.gem 'bmabey-database_cleaner', :lib => 'database_cleaner', :version => '>= 0.2.2', :source => 'http://gems.github.com'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
