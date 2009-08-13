@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
       if result
         if @user_session.user.confirmed?
           flash[:notice] = "You have been signed in."
-          redirect_to root_url
+          redirect_to root_url and return
         else
           flash[:error] = "Your account is not confirmed. Check your email for confirmation instructions."
           render :action => "new" and return
@@ -22,9 +22,7 @@ class UserSessionsController < ApplicationController
       end
     end
     flash[:error] = "Your account is not confirmed. Check your email for confirmation instructions."
-    #flash[:error] = "Account does not exist!"
-    #redirect_to signin_url and return
-    #render :action => "new" and return
+    render :action => "new"
   end
 
   def destroy
