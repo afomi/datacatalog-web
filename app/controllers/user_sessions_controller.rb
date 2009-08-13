@@ -15,6 +15,7 @@ class UserSessionsController < ApplicationController
           redirect_to root_url and return
         else
           flash[:error] = "Your account is not confirmed. Check your email for confirmation instructions."
+          @user_session.user.deliver_confirmation_instructions!
           render :action => "new" and return
         end
       else
@@ -22,6 +23,7 @@ class UserSessionsController < ApplicationController
       end
     end
     flash[:error] = "Your account is not confirmed. Check your email for confirmation instructions."
+    @user_session.user.deliver_confirmation_instructions!
     render :action => "new"
   end
 
