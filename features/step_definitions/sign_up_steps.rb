@@ -10,6 +10,10 @@ Given /^I have signed up but not yet confirmed$/ do
   User.create!(:display_name => 'John D.', :email => 'some@email.com', :password => 'test', :password_confirmation => 'test')
 end
 
+Given /^I have signed up via OpenID but not yet confirmed$/ do 
+  User.create!(:display_name => 'John D.', :email => 'some1@email.com', :openid_identifier => "http://someid.com/")
+end
+
 When /^I click on the confirmation link$/ do
   unconfirmed_user = User.find_by_email('some@email.com')
   visit confirm_path(:token => unconfirmed_user.perishable_token)

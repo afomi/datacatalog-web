@@ -10,12 +10,21 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     @user_session.save do |result|
       if result
-        flash[:notice] = "You have been signed in."
-        redirect_to root_url
+        if @user_session.user.confirmed?
+          flash[:notice] = "You have been signed in."
+          redirect_to root_url
+        else
+          flash[:error] = "Your account is not confirmed. Check your email for confirmation instructions."
+          render :action => "new" and return
+        end
       else
-        render :action => :new
+        render :action => "new" and return
       end
     end
+    flash[:error] = "Your account is not confirmed. Check your email for confirmation instructions."
+    #flash[:error] = "Account does not exist!"
+    #redirect_to signin_url and return
+    #render :action => "new" and return
   end
 
   def destroy
@@ -23,4 +32,5 @@ class UserSessionsController < ApplicationController
     flash[:notice] = "You have been signed out."
     redirect_to root_url
   end
+
 end

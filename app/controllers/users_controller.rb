@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       if result
         @user.deliver_confirmation_instructions!
         flash[:notice] = "Your account has been created. Please check your email inbox to confirm your email address."
-        redirect_to signin_url
+        redirect_to signin_path
       else
         render :action => :new
       end
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @user.save do |result|
       if result
         flash[:notice] = "Profile updated!"
-        redirect_to profile_url
+        redirect_to profile_path
       else
         render :action => :edit
       end
@@ -44,16 +44,16 @@ class UsersController < ApplicationController
     @user = User.find_using_perishable_token(params[:token], 1.month)
     if @user.nil? || @user.confirmed?
       flash[:notice] = "No confirmation needed! Try signing in."
-      redirect_to signin_url
+      redirect_to signin_path
     elsif @user.confirm!
       #@user.assign_api_key!
       @user.deliver_welcome_message!
       UserSession.create(@user)
       flash[:notice] = "Thanks! Your email address has been confirmed and you're now signed in."
-      redirect_to profile_url
+      redirect_to profile_path
     else
       flash[:error] = "Sorry, could not confirm the email address."
-      redirect_to signup_url
+      redirect_to signup_path
     end
   end
 end
