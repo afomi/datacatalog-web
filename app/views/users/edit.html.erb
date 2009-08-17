@@ -3,7 +3,7 @@
 <% end %>
 
 <% form_for @user, :url => profile_path do |f| %>
-  <%= f.error_messages %>
+  <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
   <%= render :partial => "form", :object => f %>
   <%= f.label :openid_identifier, 'OpenID URL' %>
   <%= f.text_field :openid_identifier %>

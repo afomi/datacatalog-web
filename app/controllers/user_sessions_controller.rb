@@ -1,30 +1,26 @@
 class UserSessionsController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
+  before_filter :activate_authlogic 
 
   def new
     @user_session = UserSession.new
   end
 
   def create
-    @user_session = UserSession.new(params[:user_session])
-    @user_session.save do |result|
+    @user_session = UserSession.new params[:user_session] 
+    @user_session.save do |result|      
       if result
-        if @user_session.user.confirmed?
-          flash[:notice] = "You have been signed in."
-          redirect_to root_url and return
-        else
-          flash[:error] = "Your account is not confirmed. Check your email for confirmation instructions."
-          @user_session.user.deliver_confirmation_instructions!
-          render :action => "new" and return
-        end
+        flash[:notice] = "You have been signed in."
+        redirect_to root_path and return
       else
         render :action => "new" and return
-      end
+      end      
     end
-    flash[:error] = "Your account is not confirmed. Check your email for confirmation instructions."
-    @user_session.user.deliver_confirmation_instructions!
-    render :action => "new"
+  end
+  
+  def update
+    create
   end
 
   def destroy

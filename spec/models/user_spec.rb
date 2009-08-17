@@ -15,6 +15,21 @@ describe User do
 
   context "#confirmed?" do
 
+    it "should return false if confirmed_at is nil" do
+      @user.confirmed_at = nil
+      @user.confirmed?.should be(false)
+    end
+
+    it "should return false if confirmed_at is '0000-00-00 00:00:00'" do
+      @user.confirmed_at = '0000-00-00 00:00:00'
+      @user.confirmed?.should be(false)
+    end
+
+    it "should return true if confirmed_at is '2009-01-01 12:34:56'" do
+      @user.confirmed_at = '2009-01-01 12:34:56'
+      @user.confirmed?.should be(true)
+    end
+    
     it "should return false after initial creation" do
       @user.confirmed?.should be(false)
     end

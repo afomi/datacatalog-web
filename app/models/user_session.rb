@@ -1,13 +1,11 @@
 class UserSession < Authlogic::Session::Base
-
-end
-
-ActionController::Base.class_eval do
-
+  
+  validate :check_confirmed_user
+  
   private
-
-  def begin_open_id_authentication(identity_url, options = {})
-    yield OpenIdAuthentication::Result.new(:successful), normalize_identifier(identity_url), {}
+  
+  def check_confirmed_user
+    #errors.add_to_base("Your account is not confirmed!") unless self.attempted_record.confirmed?
   end
-
+  
 end

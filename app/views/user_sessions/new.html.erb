@@ -3,7 +3,7 @@
 <% end %>
 
 <% form_for @user_session, :url => user_session_path do |f| %>
-  <%= f.error_messages %>
+  <%= f.error_messages custom_error_messages %>
   
   <%= f.label :openid_identifier, 'OpenID URL' %>
   <%= f.text_field :openid_identifier %>

@@ -4,7 +4,7 @@
 
 <% if @user.openid_identifier.blank? -%> 
   <% form_for @user, :url => profile_path do |f| %>
-    <%= f.error_messages %>
+    <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
     <%= render :partial => "form", :object => f %>
     <%= f.submit "Sign Up" %>
   <% end %>
@@ -12,7 +12,7 @@
 
 <h3>Or, use OpenID:</h3>
 <% form_for @user, :url => profile_path do |f| %>
-  <%= f.error_messages %>
+  <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
   <%= render :partial => "openid_form", :object => f %>
   <%= f.submit "Sign Up via OpenID" %>
 <% end %>

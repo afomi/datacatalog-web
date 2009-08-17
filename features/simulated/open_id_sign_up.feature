@@ -12,10 +12,4 @@ Feature: Sign up via OpenID
     And I fill in "openid_email" with "john@test.com"
     And I press "Sign Up via OpenID"
     Then my OpenID-enabled account should be created
-    
-  Scenario: Attempt to sign in without confirming email address
-    Given I have signed up via OpenID but not yet confirmed
-    When I go to sign in
-    And I fill in "OpenID URL" with "http://someid.com/"
-    And I press "Sign In"
-    Then I should see "Your account is not confirmed"
+    And I should see "You have been signed in"

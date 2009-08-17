@@ -10,9 +10,17 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.save do |result|
       if result
-        @user.deliver_confirmation_instructions!
-        flash[:notice] = "Your account has been created. Please check your email inbox to confirm your email address."
-        redirect_to signin_path
+        if @user.openid_identifier.present?
+          @user.confirm!
+          @user.deliver_welcome_message!
+          UserSession.create(@user)
+          flash[:notice] = "Success! You have been signed in."
+          redirect_to profile_path
+        else
+          @user.deliver_confirmation_instructions!
+          flash[:notice] = "Your account has been created. Please check your email inbox to confirm your email address."
+          redirect_to signin_path
+        end
       else
         render :action => :new
       end

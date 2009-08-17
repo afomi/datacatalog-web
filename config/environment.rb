@@ -22,7 +22,7 @@ Rails::Initializer.run do |config|
   config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :version => ">= 2.10.0", :source => 'http://gems.github.com'
   config.gem 'rr', :version => '>= 0.10.0'
   config.gem 'notahat-machinist', :lib => 'machinist', :version => ">= 1.0.3", :source => 'http://gems.github.com'
-  config.gem 'webrat', :version => '>= 0.4.4'
+  config.gem 'webrat', :version => '>= 0.4.5'
   config.gem 'cucumber', :version => '>= 0.3.94', :source => 'http://gems.github.com'
   config.gem 'bmabey-database_cleaner', :lib => 'database_cleaner', :version => '>= 0.2.2', :source => 'http://gems.github.com'
 
@@ -41,4 +41,10 @@ Rails::Initializer.run do |config|
   # Run "rake -D time" for a list of tasks for finding time zone names.
   config.time_zone = 'UTC'
 
+
+  config.action_controller.session = {
+    :session_key => 'natdatcat',
+    :secret      => 'f3f57b71ef9345ffccd0c4e841d8e74bb2e7d2ef692a506aa6c2a3c29d584a55dd18426ffc04610be49956a51af'
+  }
+  
 end

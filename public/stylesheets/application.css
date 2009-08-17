@@ -77,7 +77,7 @@ input#user_openid_identifier, input#user_session_openid_identifier {
 
 #errorExplanation {
   width: 400px;
-  border: 2px solid #CF0000;
+  border: 1px solid #CF0000;
   padding: 0px;
   padding-bottom: 12px;
   margin-bottom: 20px;
