@@ -1,0 +1,19 @@
+login: &login
+  username: root
+  password: 
+  adapter:  mysql
+  host:     localhost
+
+development:
+  database: dcweb_development
+  <<: *login
+
+test: &test
+  database: dcweb_test
+  <<: *login
+
+cucumber:
+  <<: *test
+
+selenium:
+  <<: *test
