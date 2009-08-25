@@ -11,12 +11,18 @@ Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
   
+  
   config.gem 'authlogic', :version => '>= 2.1.1'
   config.gem "authlogic-oid", :lib => "authlogic_openid", :version => '>= 1.0.4'
   config.gem "ruby-openid", :lib => "openid", :version => '>= 2.1.7'
   config.gem 'nokogiri', :version => '>= 1.3.2'
   config.gem 'faker', :version => '>= 0.3.1'
   config.gem 'httparty', :version => '>= 0.4.4'
+  
+  # until ruby-datacatalog is stable, we're vendoring it
+  require 'ostruct'
+  require 'datacatalog'
+  
   
   config.gem "rspec", :lib => false, :version => ">= 1.2.0" 
   config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
