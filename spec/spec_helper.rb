@@ -15,3 +15,8 @@ Spec::Runner.configure do |config|
   config.mock_with :rr
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
 end
+
+def setup_api
+  DataCatalog.api_key = 'flurfeneugen'
+  DataCatalog.base_uri = 'somehost.com'
+end

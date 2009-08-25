@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   end
 
   def confirm!
+    create_api_user
     self.confirmed_at = Time.now
     save!
   end
@@ -25,11 +26,19 @@ class User < ActiveRecord::Base
     Notifier.deliver_welcome_message(self)
   end
 
+  def create_api_user
+    api_user = DataCatalog::User.create(:name => self.display_name, :email => self.email, 
+                                        :purpose => "Generated from user sign up on National Data Catalog.")
+    self.api_key = api_user.primary_api_key
+  end
+
   private
 
   def map_openid_registration(registration)
     self.email = registration["email"] if email.blank?
     self.display_name = registration["nickname"] if display_name.blank?
   end
+  
+
 
 end

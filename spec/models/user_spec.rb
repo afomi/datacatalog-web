@@ -2,6 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe User do
   before(:each) do
+    setup_api
+    
     @valid_attributes = {
       :display_name => 'John D.',
       :email        => 'joe@test.com',
@@ -11,9 +13,11 @@ describe User do
     @user = User.create!(@valid_attributes)
   end
 
-  it { should validate_presence_of(:email) }
-
-  context "#confirmed?" do
+  it "validations" do
+    should validate_presence_of(:email)
+  end 
+    
+  describe "#confirmed?" do
 
     it "should return false if confirmed_at is nil" do
       @user.confirmed_at = nil
@@ -35,21 +39,36 @@ describe User do
     end
 
     it "should return true after confirmation" do
+      stub(@user).create_api_user
       @user.confirm!
       @user.confirmed?.should be(true)
     end
     
-  end # context "#confirmed?"
+  end # describe "#confirmed?"
   
-  context "#confirm!" do
+  describe "#confirm!" do
     
     it "should set confirmed_at to the current_time" do
+      stub(@user).create_api_user
       stubbed_time = Time.now
       stub(Time).now {stubbed_time}
       @user.confirm!
       @user.confirmed_at.should == stubbed_time 
     end
     
-  end # context "#confirm!"
+  end # describe "#confirm!"
+  
+  describe "#create_api_user" do
+    
+    it "should set the user's api_key" do
+      mock_user = DataCatalog::User.new
+      mock(mock_user).primary_api_key {'jasdlkfj39'}
+      stub(DataCatalog::User).create { mock_user }
+      
+      @user.create_api_user
+      @user.api_key.should eql('jasdlkfj39')
+    end
+    
+  end # describe "#create_api_user"
   
 end
