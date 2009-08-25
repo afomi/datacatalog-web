@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/sunlightlabs/ruby-datacatalog/"
   s.authors = ["Luigi Montanez"]
   s.files = ['datacatalog.gemspec', 'lib/datacatalog.rb', 'lib/datacatalog/base.rb',
-             'lib/datacatalog/user.rb', 'lib/datacatalog/source.rb', 
+             'lib/datacatalog/user.rb', 'lib/datacatalog/source.rb', 'lib/datacatalog/api_key.rb', 
              'README.md', 'CHANGES.md']
   s.add_dependency("httparty", [">= 0.4.4"])
   s.has_rdoc = true
