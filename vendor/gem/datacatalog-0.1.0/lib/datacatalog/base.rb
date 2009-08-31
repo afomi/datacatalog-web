@@ -1,6 +1,6 @@
 module DataCatalog
 
-  class Base < OpenStruct
+  class Base < Mash
   
     include HTTParty
     format :json
@@ -11,7 +11,7 @@ module DataCatalog
     
     def self.set_api_key
       if DataCatalog.api_key.blank?
-        raise ApiKeyNotConfigured, "Use DataCatalog.api_key = '...'."
+        raise ApiKeyNotConfigured, "Use DataCatalog.api_key = '...'"
       end
       default_options[:default_params] = {} if default_options[:default_params].nil?
       default_options[:default_params].merge!({:api_key => DataCatalog.api_key})
@@ -24,11 +24,26 @@ module DataCatalog
 
     def self.check_status_code(response)
       case response.code
-      when 400: raise BadRequest
-      when 401: raise Unauthorized
-      when 404: raise NotFound
-      when 500: raise InternalServerError
+      when 400: raise BadRequest, error_message(response)
+      when 401: raise Unauthorized, error_message(response)
+      when 404: raise NotFound, error_message(response)
+      when 500: raise InternalServerError, error_message(response)
       end
+    end
+    
+    def self.error_message(response)
+      parsed_body = JSON.parse(response.body)
+      
+      if parsed_body.empty?
+        return "Response was empty"
+      elsif parsed_body["errors"]
+        return parsed_body["errors"].inspect
+      else
+        return response.body
+      end
+      
+      rescue JSON::ParserError
+        return "Unable to parse: #{response.body.inspect}"
     end
 
     def self.response_for
@@ -45,33 +60,6 @@ module DataCatalog
     def self.about
       set_base_uri
       build_object(response_for{get('/')})
-    end
-    
-    def id
-      instance_values["table"][:id]
-    end
-    
-    # Tweak behavior of OpenStruct
-    # so that method calls that don't exist explode
-    # rather than returning nil
-    def method_missing(mid, *args) # :nodoc:
-      mname = mid.id2name
-      len = args.length
-      if mname =~ /=$/
-        if len != 1
-          raise ArgumentError, "wrong number of arguments (#{len} for 1)", caller(1)
-        end
-        if self.frozen?
-          raise TypeError, "can't modify frozen #{self.class}", caller(1)
-        end
-        mname.chop!
-        self.new_ostruct_member(mname)
-        @table[mname.intern] = args[0]
-      elsif len == 0 && @table[mid]
-        @table[mid]
-      else
-        raise NoMethodError, "undefined method `#{mname}' for #{self}", caller(1)
-      end
     end
 
   end # class Base

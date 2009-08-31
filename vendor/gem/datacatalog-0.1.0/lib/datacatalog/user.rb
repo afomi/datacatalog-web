@@ -20,7 +20,7 @@ module DataCatalog
       build_object(response_for { get("/users/#{id}") })
     end
     
-    def self.create(params)
+    def self.create(params={})
       set_up!
       build_object(response_for { post("/users", :query => params) })
     end
@@ -46,11 +46,6 @@ module DataCatalog
       
       @api_keys ||= []
       @api_keys << response
-    end
-    
-    def primary_api_key
-      raise UserHasNoApiKeys if @api_keys.nil? || @api_keys.empty?
-      @api_keys.first
     end
 
     def secondary_api_keys
