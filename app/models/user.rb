@@ -27,8 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def create_api_user
-    api_user = DataCatalog::User.create(:name => self.display_name, :email => self.email, 
-                                        :purpose => "Generated from user sign up on National Data Catalog.")
+    api_user = DataCatalog::User.create(:name => self.display_name, :email => self.email)
     self.api_key = api_user.primary_api_key
   end
 
