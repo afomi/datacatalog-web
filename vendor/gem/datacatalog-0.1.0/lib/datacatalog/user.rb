@@ -1,12 +1,6 @@
 module DataCatalog
 
   class User < DataCatalog::Base
-  
-    include HTTParty
-    format :json
-
-    attr_reader :api_keys
-    def api_keys=(value) raise NoMethodError end
     
     def self.all
       set_up!
@@ -17,12 +11,20 @@ module DataCatalog
     
     def self.find(id)
       set_up!
-      build_object(response_for { get("/users/#{id}") })
+      user = build_object(response_for { get("/users/#{id}") })
+      user.api_keys = response_for { get("/users/#{id}/keys") }.map do |key|
+        DataCatalog::ApiKey.build_object(key)
+      end if user
+      user
     end
     
     def self.create(params={})
       set_up!
-      build_object(response_for { post("/users", :query => params) })
+      user = build_object(response_for { post("/users", :query => params) })
+      user.api_keys = response_for { get("/users/#{user.id}/keys") }.map do |key|
+        DataCatalog::ApiKey.build_object(key)
+      end if user
+      user
     end
 
     def self.update(user_id, params)
@@ -37,29 +39,45 @@ module DataCatalog
       true
     end
     
-    def generate_api_key(purpose)
+    def generate_api_key!(params)
       self.class.set_up!
-
-      response = self.class.response_for do
-        self.class.post("/users/#{self.id}/api_keys", :query => { :purpose => purpose })
-      end
       
-      @api_keys ||= []
-      @api_keys << response
-    end
-
-    def secondary_api_keys
-      raise UserHasNoApiKeys if @api_keys.nil? || @api_keys.empty?
-      @api_keys[1..-1]
+      response = self.class.response_for do
+        self.class.post("/users/#{self.id}/keys", :query => params )
+      end
+      update_api_keys
+      true
     end
     
-    def delete_api_key(api_key)
+    def delete_api_key!(api_key_id)
       self.class.set_up!
+      
       response = self.class.response_for do
-        self.class.delete("/users/#{self.id}/api_keys/#{api_key}")
+        self.class.delete("/users/#{self.id}/keys/#{api_key_id}")
       end
-      @api_keys.delete_if { |key| key.api_key == api_key }
+      update_api_keys
       true
+    end
+    
+    def update_api_key!(api_key_id, params)
+      self.class.set_up!
+      
+      response = self.class.response_for do
+        self.class.put("/users/#{self.id}/keys/#{api_key_id}", :query => params)
+      end
+      update_api_keys
+      true
+    end
+    
+    private
+    
+    def update_api_keys
+      self.api_keys = self.class.response_for { self.class.get("/users/#{self.id}/keys") }.map do |key|
+        DataCatalog::ApiKey.build_object(key)
+      end
+      updated_user = DataCatalog::User.find(self.id)
+      self.application_api_keys = updated_user.application_api_keys
+      self.valet_api_keys = updated_user.valet_api_keys
     end
     
   end # class User

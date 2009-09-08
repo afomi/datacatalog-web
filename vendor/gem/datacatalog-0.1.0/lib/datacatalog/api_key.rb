@@ -1,9 +1,7 @@
 module DataCatalog
 
-  class ApiKey
+  class ApiKey < DataCatalog::Base
     
-    attr_accessor :api_key, :purpose, :created_at
-
-  end
+  end # class ApiKey
   
-end
+end # module DataCatalog
