@@ -5,8 +5,11 @@ ActionController::Routing::Routes.draw do |map|
   map.confirm '/confirm/:token', :controller => 'users', :action => "confirm"
   
   map.resources :users
-  map.resource :profile, :controller => "users"
+  map.resource :profile, :controller => "users" do |profile|
+      profile.resources :keys
+  end
   map.resource :user_session
+
 
   # The priority is based upon order of creation: first created -> highest priority.
 

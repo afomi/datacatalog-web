@@ -1,0 +1,7 @@
+<%= label_tag 'key[key_type]', 'Key Type' %>
+<%= select_tag "key[key_type]", "<option value='application'>Application</option><option value='valet'>Valet</option>" %>
+
+<%= label_tag 'key[purpose]', 'Purpose' %>
+<%= text_area_tag 'key[purpose]', nil, :rows => 3, :cols => 50 %>
+
+

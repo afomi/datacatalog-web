@@ -16,7 +16,7 @@ a {
 label, input {
   display: block;
 }
-input {
+input, select, textarea {
   margin-bottom: 15px;
   border: 1px solid #999;
   background: #fff;
@@ -40,6 +40,15 @@ input#user_openid_identifier, input#user_session_openid_identifier {
   padding-left: 18px;
 } 
 
+table {
+  margin: 5px 0px 20px 0px;
+  border: 1px solid #999;
+}
+tr,th,td {
+  text-align: left;
+  border: 1px solid #999;
+  padding: 5px 15px 5px 5px;
+}
 
 .clear {
   clear: both;

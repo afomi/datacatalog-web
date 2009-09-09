@@ -4,3 +4,4 @@ signup: -i -r features/support/env.rb -r features/step_definitions -r features/s
 signin: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* -t signin features/simulated
 users: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* -t users features/simulated
 openid: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* -t openid features/simulated
+keys: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* -t keys features/simulated

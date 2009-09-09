@@ -4,12 +4,24 @@
 
 <p>
   <strong>Email:</strong>
-  <%=h @user.email %>
+  <%=h current_user.email %>
 </p>
 
-<p>
-  <strong>Primary API Key:</strong>
-  <%=h @user.api_key %>
-</p>
+<table>
+  <tr>
+    <th>Key Type</th>
+    <th>Value</th>
+    <th>Purpose</th>
+  </tr>
+  <% current_user.api_user.api_keys.each do |key| %>
+  <tr>
+    <td><%= key.key_type %></td>
+    <td><%= key.api_key %></td>
+    <td><%= key.purpose %></td>
+  </tr>
+  <% end %>
+</table>
 
-<%= link_to 'Edit', edit_profile_path %>
+<%= link_to 'Edit Profile', edit_profile_path %>
+|
+<%= link_to 'Generate New API Key', new_profile_key_path %>

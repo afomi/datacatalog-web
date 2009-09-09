@@ -12,3 +12,6 @@ config.gem "cucumber",                          :version => ">=0.3.94"  unless "
 config.gem "webrat",                            :version => ">=0.4.5"   unless "webrat".plugin?
 config.gem "rspec",       :lib => false,        :version => ">=1.2.6"   unless "rspec".plugin?
 config.gem "rspec-rails", :lib => 'spec/rails', :version => ">=1.2.6"   unless "rspec-rails".plugin?
+
+DataCatalog.api_key = 'e495911786b060aeb8dc751dc05d3b3504b6c18a'
+DataCatalog.base_uri = 'sandbox.dc-api.local'

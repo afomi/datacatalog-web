@@ -1,0 +1,8 @@
+<% content_for :title do %>
+  Generate New API Key
+<% end %>
+
+<%= form_tag profile_keys_path %>
+  <%= render :partial => "form" %>
+  <%= submit_tag "Generate" %>
+</form>
