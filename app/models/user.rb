@@ -1,9 +1,15 @@
 class User < ActiveRecord::Base
 
   validates_presence_of :email, :display_name
+  
+  attr_accessor :api_user
 
   acts_as_authentic do |config|
     config.openid_required_fields = [:nickname, :email]  
+  end
+  
+  def after_find
+    self.api_user = DataCatalog::User.find_by_api_key(self.api_key)
   end
 
   def confirmed?
@@ -37,7 +43,5 @@ class User < ActiveRecord::Base
     self.email = registration["email"] if email.blank?
     self.display_name = registration["nickname"] if display_name.blank?
   end
-  
-
 
 end
