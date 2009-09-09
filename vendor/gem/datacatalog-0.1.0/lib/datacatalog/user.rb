@@ -18,6 +18,16 @@ module DataCatalog
       user
     end
     
+    def self.find_by_api_key(api_key)
+      user = nil
+      DataCatalog.with_key(api_key) do
+        set_up!
+        checkup = build_object(response_for { get("/checkup") })
+        user = find(checkup.user_id)
+      end
+      user
+    end
+    
     def self.create(params={})
       set_up!
       user = build_object(response_for { post("/users", :query => params) })
