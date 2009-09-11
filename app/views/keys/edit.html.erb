@@ -1,0 +1,8 @@
+<% content_for :title do %>
+  Edit API Key
+<% end %>
+
+<%= form_tag profile_key_path(@key.id), :method => :put %>
+  <%= render :partial => "form" %>
+  <%= submit_tag "Update" %>
+</form>

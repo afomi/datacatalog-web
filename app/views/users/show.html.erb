@@ -7,17 +7,23 @@
   <%=h current_user.email %>
 </p>
 
-<table>
+<table id="keys">
   <tr>
     <th>Key Type</th>
     <th>Value</th>
     <th>Purpose</th>
+    <th>Options</th>
   </tr>
   <% current_user.api_user.api_keys.each do |key| %>
-  <tr>
+  <tr class="user_keys">
     <td><%= key.key_type %></td>
     <td><%= key.api_key %></td>
     <td><%= key.purpose %></td>
+    <td>
+    <% unless key.key_type == "primary" -%>
+      <%= link_to "Edit", edit_profile_key_path(key.id) %> | <%= link_to "Delete", profile_key_path(key.id), :method => :delete %>
+    <% end -%>
+    </td>
   </tr>
   <% end %>
 </table>
