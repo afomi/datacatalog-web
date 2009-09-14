@@ -2,22 +2,38 @@
   Sign In
 <% end %>
 
-<% form_for @user_session, :url => user_session_path do |f| %>
+<% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
   <%= f.error_messages custom_error_messages %>
   
-  <%= f.label :openid_identifier, 'OpenID URL' %>
-  <%= f.text_field :openid_identifier %>
+  <ul id="dataMetaData">
+
+    <li>
+      <%= f.label :openid_identifier, 'OpenID URL' %>
+      <%= f.text_field :openid_identifier %>
+    </li>
   
-  <h3>Or the lame way...</h3>
+  </ul>
+  <%= f.submit "Sign In Via OpenID" %>
+
+  <ul id="dataMetaData">
+
+    <li>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </li>
+    
+    <li>  
+      <%= f.label :password %>
+      <%= f.password_field :password %>    
+    </li>
   
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.check_box :remember_me, {:class => "inline"} %>
-  <%= f.label :remember_me, "Remember?", {:class => "inline"}  %>
-
+    <li>  
+      <%= f.check_box :remember_me, {:class => "inline"} %>
+      <%= f.label :remember_me, "Remember?", {:class => "inline"}  %>
+    </li>
+    
+  </ul>
   <%= f.submit "Sign In" %>
+
+
 <% end %>
