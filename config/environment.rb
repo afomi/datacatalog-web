@@ -11,7 +11,6 @@ Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
   
-  
   config.gem 'authlogic', :version => '>= 2.1.1'
   config.gem "authlogic-oid", :lib => "authlogic_openid", :version => '>= 1.0.4'
   config.gem "ruby-openid", :lib => "openid", :version => '>= 2.1.7'
