@@ -54,7 +54,6 @@ class UsersController < ApplicationController
       flash[:notice] = "No confirmation needed! Try signing in."
       redirect_to signin_path
     elsif @user.confirm!
-      #@user.assign_api_key!
       @user.deliver_welcome_message!
       UserSession.create(@user)
       flash[:notice] = "Thanks! Your email address has been confirmed and you're now signed in."

@@ -3,7 +3,9 @@ Given /^I am a site visitor$/ do
 end
 
 Given /^I am a site visitor who already has signed up with "([^\"]*)"$/ do |email|
-  User.create!(:display_name => 'John D.', :email => email, :password => 'test', :password_confirmation => 'test')
+  u = User.create!(:display_name => 'John D.', :email => email, :password => 'test', :password_confirmation => 'test')
+  u.confirm!
+  @user = User.find_by_api_key(u.api_key)
 end
 
 Given /^I have signed up but not yet confirmed$/ do 
