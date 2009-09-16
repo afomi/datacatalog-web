@@ -1,0 +1,27 @@
+development:
+  api_key: 
+  base_uri: 
+
+test: 
+  api_key: 
+  base_uri: 
+
+cucumber:
+  api_key: 
+  base_uri: 
+
+selenium:
+  api_key: 
+  base_uri: 
+
+staging:
+  api_key: 
+  base_uri: 
+
+sandbox:
+  api_key: 
+  base_uri: 
+
+production:
+  api_key: 
+  base_uri: 

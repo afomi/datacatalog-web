@@ -10,6 +10,11 @@ Other the standard Rails stack, the biggest requirement is the National Data Cat
         sudo gem install authlogic authlogic-oid ruby-openid nokogiri faker httparty
         sudo gem install rspec rspec-rails thoughtbot-shoulda rr
         sudo gem install notahat-machinist webrat cucumber bmabey-database_cleaner
+        
+### Setup
+
+1. Configure `config/api.yml` to point to your API instance.
+2. Configure a `config/database.yml` to point to your relational database of choice.
 
 ### Testing Stack
 
