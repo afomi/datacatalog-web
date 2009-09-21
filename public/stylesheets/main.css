@@ -38,6 +38,31 @@ h4 { font-size: 110%; font-weight: bold; color: #371d17; margin-bottom: 10px;}
 p { margin-bottom: 1em;}
 input, textarea { -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 2px solid #e2e7e7; padding: 3px;}
 
+/* TEMPORARY ADDS BY LUIGI */
+label, input {
+  display: block;
+}
+input, select, textarea {
+  margin-bottom: 15px;
+  padding: 3px 2px 3px 2px;
+}
+input[type="hidden"] {
+  display: none;
+}
+#flash_notice, #flash_error, #errorExplanation {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+#flash_error, #errorExplanation {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+/* END TEMPORARY ADDS BY LUIGI */
+
 /*utility*/
 
 div#utility { float: right; padding-top: 20px; }

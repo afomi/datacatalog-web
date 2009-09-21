@@ -12,7 +12,9 @@ module NavigationHelpers
     when /sign out/
       'signout'
     when /my profile/
-      'profile'   
+      'profile'
+    when /the contact form/
+      'contact'
     
     # Add more mappings here.
     # Here is a more fancy example:
