@@ -1,19 +1,18 @@
-login: &login
+development: &default
+  database: dcweb_development
   username: root
   password: 
   adapter:  mysql
   host:     localhost
 
-development:
-  database: dcweb_development
-  <<: *login
-
-test: &test
+test:
+  <<: *default
   database: dcweb_test
-  <<: *login
 
 cucumber:
-  <<: *test
+  <<: *default
+  database: dcweb_test
 
 selenium:
-  <<: *test
+  <<: *default
+  database: dcweb_test
