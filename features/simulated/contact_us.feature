@@ -1,5 +1,4 @@
-@miscellany @contact
-
+@miscellany @submissions
 Feature: Contact Us
   In order to ask about the curation process on the site
   As a user

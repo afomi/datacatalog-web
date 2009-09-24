@@ -56,5 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   map.contact "contact", :controller => 'contact', :action => 'index'
   map.contact_submission "contact/submit", :controller => 'contact', :action => 'submit'
   
+  map.submit "submit", :controller => 'submit', :action => 'index'
+  map.data_submission "submit/submit", :controller => 'submit', :action => 'submit'
   
 end

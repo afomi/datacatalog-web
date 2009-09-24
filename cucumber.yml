@@ -5,4 +5,4 @@ signin: -i -r features/support/env.rb -r features/step_definitions -r features/s
 users: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* -t users features/simulated
 openid: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* -t openid features/simulated
 keys: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* -t keys features/simulated
-contact: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* -t contact features/simulated
+submissions: -i -r features/support/env.rb -r features/step_definitions -r features/support/simulated.rb -e selenium* -t submissions features/simulated

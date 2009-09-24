@@ -1,0 +1,13 @@
+<% content_for :title do %>
+  Submit a Data Source
+<% end %>
+
+<% content_for :body_class do %>submission<% end %>
+
+<p>Know of a data set or API that isn't cataloged here? We want to know about it! Tell us more below.</p>
+
+<% form_for @data_submission, :url => data_submission_path do |f| %>
+  <%= f.error_messages custom_error_messages %>
+  <%= render :partial => "form", :object => f %>
+  <%= f.submit "Submit" %>
+<% end %>

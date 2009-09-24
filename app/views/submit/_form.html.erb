@@ -1,0 +1,22 @@
+<% if current_user -%>
+
+<%= form.hidden_field :user_id, :value => current_user %>
+
+<% else -%>
+
+<%= form.label :name, "Your Name" %>
+<%= form.text_field :name %>
+
+<%= form.label :email, "Your Email Address" %>
+<%= form.text_field :email %>
+
+<% end -%>
+
+<%= form.label :title, "Data Source Title" %>
+<%= form.text_field :title %>
+
+<%= form.label :url, "Data Source URL" %>
+<%= form.text_field :url %>
+
+<%= form.label :comments, "Comments" %>
+<%= form.text_area :comments %>

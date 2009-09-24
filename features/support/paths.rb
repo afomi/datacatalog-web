@@ -15,7 +15,9 @@ module NavigationHelpers
       'profile'
     when /the contact form/
       'contact'
-    
+    when /the data source submission form/
+      'submit'
+          
     # Add more mappings here.
     # Here is a more fancy example:
     #
