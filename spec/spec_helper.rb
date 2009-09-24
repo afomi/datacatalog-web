@@ -20,3 +20,12 @@ def setup_api
   DataCatalog.api_key = 'flurfeneugen'
   DataCatalog.base_uri = 'somehost.com'
 end
+
+def valid_user_attributes
+  {
+      :display_name => 'John D.',
+      :email        => 'joe@test.com',
+      :password     => 's3krit',
+      :password_confirmation => 's3krit'
+  }
+end
