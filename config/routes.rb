@@ -19,8 +19,10 @@ ActionController::Routing::Routes.draw do |map|
   map.submit "submit", :controller => 'submit', :action => 'index'
   map.data_submission "submit/submit", :controller => 'submit', :action => 'submit'
 
-  map.about "about", :controller => "home", :action => 'about'
-  
+  map.search "search", :controller => "search", :action => "index"
+
+  map.browse "browse", :controller => "browse", :action => "index"
+
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 

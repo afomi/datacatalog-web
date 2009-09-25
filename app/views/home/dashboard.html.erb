@@ -1,0 +1,9 @@
+<% content_for :title do %>
+  <% if current_user -%>
+  Dashboard
+  <% else -%>
+  Welcome to the National Data Catalog
+  <% end -%>
+<% end %>
+
+<% content_for :body_class do %>home<% end %>
