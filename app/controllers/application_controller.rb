@@ -1,11 +1,22 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user_session, :current_user
   filter_parameter_logging :password, :password_confirmation
   before_filter :show_title, :mailer_set_url_options
+
+  unless ["development", "test"].include?(Rails.env)
+    rescue_from ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid, ActionController::RoutingError, 
+                ActionController::UnknownController,ActionController::UnknownAction, :with => :render_404
+    rescue_from NoMethodError, ActiveRecord::StatementInvalid, ActionView::TemplateError, :with => :render_500
+  end
+
+  def render_404(e)
+    render :template => 'home/notfound', :status => "404 Not Found"
+  end
+  
+  def render_500(e)
+    render :template => 'home/internal_error', :status => "500 Error"
+  end
 
   private
   
