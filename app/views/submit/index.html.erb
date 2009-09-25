@@ -2,12 +2,21 @@
   Submit a Data Source
 <% end %>
 
+<div id="ltColumn">
 <% content_for :body_class do %>submission<% end %>
 
-<p>Know of a data set or API that isn't cataloged here? We want to know about it! Tell us more below.</p>
+    <p>Know of a data set or API that isn't cataloged here? We want to know about it! Tell us more below.</p>
 
-<% form_for @data_submission, :url => data_submission_path do |f| %>
-  <%= f.error_messages custom_error_messages %>
-  <%= render :partial => "form", :object => f %>
-  <%= f.submit "Submit" %>
-<% end %>
+    <% form_for @data_submission, :url => data_submission_path do |f| %>
+        
+            <%= f.error_messages custom_error_messages %>
+        <ul>
+            <%= render :partial => "form", :object => f %>
+            <li>
+                <button class="submit" id="data_submission_submit" type="submit" value="Submit" name="commit">
+                    <span>Submit</span>
+                </button>  
+            </li>      
+        </ul>
+    <% end %>
+</div>    
