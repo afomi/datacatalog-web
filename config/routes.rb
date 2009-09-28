@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :users
   map.resource :profile, :controller => "users" do |profile|
-      profile.resources :keys
+    profile.resources :keys
   end
   map.resource :user_session
   
