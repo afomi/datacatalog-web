@@ -1,8 +1,14 @@
 <% content_for :title do %>
-  Generate New API Key
+    Generate New API Key
 <% end %>
 
 <%= form_tag profile_keys_path %>
-  <%= render :partial => "form" %>
-  <%= submit_tag "Generate" %>
+    <ul>
+        <%= render :partial => "form" %>
+        <li>
+            <button class="generate" type="submit" value="Generate" name="commit">
+                <span>Generate API Key</span>
+            </button>
+        </li>
+    </ul>
 </form>

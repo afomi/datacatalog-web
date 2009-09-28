@@ -29,10 +29,14 @@ class UsersController < ApplicationController
   
   def show
     @user = @current_user
+    @key = DataCatalog::ApiKey.new
+  
   end
  
   def edit
     @user = @current_user
+    @key = DataCatalog::ApiKey.new
+    
   end
   
   def update

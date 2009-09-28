@@ -55,6 +55,18 @@ $(document).ready(function(){
 	
 	);
 	
+	$("form.generateAPI").hide();
+	
+	$("div#additionalKeys a.addLink").toggle(
+	  function(){
+	     $("form.generateAPI").slideDown("slow");
+	  },
+	  function(){
+  	     $("form.generateAPI").slideUp("slow");
+  	  } 
+	
+	);
+	
 	$("div#addTag").hide();
 	
 	$("a#addTagLink").toggle(

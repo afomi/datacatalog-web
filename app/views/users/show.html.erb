@@ -1,33 +1,59 @@
+<% content_for :body_class do %>profile<% end %>
+
 <% content_for :title do %>
-  My Profile
+    Account Settings
 <% end %>
 
-<p>
-  <strong>Email:</strong>
-  <%=h current_user.email %>
-</p>
+<div id="ltColumn">
+    <table id="keys">
+        <tr id="titles">
+            <th>Key Type</th>
+            <th>Value</th>
+            <th>Purpose</th>
+            <th>Options</th>
+        </tr>
+        <% current_user.api_user.api_keys.each do |key| %>
+        <tr class="user_keys">
+            <td><%= key.key_type %></td>
+            <td><%= key.api_key %></td>
+            <td><%= key.purpose %></td>
+            <td>
+                <% unless key.key_type == "primary" -%>
+                <%= link_to "Edit", edit_profile_key_path(key.id) %> | <%= link_to "Delete", profile_key_path(key.id), :method => :delete %>
+                <% end -%>
+            </td>
+        </tr>
+        <% end %>
+    </table>
+    
+    <div id="additionalKeys">
+        <%= link_to 'Generate New API Key', new_profile_key_path, {:class => "addLink"} %>
+        <%= form_tag profile_keys_path, {:class => "generateAPI"} %>
+            <ul>
+                <%= render :partial => "keys/form" %>
+                <li>
+                    <button class="generate" type="submit" value="Generate" name="commit">
+                        <span>Generate API Key</span>
+                    </button>
+                </li>
+            </ul>  
+        </form>
+    </div>    
 
-<table id="keys">
-  <tr>
-    <th>Key Type</th>
-    <th>Value</th>
-    <th>Purpose</th>
-    <th>Options</th>
-  </tr>
-  <% current_user.api_user.api_keys.each do |key| %>
-  <tr class="user_keys">
-    <td><%= key.key_type %></td>
-    <td><%= key.api_key %></td>
-    <td><%= key.purpose %></td>
-    <td>
-    <% unless key.key_type == "primary" -%>
-      <%= link_to "Edit", edit_profile_key_path(key.id) %> | <%= link_to "Delete", profile_key_path(key.id), :method => :delete %>
-    <% end -%>
-    </td>
-  </tr>
-  <% end %>
-</table>
+</div>
 
-<%= link_to 'Edit Profile', edit_profile_path %>
-|
-<%= link_to 'Generate New API Key', new_profile_key_path %>
+<div id="rtColumnWrapper">
+    <div id="rtColumn" class="withBg">
+        <% form_for @user, :url => profile_path do |f| %>
+            <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
+            <ul>
+                <%= render :partial => "form", :object => f %>
+                <%= f.label :openid_identifier, 'OpenID URL' %>
+                <%= f.text_field :openid_identifier %>
+                <button class="update" id="user_submit" type="submit" value="Update" name="commit">
+                    <span>Update</span>
+                </button>
+            </ul>
+        <% end %>
+    </div>
+</div>

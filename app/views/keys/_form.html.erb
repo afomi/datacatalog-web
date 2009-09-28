@@ -1,7 +1,9 @@
-<%= label_tag 'key[key_type]', 'Key Type' %>
-<%= select_tag "key[key_type]", options_for_select([["Application","application"],["Valet","valet"]], @key.key_type) %>
-
-<%= label_tag 'key[purpose]', 'Purpose' %>
-<%= text_area_tag 'key[purpose]', @key.purpose, :rows => 3, :cols => 50 %>
-
+<li>
+    <%= label_tag 'key[key_type]', 'Key Type' %>
+    <%= select_tag "key[key_type]", options_for_select([["Application","application"],["Valet","valet"]], @key.key_type) %>
+</li>
+<li>
+    <%= label_tag 'key[purpose]', 'Purpose' %>
+    <%= text_area_tag 'key[purpose]', @key.purpose, :rows => 3, :cols => 50 %>
+</li>
 
