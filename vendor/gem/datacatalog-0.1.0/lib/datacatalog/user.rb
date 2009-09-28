@@ -45,7 +45,6 @@ module DataCatalog
     def self.destroy(user_id)
       set_up!
       response = response_for { delete("/users/#{user_id}") }
-      raise Error, "Unexpected Status Code" unless response.code == 200
       true
     end
     

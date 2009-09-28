@@ -1,6 +1,6 @@
 require 'rubygems'
-require 'httparty'
 require 'activesupport'
+require 'httparty'
 require 'mash'
 
 module DataCatalog
