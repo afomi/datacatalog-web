@@ -7,7 +7,6 @@ require 'webrat'
 require 'webrat/rails'
 require 'cucumber/rails/rspec'
 require 'webrat/core/matchers'
-Cucumber::Rails.bypass_rescue
 
 ActionController::Base.class_eval do
 
