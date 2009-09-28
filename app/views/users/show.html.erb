@@ -7,17 +7,17 @@
 <div id="ltColumn">
     <table id="keys">
         <tr id="titles">
-            <th>Key Type</th>
-            <th>Value</th>
-            <th>Purpose</th>
-            <th>Options</th>
+            <th class="keyType left">Key Type</th>
+            <th class="keyPurpose">Key/Purpose</th>
+            <th class="keyOptions right">Options</th>
         </tr>
         <% current_user.api_user.api_keys.each do |key| %>
         <tr class="user_keys">
-            <td><%= key.key_type %></td>
-            <td><%= key.api_key %></td>
-            <td><%= key.purpose %></td>
-            <td>
+            <td class="left"><%= key.key_type %></td>
+            <td class="keyContent">
+                <div class="key"><%= key.api_key %></div>
+                <p><%= key.purpose %></p>
+            <td class="right">
                 <% unless key.key_type == "primary" -%>
                 <%= link_to "Edit", edit_profile_key_path(key.id) %> | <%= link_to "Delete", profile_key_path(key.id), :method => :delete %>
                 <% end -%>
@@ -57,3 +57,4 @@
         <% end %>
     </div>
 </div>
+<div class="clear"></div>

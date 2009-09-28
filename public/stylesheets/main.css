@@ -144,11 +144,14 @@ td.right, th.right { padding-right: 15px; text-align: right;}
 th.right { text-align: right;}
 td.center, th.center { text-align: center; margin: 0 auto; width: 107px;}
 td.dataContent { width: 370px; padding-right: 20px;}
-td.dataContent a.dataName, div#recentComments dt { font-size: 120%; padding-bottom: 5px; }
+td.dataContent a.dataName, div#recentComments dt, div.key { font-size: 120%; padding-bottom: 5px; }
 body.dashboard td.dataContent a.dataName { float: none;}
 td.notes { width: 50px; height: 22px; text-align: inherit;}
 tr#titles th{ padding-bottom: 10px;}
 a.dataName { float: left; margin-right: 15px;}
+
+div.key { color: #371D17;}
+table#keys td.left, table#keys th.left { width: 80px; padding-right: 15px;}
 
 a.notesAvailable { text-indent: -9999em; background: url(/images/icon_notes.png) right top no-repeat; display: block; height: 22px;}
 
@@ -289,6 +292,7 @@ button.signUp { background: url(/images/btn_signUp.png) top left no-repeat; widt
 button.signIn_openID { background: url(/images/btn_signIn_openID.png) top left no-repeat; width: 172px; margin-left: 150px; margin-top: 20px; }
 button.signUp_openID { background: url(/images/btn_signUp_openID.png) top left no-repeat; width: 172px; margin-left: 150px; margin-top: 20px; }
 button.update { background: url(/images/btn_update.png) top left no-repeat; width: 93px; margin-top: 20px; }
+ul.editAPI button.update { margin-left: 150px;}
 button.generate { background: url(/images/btn_generateAPI.png) top left no-repeat; width: 157px; margin-top: 20px; margin-left: 150px;}
 
 form#sidebarSearch button.addTerm, form#sidebarSearch button.addAgency, form#sidebarSearch button.addCategory { margin-top: 10px;}
@@ -302,7 +306,7 @@ div#tags ul { margin-bottom: 20px;}
 ul#additionalFields_details { margin-top: 30px;}
 
 form#new_data_submission, form#new_contact_submission { margin-top: 40px;}
-form#new_data_submission label, form#addData label, form#comment label#commentLabel, form#advancedSearch>ul>li>label, form#new_user_session label, form#new_user label, form#new_contact_submission label, form.edit_user, div#additionalKeys form label { font-weight: bold; width: 150px; display: block; float: left; text-transform: uppercase; color: #371D17;}
+form#new_data_submission label, form#addData label, form#comment label#commentLabel, form#advancedSearch>ul>li>label, form#new_user_session label, form#new_user label, form#new_contact_submission label, form.edit_user, div#additionalKeys form label, form.generateAPI_page label, form ul.editAPI label  { font-weight: bold; width: 150px; display: block; float: left; text-transform: uppercase; color: #371D17;}
 form#sidebarSearch>ul>li>label{ font-weight: bold; display: block; text-transform: uppercase; color: #371D17; margin-bottom: 10px;}
 form#addData li { margin-bottom: 30px;}
 div#ltColumn form li, div#rtColumn form li, ul#openID_signup li { margin-bottom: 15px;}
