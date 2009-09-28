@@ -68,10 +68,9 @@ li#nav_suggest a:hover, li#nav_suggest a.active { width: 134px; background: url(
 /*columns*/
 
 div#contentHeader { background: url(/images/contentHeader_bar.png) bottom left no-repeat; height: 88px; position: relative;}
-body.dashboard div#contentHeader, body.add div#contentHeader, body.search div#contentHeader, body.advancedSearch div#contentHeader, body.submission div#contentHeader { height: 55px;}
+body.dashboard div#contentHeader, body.add div#contentHeader, body.search div#contentHeader, body.advancedSearch div#contentHeader, body.submission div#contentHeader, body.sign_up div#contentHeader, body.sign_in div#contentHeader { height: 55px;}
 body.browse div#contentHeader { height: 50px; background: none;}
-div#ltColumn { width: 610px; margin-right: 30px; float: left;}
-body.home div#ltColumn, body.dashboard div#ltColumn, body.add div#ltColumn, body.advancedSearch div#ltColumn, body.submission div#ltColumn { padding-left: 5px; width: 605px; padding-top: 20px;}
+div#ltColumn { width: 610px; margin-right: 30px; float: left; padding-left: 5px; width: 605px; padding-top: 20px;}
 body.home div#rtColumn, body.dashboard div#rtColumn { padding-top: 25px;}
 div#rtColumn { float: left; padding-left: 30px; width: 285px; background: url(/images/rtColumn_bg.jpg) top left repeat-y; margin-top:-6px; padding-right: 5px;}
 div#rtColumnWrapper { float: left; width: 320px; background: url(/images/rtColumn_bgWrapper.jpg) bottom left no-repeat; padding-bottom: 40px;}
@@ -79,10 +78,12 @@ div#rtColumnWrapper { float: left; width: 320px; background: url(/images/rtColum
 div#ltColumn div.module { background: url(/images/ltModule_bar.jpg) bottom center no-repeat; padding-bottom: 40px; margin-bottom: 20px;}
 div#rtColumn div.module {padding-bottom: 40px; margin-bottom: 20px; background: url(/images/rtModule_bar.png) bottom center no-repeat;}
 
-body.search div#ltColumn { width: 155px; background: url(/images/ltColumn_bg.jpg) top right repeat-y;  padding-right:15px; padding-left: 5px; margin-top: -6px; padding-top: 26px;}
+body.search div#ltColumn { width: 155px; background: url(/images/ltColumn_bg.jpg) top right repeat-y;  padding-right:15px; margin-top: -6px; padding-top: 26px;}
 body.search div#ltColumnWrapper { float: left; background: url(/images/ltColumn_bgBottom.jpg) bottom right no-repeat; padding-bottom: 40px; width: 175px; margin-right: 30px;}
 body.search div#rtColumn { width: 750px; padding-left: 0px; margin-top: 0px; background: none; padding-top: 20px;}
 
+body.sign_up div#ltColumn, body.sign_in div#ltColumn{ width: 445px; margin-right: 30px; padding-right: 30px; border-right: 1px solid #dcdad7;}
+body.sign_up div#rtColumn, body.sign_in div#rtColumn  { width: 444px; background: none; padding-left: 0px; padding-top: 20px; margin-top: 0px;}
 
 /*tabs*/
 
@@ -283,6 +284,10 @@ button.addTerm { background: url(/images/btn_addTerm.png) top left no-repeat; wi
 button.addAgency { background: url(/images/btn_addAgency.png) top left no-repeat; width: 101px; height: 22px; }
 button.addCategory { background: url(/images/btn_addCategory.png) top left no-repeat; width: 113px; height: 22px; }
 button.submit { background: url(/images/btn_submit.png) top left no-repeat; width: 93px; margin-left: 150px; margin-top: 20px;}
+button.signIn { background: url(/images/btn_signIn.png) top left no-repeat; width: 94px; margin-left: 150px; margin-top: 20px; }
+button.signUp { background: url(/images/btn_signUp.png) top left no-repeat; width: 94px; margin-left: 150px; margin-top: 20px; }
+button.signIn_openID { background: url(/images/btn_signIn_openID.png) top left no-repeat; width: 172px; margin-left: 150px; margin-top: 20px; }
+button.signUp_openID { background: url(/images/btn_signUp_openID.png) top left no-repeat; width: 172px; margin-left: 150px; margin-top: 20px; }
 
 form#sidebarSearch button.addTerm, form#sidebarSearch button.addAgency, form#sidebarSearch button.addCategory { margin-top: 10px;}
 
@@ -294,14 +299,14 @@ div#tags li { margin-bottom: 5px;}
 div#tags ul { margin-bottom: 20px;}
 ul#additionalFields_details { margin-top: 30px;}
 
-form#new_data_submission { margin-top: 40px;}
-form#new_data_submission label,  form#addData label, form#comment label#commentLabel, form#advancedSearch>ul>li>label{ font-weight: bold; width: 150px; display: block; float: left; text-transform: uppercase; color: #371D17;}
+form#new_data_submission, form#new_contact_submission { margin-top: 40px;}
+form#new_data_submission label, form#addData label, form#comment label#commentLabel, form#advancedSearch>ul>li>label, form#new_user_session label, form#new_user label, form#new_contact_submission label { font-weight: bold; width: 150px; display: block; float: left; text-transform: uppercase; color: #371D17;}
 form#sidebarSearch>ul>li>label{ font-weight: bold; display: block; text-transform: uppercase; color: #371D17; margin-bottom: 10px;}
 form#addData li { margin-bottom: 30px;}
-div#ltColumn form li { margin-bottom: 15px;}
+div#ltColumn form li, ul#openID_signup li { margin-bottom: 15px;}
 form#addData input, form#addData textarea { width: 250px;}
-form#addData input.full, form#addData textarea.full, form#new_data_submission input, form#new_data_submission textarea { width: 370px;}
-input#source { float: left; margin-right: 15px;}
+div#ltColumn input, div#ltColumn textarea{ width: 370px;}
+div#ltColumn input#source { float: left; margin-right: 15px; width: 250px;}
 form#addData select { margin-right: 5px; float: left;}
 select.year { float: left;}
 p.seperator { margin-left: 20px; display: block; float: left;}
@@ -314,6 +319,11 @@ form#sidebarSearch input.checkbox { float: left; margin-right: 10px; margin-top:
 form#sidebarSearch p.seperator { display: block; float: none; margin-left: 0px; margin-top: 10px;}
 form#sidebarSearch select { display: block; margin-bottom: 5px;}
 form#sidebarSearch li#li_submit { border-bottom: 0px; margin-top: 40px;}
+form#sidebarSearch input { width: 136px;}
+
+form#new_user_session li.signIn_cues label { font-size: 95%; font-style: oblique; float: none; text-transform: none; color: #706A67; }
+form#new_user_session li.signIn_cues input.checkbox { float: left; margin: 2px 10px 0 0 ;}
+form#new_user_session li.signIn_cues { margin-left: 150px; }
 
 a#additionalData_information { margin-top: 15px; display: block;}
 
@@ -323,13 +333,13 @@ form#advancedSearch input.checkbox { float: left; margin-right: 10px; margin-top
 div.formModule { float: left; }
 div.formModule li { margin-bottom: 5px;}
 div.scroll { overflow: auto; width: 440px; height: 80px; padding: 5px; border:2px solid #E2E7E7; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
-form#advancedSearch input#searchInput { width: 280px;}
+form#advancedSearch input#searchInput, body.sign_in div#ltColumn input, div#ltColumn ul#standard_signin input, div#rtColumn ul#openID_signin input, div#ltColumn ul#standard_signup input, div#rtColumn ul#openID_signup input { width: 280px;}
 
 input[type="hidden"] { display: none; }
 
-.checkbox { width: 15px;}
+div#ltColumn ul#standard_signin li.signIn_cues input.checkbox, div#ltColumn .checkbox, div#rtColumn .checkbox, div#column_fullWidth .checkbox{ width: 15px;}
 
-#flash_notice, #flash_error, #errorExplanation { padding: 7px 10px; margin: 10px 0;-moz-border-radius: 3px; -webkit-border-radius: 3px;}
+#flash_notice, #flash_error, #errorExplanation { padding: 7px 10px; margin: 10px 0 20px; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
 #flash_notice {
   background-color: #e5eaea;
   border: solid 2px #a0c1cd;
@@ -339,8 +349,12 @@ input[type="hidden"] { display: none; }
   border: solid 2px #C66;
 }
 
+div#errorExplanation p { color: #371D17;}
+div#errorExplanation ul { list-style-type: disc; padding-left: 40px;}
+div#ltColumn div#errorExplanation li, div#rtColumn div#errorExplanation li  { margin-bottom: 15px;}
+
 div#footer { margin: 10px auto 0; width: 960px;}
-div#footerWrapper { background: url(/images/footerBg.jpg) top left repeat-x; height: 245px;}
+div#footerWrapper { background: url(/images/footerBg.jpg) top left repeat-x; height: 245px; margin-top:80px;}
 div#footerNav ul { height: 40px; padding-top: 15px; width: 110px; margin: 0 auto;}
 div#footerNav li { float: left; }
 div#footerNav li a { color: #fff; text-transform: uppercase; text-indent: -9999em; display: block; height: 13px;}

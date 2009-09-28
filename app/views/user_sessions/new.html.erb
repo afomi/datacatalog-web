@@ -1,39 +1,48 @@
+<% content_for :body_class do %>sign_in<% end %>
+
 <% content_for :title do %>
   Sign In
 <% end %>
 
-<% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
-  <%= f.error_messages custom_error_messages %>
-  
-  <ul id="dataMetaData">
-
-    <li>
-      <%= f.label :openid_identifier, 'OpenID URL' %>
-      <%= f.text_field :openid_identifier %>
-    </li>
-  
-  </ul>
-  <%= f.submit "Sign In Via OpenID" %>
-
-  <ul id="dataMetaData">
-
-    <li>
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-    </li>
-    
-    <li>  
-      <%= f.label :password %>
-      <%= f.password_field :password %>    
-    </li>
-  
-    <li>  
-      <%= f.check_box :remember_me, {:class => "inline"} %>
-      <%= f.label :remember_me, "Remember?", {:class => "inline"}  %>
-    </li>
-    
-  </ul>
-  <%= f.submit "Sign In" %>
-
-
-<% end %>
+<div id="ltColumn">
+    <% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
+        <%= f.error_messages custom_error_messages %>
+        <ul id="standard_signin">
+            <li>
+              <%= f.label :email %>
+              <%= f.text_field :email %>
+            </li>
+            <li>  
+              <%= f.label :password %>
+              <%= f.password_field :password %>    
+            </li>
+            <li class="signIn_cues">  
+              <%= f.check_box :remember_me, {:class => "checkbox"} %>
+              <%= f.label :remember_me, "Stay Signed In", {:class => "inline"}  %>
+              <a href="#">Forgot Your Password?</a>
+            </li>  
+            <li>
+                <button class="signIn" id="user_session_submit" type="submit" value="Sign In" name="commit">
+                    <span>Sign In</span>
+                </button>
+            </li>    
+        </ul>
+    <% end %>
+</div>
+<div id="rtColumn">
+    <% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
+        <%= f.error_messages custom_error_messages %>
+      
+        <ul id="openID_signin">
+            <li>
+                <%= f.label :openid_identifier, 'OpenID URL' %>
+                <%= f.text_field :openid_identifier %>
+            </li>
+            <li>
+                <button class="signIn_openID" id="user_session_submit_openID" type="submit" value="Sign In Via OpenID" name="commit">
+                    <span>Sign In With OpenID</span>
+                </button>    
+            </li>    
+        </ul>
+    <% end %>
+</div>

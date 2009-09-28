@@ -3,14 +3,16 @@
 <%= form.hidden_field :user_id, :value => current_user %>
 
 <% else -%>
-
-<%= form.label :name, "Your Name" %>
-<%= form.text_field :name %>
-
-<%= form.label :email, "Your Email Address" %>
-<%= form.text_field :email %>
-
+<li>
+    <%= form.label :name, "Name" %>
+    <%= form.text_field :name %>
+</li>
+<li>
+    <%= form.label :email, "Email Address" %>
+    <%= form.text_field :email %>
+</li>
 <% end -%>
-
-<%= form.label :comments, "Your Comments" %>
-<%= form.text_area :comments %>
+<li>
+    <%= form.label :comments, "Comments" %>
+    <%= form.text_area :comments %>
+</li>
