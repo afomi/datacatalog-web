@@ -4,6 +4,15 @@
     Sign In
 <% end %>
 
+<% content_for :tabs do %>
+    <div id="signin_tabs">
+        <ul>
+            <li id="nav_standard_signin"><a class="buttonLink active" href="#">Standard Sign In</a></li>
+            <li id="nav_openid_signin"><a class="buttonLink" href="#">OpenID Sign In</a></li>
+        </ul>    
+    </div>  
+<% end %>
+
 <div id="ltColumn">
     <% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
         <%= f.error_messages custom_error_messages %>
@@ -45,7 +54,7 @@
     <% end %>
 </div>
 <div id="rtColumnWrapper">
-    <div id="rtColumn">
+    <div id="rtColumn" class="withBg">
 
     </div>
 </div>    

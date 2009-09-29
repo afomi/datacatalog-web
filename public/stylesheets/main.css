@@ -82,23 +82,28 @@ body.search div#ltColumn { width: 155px; background: url(/images/ltColumn_bg.jpg
 body.search div#ltColumnWrapper { float: left; background: url(/images/ltColumn_bgBottom.jpg) bottom right no-repeat; padding-bottom: 40px; width: 175px; margin-right: 30px;}
 body.search div#rtColumn { width: 750px; padding-left: 0px; margin-top: 0px; background: none; padding-top: 20px;}
 
-/*body.sign_up div#ltColumn, body.sign_in div#ltColumn{ width: 445px; margin-right: 30px; padding-right: 30px; border-right: 1px solid #dcdad7;}
-body.sign_up div#rtColumn, body.sign_in div#rtColumn  { width: 444px; background: none; padding-left: 0px; padding-top: 20px; margin-top: 0px;}*/
-
 /*tabs*/
 
-div#content_tabs li, div#downloadFormats li{ float: left;}
-div#content_tabs li { padding-top: 10px; margin-left: 5px;}
+div#content_tabs li, div#downloadFormats li, div#signin_tabs li, div#signup_tabs li{ float: left;}
+div#content_tabs li, div#signin_tabs li, div#signup_tabs li { padding-top: 10px; margin-left: 5px;}
 li#nav_dataDetails a{ background: url(/images/nav_dataDetails.png) top left no-repeat; width: 103px; height: 30px;}
 li#nav_dataDetails a:hover, li#nav_dataDetails a.active{ background: url(/images/nav_dataDetails.png) bottom left no-repeat; width: 103px; height: 30px;}
 li#nav_sitesUseData a{ background: url(/images/nav_sitesUseData.png) top left no-repeat; width: 167px; height: 30px;}
 li#nav_sitesUseData a:hover, li#nav_sitesUseData a.active{ background: url(/images/nav_sitesUseData.png) bottom left no-repeat; width: 167px; height: 30px;}
 
-
 div#dataDetails dt{ text-transform: uppercase; font-weight: bold; float: left; color: #371d17; width: 110px; padding-top: 2px;}
 div#dataDetails dt { margin-bottom: 5px;}
 div#dataDetails dd { margin-bottom: 7px;}
 div#dataDetails { border-bottom: #f2f3f1 1px solid; padding-bottom: 20px; margin-bottom: 20px;}
+
+li#nav_standard_signin a{ background: url(/images/nav_standard_signin.png) top left no-repeat; width: 135px; height: 30px;}
+li#nav_standard_signin a:hover, li#nav_standard_signin a.active{ background: url(/images/nav_standard_signin.png) bottom left no-repeat; width: 135px; height: 30px;}
+li#nav_openid_signin a{ background: url(/images/nav_openid_signin.png) top left no-repeat; width: 135px; height: 30px;}
+li#nav_openid_signin a:hover, li#nav_openid_signin a.active{ background: url(/images/nav_openid_signin.png) bottom left no-repeat; width: 135px; height: 30px;}
+li#nav_standard_signup a{ background: url(/images/nav_standard_signup.png) top left no-repeat; width: 135px; height: 30px;}
+li#nav_standard_signup a:hover, li#nav_standard_signup a.active{ background: url(/images/nav_standard_signup.png) bottom left no-repeat; width: 135px; height: 30px;}
+li#nav_openid_signup a{ background: url(/images/nav_openid_signup.png) top left no-repeat; width: 135px; height: 30px;}
+li#nav_openid_signup a:hover, li#nav_openid_signup a.active{ background: url(/images/nav_openid_signup.png) bottom left no-repeat; width: 135px; height: 30px;}
 
 div#metaDetails { float: left; width: 300px; padding-right: 15px;}
 div#ratingBox, div#favoriteData { float: left; width: 280px; margin-bottom: 10px;}
@@ -339,7 +344,7 @@ form#advancedSearch input.checkbox { float: left; margin-right: 10px; margin-top
 div.formModule { float: left; }
 div.formModule li { margin-bottom: 5px;}
 div.scroll { overflow: auto; width: 440px; height: 80px; padding: 5px; border:2px solid #E2E7E7; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
-form#advancedSearch input#searchInput, body.sign_in div#ltColumn input, div#ltColumn ul#standard_signin input, div#rtColumn ul#openID_signin input, div#ltColumn ul#standard_signup input, div#rtColumn ul#openID_signup input { width: 280px;}
+form#advancedSearch input#searchInput{ width: 280px;}
 form.generateAPI { margin-top: 30px;}
 
 input[type="hidden"] { display: none; }
