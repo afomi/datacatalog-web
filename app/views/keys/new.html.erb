@@ -1,23 +1,25 @@
-<% content_for :body_class do %>profile<% end %>
-
 <% content_for :title do %>
-    Generate New API Key
+Generate New API Key
 <% end %>
 
+<% content_for :body_class do %>profile<% end %>
+
 <div id="ltColumn">
-    <%= form_tag profile_keys_path, {:class => "generateAPI_page"} %>
-        <ul>
-            <%= render :partial => "form" %>
-            <li>
-                <button class="generate" type="submit" value="Generate" name="commit">
-                    <span>Generate API Key</span>
-                </button>
-            </li>
-        </ul>
-    </form>
+  <%= show_flash_message %>
+  <%= form_tag profile_keys_path, {:class => "generateAPI_page"} %>
+  <ul>
+    <%= render :partial => "form" %>
+    <li>
+      <button class="generate" type="submit" value="Generate" name="commit">
+        <span>Generate API Key</span>
+      </button>
+    </li>
+  </ul>
+  </form>
 </div>
+
 <div id="rtColumnWrapper">
-    <div id="rtColumn" class="withBg">
-        
-    </div>
+  <div id="rtColumn" class="withBg">
+
+  </div>
 </div>        

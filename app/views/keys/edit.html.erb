@@ -1,18 +1,20 @@
-<% content_for :body_class do %>profile<% end %>
-
 <% content_for :title do %>
-    Edit API Key
+Edit API Key
 <% end %>
 
+<% content_for :body_class do %>profile<% end %>
+
 <div id="ltColumn">
-    <%= form_tag profile_key_path(@key.id), :method => :put %>
-        <ul class="editAPI">
-            <%= render :partial => "form" %>
-            <li>
-                <button class="update" id="user_submit" type="submit" value="Update" name="commit">
-                    <span>Update</span>
-                </button>
-            </li>    
-        </ul>    
-    </form>
+  <%= show_flash_message %>
+
+  <%= form_tag profile_key_path(@key.id), :method => :put %>
+  <ul class="editAPI">
+    <%= render :partial => "form" %>
+    <li>
+      <button class="update" id="user_submit" type="submit" value="Update" name="commit">
+        <span>Update</span>
+      </button>
+    </li>    
+  </ul>    
+  </form>
 </div>

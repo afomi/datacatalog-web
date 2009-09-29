@@ -5,6 +5,7 @@
 <% end %>
 
 <div id="ltColumn">
+    <%= show_flash_message %>
     <% form_for @user, :url => profile_path do |f| %>
         <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
         <ul>
