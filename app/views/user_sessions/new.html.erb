@@ -14,6 +14,8 @@
 <% end %>
 
 <div id="ltColumn">
+    <%= show_flash_message %>
+
     <% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
         <%= f.error_messages custom_error_messages %>
         <ul id="standard_signin">

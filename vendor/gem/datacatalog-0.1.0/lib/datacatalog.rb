@@ -10,6 +10,7 @@ module DataCatalog
   class Unauthorized              < Error; end # 401
   class Forbidden                 < Error; end # 403
   class NotFound                  < Error; end # 404
+  class Conflict                  < Error; end # 409
   class InternalServerError       < Error; end # 500
   class ApiKeyNotConfigured       < Error; end
   class CannotDeletePrimaryApiKey < Error; end
