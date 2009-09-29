@@ -28,8 +28,6 @@
             </li>    
         </ul>
     <% end %>
-</div>
-<div id="rtColumn">
     <% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
         <%= f.error_messages custom_error_messages %>
       
@@ -46,4 +44,9 @@
         </ul>
     <% end %>
 </div>
+<div id="rtColumnWrapper">
+    <div id="rtColumn">
+
+    </div>
+</div>    
 <div class="clear"></div>
