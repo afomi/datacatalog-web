@@ -18,5 +18,13 @@ module ApplicationHelper
       ""
     end
   end
+  
+  def show_flash_message
+    message = ""
+    flash.each do |name, msg|
+      message += content_tag :div, msg, :id => "flash_#{name}"
+    end
+    message
+  end
 
 end

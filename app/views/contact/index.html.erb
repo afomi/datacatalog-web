@@ -4,9 +4,7 @@
 
 <div id="ltColumn">
     
-    <%- flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-    <%- end -%>
+    <%= show_flash_message %>
     <% content_for :body_class do %>submission<% end %>
 
     <p>Have a question or comment about the site? Submit it below.</p>
@@ -26,7 +24,8 @@
 </div>
 <div id="rtColumnWrapper">
     <div id="rtColumn" class="withBg">
-        
+        <h3>Why Sign Up?</h3>
+        <p>With an account on the National Data Catalog, you'll be able to mark data sources as favorites, participate in discussions, and contribute to documentation.</p>
     </div>    
 </div>
 <div class="clear"></div>    
