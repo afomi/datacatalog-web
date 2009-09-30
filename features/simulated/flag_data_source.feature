@@ -1,3 +1,4 @@
+@sources
 Feature: Flag data source as bad
   In order to report that a data set is no longer available at the current URL
   As a registered user

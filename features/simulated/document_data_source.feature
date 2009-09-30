@@ -1,3 +1,4 @@
+@sources
 Feature: Help document a data source
   In order share my knowledge about a data source
   As a registered user

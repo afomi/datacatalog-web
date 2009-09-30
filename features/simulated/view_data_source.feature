@@ -1,3 +1,4 @@
+@sources
 Feature: View a data source
   In order view the information available on a particular data set
   As a site visitor
