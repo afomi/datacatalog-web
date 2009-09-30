@@ -39,6 +39,18 @@ class User < ActiveRecord::Base
     self.api_key = api_user.primary_api_key
   end
 
+  def admin?
+    api_user.admin
+  end
+  
+  def curator?
+    api_user.curator
+  end
+  
+  def admin_or_curator?
+    api_user.admin || api_user.curator
+  end
+
   private
 
   def map_openid_registration(registration)

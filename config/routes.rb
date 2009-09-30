@@ -25,6 +25,13 @@ ActionController::Routing::Routes.draw do |map|
 
   map.browse "browse", :controller => "browse", :action => "index"
 
+  map.resource :admin, :controller => "admin" do |admin|
+    admin.resources :sources, :controller => "admin/sources"
+    admin.resources :data_submissions, :controller => "admin/data_submissions"
+    admin.resources :users, :controller => "admin/users"
+    admin.resources :contact_submissions, :controller => "admin/contact_submissions"
+  end
+
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 

@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   
-  def index
+  def show
 
   end
   
