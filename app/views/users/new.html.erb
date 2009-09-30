@@ -1,62 +1,62 @@
 <% content_for :body_class do %>sign_up<% end %>
 
 <% content_for :title do %>
-    Sign Up
+Sign Up
 <% end %>
 
 <% content_for :tabs do %>
 <div id="signup_tabs">
-    <ul>
-        <li id="nav_standard_signup"><a class="buttonLink active" href="#">Standard Sign Up</a></li>
-        <li id="nav_openid_signup"><a class="buttonLink" href="#">OpenID Sign Up</a></li>
-    </ul>    
+  <ul class="tabs">
+    <li id="nav_standard_signup"><a class="buttonLink active" href="#">Standard Sign Up</a></li>
+    <li id="nav_openid_signup"><a class="buttonLink" href="#">OpenID Sign Up</a></li>
+  </ul>    
 </div>
 <% end %>
 
-  <div id="ltColumn">
-    <%= show_flash_message %>
-    <div class="panes">
-      <div id="standard_signup" class="pane">  
-        <p class="tip">Sign up the old-fashioned way</p>
-        <% if @user.openid_identifier.blank? -%> 
-        <% form_for @user, :url => profile_path do |f| %>
-        <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
-        <ul id="standard_signup">
-          <%= render :partial => "form", :object => f %>
-          <li>
-            <button class="signUp" id="user_submit" type="submit" value="Sign Up" name="commit">
-              <span>Sign Up</span>
-            </button>
-          </li>
-        </ul>
-        <% end -%>
-        <% end -%>
-      </div>
+<div id="ltColumn">
+  <%= show_flash_message %>
+  <div class="tab_panes">
+    <div id="standard_signup" class="tab_pane">  
+      <p class="tip">Sign up the old-fashioned way</p>
+      <% if @user.openid_identifier.blank? -%> 
+      <% form_for @user, :url => profile_path do |f| %>
+      <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
+      <ul id="standard_signup">
+        <%= render :partial => "form", :object => f %>
+        <li>
+          <button class="signUp" id="user_submit" type="submit" value="Sign Up" name="commit">
+            <span>Sign Up</span>
+          </button>
+        </li>
+      </ul>
+      <% end -%>
+      <% end -%>
+    </div>
 
-      <div id="openid_signup" class="pane">
-        <p class="tip">Or, use OpenID</p>
-        <% form_for @user, :url => profile_path do |f| %>
-        <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
-        <ul id="openID_signup">
-          <%= render :partial => "openid_form", :object => f %>
-          <li>
-            <button class="signUp_openID" id="user_submit_openID" type="submit" value="Sign Up via OpenID" name="commit">
-              <span>Sign Up With OpenID</span>
-            </button>    
-          </li>
-        </ul>
-        <% end %>
-      </div>
-      
-    </div><!--panes -->    
-  </div><!--lt_column -->
-  <div id="rtColumnWrapper">
-      <div id="rtColumn" class="withBg">
-          <div class="module">
-              <h3>Why Sign Up?</h3>
-              <p>With an account on the National Data Catalog, you'll be able to mark data sources as favorites, participate in discussions, and contribute to documentation.</p>
-              <p>For developers and researchers, signing up is the only way to obtain API keys for programmatic access to the National Data Catalog.</p>
-          </div>
-      </div>
+    <div id="openid_signup" class="tab_pane">
+      <p class="tip">Or, use OpenID</p>
+      <% form_for @user, :url => profile_path do |f| %>
+      <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
+      <ul id="openID_signup">
+        <%= render :partial => "openid_form", :object => f %>
+        <li>
+          <button class="signUp_openID" id="user_submit_openID" type="submit" value="Sign Up via OpenID" name="commit">
+            <span>Sign Up With OpenID</span>
+          </button>    
+        </li>
+      </ul>
+      <% end %>
+    </div>
+
+  </div><!--panes -->    
+</div><!--lt_column -->
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <div class="module">
+      <h3>Why Sign Up?</h3>
+      <p>With an account on the National Data Catalog, you'll be able to mark data sources as favorites, participate in discussions, and contribute to documentation.</p>
+      <p>For developers and researchers, signing up is the only way to obtain API keys for programmatic access to the National Data Catalog.</p>
+    </div>
   </div>
-  <div class="clear"></div>
+</div>
+<div class="clear"></div>

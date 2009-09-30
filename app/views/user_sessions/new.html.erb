@@ -1,63 +1,73 @@
 <% content_for :body_class do %>sign_in<% end %>
 
 <% content_for :title do %>
-    Sign In
+Sign In
 <% end %>
 
 <% content_for :tabs do %>
-    <div id="signin_tabs">
-        <ul>
-            <li id="nav_standard_signin"><a class="buttonLink active" href="#">Standard Sign In</a></li>
-            <li id="nav_openid_signin"><a class="buttonLink" href="#">OpenID Sign In</a></li>
-        </ul>    
-    </div>  
+<div id="signin_tabs">
+  <ul class="tabs">
+    <li id="nav_standard_signin"><a class="buttonLink active" href="#">Standard Sign In</a></li>
+    <li id="nav_openid_signin"><a class="buttonLink" href="#">OpenID Sign In</a></li>
+  </ul>    
+</div>  
 <% end %>
 
 <div id="ltColumn">
-    <%= show_flash_message %>
+  <%= show_flash_message %>
 
-    <% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
-        <%= f.error_messages custom_error_messages %>
-        <ul id="standard_signin">
-            <li>
-              <%= f.label :email %>
-              <%= f.text_field :email %>
-            </li>
-            <li>  
-              <%= f.label :password %>
-              <%= f.password_field :password %>    
-            </li>
-            <li class="signIn_cues">  
-              <%= f.check_box :remember_me, {:class => "checkbox"} %>
-              <%= f.label :remember_me, "Stay Signed In", {:class => "inline"}  %>
-              <a href="#">Forgot Your Password?</a>
-            </li>  
-            <li>
-                <button class="signIn" id="user_session_submit" type="submit" value="Sign In" name="commit">
-                    <span>Sign In</span>
-                </button>
-            </li>    
-        </ul>
-    <% end %>
-    <% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
-        <%= f.error_messages custom_error_messages %>
-      
-        <ul id="openID_signin">
-            <li>
-                <%= f.label :openid_identifier, 'OpenID URL' %>
-                <%= f.text_field :openid_identifier %>
-            </li>
-            <li>
-                <button class="signIn_openID" id="user_session_submit_openID" type="submit" value="Sign In Via OpenID" name="commit">
-                    <span>Sign In With OpenID</span>
-                </button>    
-            </li>    
-        </ul>
-    <% end %>
-</div>
-<div id="rtColumnWrapper">
-    <div id="rtColumn" class="withBg">
+  <div class="tab_panes">
 
+    <div class="tab_pane">
+      <% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
+      <%= f.error_messages custom_error_messages %>
+      <ul id="standard_signin">
+        <li>
+          <%= f.label :email %>
+          <%= f.text_field :email %>
+        </li>
+        <li>  
+          <%= f.label :password %>
+          <%= f.password_field :password %>    
+        </li>
+        <li class="signIn_cues">  
+          <%= f.check_box :remember_me, {:class => "checkbox"} %>
+          <%= f.label :remember_me, "Stay Signed In", {:class => "inline"}  %>
+          <a href="#">Forgot Your Password?</a>
+        </li>  
+        <li>
+          <button class="signIn" id="user_session_submit" type="submit" value="Sign In" name="commit">
+            <span>Sign In</span>
+          </button>
+        </li>    
+      </ul>
+      <% end %>
     </div>
+    
+    <div class="tab_pane">
+      <% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
+      <%= f.error_messages custom_error_messages %>
+
+      <ul id="openID_signin">
+        <li>
+          <%= f.label :openid_identifier, 'OpenID URL' %>
+          <%= f.text_field :openid_identifier %>
+        </li>
+        <li>
+          <button class="signIn_openID" id="user_session_submit_openID" type="submit" value="Sign In Via OpenID" name="commit">
+            <span>Sign In With OpenID</span>
+          </button>    
+        </li>    
+      </ul>
+      <% end %>
+    </div>
+  </div><!-- tab_panes -->
+</div><!-- ltColumn -->
+
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <h3>No account yet?</h3>
+    <p>You'll need to <%= link_to "sign up", signup_path %> first.</p>
+  </div>
 </div>    
 <div class="clear"></div>
