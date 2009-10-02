@@ -45,7 +45,10 @@ Account Settings
 
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
+    <%= gravatar_image_tag(current_user.email, :alt => current_user.display_name, :title => current_user.display_name, :class => "avatar") -%>
+    <p class="tip">Set your avatar on <a href="http://en.gravatar.com/site/signup/">Gravatar</a>.</p>
     <% form_for @user, :url => profile_path do |f| %>
+
     <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
     <ul>
       <%= render :partial => "form", :object => f %>

@@ -18,8 +18,8 @@ ActionController::Routing::Routes.draw do |map|
   map.contact "contact", :controller => 'contact', :action => 'index'
   map.contact_submission "contact/submit", :controller => 'contact', :action => 'submit'
   
-  map.submit "submit", :controller => 'submit', :action => 'index'
-  map.data_submission "submit/submit", :controller => 'submit', :action => 'submit'
+  map.suggest "suggest", :controller => 'suggest', :action => 'index'
+  map.data_suggestion "suggest/suggest", :controller => 'suggest', :action => 'suggest'
 
   map.search "search", :controller => "search", :action => "index"
 
@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :admin, :controller => "admin" do |admin|
     admin.resources :sources, :controller => "admin/sources"
-    admin.resources :data_submissions, :controller => "admin/data_submissions"
+    admin.resources :data_suggestions, :controller => "admin/data_suggestions"
     admin.resources :users, :controller => "admin/users"
     admin.resources :contact_submissions, :controller => "admin/contact_submissions"
   end

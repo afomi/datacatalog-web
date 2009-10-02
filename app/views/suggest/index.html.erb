@@ -1,19 +1,19 @@
 <% content_for :title do %>
-Submit a Data Source
+Suggest a Data Source
 <% end %>
 
 <div id="ltColumn">
-  <% content_for :body_class do %>submission<% end %>
+  <% content_for :body_class do %>suggestion<% end %>
 
   <p>Know of a data set or API that isn't cataloged here? We want to know about it! Tell us more below.</p>
 
-  <% form_for @data_submission, :url => data_submission_path do |f| %>
+  <% form_for @data_suggestion, :url => data_suggestion_path do |f| %>
   <%= show_flash_message %>
   <%= f.error_messages custom_error_messages %>
   <ul>
     <%= render :partial => "form", :object => f %>
     <li>
-      <button class="submit" id="data_submission_submit" type="submit" value="Submit" name="commit">
+      <button class="submit" id="data_suggestion_submit" type="submit" value="Submit" name="commit">
         <span>Submit</span>
       </button>  
     </li>      
