@@ -1,4 +1,4 @@
-class Admin::DataSubmissionsController < AdminController
+class Admin::DataSuggestionsController < AdminController
   
   def index
 
