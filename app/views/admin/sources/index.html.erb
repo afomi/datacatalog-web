@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  Data Source Curation
+  Data Sources
 <% end %>
 
 <% content_for :body_class do %>admin<% end %>
@@ -7,3 +7,115 @@
 <% content_for :tabs do %>
   <%= render 'admin/tabs' %>
 <% end %>  
+
+<div id="ltColumn">
+  <table id="dataSources">
+    <thread>
+      <tr id="titles">
+        <th class="left sort">Name</th>
+        <th class="left sort">Added By</th>
+        <th class="left sort">Date</th>
+        <th class="center">Notes</th>
+        <th class="right sort">Flagged (30)</th>
+      </tr>  
+    </thread>  
+    <tbody>
+      <tr class="even">
+        <td class="left">
+          <a href="#">Data Set Name</a>
+        </td>
+        <td class="left">David</td>
+        <td class="left">12/10/08</td>
+        <td title="Add a Note" class="left">
+          <a class="addNote" href="#">Add Note</a>
+        </td>
+        <td title="Resolve Data Set">
+          <a class="flaggedData" href="#">Flagged Data</a>
+        </td>
+      </tr>  
+      <tr class="odd">
+        <td class="left">
+          <a href="#">Data Set Name</a>
+        </td>
+        <td class="left">David</td>
+        <td class="left">12/10/08</td>
+        <td title="Add a Note" class="left">
+          <a class="addNote" href="#">Add Note</a>
+        </td>
+        <td title="Resolve Data Set">
+          <a class="flaggedData" href="#">Flagged Data</a>
+        </td>
+      </tr>
+      <tr class="even">
+        <td class="left">
+          <a href="#">Data Set Name</a>
+        </td>
+        <td class="left">David</td>
+        <td class="left">12/10/08</td>
+        <td class="left note">
+          <a class="notesAvailable" href="#">Note</a>
+        </td>
+        <td title="Flag Data Set">
+          <a class="flagData" href="#">Flag Data</a>
+        </td>
+      </tr>  
+      <tr class="odd">
+        <td class="left">
+          <a href="#">Data Set Name</a>
+        </td>
+        <td class="left">David</td>
+        <td class="left">12/10/08</td>
+        <td title="Add a Note" class="left">
+          <a class="addNote" href="#">Add Note</a>
+        </td>
+        <td title="Resolve Data Set">
+          <a class="flaggedData" href="#">Flagged Data</a>
+        </td>
+      </tr>
+    </tbody>  
+  </table>  
+</div>
+
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <h3>Recently Resolved Data Sets</h3>
+    <dl id="resolvedData">
+      <dt>
+        <a href="#">Data Set Name</a>
+      </dt>
+      <dd>Text if there is a note</dd>
+      <dd class="resolvedDate">
+        <span class="resolver">Resolved by David</span>
+        <span>10/11/08</span>
+      </dd>
+      
+      <dt>
+        <a href="#">Data Set Name</a>
+      </dt>
+      <dd class="resolvedDate">
+        <span class="resolver">Resolved by David</span>
+        <span>10/11/08</span>
+      </dd>
+      
+      <dt>
+        <a href="#">Data Set Name</a>
+      </dt>
+      <dd>Text if there is a note</dd>
+      <dd class="resolvedDate">
+        <span class="resolver">Resolved by David</span>
+        <span>10/11/08</span>
+      </dd>
+      
+      <dt>
+        <a href="#">Data Set Name</a>
+      </dt>
+      <dd>Text if there is a note</dd>
+      <dd class="resolvedDate">
+        <span class="resolver">Resolved by David</span>
+        <span>10/11/08</span>
+      </dd>
+    </dl>
+  </div>    
+</div>
+<div class="clear"></div>
+

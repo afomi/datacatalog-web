@@ -7,3 +7,104 @@
 <% content_for :tabs do %>
   <%= render 'admin/tabs' %>
 <% end %>  
+
+<div id="ltColumn">
+  <div id="dashboardControls">
+    <ul>
+      <li id="deleteBtn"><a class="buttonLink" href="#">Delete</a></li>
+      <li id="moveBtn">
+        <a class="buttonLink" href="#">Move To</a>
+        <div id="favoriteData_dropdown">
+          <ul>
+            <li>
+              <a class="dashboardNav" href="#">Favorited Data</a>
+              <span>5</span>
+            </li>
+            <li>
+              <a class="dashboardNav folder" href="#">EPA</a>
+              <span>5</span>
+            </li>    
+            <li>
+              <a class="dashboardNav folder" href="#">TRI Reporting</a>
+              <span>50</span>
+            </li>
+            <li class="divider"></li>
+            <li id="manageFolders">
+              <a class="dashboardNav" href="#">Manage Folders</a>
+              <div class="clear"></div>
+            </li>
+          </ul>    
+        </div>
+      </li>
+    </ul>     
+    <div class="clear"></div>
+  </div>
+  <table id="messagesTable">
+    <thead>
+      <tr id="titles">
+        <th id="selectTitle">Select</th>
+        <th class="left sort">Name</th>
+        <th class="left sort">Message</th>
+        <th class="right sort">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="even">
+        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+        <td class="left">User Name</td>
+        <td class="left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adipiscing est ac nisi accumsan nec blandit ante...</td>
+        <td class="right">10/20/08</td>
+      </tr>
+      <tr class="odd">
+        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+        <td class="left">User Name</td>
+        <td class="left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adipiscing est ac nisi accumsan nec blandit ante...</td>
+        <td class="right">10/20/08</td>
+      </tr>
+      <tr class="even">
+        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+        <td class="left">User Name</td>
+        <td class="left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adipiscing est ac nisi accumsan nec blandit ante...</td>
+        <td class="right">10/20/08</td>
+      </tr>
+      <tr class="odd">
+        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+        <td class="left">User Name</td>
+        <td class="left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adipiscing est ac nisi accumsan nec blandit ante...</td>
+        <td class="right">10/20/08</td>
+      </tr>
+    </tbody>
+  </table>    
+  
+</div>
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <div id="dashboardNav" class="module">
+      <ul>
+        <li class="active">
+          <a class="dashboardNav" href="#">Contact Submissions</a>
+          <span>20</span>
+        </li>
+        <li>
+          <a class="dashboardNav folder" href="#">EPA</a>
+          <a class="deleteIcon" title="Delete Folder" href="#">Delete</a>
+          <span>5</span>
+        </li>
+        <li>
+          <a class="dashboardNav folder" href="#">TRI Reporting</a>
+          <a class="deleteIcon" title="Delete Folder" href="#">Delete</a>
+          <span>2</span>
+        </li>
+      </ul>   
+      <a class="allLink" id="addFolderLink" href="#">Add Folder</a> 
+      <div class="clear"></div>
+      <div id="addFolder">
+        <input id="addFolderInput" type="text" name="word" />
+        <button class="addFolder" type="submit">
+          <span>Add</span>
+        </button>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>

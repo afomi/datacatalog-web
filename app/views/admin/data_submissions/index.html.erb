@@ -7,3 +7,153 @@
 <% content_for :tabs do %>
   <%= render 'admin/tabs' %>
 <% end %>    
+
+<div id="ltColumn">
+  <div id="dashboardControls">
+    <ul>
+      <li id="deleteBtn"><a class="buttonLink" href="#">Delete</a></li>
+      <li id="moveBtn">
+        <a class="buttonLink" href="#">Move To</a>
+        <div id="favoriteData_dropdown">
+          <ul>
+            <li>
+              <a class="dashboardNav" href="#">Favorited Data</a>
+              <span>5</span>
+            </li>
+            <li>
+              <a class="dashboardNav folder" href="#">EPA</a>
+              <span>5</span>
+            </li>    
+            <li>
+              <a class="dashboardNav folder" href="#">TRI Reporting</a>
+              <span>50</span>
+            </li>
+            <li class="divider"></li>
+            <li id="manageFolders">
+              <a class="dashboardNav" href="#">Manage Folders</a>
+              <div class="clear"></div>
+            </li>
+          </ul>    
+        </div>
+      </li>
+    </ul>     
+    <div class="clear"></div>
+  </div>   
+  <table id="suggestedData">
+    <thead>
+      <tr id="titles">
+        <th id="selectTitle">Select</th>
+        <th>Data Set</th>
+        <th class="center">URL</th>
+        <th class="center">Date</th>
+        <th class="right">Curate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="even">
+        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+        <td class="dataContent">
+          <a class="dataName" href="#">Name of Suggested Data Set</a>
+          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
+        </td>
+        <td class="center">
+          <a href="#">http://www.sunlightlabs.com</a>
+        </td>
+        <td class="center">10/20/08</td>
+        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
+      </tr>	
+      <tr class="odd">
+        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+        <td class="dataContent">
+          <a class="dataName" href="#">Name of Suggested Data Set</a>
+          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
+        </td>
+        <td class="center">
+          <a href="#">http://www.sunlightlabs.com</a>
+        </td>
+        <td class="center">10/20/08</td>
+        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
+      </tr>
+      <tr class="even">
+        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+        <td class="dataContent">
+          <a class="dataName" href="#">Name of Suggested Data Set</a>
+          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
+        </td>
+        <td class="center">
+          <a href="#">http://www.sunlightlabs.com</a>
+        </td>
+        <td class="center">10/20/08</td>
+        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
+      </tr>
+      <tr class="odd">
+        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+        <td class="dataContent">
+          <a class="dataName" href="#">Name of Suggested Data Set</a>
+          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
+        </td>
+        <td class="center">
+          <a href="#">http://www.sunlightlabs.com</a>
+        </td>
+        <td class="center">10/20/08</td>
+        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
+      </tr>
+      <tr class="even">
+        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+        <td class="dataContent">
+          <a class="dataName" href="#">Name of Suggested Data Set</a>
+          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
+        </td>
+        <td class="center">
+          <a href="#">http://www.sunlightlabs.com</a>
+        </td>
+        <td class="center">10/20/08</td>
+        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
+      </tr>
+      <tr class="odd">
+        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+        <td class="dataContent">
+          <a class="dataName" href="#">Name of Suggested Data Set</a>
+          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
+        </td>
+        <td class="center">
+          <a href="#">http://www.sunlightlabs.com</a>
+        </td>
+        <td class="center">10/20/08</td>
+        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
+      </tr>
+    </tbody>		
+  </table>        	           
+</div> 
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <div id="dashboardNav" class="module">
+      <ul>
+        <li class="active">
+          <a class="dashboardNav" href="#">Suggested Data</a>
+          <span>20</span>
+        </li>
+        <li>
+          <a class="dashboardNav folder" href="#">EPA</a>
+          <a class="deleteIcon" title="Delete Folder" href="#">Delete</a>
+          <span>5</span>
+        </li>
+        <li>
+          <a class="dashboardNav folder" href="#">TRI Reporting</a>
+          <a class="deleteIcon" title="Delete Folder" href="#">Delete</a>
+          <span>2</span>
+        </li>
+      </ul>   
+      <a class="allLink" id="addFolderLink" href="#">Add Folder</a> 
+      <div class="clear"></div>
+      <div id="addFolder">
+        <input id="addFolderInput" type="text" name="word" />
+        <button class="addFolder" type="submit">
+          <span>Add</span>
+        </button>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>  
+</div> 
+<div class="clear"></div>

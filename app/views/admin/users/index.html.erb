@@ -7,3 +7,70 @@
 <% content_for :tabs do %>
   <%= render 'admin/tabs' %>
 <% end %>  
+
+<div id="ltColumn">
+  <h3>There are currently 980 users using Data Catalog</h3>
+  <div id="dashboardControls">
+    <ul>
+      <li id="deleteBtn"><a class="buttonLink" href="#">Delete</a></li>
+    </ul>
+    <div class="clear"></div>
+  </div>  
+    <table id="usersTable">
+      <thead>
+        <tr id="titles">
+          <th id="selectTitle">Select</th>
+          <th>User</th>
+          <th class="right">Curator</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="even">
+          <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+          <td class="dataContent">User Name</td>
+          <td class="right"><a class="addCurator" href="#">Make User a Curator</td>
+        </tr>
+        <tr class="odd">
+          <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+          <td class="dataContent">User Name</td>
+          <td class="right"><a class="addCurator" href="#">Make User a Curator</td>
+        </tr>
+        <tr class="even">
+          <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+          <td class="dataContent">User Name</td>
+          <td class="right"><a class="curateData" href="#">Curator</td>
+        </tr>
+        <tr class="odd">
+          <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
+          <td class="dataContent">User Name</td>
+          <td class="right"><a class="addCurator" href="#">Make User a Curator</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <div id="adminUsers" class="module">
+      <h3>Admin Users</h3>
+      <ul class="adminUsers">
+        <li>
+          <span class="adminName">Luigi</span>
+          <a class="deleteIcon" href="#" title="Delete Folder">Delete</a>
+        </li>
+        <li>
+          <span class="adminName">David</span>
+          <a class="deleteIcon" href="#" title="Delete Folder">Delete</a>
+        </li>
+        <li class="clear"></li>
+      </ul> 
+      <h4>Add User</h4> 
+      <div class="clear"></div>
+      <div id="addUser">
+        <input id="addFolderInput" type="text" name="word" />
+        <button class="addFolder" type="submit">
+          <span>Add</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>    

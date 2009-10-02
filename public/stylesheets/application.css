@@ -104,6 +104,16 @@ li#nav_standard_signup a:hover, li#nav_standard_signup a.active{ background: url
 li#nav_openid_signup a{ background: url(/images/nav_openid_signup.png) top left no-repeat; width: 135px; height: 30px;}
 li#nav_openid_signup a:hover, li#nav_openid_signup a.active{ background: url(/images/nav_openid_signup.png) bottom left no-repeat; width: 135px; height: 30px;}
 
+li#nav_dataSources a { background: url(/images/nav_dataSources.png) top left no-repeat; width: 115px; height: 30px; }
+li#nav_dataSources a:hover, li#nav_dataSources a.active { background: url(/images/nav_dataSources.png) bottom left no-repeat; width: 115px; height: 30px; }
+li#nav_dataSubmissions a { background: url(/images/nav_dataSubmissions.png) top left no-repeat; width: 135px; height: 30px; }
+li#nav_dataSubmissions a:hover, li#nav_dataSubmissions a.active { background: url(/images/nav_dataSubmissions.png) bottom left no-repeat; width: 135px; height: 30px; }
+li#nav_userAccounts a { background: url(/images/nav_userAccounts.png) top left no-repeat; width: 122px; height: 30px; }
+li#nav_userAccounts a:hover, li#nav_userAccounts a.active { background: url(/images/nav_userAccounts.png) bottom left no-repeat; width: 122px; height: 30px; }
+li#nav_contactSubmissions a { background: url(/images/nav_contactSubmissions.png) top left no-repeat; width: 154px; height: 30px; }
+li#nav_contactSubmissions a:hover, li#nav_contactSubmissions a.active { background: url(/images/nav_contactSubmissions.png) bottom left no-repeat; width: 154px; height: 30px; }
+
+
 div#metaDetails { float: left; width: 300px; padding-right: 15px;}
 div#ratingBox, div#favoriteData { float: left; width: 280px; margin-bottom: 10px;}
 div#ratingBox { background: url(/images/voteBox.png) top left no-repeat; width: 280px; height: 113px;}
@@ -148,16 +158,29 @@ td.right, th.right { padding-right: 15px; text-align: right;}
 th.right { text-align: right;}
 td.center, th.center { text-align: center; margin: 0 auto; width: 107px;}
 td.dataContent { width: 370px; padding-right: 20px;}
-td.dataContent a.dataName, div#recentComments dt, div.key { font-size: 120%; padding-bottom: 5px; }
-body.dashboard td.dataContent a.dataName { float: none;}
+td.dataContent a.dataName, div#recentComments dt, div.key, dl#resolvedData dt { font-size: 120%; padding-bottom: 5px; }
+body.dashboard td.dataContent a.dataName, body.admin td.dataContent a.dataName { float: none;}
 td.notes { width: 50px; height: 22px; text-align: inherit;}
 tr#titles th{ padding-bottom: 10px;}
 a.dataName { float: left; margin-right: 15px;}
+table#dataSources td.left, table#dataSources th.left, table#dataSources td.left, table#dataSources th.left { padding-right: 15px;}
+table#dataSources td.right, table#dataSources th.right { width: 95px;}
+
+table#usersTable td.right, table#usersTable th.right { width: 200px;}
+table#messagesTable td.right, table#messagesTable th.right { width: 40px;}
+
+table#suggestedData td.center, table#suggestedData td.left, table#suggestedData th.center, table#suggestedData th.left { padding-right: 15px;}
+
+th.sort { background: url(/images/sortArrows.png) left 4px no-repeat; padding-left: 15px; cursor: pointer;}
 
 div.key { color: #371D17;}
 table#keys td.left, table#keys th.left { width: 80px; padding-right: 15px;}
 
 a.notesAvailable { text-indent: -9999em; background: url(/images/icon_notes.png) right top no-repeat; display: block; height: 22px;}
+table#dataSources a.notesAvailable { background: url(/images/icon_notes.png) center top no-repeat; }
+a.addNote { text-indent: -9999em; background: url(/images/icon_notesAdd.png) center top no-repeat; display: block; height: 23px; }
+a.flaggedData { text-indent: -9999em; background: url(/images/icon_flagged.png) right top no-repeat; display: block; height: 19px; margin-right: 15px;}
+a.flagData { text-indent: -9999em; background: url(/images/icon_favorited.png) right top no-repeat; display: block; height: 19px; margin-right: 15px; }
 
 table#browseTable { width: 960px;}
 table#browseTable td.right, th.right, table#searchTable td.right, th.right { width: 90px;}
@@ -166,14 +189,18 @@ table#browseTable td.dataContent { width: 605px; }
 table#searchTable { width: 750px;}
 table#searchTable td.dataContent { width: 395px;}
 
+
 dl#searchDetails dt { font-weight: bold; margin-right: 15px; margin-top: 2px; margin-bottom: 15px;}
 dl#searchDetails dd { margin-bottom: 10px;}
 dl#searchDetails { margin-bottom: 30px;}
 
 div#recentComments dd { margin-bottom: 10px;}
-div#recentComments dd.commentDate { font-style: oblique; margin-bottom: 30px; color: #928F8C;}
+div#recentComments dd.commentDate, dd.resolvedDate { font-style: oblique; margin-bottom: 30px; color: #928F8C;}
+.resolver { margin-right: 10px;}
 
 div#yourRatings li, div#similarSets li { margin-bottom: 10px;}
+span.adminName, div#adminUsers a.deleteIcon { float: left; margin-right: 15px;}
+div#adminUsers a.deleteIcon { margin-right: 30px;}
 
 a.allLink { font-size: 110%; font-weight: bold; padding-top: 4px;}
 
@@ -184,7 +211,7 @@ div#dashboardNav li.active { background: #fff; -moz-border-radius: 3px; -webkit-
 div#dashboardNav span, div#favoriteData_dropdown span { font-weight: bold; padding-right: 30px;}
 body.dashboard div#ltColumn div#favoriteData_dropdown span { padding-right: 10px;}
 div#dashboardNav a { float: left; text-align: left;}
-div#dashboardNav ul { margin-bottom: 20px;}
+div#dashboardNav ul, ul.adminUsers { margin-bottom: 20px;}
 div#dashboardNav a#addFolderLink { background: url(/images/btn_add.png) left 3px no-repeat; padding-bottom: 3px; padding-left: 33px;}
 input#addFolderInput, input#addTagInput { float: left; margin-right: 15px;}
 div#addFolder, div#addTag { margin-top: 10px;}
@@ -303,9 +330,9 @@ form#sidebarSearch button.addTerm, form#sidebarSearch button.addAgency, form#sid
 
 a.calendar { background: url(/images/calendarIcon.png) top right no-repeat; width: 20px; height: 19px; float: left; margin-left: 15px;}
 
-a#addTagLink, div#additionalFields h3 a, a.addLink{ background: url(/images/btn_add.png) top left no-repeat; padding-bottom: 3px; padding-left: 28px;}
+a#addTagLink, div#additionalFields h3 a, a.addLink, .addCurator{ background: url(/images/btn_add.png) top left no-repeat; padding-bottom: 3px; padding-left: 28px;}
 div#additionalFields h3, a.addLink { margin-bottom: 0px; font-size: 120%;}
-div#tags li { margin-bottom: 5px;}
+div#tags li, div#adminUsers li{ margin-bottom: 5px;}
 div#tags ul { margin-bottom: 20px;}
 ul#additionalFields_details { margin-top: 30px;}
 
