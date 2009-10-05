@@ -21,6 +21,15 @@ def setup_api
   DataCatalog.base_uri = 'somehost.com'
 end
 
+def clean_slate
+  DataCatalog::User.all.each do |u|
+    DataCatalog::User.destroy(u.id) unless u.name == "Primary Admin"
+  end
+  DataCatalog::Source.all.each do |s|
+    DataCatalog::Source.destroy(s.id)
+  end
+end
+
 def valid_user_attributes
   {
       :display_name => 'John D.',

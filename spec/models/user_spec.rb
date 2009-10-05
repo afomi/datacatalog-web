@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe User do
   before(:each) do
-    setup_api
+    clean_slate
     @user = User.create!(valid_user_attributes)
   end
 
@@ -53,15 +53,30 @@ describe User do
   
   describe "#create_api_user" do
     
-    it "should set the user's api_key" do
-      mock_user = DataCatalog::User.new
-      mock(mock_user).primary_api_key {'jasdlkfj39'}
-      stub(DataCatalog::User).create { mock_user }
-      
+    it "should set the user's api_key" do      
       @user.create_api_user
-      @user.api_key.should eql('jasdlkfj39')
+      @user.api_user.should be_an_instance_of(DataCatalog::User)
+      @user.api_user.name.should eql(valid_user_attributes[:display_name])
     end
     
   end # describe "#create_api_user"
+  
+  describe "#save" do
+    
+    it "should sync up the api_user object" do
+      @user.create_api_user
+      @user.api_user.name.should eql(valid_user_attributes[:display_name])
+      @user.api_user.admin.should be false
+      
+      new_name = "Sam Snead"
+      @user.display_name = new_name
+      @user.curator = true
+      @user.save
+      @user.api_user.name.should eql(new_name)
+      @user.api_user.curator.should be true
+      @user.curator?.should be true
+    end
+    
+  end # describe "#save"
   
 end
