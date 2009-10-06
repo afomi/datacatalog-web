@@ -15,8 +15,8 @@ module ApplicationHelper
         return "active" if params[:controller] == controller
       end
     else
-      ""
     end
+    return ""
   end
   
   def show_flash_message

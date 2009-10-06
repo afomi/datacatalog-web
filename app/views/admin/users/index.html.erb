@@ -50,8 +50,19 @@
 </div>
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
+    
+    <div id="search" class="module">
+      <h3>Search</h3>
+      <form>
+        <input id="searchInput" type="text" />
+        <button class="search" type="submit">
+          <span>Search</span>
+        </button>
+      </form>      
+    </div>
+    
     <div id="adminUsers" class="module">
-      <h3>Admin Users</h3>
+      <h3>Curators</h3>
       <ul class="adminUsers">
         <li>
           <span class="adminName">Luigi</span>
@@ -62,15 +73,21 @@
           <a class="deleteIcon" href="#" title="Delete Folder">Delete</a>
         </li>
         <li class="clear"></li>
-      </ul> 
-      <h4>Add User</h4> 
-      <div class="clear"></div>
-      <div id="addUser">
-        <input id="addFolderInput" type="text" name="word" />
-        <button class="addFolder" type="submit">
-          <span>Add</span>
-        </button>
-      </div>
+      </ul>
     </div>
+    
+    <div id="adminUsers" class="module">
+      <h3>Admins</h3>
+      <ul class="adminUsers">
+        <li>
+          <span class="adminName">Luigi</span>
+        </li>
+        <li>
+          <span class="adminName">David</span>
+        </li>
+        <li class="clear"></li>
+      </ul>
+    </div>    
+    
   </div>
 </div>    

@@ -3,7 +3,7 @@
   <div id="utility">
     <ul>
     <% if current_user -%>
-      <li id="utilityRegister"><%= link_to "Admin", admin_path %></li>
+      <li id="utilityRegister"><%= link_to "Admin", admin_sources_path %></li>
       <li id="utilityRegister"><%= link_to "Account Settings", profile_path %></li>
       <li id="utilitySignup"><%= link_to "Sign Out", signout_path %></li>
     <% else -%>
