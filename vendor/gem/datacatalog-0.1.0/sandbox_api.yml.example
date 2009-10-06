@@ -1,0 +1,2 @@
+api_key: d193d1523d49e4caf46297ef94d7a2c995d3b2cb # generate with rake db:ensure_admin on datacatalog-api
+base_uri: sandbox.dc-api.local

@@ -55,7 +55,8 @@ module DataCatalog
     end
 
     def self.set_base_uri
-      default_options[:base_uri] = HTTParty.normalize_base_uri(DataCatalog.base_uri || 'api.nationaldatacatalog.com')
+      uri = DataCatalog.base_uri || 'api.nationaldatacatalog.com'
+      default_options[:base_uri] = HTTParty.normalize_base_uri(uri)
     end
 
     def self.set_up!

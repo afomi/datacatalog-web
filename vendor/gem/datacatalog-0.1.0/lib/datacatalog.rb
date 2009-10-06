@@ -4,6 +4,7 @@ require 'httparty'
 require 'mash'
 
 module DataCatalog
+
   mattr_accessor :api_key, :base_uri
   class Error                     < RuntimeError; end
   class BadRequest                < Error; end # 400
@@ -24,5 +25,6 @@ module DataCatalog
   
 end
 
-require "#{File.dirname(__FILE__)}/datacatalog/base.rb"
-Dir["#{File.dirname(__FILE__)}/datacatalog/*.rb"].each { |source_file| require source_file }
+require 'require_helpers'
+require_file 'base'
+require_dir 'resources'

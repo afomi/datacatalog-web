@@ -1,0 +1,54 @@
+A user has a built-in, primary API key.
+A user also has secondary API keys.
+
+API keys fall into these categories:
+1. "primary" API key
+   - created and controlled by system
+   - cannot be deleted by users
+   - used by the Data Catalog Web Application
+   - can be rekeyed by user
+2. application keys
+   - created and controlled by users
+   - can be rekeyed by user
+   - do not provide user-specific credentials:
+     - favorites
+     - comments
+3. valet keys
+   - created and controlled by users
+   - can be rekeyed by user
+   - provide user-specific credentials
+     - favorites
+     - comments
+
+GET /users/1/api_keys
+# get all API keys
+:type => :primary
+:type => :application
+:type => :valet
+
+GET /users/1/api_keys?type=primary
+# just returns the primary key
+
+GET /users/1/api_keys?type=application
+# returns an array of application keys. [] if none.
+
+GET /users/1/api_keys?type=valet
+# returns an array of the valet keys. [] if none.
+
+POST /users/1/api_keys
+# create a new API key
+
+PUT /users/1/api_keys/12345
+# update an existing API key
+
+PUT /users/1/api_keys/12345?regenerate_api_key=true
+# rekey an API key
+
+DELETE /users/1/api_keys/12345
+# delete an existing API key
+# return 403 Forbidden if attempting to delete a primary key
+
+# -----
+
+POST /users
+A a primary key API should be generated automatically.
