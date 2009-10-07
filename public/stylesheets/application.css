@@ -106,8 +106,8 @@ li#nav_openid_signup a:hover, li#nav_openid_signup a.active{ background: url(/im
 
 li#nav_dataSources a { background: url(/images/nav_dataSources.png) top left no-repeat; width: 115px; height: 30px; }
 li#nav_dataSources a:hover, li#nav_dataSources a.active { background: url(/images/nav_dataSources.png) bottom left no-repeat; width: 115px; height: 30px; }
-li#nav_dataSubmissions a { background: url(/images/nav_dataSubmissions.png) top left no-repeat; width: 135px; height: 30px; }
-li#nav_dataSubmissions a:hover, li#nav_dataSubmissions a.active { background: url(/images/nav_dataSubmissions.png) bottom left no-repeat; width: 135px; height: 30px; }
+li#nav_dataSuggestions a { background: url(/images/nav_dataSuggestions.png) top left no-repeat; width: 135px; height: 30px; }
+li#nav_dataSuggestions a:hover, li#nav_dataSuggestions a.active { background: url(/images/nav_dataSuggestions.png) bottom left no-repeat; width: 135px; height: 30px; }
 li#nav_userAccounts a { background: url(/images/nav_userAccounts.png) top left no-repeat; width: 122px; height: 30px; }
 li#nav_userAccounts a:hover, li#nav_userAccounts a.active { background: url(/images/nav_userAccounts.png) bottom left no-repeat; width: 122px; height: 30px; }
 li#nav_contactSubmissions a { background: url(/images/nav_contactSubmissions.png) top left no-repeat; width: 154px; height: 30px; }
