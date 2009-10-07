@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/spec_helper'
+include DataCatalog
 
-describe DataCatalog::User do
-
+module UserHelpers
   def create_user
-    DataCatalog::User.create({
+    User.create({
       :name  => "Ted Smith",
       :email => "ted@email.com"
     })
@@ -20,25 +20,33 @@ describe DataCatalog::User do
     user
   end
   
-  before(:each) do
+  def create_3_users
+    3.times do |n|
+      User.create(
+        :name  => "User-#{n}",
+        :email => "user_#{n}@email.com"
+      )
+    end
+  end
+end
+
+describe User do
+  include UserHelpers
+  
+  before do
     setup_api
     clean_slate
   end
 
   describe ".all" do
-    before(:each) do
-      3.times do |n|
-        DataCatalog::User.create(
-          :name  => "User-#{n}",
-          :email => "user_#{n}@email.com"
-        )
-      end
-      @users = DataCatalog::User.all
+    before do
+      create_3_users
+      @users = User.all
     end
     
     it "should return an enumeration of users" do
       @users.each do |u|
-        u.should be_an_instance_of(DataCatalog::User)
+        u.should be_an_instance_of(User)
       end
     end
     
@@ -48,7 +56,7 @@ describe DataCatalog::User do
       names.should include("User-1")
       names.should include("User-2")
     end
-  end # describe ".all"
+  end
 
   describe ".create" do
     before do
@@ -56,35 +64,17 @@ describe DataCatalog::User do
     end
 
     it "should create a new user when valid params are passed in" do
-      @user.should be_an_instance_of(DataCatalog::User)
+      @user.should be_an_instance_of(User)
       @user.name.should == "Ted Smith"
       @user.email.should == "ted@email.com"
     end
 
     it "should raise BadRequest when invalid params are passed in" do
       executing do
-        DataCatalog::User.create({ :garbage_field => "junk" })
-      end.should raise_error(DataCatalog::BadRequest)
+        User.create({ :garbage_field => "junk" })
+      end.should raise_error(BadRequest)
     end
-  end # describe ".create"
-  
-  describe ".find" do
-    before do
-      @user = create_user
-    end
-
-    it "should return a user" do  
-      user = DataCatalog::User.find(@user.id)
-      user.should be_an_instance_of(DataCatalog::User)
-      user.email.should == "ted@email.com"
-    end
-    
-    it "should raise NotFound out if no user exists" do
-      executing do
-        DataCatalog::User.find(mangle(@user.id))
-      end.should raise_error(DataCatalog::NotFound)
-    end
-  end # describe ".find"
+  end
   
   describe ".find_by_api_key" do
     before do
@@ -92,29 +82,63 @@ describe DataCatalog::User do
     end
     
     it "should return a user" do
-      user = DataCatalog::User.find_by_api_key(@user.primary_api_key)
-      user.should be_an_instance_of(DataCatalog::User)
+      user = User.find_by_api_key(@user.primary_api_key)
+      user.should be_an_instance_of(User)
       user.email.should == "ted@email.com"
     end
-  end # describe ".find_by_api_key"
+  end
+  
+  describe ".first" do
+    before do
+      create_3_users
+    end
+
+    it "should return a user" do  
+      user = User.first(:name => "User-1")
+      user.should be_an_instance_of(User)
+      user.name.should == "User-1"
+    end
     
+    it "should return nil if nothing found" do
+      user = User.first(:name => "Elvis")
+      user.should be_nil
+    end
+  end
+
+  describe ".get" do
+    before do
+      @user = create_user
+    end
+
+    it "should return a user" do  
+      user = User.get(@user.id)
+      user.should be_an_instance_of(User)
+      user.email.should == "ted@email.com"
+    end
+    
+    it "should raise NotFound out if no user exists" do
+      executing do
+        User.get(mangle(@user.id))
+      end.should raise_error(NotFound)
+    end
+  end
+  
   describe ".update" do
     before do
       @user = create_user
     end
     
     it "should update a user when valid params are passed in" do
-      user = DataCatalog::User.update(@user.id, { :name => "Jane Smith" })
+      user = User.update(@user.id, { :name => "Jane Smith" })
       user.name.should == "Jane Smith"
     end
 
     it "should raise BadRequest when invalid params are passed in" do
       executing do
-        DataCatalog::User.update(@user.id, { :garbage => "junk" })
-      end.should raise_error(DataCatalog::BadRequest)
+        User.update(@user.id, { :garbage => "junk" })
+      end.should raise_error(BadRequest)
     end
-
-  end # describe ".update"
+  end
   
   describe ".destroy" do
     before do
@@ -122,16 +146,16 @@ describe DataCatalog::User do
     end
 
     it "should destroy an existing user" do
-      result = DataCatalog::User.destroy(@user.id)
+      result = User.destroy(@user.id)
       result.should be_true
     end
     
     it "should raise NotFound when non-existing user" do
       executing do
-        DataCatalog::User.destroy(mangle(@user.id))
-      end.should raise_error(DataCatalog::NotFound)
+        User.destroy(mangle(@user.id))
+      end.should raise_error(NotFound)
     end
-  end # describe ".destroy"
+  end
 
   describe "#generate_api_key!" do
     before do
@@ -155,9 +179,9 @@ describe DataCatalog::User do
           :purpose  => "Civic hacking with my awesome app",
           :key_type => "primary"
         })
-      end.should raise_error(DataCatalog::BadRequest)
+      end.should raise_error(BadRequest)
     end
-  end # describe "#generate_api_key!"
+  end
   
   describe "#update_api_key!" do
     before do
@@ -175,7 +199,7 @@ describe DataCatalog::User do
     it "should raise NotFound if updating a key that doesn't exist" do
       executing do
         @user.update_api_key!(mangle(@user.api_keys[1].id), {})
-      end.should raise_error(DataCatalog::NotFound)
+      end.should raise_error(NotFound)
     end
 
     it "should raise BadRequest if primary key's type is changed" do
@@ -183,9 +207,9 @@ describe DataCatalog::User do
         @user.update_api_key!(@user.api_keys[0].id, {
           :key_type => "valet"
         })
-      end.should raise_error(DataCatalog::BadRequest)
+      end.should raise_error(BadRequest)
     end
-  end # describe "#update_api_key!"
+  end
 
   describe "#delete_api_key!" do
     before do
@@ -200,9 +224,9 @@ describe DataCatalog::User do
     it "should raise Conflict if deleting the primary key" do
       executing do
         @user.delete_api_key!(@user.api_keys[0].id)
-      end.should raise_error(DataCatalog::Conflict)
+      end.should raise_error(Conflict)
       @user.api_keys.length.should == 2
     end
-  end # describe "#delete_api_key!"
+  end
   
 end

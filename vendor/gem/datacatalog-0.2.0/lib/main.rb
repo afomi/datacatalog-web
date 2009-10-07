@@ -1,11 +1,7 @@
-require 'rubygems'
-require 'activesupport'
-require 'httparty'
-require 'mash'
-
 module DataCatalog
-
-  mattr_accessor :api_key, :base_uri
+  
+  # == Exceptions
+  
   class Error                     < RuntimeError; end
   class BadRequest                < Error; end # 400
   class Unauthorized              < Error; end # 401
@@ -16,15 +12,29 @@ module DataCatalog
   class ApiKeyNotConfigured       < Error; end
   class CannotDeletePrimaryApiKey < Error; end
   
+  # == Accessors
+  
+  def self.api_key
+    Base.default_params[:api_key]
+  end
+  
+  def self.api_key=(key)
+    Base.default_params :api_key => key
+  end
+  
+  def self.base_uri
+    Base.base_uri
+  end
+  
+  def self.base_uri=(uri)
+    Base.base_uri(uri.blank? ? Base::DEFAULT_BASE_URI : uri)
+  end
+  
   def self.with_key(temp_key)
-    original_key = DataCatalog.api_key 
+    original_key = DataCatalog.api_key
     DataCatalog.api_key = temp_key
     yield
     DataCatalog.api_key = original_key
   end
-  
-end
 
-require 'require_helpers'
-require_file 'base'
-require_dir 'resources'
+end

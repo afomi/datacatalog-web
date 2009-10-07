@@ -4,10 +4,6 @@ def require_dir(dir)
   Dir.glob(make_full_path(dir) + "/*.rb").each { |f| require f }
 end
 
-def load_dir(dir, pattern)
-  Dir.glob(make_full_path(dir) + "/#{pattern}").each { |f| load f }
-end
-
 def require_file(filename)
   require make_full_path(filename)
 end

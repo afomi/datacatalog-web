@@ -5,6 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "datacatalog"
+    gem.rubyforge_project = "datacatalog"
     gem.summary = %Q{Wrapper for the National Data Catalog API}
     gem.description = %Q{Ruby library that wraps the National Data Catalog API}
     gem.email = "luigi@sunlightfoundation.com"
@@ -25,13 +26,10 @@ end
 require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'
+  spec.spec_opts = ['--color']
   spec.spec_files = FileList['spec/**/*_spec.rb']
-end
-
-Spec::Rake::SpecTask.new(:rcov) do |spec|
-  spec.libs << 'lib' << 'spec'
-  spec.pattern = 'spec/**/*_spec.rb'
   spec.rcov = true
+  spec.rcov_opts = ['--exclude', '^spec,/gems/']
 end
 
 task :spec => :check_dependencies

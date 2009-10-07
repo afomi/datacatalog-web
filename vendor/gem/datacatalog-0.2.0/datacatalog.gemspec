@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{datacatalog}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Luigi Montanez", "David James"]
-  s.date = %q{2009-10-06}
+  s.date = %q{2009-10-07}
   s.description = %q{Ruby library that wraps the National Data Catalog API}
   s.email = %q{luigi@sunlightfoundation.com}
   s.extra_rdoc_files = [
@@ -24,18 +24,19 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "datacatalog.gemspec",
-     "doc/api_key_spec_for_rest_api.txt",
-     "doc/api_key_spec_for_ruby_api.rb",
-     "doc/mocking_options.md",
      "lib/base.rb",
      "lib/datacatalog.rb",
+     "lib/main.rb",
      "lib/require_helpers.rb",
+     "lib/resources/about.rb",
      "lib/resources/api_key.rb",
      "lib/resources/source.rb",
      "lib/resources/user.rb",
      "sandbox_api.yml.example",
+     "spec/about_spec.rb",
      "spec/api_key_spec.rb",
      "spec/base_spec.rb",
+     "spec/datacatalog_spec.rb",
      "spec/source_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
@@ -44,11 +45,14 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/sunlightlabs/datacatalog}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
+  s.rubyforge_project = %q{datacatalog}
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Wrapper for the National Data Catalog API}
   s.test_files = [
-    "spec/api_key_spec.rb",
+    "spec/about_spec.rb",
+     "spec/api_key_spec.rb",
      "spec/base_spec.rb",
+     "spec/datacatalog_spec.rb",
      "spec/source_spec.rb",
      "spec/spec_helper.rb",
      "spec/user_spec.rb"

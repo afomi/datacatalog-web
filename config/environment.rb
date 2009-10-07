@@ -19,7 +19,7 @@ Rails::Initializer.run do |config|
   config.gem 'httparty', :version => '>= 0.4.4'
   
   # until the datacatalog gem is released, we're vendoring it
-  require File.join(File.dirname(__FILE__), '../vendor/gem/datacatalog-0.1.0/lib/datacatalog.rb')
+  require File.join(File.dirname(__FILE__), '../vendor/gem/datacatalog-0.2.0/lib/datacatalog.rb')
   
   config.gem "rspec", :lib => false, :version => ">= 1.2.0" 
   config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
