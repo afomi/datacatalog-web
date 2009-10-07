@@ -51,24 +51,24 @@ module DataCatalog
     # == Instance Methods
 
     def delete_api_key!(api_key_id)
-      self.class.http_delete("/users/#{self.id}/keys/#{api_key_id}")
+      ApiKey.destroy(self.id, api_key_id)
       update_api_keys
     end
 
     def generate_api_key!(params)
-      self.class.http_post("/users/#{self.id}/keys", :query => params)
+      ApiKey.create(self.id, params)
       update_api_keys
     end
 
     def update_api_key!(api_key_id, params)
-      self.class.http_put("/users/#{self.id}/keys/#{api_key_id}", :query => params)
+      ApiKey.update(self.id, api_key_id, params)
       update_api_keys
     end
     
     protected
     
     def update_api_keys
-      self.api_keys = self.class.many(self.class.http_get("/users/#{self.id}/keys"))
+      self.api_keys = ApiKey.all(self.id)
       user = User.get(id)
       self.application_api_keys = user.application_api_keys
       self.valet_api_keys = user.valet_api_keys

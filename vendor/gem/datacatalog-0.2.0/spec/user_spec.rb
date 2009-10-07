@@ -81,7 +81,7 @@ describe User do
       create_3_users
     end
 
-    it "should return a user" do  
+    it "should return a user" do
       user = User.first(:name => "User-1")
       user.should be_an_instance_of(User)
       user.name.should == "User-1"
@@ -234,7 +234,7 @@ describe User do
       @user = create_user_with_2_keys
     end
   
-    it "should update a key for the user" do      
+    it "should update a key for the user" do
       @user.update_api_key!(@user.api_keys[1].id, {
         :key_type => "valet",
         :purpose  => "To be more awesome"

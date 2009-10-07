@@ -98,7 +98,7 @@ describe Source do
       create_3_sources
     end
   
-    it "should return a source" do  
+    it "should return a source" do
       source = Source.first(:title => "NASA Data")
       source.should be_an_instance_of(Source)
       source.title.should == "NASA Data"
@@ -115,13 +115,13 @@ describe Source do
       @source = create_source
     end
   
-    it "should return a source" do  
+    it "should return a source" do
       source = Source.get(@source.id)
       source.should be_an_instance_of(Source)
       source.title.should == "Some FCC Data"
     end
     
-    it "should raise NotFound out if no source exists" do
+    it "should raise NotFound if no source exists" do
       executing do
         Source.get(mangle(@source.id))
       end.should raise_error(NotFound)
