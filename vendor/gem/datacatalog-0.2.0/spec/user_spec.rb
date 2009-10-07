@@ -76,18 +76,6 @@ describe User do
     end
   end
   
-  describe ".find_by_api_key" do
-    before do
-      @user = create_user
-    end
-    
-    it "should return a user" do
-      user = User.find_by_api_key(@user.primary_api_key)
-      user.should be_an_instance_of(User)
-      user.email.should == "ted@email.com"
-    end
-  end
-  
   describe ".first" do
     before do
       create_3_users
@@ -104,25 +92,83 @@ describe User do
       user.should be_nil
     end
   end
-
-  describe ".get" do
+  
+  describe ".get_by_api_key" do
     before do
       @user = create_user
     end
-
-    it "should return a user" do  
-      user = User.get(@user.id)
+    
+    it "should return a user" do
+      user = User.get_by_api_key(@user.primary_api_key)
       user.should be_an_instance_of(User)
       user.email.should == "ted@email.com"
     end
+  end
+
+  describe ".get" do
+    before do
+      @user = create_user_with_2_keys
+    end
     
-    it "should raise NotFound out if no user exists" do
+    describe "user exists" do
+      before do
+        @u = User.get(@user.id)
+      end
+
+      it "should return a user" do
+        @u.should be_an_instance_of(User)
+        @u.name.should == "Ted Smith"
+        @u.email.should == "ted@email.com"
+      end
+
+      it "should include 2 api_keys" do
+        keys = @u.api_keys
+        keys.map(&:key_type).should == %w(primary application)
+        keys.each do |key|
+          key.should be_an_instance_of(ApiKey)
+        end
+      end
+    end
+    
+    it "should raise NotFound if no user exists" do
       executing do
         User.get(mangle(@user.id))
       end.should raise_error(NotFound)
     end
   end
-  
+
+  describe ".get_by_api_key" do
+    before do
+      @user = create_user_with_2_keys
+    end
+    
+    describe "API key exists" do
+      before do
+        @u = User.get_by_api_key(@user.primary_api_key)
+      end
+
+      it "should return a user" do
+        @u.should be_an_instance_of(User)
+        @u.name.should == "Ted Smith"
+        @u.email.should == "ted@email.com"
+      end
+
+      it "should include 2 api_keys" do
+        keys = @u.api_keys
+        keys.map(&:key_type).should == %w(primary application)
+        keys.each do |key|
+          key.should be_an_instance_of(ApiKey)
+        end
+      end
+    end
+
+    it "should raise NotFound if API key does not exist" do
+      executing do
+        User.get_by_api_key(mangle(@user.primary_api_key))
+      end.should raise_error(NotFound)
+    end
+  end
+
   describe ".update" do
     before do
       @user = create_user

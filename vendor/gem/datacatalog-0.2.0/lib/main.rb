@@ -33,8 +33,9 @@ module DataCatalog
   def self.with_key(temp_key)
     original_key = DataCatalog.api_key
     DataCatalog.api_key = temp_key
-    yield
+    result = yield
     DataCatalog.api_key = original_key
+    result
   end
 
 end
