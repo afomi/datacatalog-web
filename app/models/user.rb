@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   end
 
   def after_find
-    self.api_user = self.api_key ? DataCatalog::User.find_by_api_key(self.api_key) : nil
+    self.api_user = self.api_key ? DataCatalog::User.get_by_api_key(self.api_key) : nil
     rescue ActiveRecord::MissingAttributeError
       nil
   end
