@@ -9,42 +9,35 @@
 <% end %>  
 
 <div id="ltColumn">
-  <h3>There are currently 980 users using Data Catalog</h3>
-  <div id="dashboardControls">
+  <% if @search_term.blank? -%>
+  <h3>There are <%= total_users %> registered users</h3>
+  <% else -%>
+  <h3>There are <%= @users.length %> results for: <%= @search_term %></h3>
+  <% end -%>
+  <!--<div id="dashboardControls">
     <ul>
       <li id="deleteBtn"><a class="buttonLink" href="#">Delete</a></li>
     </ul>
     <div class="clear"></div>
-  </div>  
+  </div>-->  
     <table id="usersTable">
       <thead>
         <tr id="titles">
-          <th id="selectTitle">Select</th>
-          <th>User</th>
-          <th class="right">Curator</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Latest Activity</th>
+          <th>Delete?</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="even">
-          <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
-          <td class="dataContent">User Name</td>
-          <td class="right"><a class="addCurator" href="#">Make User a Curator</td>
+        <% @users.each do |user| -%>
+        <tr class="<%= cycle('even','odd') %>">
+          <td><%= link_to user.display_name, admin_user_path(user) %></td>
+          <td><%= link_to user.email, "mailto:#{user.email}" %></td>
+          <td><%= time_ago_in_words(user.last_request_at) + " ago" %>
+          <td><%= link_to "Delete", admin_user_path(user), :method => :delete, :class => "deleteIcon", :alert => "Are you sure?" %></td>
         </tr>
-        <tr class="odd">
-          <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
-          <td class="dataContent">User Name</td>
-          <td class="right"><a class="addCurator" href="#">Make User a Curator</td>
-        </tr>
-        <tr class="even">
-          <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
-          <td class="dataContent">User Name</td>
-          <td class="right"><a class="curateData" href="#">Curator</td>
-        </tr>
-        <tr class="odd">
-          <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
-          <td class="dataContent">User Name</td>
-          <td class="right"><a class="addCurator" href="#">Make User a Curator</td>
-        </tr>
+        <% end # User.all.each -%>
       </tbody>
     </table>
 </div>
@@ -52,24 +45,33 @@
   <div id="rtColumn" class="withBg">
     
     <div id="search" class="module">
-      <h3>Search</h3>
-      <form>
-        <input id="searchInput" type="text" />
+      <h3>Search for User</h3>
+      <% form_tag admin_users_path, :method => :get do -%>
+        <input id="searchInput" type="text" name="search" />
         <button class="search" type="submit">
           <span>Search</span>
         </button>
-      </form>      
+      <% end -%>
+      <p class="tip">Enter in a name or email address.</p>
     </div>
     
     <div id="adminUsers" class="module">
       <h3>Curators</h3>
       <ul class="adminUsers">
         <li>
-          <span class="adminName">Luigi</span>
+          <span class="adminName">Jane Curator</span>
           <a class="deleteIcon" href="#" title="Delete Folder">Delete</a>
         </li>
         <li>
-          <span class="adminName">David</span>
+          <span class="adminName">Tom DaMod</span>
+          <a class="deleteIcon" href="#" title="Delete Folder">Delete</a>
+        </li>
+        <li>
+          <span class="adminName">Jane</span>
+          <a class="deleteIcon" href="#" title="Delete Folder">Delete</a>
+        </li>
+        <li>
+          <span class="adminName">Tom </span>
           <a class="deleteIcon" href="#" title="Delete Folder">Delete</a>
         </li>
         <li class="clear"></li>
@@ -80,14 +82,14 @@
       <h3>Admins</h3>
       <ul class="adminUsers">
         <li>
-          <span class="adminName">Luigi</span>
+          <span class="adminName">Sam Admin</span>
         </li>
         <li>
-          <span class="adminName">David</span>
+          <span class="adminName">Ruth Root</span>
         </li>
         <li class="clear"></li>
       </ul>
-    </div>    
+    </div>
     
   </div>
-</div>    
+</div>
