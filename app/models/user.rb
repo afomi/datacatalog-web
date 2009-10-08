@@ -8,9 +8,19 @@ class User < ActiveRecord::Base
   after_save :update_api_user
 
   acts_as_authentic do |config|
-    config.openid_required_fields = [:nickname, :email]  
+    config.openid_required_fields = [:nickname, :email]
   end
 
+  named_scope :alphabetical, :order => 'display_name'
+
+  def self.admins
+    self.all.select { |u| u.admin? }
+  end
+  
+  def self.curators
+    self.all.select { |u| u.curator? }
+  end
+  
   def after_find
     self.api_user = self.api_key ? DataCatalog::User.get_by_api_key(self.api_key) : nil
     rescue ActiveRecord::MissingAttributeError

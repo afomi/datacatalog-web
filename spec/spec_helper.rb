@@ -30,11 +30,11 @@ def clean_slate
   end
 end
 
-def valid_user_attributes
-  {
+def valid_user_attributes(params={})
+  params.reverse_merge!({
       :display_name => 'John D.',
       :email        => 'joe@test.com',
       :password     => 's3krit',
       :password_confirmation => 's3krit'
-  }
+  })
 end

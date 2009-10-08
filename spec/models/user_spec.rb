@@ -32,7 +32,6 @@ describe User do
     end
 
     it "should return true after confirmation" do
-      stub(@user).create_api_user
       @user.confirm!
       @user.confirmed?.should be(true)
     end
@@ -78,5 +77,36 @@ describe User do
     end
     
   end # describe "#save"
+  
+  describe ".curators" do
+    
+    it "should return a collection of curator users" do
+      u1 = User.create!(valid_user_attributes({:display_name => "User One", :email => "user@one.com"}))
+      u2 = User.create!(valid_user_attributes({:display_name => "User Two", :email => "user@two.com"}))
+      [@user, u1, u2].each { |u| u.confirm! }
+      User.curators.should be_empty
+      
+      u1.curator = true
+      u1.save
+      User.curators.first.display_name.should eql("User One")
+    end
+    
+  end # describe ".curators"
+
+  describe ".admins" do
+    
+    it "should return a collection of admin users" do
+      u1 = User.create!(valid_user_attributes({:display_name => "User One", :email => "user@one.com"}))
+      u2 = User.create!(valid_user_attributes({:display_name => "User Two", :email => "user@two.com"}))
+      [@user, u1, u2].each { |u| u.confirm! }
+      User.admins.should be_empty
+      
+      # mock because the API does not expose admin=
+      mock(u1).admin? {true}
+      mock(User).all { [@user, u1, u2] }
+      User.admins.first.display_name.should eql("User One")
+    end
+    
+  end # describe ".admins"
   
 end
