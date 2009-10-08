@@ -12,4 +12,21 @@ class Admin::UsersController < AdminController
     end
   end
   
+  def show
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    @user.attributes = params[:user]
+    @user.save do |result|
+      if result
+        flash[:notice] = "Profile updated!"
+      else
+        flash[:error] = "Error updating!"
+      end
+    end
+    redirect_to :back
+  end
+  
 end

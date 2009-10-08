@@ -28,7 +28,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :admin, :controller => "admin" do |admin|
     admin.resources :sources, :controller => "admin/sources"
     admin.resources :data_suggestions, :controller => "admin/data_suggestions"
-    admin.resources :users, :controller => "admin/users"
+    admin.resources :users, :controller => "admin/users" do |user|
+      user.resources :keys, :controller => "admin/keys"
+    end
     admin.resources :contact_submissions, :controller => "admin/contact_submissions"
   end
 
