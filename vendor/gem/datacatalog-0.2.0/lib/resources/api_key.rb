@@ -2,8 +2,6 @@ module DataCatalog
 
   class ApiKey < Base
     
-    attr_accessor :user
-    
     def self.all(user_id, conditions={})
       many(http_get(uri(user_id), :query => conditions))
     end

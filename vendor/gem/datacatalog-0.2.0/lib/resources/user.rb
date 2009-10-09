@@ -14,13 +14,6 @@ module DataCatalog
       one(http_delete("/users/#{user_id}"))
     end
 
-    def self.get_by_api_key(api_key)
-      DataCatalog.with_key(api_key) do
-        user_id = one(http_get("/checkup")).user.id
-        get(user_id)
-      end
-    end
-
     def self.first(conditions={})
       one(http_get("/users", :query => conditions).first)
     end
