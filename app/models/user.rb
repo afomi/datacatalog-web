@@ -62,7 +62,9 @@ class User < ActiveRecord::Base
   end
 
   def create_api_user
-    self.api_user = DataCatalog::User.create(:name => self.display_name, :email => self.email)
+    unless (self.api_user = DataCatalog::User.first(:email => self.email))
+      self.api_user = DataCatalog::User.create(:name => self.display_name, :email => self.email)
+    end
     self.api_key = self.api_user.primary_api_key
   end
   

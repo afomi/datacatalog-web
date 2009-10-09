@@ -58,6 +58,15 @@ describe User do
       @user.api_user.name.should eql(valid_user_attributes[:display_name])
     end
     
+    it "should use an existing user if it exists in the API" do
+      # test this using the existing API user generated 
+      # by rake db:ensure_admin on API instance
+      @user.email = "admin@nationaldatacatalog.com"
+      @user.save
+      @user.create_api_user
+      @user.api_user.admin.should be true
+    end
+    
   end # describe "#create_api_user"
   
   describe "#save" do
