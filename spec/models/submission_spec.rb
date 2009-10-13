@@ -1,20 +1,3 @@
-# == Schema Information
-#
-# Table name: submissions
-#
-#  id         :integer(4)      not null, primary key
-#  type       :string(255)
-#  name       :string(255)
-#  email      :string(255)
-#  user_id    :integer(4)
-#  title      :string(255)
-#  url        :string(255)
-#  comments   :text
-#  created_at :datetime
-#  updated_at :datetime
-#  status     :string(255)
-#
-
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Submission do
@@ -46,6 +29,14 @@ describe Submission do
   it "should save when missing user_id but name and email are given" do
     s = Submission.new(:email => 'foo@dot.com', :name => 'John Folsom')
     s.save.should be(true)
+  end
+  
+  it "should set status as 'Unread' after creation" do
+    user = User.create!(valid_user_attributes)    
+    s = Submission.new(:user_id => user.id)
+    s.save
+    
+    s.status.should eql("Unread")
   end
   
 end

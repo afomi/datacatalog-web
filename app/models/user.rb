@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
     config.openid_required_fields = [:nickname, :email]
   end
 
+  acts_as_tagger
+
   named_scope :alphabetical, :order => 'display_name'
 
   def self.admins

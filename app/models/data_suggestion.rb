@@ -17,8 +17,12 @@
 
 class DataSuggestion < Submission
   
-  validate :ensure_detail
+  include SubmissionTools
   
+  validate :ensure_detail
+  acts_as_taggable_on :folders
+  after_create :add_to_inbox
+
   attr_human_name 'title' => 'Data Source Title'
   attr_human_name 'url' => 'Data Source URL'
   

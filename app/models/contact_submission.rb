@@ -16,7 +16,10 @@
 #
 
 class ContactSubmission < Submission
-  
+  include SubmissionTools
+
   validates_presence_of :comments
+  acts_as_taggable_on :folders
+  after_create :add_to_inbox
   
 end

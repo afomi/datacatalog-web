@@ -18,6 +18,23 @@
 class Submission < ActiveRecord::Base
   
   validate :identify_submitter
+  after_create :unread!
+
+  named_scope :unread, :conditions => {:status => 'Unread'}
+  named_scope :read, :conditions => {:status => 'Read'}
+  named_scope :archived, :conditions => {:status => 'Archived'}
+  
+  def unread!
+    self.status = 'Unread'
+  end
+  
+  def read!
+    self.status = 'Read'
+  end
+  
+  def archived!
+    self.status = 'Archived'
+  end
   
   private 
   
