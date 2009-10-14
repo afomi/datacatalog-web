@@ -16,7 +16,8 @@
 #
 
 class Submission < ActiveRecord::Base
-  
+
+  belongs_to :user
   validate :identify_submitter
   after_create :unread!
 

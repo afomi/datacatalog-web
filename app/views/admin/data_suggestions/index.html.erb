@@ -30,10 +30,10 @@
               <a class="dashboardNav" href="#">Manage Folders</a>
               <div class="clear"></div>
             </li>
-          </ul>    
+          </ul>
         </div>
       </li>
-    </ul>     
+    </ul>
     <div class="clear"></div>
   </div>   
   <table id="suggestedData">
@@ -50,7 +50,7 @@
       <tr class="<%= cycle 'even','odd' %>">
         <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
         <td class="dataContent">
-          <a class="dataName" href="#"><%= suggestion.title %></a>
+          <%= link_to suggestion.title, admin_data_suggestion_path(suggestion), :class => "dataName" %>
           <p><%= truncate(suggestion.comments, :length => 100) %></p>
         </td>
         <td class="center">
