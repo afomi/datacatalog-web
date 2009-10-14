@@ -1,0 +1,55 @@
+<% content_for :title do %>
+  Submission from <%= @submission.user ? @submission.user.display_name : @submission.name %>
+<% end %>
+
+<% content_for :body_class do %>admin<% end %>
+  
+<% content_for :tabs do %>
+  <%= render 'admin/tabs' %>
+<% end %>
+
+<div id="ltColumn">
+  <%= show_flash_message %>
+  
+  <h3>Comments</h3>
+  <p><%= simple_format @submission.comments %></p>
+  
+  <h3>User Details</h3>
+  <% if user = @submission.user -%>
+  <p><%= link_to user.display_name, user %> &lt;<%= link_to user.email, "mailto:#{user.email}" %>&gt;</p>
+  <% else -%>
+  <p><%= @submission.name %> &lt;<%= link_to @submission.email, "mailto:#{@submission.email}" %>&gt;</p>
+  <% end # if user -%>
+  
+  <h3>Status</h3>
+  <% form_for @submission, :url => admin_contact_submission_path(@submission.id), :method => :put do |form| %>
+    <%= form.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
+    <ul>
+      <li>
+          <%= form.label :status, "Status" %>
+          <%= form.select :status, ['Unread', 'Read', 'Archived'] %>
+      </li>      
+      <button class="update" id="user_submit" type="submit" value="Update" name="commit">
+        <span>Update</span>
+      </button>
+    </ul>
+  <% end %>
+  
+</div>
+
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <div id="dashboardNav" class="module">
+      <ul>
+        <% @folders.each do |folder| -%>
+        <li class="<%= folder.name == @folder_name %>">
+          <%= link_to folder.name, admin_contact_submissions_path(:folder => folder.name), :class => "dashboardNav folder" %>
+          <span><%= folder.count %></span>
+        </li>
+        <% end -%>
+      </ul>   
+      <div class="clear"></div>
+    </div>
+  </div>  
+</div> 
+<div class="clear"></div>

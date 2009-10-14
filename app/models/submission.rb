@@ -19,11 +19,12 @@ class Submission < ActiveRecord::Base
 
   belongs_to :user
   validate :identify_submitter
-  after_create :unread!
+  before_create :unread!
 
   named_scope :unread, :conditions => {:status => 'Unread'}
   named_scope :read, :conditions => {:status => 'Read'}
   named_scope :archived, :conditions => {:status => 'Archived'}
+  named_scope :reverse_chronological, :order => 'created_at DESC'
   
   def unread!
     self.status = 'Unread'

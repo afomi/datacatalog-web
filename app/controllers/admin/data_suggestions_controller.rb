@@ -9,7 +9,7 @@ class Admin::DataSuggestionsController < AdminController
       @folder_name = params[:folder]
     end
     
-    @suggestions = DataSuggestion.find_tagged_with(@folder_name, :on => :folders)
+    @suggestions = DataSuggestion.reverse_chronological.find_tagged_with(@folder_name, :on => :folders)
   end
   
   def show

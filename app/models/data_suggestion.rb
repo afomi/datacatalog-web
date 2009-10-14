@@ -16,7 +16,6 @@
 #
 
 class DataSuggestion < Submission
-  
   include SubmissionTools
   
   validate :ensure_detail
