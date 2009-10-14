@@ -16,18 +16,15 @@
         <a class="buttonLink" href="#">Move To</a>
         <div id="favoriteData_dropdown">
           <ul>
+            <% @folders.each do |folder| -%>
+            <% if folder.name != @folder_name -%>
             <li>
-              <a class="dashboardNav" href="#">Inbox</a>
-              <span>5</span>
+              <%= link_to folder.name, "#", :class => "dashboardNav folder" %>
+              <span><%= folder.count %></span>
             </li>
-            <li>
-              <a class="dashboardNav folder" href="#">EPA</a>
-              <span>5</span>
-            </li>    
-            <li>
-              <a class="dashboardNav folder" href="#">TRI Reporting</a>
-              <span>50</span>
-            </li>
+            <% end # if -%>
+            <% end # @folders.each -%>
+            
             <li class="divider"></li>
             <li id="manageFolders">
               <a class="dashboardNav" href="#">Manage Folders</a>
@@ -45,113 +42,39 @@
         <th id="selectTitle">Select</th>
         <th>Data Set</th>
         <th class="center">URL</th>
-        <th class="center">Date</th>
-        <th class="right">Curate</th>
+        <th class="right">Date</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="even">
+      <% @suggestions.each do |suggestion| -%>
+      <tr class="<%= cycle 'even','odd' %>">
         <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
         <td class="dataContent">
-          <a class="dataName" href="#">Name of Suggested Data Set</a>
-          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
+          <a class="dataName" href="#"><%= suggestion.title %></a>
+          <p><%= truncate(suggestion.comments, :length => 100) %></p>
         </td>
         <td class="center">
-          <a href="#">http://www.sunlightlabs.com</a>
+          <%= link_to suggestion.url, suggestion.url %>
         </td>
-        <td class="center">10/20/08</td>
-        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
-      </tr>	
-      <tr class="odd">
-        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
-        <td class="dataContent">
-          <a class="dataName" href="#">Name of Suggested Data Set</a>
-          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
-        </td>
-        <td class="center">
-          <a href="#">http://www.sunlightlabs.com</a>
-        </td>
-        <td class="center">10/20/08</td>
-        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
+        <td class="right"><%= suggestion.created_at.to_s(:mdy_slashed) %></td>
       </tr>
-      <tr class="even">
-        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
-        <td class="dataContent">
-          <a class="dataName" href="#">Name of Suggested Data Set</a>
-          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
-        </td>
-        <td class="center">
-          <a href="#">http://www.sunlightlabs.com</a>
-        </td>
-        <td class="center">10/20/08</td>
-        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
+      <% end # @suggestions.each -%>
       </tr>
-      <tr class="odd">
-        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
-        <td class="dataContent">
-          <a class="dataName" href="#">Name of Suggested Data Set</a>
-          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
-        </td>
-        <td class="center">
-          <a href="#">http://www.sunlightlabs.com</a>
-        </td>
-        <td class="center">10/20/08</td>
-        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
-      </tr>
-      <tr class="even">
-        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
-        <td class="dataContent">
-          <a class="dataName" href="#">Name of Suggested Data Set</a>
-          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
-        </td>
-        <td class="center">
-          <a href="#">http://www.sunlightlabs.com</a>
-        </td>
-        <td class="center">10/20/08</td>
-        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
-      </tr>
-      <tr class="odd">
-        <td class="left"><input class="checkbox" type="checkbox" name="delete" value="delete"/></td>
-        <td class="dataContent">
-          <a class="dataName" href="#">Name of Suggested Data Set</a>
-          <p>Contains the bibliographic text (i.e., front page) of each patent application (non-provisional utility and plant) published weekly...</p>
-        </td>
-        <td class="center">
-          <a href="#">http://www.sunlightlabs.com</a>
-        </td>
-        <td class="center">10/20/08</td>
-        <td class="right"><a title="Curate Data" class="curateData" href="#">Curate</td>
-      </tr>
-    </tbody>		
-  </table>        	           
-</div> 
+    </tbody>
+  </table>
+</div>
+ 
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
     <div id="dashboardNav" class="module">
       <ul>
-        <li class="active">
-          <a class="dashboardNav" href="#">Inbox</a>
-          <span>20</span>
+        <% @folders.each do |folder| -%>
+        <li class="<%= folder.name == @folder_name %>">
+          <%= link_to folder.name, admin_data_suggestions_path(:folder => folder.name), :class => "dashboardNav folder" %>
+          <span><%= folder.count %></span>
         </li>
-        <li>
-          <a class="dashboardNav folder" href="#">Federal</a>
-          <a class="deleteIcon" title="Delete Folder" href="#">Delete</a>
-          <span>5</span>
-        </li>
-        <li>
-          <a class="dashboardNav folder" href="#">State</a>
-          <a class="deleteIcon" title="Delete Folder" href="#">Delete</a>
-          <span>2</span>
-        </li>
+        <% end -%>
       </ul>   
-      <a class="allLink" id="addFolderLink" href="#">Add Folder</a> 
-      <div class="clear"></div>
-      <div id="addFolder">
-        <input id="addFolderInput" type="text" name="word" />
-        <button class="addFolder" type="submit">
-          <span>Add</span>
-        </button>
-      </div>
       <div class="clear"></div>
     </div>
   </div>  
