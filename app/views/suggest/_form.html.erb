@@ -1,12 +1,14 @@
 <% if current_user -%>
 
-<%= form.hidden_field :user_id, :value => current_user %>
+<%= form.hidden_field :user_id, :value => current_user.id %>
 
 <% else -%>
+
 <li>
     <%= form.label :name, "Your Name" %>
     <%= form.text_field :name %>
 </li>
+
 <li>
     <%= form.label :email, "Your Email Address" %>
     <%= form.text_field :email %>
@@ -18,10 +20,12 @@
     <%= form.label :title, "Data Source Title" %>
     <%= form.text_field :title %>
 </li>    
+
 <li>
     <%= form.label :url, "Data Source URL" %>
     <%= form.text_field :url %>
 </li>
+
 <li>
     <%= form.label :comments, "Comments" %>
     <%= form.text_area :comments %>
