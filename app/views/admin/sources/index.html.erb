@@ -12,20 +12,19 @@
   <table id="dataSources">
     <thread>
       <tr id="titles">
-        <th class="left sort">Name</th>
-        <th class="left sort">Added By</th>
-        <th class="left sort">Date</th>
+        <th class="left sort">Title</th>
+        <th class="left sort">Added On</th>
         <th class="center">Notes</th>
         <th class="right sort">Flagged (30)</th>
       </tr>  
     </thread>  
     <tbody>
-      <tr class="even">
+      <% @sources.each do |source| -%>
+      <tr class="<%= cycle 'even','odd'%>">
         <td class="left">
-          <a href="#">Data Set Name</a>
+          <a href="#"><%= source.title %></a>
         </td>
-        <td class="left">David</td>
-        <td class="left">12/10/08</td>
+        <td class="left"><%= source.created_at.to_s %></td>
         <td title="Add a Note" class="left">
           <a class="addNote" href="#">Add Note</a>
         </td>
@@ -33,45 +32,7 @@
           <a class="flaggedData" href="#">Flagged Data</a>
         </td>
       </tr>  
-      <tr class="odd">
-        <td class="left">
-          <a href="#">Data Set Name</a>
-        </td>
-        <td class="left">David</td>
-        <td class="left">12/10/08</td>
-        <td title="Add a Note" class="left">
-          <a class="addNote" href="#">Add Note</a>
-        </td>
-        <td title="Resolve Data Set">
-          <a class="flaggedData" href="#">Flagged Data</a>
-        </td>
-      </tr>
-      <tr class="even">
-        <td class="left">
-          <a href="#">Data Set Name</a>
-        </td>
-        <td class="left">David</td>
-        <td class="left">12/10/08</td>
-        <td class="left note">
-          <a class="notesAvailable" href="#">Note</a>
-        </td>
-        <td title="Flag Data Set">
-          <a class="flagData" href="#">Flag Data</a>
-        </td>
-      </tr>  
-      <tr class="odd">
-        <td class="left">
-          <a href="#">Data Set Name</a>
-        </td>
-        <td class="left">David</td>
-        <td class="left">12/10/08</td>
-        <td title="Add a Note" class="left">
-          <a class="addNote" href="#">Add Note</a>
-        </td>
-        <td title="Resolve Data Set">
-          <a class="flaggedData" href="#">Flagged Data</a>
-        </td>
-      </tr>
+      <% end -%>
     </tbody>  
   </table>  
 </div>

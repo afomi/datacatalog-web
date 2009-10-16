@@ -34,7 +34,7 @@
         <tr class="<%= cycle('even','odd') %>">
           <td><%= link_to user.display_name, admin_user_path(user) %></td>
           <td><%= link_to user.email, "mailto:#{user.email}" %></td>
-          <td><%= time_ago_in_words(user.last_request_at) + " ago" %>
+          <td><%= user.last_request_at ? time_ago_in_words(user.last_request_at) + " ago" : "never" %>
           <td><%= link_to "Delete", admin_user_path(user), :method => :delete, :class => "deleteIcon", :alert => "Are you sure?" %></td>
         </tr>
         <% end # User.all.each -%>
