@@ -3,3 +3,124 @@
 <% end %>
 
 <% content_for :body_class do %>browse<% end %>
+  
+<div id="column_fullWidth">
+  <div id="filterData">
+    <ul>
+      <li>
+        <label for="id_sources">Agency</label>
+        <select id="id_sources" name="sources">
+          <option value="all">All Agencies</option>
+          <option value="1">Agency 1</option>
+          <option value="2">Agency 2</option>
+          <option value="3">Agency 3</option>
+        </select>
+      </li>
+      <li>
+        <label for="id_category">Category</label>
+        <select id="id_categories" name="categories">
+          <option value="all">All Categories</option>
+          <option value="1">Federal</option>
+          <option value="2">State</option>
+          <option value="3">Municipal</option>
+        </select>
+      </li>
+      <li>
+        <label for="id_format">Formats</label>
+        <select id="id_formats" name="formats">
+          <option value="all">All Formats</option>
+          <option value="1">XML</option>
+          <option value="2">CSV</option>
+          <option value="3">JSON</option>
+        </select>
+      </li>
+      <li>
+        <label for="id_states">States</label>
+        <select id="id_states" name="states">
+          <option value="all">All States</option>
+          <option value="1">State 1</option>
+          <option value="2">State 2</option>
+          <option value="3">State 3</option>
+        </select>
+      </li>
+      <li id="submit">
+        <button class="filterBtn" type="submit">
+          <span>Filter Data</span>
+        </button>
+      </li>
+    </ul>  
+    <div class="clear"></div>  
+  </div>
+  <div class="tableNav">
+    <ul class="pagination">
+      <li><a href="#">1</a></li>
+    </ul>
+    <div class="perPage">
+      <dl>
+        <dt>Results Per Page:</dt>
+        <dd class="first"><a href="#">50</a></dd>
+        <dd><a href="#">100</a></dd>
+      </dl>    
+    </div>
+  </div>
+  <table id="browseTable">
+    <thead>
+      <tr id="titles">
+        <th class="left">Data Set</th>
+        <th class="center">Rating</th>
+        <th class="center">Agency</th>
+        <th class="right">Formats</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sources.each do |source| -%>
+      
+      <tr class="<%= cycle 'even','odd' %>">
+        <td class="dataContent left">
+          <%= link_to source.title, "/#{source.id}", :class => "dataName" %>
+          <button title="Favorite this data" class="iconFavorite" type="submit">
+            <span>Favorite this data</span>
+          </button>
+          <p><%= truncate(source.custom[2].value, :length => 350) %></p>
+        </td>
+        <td class="center">
+          <ul class="star-rating rated ratedThreeStars">
+            <li class="oneStar">1</li>
+            <li class="twoStars">2</li>
+            <li class="threeStars">3</li>
+            <li class="fourStars">4</li>
+            <li class="fiveStars">5</li>
+          </ul>
+        </td>
+        <td class="center"><a href="#"><%= source.custom[1].value.blank? ? source.custom[0].value : source.custom[1].value %></a></td>
+        <td class="right">
+          <!--<ul class="downloadFormats">
+            <li>
+              <a href="#">XML</a>
+              <span>(15MB)</span>
+            </li>
+            <li>
+              <a href="#">CSV</a>
+              <span>(15MB)</span>
+            </li>
+          </ul>-->
+        </td>
+      </tr>	
+  
+      <% end # @sources.each -%>
+    </tbody>
+  </table>    
+  <div class="tableNav">
+    <ul class="pagination">
+      <li><a href="#">1</a></li>
+    </ul>
+    <div class="perPage">
+      <dl>
+        <dt>Results Per Page:</dt>
+        <dd class="first"><a href="#">50</a></dd>
+        <dd><a href="#">100</a></dd>
+      </dl>    
+    </div>    
+  </div>
+</div>       
+  
