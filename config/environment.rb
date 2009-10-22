@@ -17,9 +17,7 @@ Rails::Initializer.run do |config|
   config.gem 'nokogiri', :version => '>= 1.3.2'
   config.gem 'faker', :version => '>= 0.3.1'
   config.gem 'httparty', :version => '>= 0.4.4'
-  
-  # until the datacatalog gem is released, we're vendoring it
-  require File.join(File.dirname(__FILE__), '../vendor/gem/datacatalog-0.2.0/lib/datacatalog.rb')
+  config.gem 'datacatalog', :version => '>= 0.3.0'
   
   config.gem "rspec", :lib => false, :version => ">= 1.2.0" 
   config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
