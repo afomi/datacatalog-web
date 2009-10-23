@@ -7,8 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.signout "signout", :controller => "user_sessions", :action => "destroy"
   map.signin "signin", :controller => "user_sessions", :action => "new"
   map.signup "signup", :controller => "users", :action => "new"
-  map.confirm 'confirm/:token', :controller => 'users', :action => "confirm"
-  
+  map.confirm 'confirm/:token', :controller => 'users', :action => "confirm"  
   
   map.resources :users
   map.resource :profile, :controller => "users" do |profile|
@@ -28,6 +27,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :admin, :controller => "admin" do |admin|
     admin.resources :sources, :controller => "admin/sources"
+    admin.resources :organizations, :controller => "admin/organizations"
     admin.resources :data_suggestions, :controller => "admin/data_suggestions"
     admin.resources :users, :controller => "admin/users" do |user|
       user.resources :keys, :controller => "admin/keys"

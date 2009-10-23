@@ -1,0 +1,45 @@
+<% content_for :title do %>
+  Organizations
+<% end %>
+
+<% content_for :body_class do %>admin<% end %>
+  
+<% content_for :tabs do %>
+  <%= render 'admin/tabs' %>
+<% end %>  
+
+<div id="ltColumn">
+  <table id="dataSources">
+    <thead>
+      <tr id="titles">
+        <th class="left sort">Name</th>
+        <th class="left">Acronym</th>
+        <th class="right">Date Added</th>
+      </tr>  
+    </thead>  
+    <tbody>
+      <% @organizations.each do |organization| -%>
+      <tr class="<%= cycle 'even','odd'%>">
+        <td class="left">
+          <a href="<%= admin_organization_path(organization.id) %>"><%= organization.name %></a>
+        </td>
+        <td class="center">
+          <a href="#"><%= organization.acronym %></a>
+        </td>
+        <td class="right"><%= organization.created_at.to_s(:mdy_slashed) %></td>
+      </tr>  
+      <% end -%>
+    </tbody>  
+  </table>  
+</div>
+
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <div id="" class="module">
+      <h3>Top Organizations</h3>
+      <div class="clear"></div>
+    </div>
+    <a href="<%= new_admin_organization_path %>"><img src="/images/btn_addAgency.png" /></a>
+  </div>
+</div>
+<div class="clear"></div>

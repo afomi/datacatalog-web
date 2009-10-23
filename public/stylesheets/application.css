@@ -341,12 +341,13 @@ div#tags ul { margin-bottom: 20px;}
 ul#additionalFields_details { margin-top: 30px;}
 
 form#new_data_suggestion, form#new_contact_submission { margin-top: 40px;}
-form#new_data_suggestion label, form#addData label, form#comment label#commentLabel, form#advancedSearch>ul>li>label, form#new_user_session label, form#new_user label, form#new_contact_submission label, form.edit_user, div#additionalKeys form label, form.generateAPI_page label, form ul.editAPI label  { font-weight: bold; width: 150px; display: block; float: left; text-transform: uppercase; color: #371D17;}
+form label, form#new_data_suggestion label, form#addData label, form#comment label#commentLabel, form#advancedSearch>ul>li>label, form#new_user_session label, form#new_user label, form#new_contact_submission label, form.edit_user, div#additionalKeys form label, form.generateAPI_page label, form ul.editAPI label  { font-weight: bold; width: 150px; display: block; float: left; text-transform: uppercase; color: #371D17;}
 form#sidebarSearch>ul>li>label{ font-weight: bold; display: block; text-transform: uppercase; color: #371D17; margin-bottom: 10px;}
 form#addData li { margin-bottom: 30px;}
 div#ltColumn form li, div#rtColumn form li, ul#openID_signup li { margin-bottom: 15px;}
 form#addData input, form#addData textarea { width: 250px;}
 div#ltColumn input, div#ltColumn textarea{ width: 370px;}
+div#ltColumn input[checkbox] { text-align: left; }
 div#ltColumn input#source { float: left; margin-right: 15px; width: 250px;}
 form#addData select { margin-right: 5px; float: left;}
 select.year { float: left;}
