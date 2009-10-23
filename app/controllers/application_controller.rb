@@ -59,4 +59,27 @@ class ApplicationController < ActionController::Base
     def mailer_set_url_options
       ActionMailer::Base.default_url_options[:host] = request.host_with_port
     end
+    
+    def handle_api_errors
+      begin
+        yield
+      rescue DataCatalog::Unauthorized
+        flash[:error] = "Unauthorized API Key! (#{DataCatalog.api_key})"
+        redirect_to :back
+        return
+      rescue DataCatalog::BadRequest => e
+        error_hash = eval(e)
+        error = ""
+        error_hash.each do |k,v|
+          error += "<p>Problem with: " + k.upcase + "</p><ul>"
+          v.each do |msg| 
+            error += "<li>" + msg + "</li>"
+          end
+          error += "</ul>"
+        end
+        flash[:error] = error
+        redirect_to :back
+        return
+      end
+    end
 end
