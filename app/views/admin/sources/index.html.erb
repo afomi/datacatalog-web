@@ -10,21 +10,21 @@
 
 <div id="ltColumn">
   <table id="dataSources">
-    <thread>
+    <thead>
       <tr id="titles">
         <th class="left sort">Title</th>
         <th class="left sort">Added On</th>
         <th class="center">Notes</th>
         <th class="right sort">Flagged (30)</th>
       </tr>  
-    </thread>  
+    </thead>  
     <tbody>
       <% @sources.each do |source| -%>
       <tr class="<%= cycle 'even','odd'%>">
         <td class="left">
           <a href="#"><%= source.title %></a>
         </td>
-        <td class="left"><%= source.created_at.to_s %></td>
+        <td class="left"><%= source.created_at.to_s(:mdy_slashed) %></td>
         <td title="Add a Note" class="left">
           <a class="addNote" href="#">Add Note</a>
         </td>
@@ -39,7 +39,7 @@
 
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
-    <h3>Recently Resolved Data Sets</h3>
+    <h3>Recently Flagged Data Sets</h3>
     <dl id="resolvedData">
       <dt>
         <a href="#">Data Set Name</a>
