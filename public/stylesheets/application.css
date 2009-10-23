@@ -106,6 +106,8 @@ li#nav_openid_signup a:hover, li#nav_openid_signup a.active{ background: url(/im
 
 li#nav_dataSources a { background: url(/images/nav_dataSources.png) top left no-repeat; width: 115px; height: 30px; }
 li#nav_dataSources a:hover, li#nav_dataSources a.active { background: url(/images/nav_dataSources.png) bottom left no-repeat; width: 115px; height: 30px; }
+li#nav_organizations a { background: url(/images/nav_organizations.png) top left no-repeat; width: 115px; height: 30px; }
+li#nav_organizations a:hover, li#nav_organizations a.active { background: url(/images/nav_organizations.png) bottom left no-repeat; width: 115px; height: 30px; }
 li#nav_dataSuggestions a { background: url(/images/nav_dataSuggestions.png) top left no-repeat; width: 135px; height: 30px; }
 li#nav_dataSuggestions a:hover, li#nav_dataSuggestions a.active { background: url(/images/nav_dataSuggestions.png) bottom left no-repeat; width: 135px; height: 30px; }
 li#nav_userAccounts a { background: url(/images/nav_userAccounts.png) top left no-repeat; width: 122px; height: 30px; }
@@ -323,6 +325,8 @@ button.signUp { background: url(/images/btn_signUp.png) top left no-repeat; widt
 button.signIn_openID { background: url(/images/btn_signIn_openID.png) top left no-repeat; width: 172px; margin-left: 150px; margin-top: 20px; }
 button.signUp_openID { background: url(/images/btn_signUp_openID.png) top left no-repeat; width: 172px; margin-left: 150px; margin-top: 20px; }
 button.update { background: url(/images/btn_update.png) top left no-repeat; width: 93px; margin-top: 20px; }
+button.update_admin { background: url(/images/btn_update.png) top left no-repeat; width: 93px; margin-top: 20px; margin-left: 150px;}
+
 ul.editAPI button.update { margin-left: 150px;}
 button.generate { background: url(/images/btn_generateAPI.png) top left no-repeat; width: 157px; margin-top: 20px; margin-left: 150px;}
 
