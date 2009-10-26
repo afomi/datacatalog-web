@@ -1,12 +1,18 @@
 namespace :demo do
   
   def clean_slate
+
     DataCatalog::User.all.each do |u|
       DataCatalog::User.destroy(u.id) unless u.name == "Primary Admin"
     end
-    DataCatalog::Source.all.each do |s|
-      DataCatalog::Source.destroy(s.id)
+
+    classes = [DataCatalog::Source, DataCatalog::Organization]
+    classes.each do |class_constant|
+      class_constant.all.each do |instance|
+        class_constant.destroy(instance.id)
+      end
     end
+
   end
   
   def set_up_api
