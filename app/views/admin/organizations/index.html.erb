@@ -21,7 +21,7 @@
       <% @organizations.each do |organization| -%>
       <tr class="<%= cycle 'even','odd'%>">
         <td class="left">
-          <a href="<%= admin_organization_path(organization.id) %>"><%= organization.name %></a>
+          <a href="<%= admin_organization_path(organization.slug) %>"><%= organization.name %></a>
         </td>
         <td class="center">
           <a href="#"><%= organization.acronym %></a>

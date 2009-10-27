@@ -1,0 +1,25 @@
+<li>
+  <%= fields.label :name %>
+  <%= fields.text_field :name %>
+</li>
+<li>
+  <%= fields.label :acronym %>
+  <%= fields.text_field :acronym %>
+</li>
+<li>
+  <%= fields.label :slug, "URL Slug" %>
+  <%= fields.text_field :slug %>
+  <p class="tip">Will be auto-generated if left blank.</p>
+</li>
+<li>
+  <%= fields.label :url, "Website" %>
+  <%= fields.text_field :url %>
+</li>
+<li>
+  <%= fields.label :org_type, "Type" %>
+  <%= fields.select :org_type, ['Governmental', 'Non-governmental'] %>
+</li>
+<li>
+  <%= fields.label :description %>
+  <%= fields.text_area :description %>
+</li>

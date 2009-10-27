@@ -351,6 +351,7 @@ div#ltColumn input[checkbox] { text-align: left; }
 div#ltColumn input#source { float: left; margin-right: 15px; width: 250px;}
 form#addData select { margin-right: 5px; float: left;}
 select.year { float: left;}
+form>ul>li p { margin-left: 150px;}
 p.seperator { margin-left: 20px; display: block; float: left;}
 select.newLine { margin-left: 150px;}
 div.searched { font-size: 90%; }

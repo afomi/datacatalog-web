@@ -13,27 +13,7 @@
 <% form_for :organization, @organization, :url => admin_organization_path(@organization.id), :html => {:method => :put} do |f| -%>
   <%= show_flash_message %>
   <ul>
-    <li>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </li>
-    <li>
-      <%= f.label :acronym %>
-      <%= f.text_field :acronym %>
-    </li>
-    <li>
-      <%= f.label :url, "Website" %>
-      <%= f.text_field :url %>
-    </li>
-    <li>
-      <%= f.label :org_type, "Type" %>
-      <%= f.select :org_type, ['Governmental', 'Non-governmental', 'Company'] %>
-    </li>
-    <li>
-      <%= f.label :description %>
-      <%= f.text_area :description %>
-    </li>
-
+    <%= render 'fields', :object => f %>
     <li>
       <button class="update_admin" id="user_submit" type="submit" value="Update" name="commit">
         <span>Update</span>

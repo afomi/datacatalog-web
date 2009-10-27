@@ -5,7 +5,7 @@ class Admin::OrganizationsController < AdminController
   end
   
   def show
-    @organization = DataCatalog::Organization.get(params[:id])
+    @organization = DataCatalog::Organization.first(:slug => params[:id])
   end
 
   def new
