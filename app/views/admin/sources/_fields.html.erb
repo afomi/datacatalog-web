@@ -1,0 +1,53 @@
+<li>
+  <%= fields.label :title %>
+  <%= fields.text_field :title %>
+</li>
+<li>
+  <%= fields.label :slug, "URL Slug" %>
+  <%= fields.text_field :slug %>
+  <p class="tip">Will be auto-generated if left blank.</p>
+</li>
+<li>
+  <%= fields.label :source_type, "Type" %>
+  <%= fields.select :source_type, ['Dataset', 'API'] %>
+</li>
+<li>
+  <%= fields.label :description %>
+  <%= fields.text_area :description %>
+</li>
+<li>
+  <%= fields.label :url, "Website" %>
+  <%= fields.text_field :url %>
+</li>
+<li>
+  <%= fields.label :documentation_url %>
+  <%= fields.text_field :documentation_url %>
+</li>
+<li>
+  <%= fields.label :license %>
+  <%= fields.text_field :license %>
+</li>
+<li>
+  <%= fields.label :license_url %>
+  <%= fields.text_field :license_url %>
+</li>
+<li>
+  <%= fields.label :catalog_name %>
+  <%= fields.text_field :catalog_name %>
+</li>
+<li>
+  <%= fields.label :catalog_url %>
+  <%= fields.text_field :catalog_url %>
+</li>
+<li>
+  <%= fields.label :released, "Released on" %>
+  <%= fields.text_field :released %>
+</li>
+<li>
+  <%= fields.label :period_start %>
+  <%= fields.text_field :period_start %>
+</li>
+<li>
+  <%= fields.label :period_end %>
+  <%= fields.text_field :period_end %>
+</li>

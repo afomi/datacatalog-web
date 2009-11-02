@@ -1,0 +1,36 @@
+<% content_for :title do %>
+  New Data Source
+<% end %>
+
+<% content_for :body_class do %>admin<% end %>
+  
+<% content_for :tabs do %>
+  <%= render 'admin/tabs' %>
+<% end %>
+
+<div id="ltColumn">
+
+<% form_for :source, @source, :url => admin_sources_path do |f| -%>
+  <%= show_flash_message %>
+  <ul>
+    <%= render 'fields', :object => f %>
+    <li>
+      <button class="submit" id="user_submit" type="submit" value="Update" name="commit">
+        <span>Submit</span>
+      </button>
+    </li>
+  </ul>
+
+<% end -%>
+</div>
+
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <div id="dashboardNav" class="module">
+      <h3>Stats</h3>
+      <div class="clear"></div>
+    </div>
+    <a href="<%= new_admin_source_path %>"><img src="/images/btn_addSource.png" /></a>
+  </div>
+</div> 
+<div class="clear"></div>

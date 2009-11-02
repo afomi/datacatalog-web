@@ -14,23 +14,23 @@
       <tr id="titles">
         <th class="left sort">Title</th>
         <th class="left sort">Added On</th>
-        <th class="center">Notes</th>
-        <th class="right sort">Flagged (30)</th>
+        <!--<th class="center">Notes</th>
+        <th class="right sort">Flagged (30)</th>-->
       </tr>  
     </thead>  
     <tbody>
       <% @sources.each do |source| -%>
       <tr class="<%= cycle 'even','odd'%>">
         <td class="left">
-          <a href="#"><%= source.title %></a>
+          <%= link_to source.title, edit_admin_source_path(source.slug) %>
         </td>
         <td class="left"><%= source.created_at.to_s(:mdy_slashed) %></td>
-        <td title="Add a Note" class="left">
+        <!--<td title="Add a Note" class="left">
           <a class="addNote" href="#">Add Note</a>
         </td>
         <td title="Resolve Data Set">
           <a class="flaggedData" href="#">Flagged Data</a>
-        </td>
+        </td>-->
       </tr>  
       <% end -%>
     </tbody>  
@@ -39,44 +39,21 @@
 
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
-    <h3>Recently Flagged Data Sets</h3>
-    <dl id="resolvedData">
-      <dt>
-        <a href="#">Data Set Name</a>
-      </dt>
-      <dd>Text if there is a note</dd>
-      <dd class="resolvedDate">
-        <span class="resolver">Resolved by David</span>
-        <span>10/11/08</span>
-      </dd>
-      
-      <dt>
-        <a href="#">Data Set Name</a>
-      </dt>
-      <dd class="resolvedDate">
-        <span class="resolver">Resolved by David</span>
-        <span>10/11/08</span>
-      </dd>
-      
-      <dt>
-        <a href="#">Data Set Name</a>
-      </dt>
-      <dd>Text if there is a note</dd>
-      <dd class="resolvedDate">
-        <span class="resolver">Resolved by David</span>
-        <span>10/11/08</span>
-      </dd>
-      
-      <dt>
-        <a href="#">Data Set Name</a>
-      </dt>
-      <dd>Text if there is a note</dd>
-      <dd class="resolvedDate">
-        <span class="resolver">Resolved by David</span>
-        <span>10/11/08</span>
-      </dd>
-    </dl>
-  </div>    
+    <div id="flaggedData">
+      <h3>Recently Flagged Data Sets</h3>
+      <dl id="resolvedData">
+        <dt>
+          <a href="#">Data Set Name</a>
+        </dt>
+        <dd>Text if there is a note</dd>
+        <dd class="flaggedData">
+          <span class="resolver">Resolved by David</span>
+          <span>10/11/08</span>
+        </dd>
+      </dl>
+    </div>
+    <a href="<%= new_admin_source_path %>"><img src="/images/btn_addSource.png" /></a>    
+  </div>
 </div>
 <div class="clear"></div>
 
