@@ -16,8 +16,8 @@ Rails::Initializer.run do |config|
   config.gem "ruby-openid", :lib => "openid", :version => '>= 2.1.7'
   config.gem 'nokogiri', :version => '>= 1.3.2'
   config.gem 'faker', :version => '>= 0.3.1'
-  config.gem 'httparty', :version => '>= 0.4.4'
-  config.gem 'datacatalog', :version => '>= 0.3.0'
+  config.gem 'luigi-httparty', :lib => 'httparty', :version => '>= 0.4.4'
+  config.gem 'datacatalog', :version => '>= 0.3.2'
   
   config.gem "rspec", :lib => false, :version => ">= 1.2.0" 
   config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
