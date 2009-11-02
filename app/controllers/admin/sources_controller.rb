@@ -1,5 +1,7 @@
 class Admin::SourcesController < AdminController
   
+  before_filter :get_organizations
+  
   def index
     @sources = DataCatalog::Source.all.sort { |a,b| a.title <=> b.title }
   end
@@ -12,7 +14,7 @@ class Admin::SourcesController < AdminController
     @source = DataCatalog::Source.new
   end
   
-  def create    
+  def create
     @source = DataCatalog::Source.new(params[:source])
 
     begin
@@ -37,6 +39,13 @@ class Admin::SourcesController < AdminController
       flash[:error] = build_error_msg(e)
       render :edit
     end
+  end
+  
+  private
+  
+  def get_organizations
+    orgs = DataCatalog::Organization.all.collect { |o| [o.name, o.id] }
+    @organizations = orgs.sort_by { |arr| arr.first }
   end
   
 end

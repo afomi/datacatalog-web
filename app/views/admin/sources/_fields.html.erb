@@ -12,6 +12,10 @@
   <%= fields.select :source_type, ['Dataset', 'API'] %>
 </li>
 <li>
+  <%= fields.label :organization_id, "Organization" %>
+  <%= fields.select :organization_id, @organizations %>
+</li>
+<li>
   <%= fields.label :description %>
   <%= fields.text_area :description %>
 </li>
