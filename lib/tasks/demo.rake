@@ -47,44 +47,22 @@ namespace :demo do
     suggestion2 = DataSuggestion.create!(:name => "Jeff Corwin", :email => "jeff@corwin.com", :title => "Bat Data", :comments => "Would love to see more animal-related data.")
     suggestion2.folder_list = ['Science']
     suggestion2.save
+
+    # organizations
+    sunlight = DataCatalog::Organization.create(:name => "Sunlight Labs", :url => "http://sunlightlabs.com/")
     
     # sources
-    # DataCatalog::Source.create(:title => "Sunlight Labs API", :url => 'http://services.sunlightlabs.com/api/', 
-    #                            :custom => { "0" => {
-    #                                                 "label"       => "License",
-    #                                                 "description" => "License",
-    #                                                 "type"        => "string",
-    #                                                 "value"       => "See Website"
-    #                                                 },
-    #                                         "1" => {
-    #                                                 "label"       => "Documentation URL",
-    #                                                 "description" => "Documentation URL",
-    #                                                 "type"        => "string",
-    #                                                 "value"       => "http://wiki.sunlightlabs.com/Sunlight_API_Documentation"
-    #                                                 },
-    #                                         "2" => {
-    #                                                 "label"       => "Description",
-    #                                                 "description" => "Description",
-    #                                                 "type"        => "string",
-    #                                                 "value"       => "The Sunlight Labs API provides methods for obtaining basic information on Members of Congress, legislator IDs used by various websites, and lookups between places and the politicians that represent them. The primary purpose of the API is to facilitate mashups involving politicians and the various other APIs that are out there."
-    #                                                 }
-    #                                        })
-    # 
-    # DataCatalog::Source.create(:title => "Capitol Words API", :url => 'http://capitolwords.org/api/', 
-    #                            :custom => { "0" => {
-    #                                                 "label"       => "Description",
-    #                                                 "description" => "Description",
-    #                                                 "type"        => "string",
-    #                                                 "value"       => "For every day Congress is in session, Capitol Words visualizes the most frequently used words in the Congressional Record, giving you an at-a-glance view of which issues lawmakers address on a daily, weekly, monthly and yearly basis. Capitol Words lets you see what are the most popular words spoken by lawmakers on the House and Senate floor."
-    #                                                 },
-    #                                         "1" => {
-    #                                                 "label"       => "API Format",
-    #                                                 "description" => "API Format",
-    #                                                 "type"        => "string",
-    #                                                 "value"       => "XML and JSON"
-    #                                                 },
-    #                                                 
-    #                                        })
+    DataCatalog::Source.create(:title => "Sunlight Labs API", :url => 'http://services.sunlightlabs.com/api/', 
+                               :source_type => "API", :organization_id => sunlight.id,
+                               :license => "See Website", :license_url => "http://services.sunlightlabs.com/api/",
+                               :documentation_url => "http://wiki.sunlightlabs.com/Sunlight_API_Documentation", 
+                               :description => "The Sunlight Labs API provides methods for obtaining basic information on Members of Congress, legislator IDs used by various websites, and lookups between places and the politicians that represent them. The primary purpose of the API is to facilitate mashups involving politicians and the various other APIs that are out there."
+                               )
+
+    DataCatalog::Source.create(:title => "Capitol Words API", :url => 'http://capitolwords.org/api/', 
+                               :source_type => "API", :organization_id => sunlight.id,
+                               :description => "For every day Congress is in session, Capitol Words visualizes the most frequently used words in the Congressional Record, giving you an at-a-glance view of which issues lawmakers address on a daily, weekly, monthly and yearly basis. Capitol Words lets you see what are the most popular words spoken by lawmakers on the House and Senate floor."
+                               )
   end
   
 end
