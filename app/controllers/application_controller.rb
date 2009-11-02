@@ -68,18 +68,23 @@ class ApplicationController < ActionController::Base
         redirect_to :back
         return
       rescue DataCatalog::BadRequest => e
-        error_hash = eval(e)
-        error = ""
-        error_hash.each do |k,v|
-          error += "<p>Problem with: " + k.upcase + "</p><ul>"
-          v.each do |msg| 
-            error += "<li>" + msg + "</li>"
-          end
-          error += "</ul>"
-        end
-        flash[:error] = error
+        flash[:error] = build_error_msg(e)
         redirect_to :back
         return
       end
     end
+    
+    def build_error_msg(e)
+      error_hash = eval(e)
+      error = ""
+      error_hash.each do |k,v|
+        error += "<p>Problem with: " + k.upcase + "</p><ul>"
+        v.each do |msg|
+          error += "<li>" + msg + "</li>"
+        end
+        error += "</ul>"
+      end
+      error
+    end
+    
 end
