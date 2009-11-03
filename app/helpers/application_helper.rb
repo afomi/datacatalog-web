@@ -27,4 +27,16 @@ module ApplicationHelper
     message
   end
 
+  def source_field(options)
+    
+    if options[:collection]
+      return nil if @source.send(options[:attribute]).empty?
+    else
+      return nil unless @source.send(options[:attribute])
+    end
+    
+    content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
+    content_tag(:dd, (options[:url] ? link_to(options[:value], options[:url]) : options[:value]))
+  end
+
 end

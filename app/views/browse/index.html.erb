@@ -68,7 +68,7 @@
       <tr id="titles">
         <th class="left">Data Set</th>
         <th class="center">Rating</th>
-        <th class="center">Agency</th>
+        <th class="center">Organization</th>
         <th class="right">Formats</th>
       </tr>
     </thead>
@@ -77,11 +77,11 @@
       
       <tr class="<%= cycle 'even','odd' %>">
         <td class="dataContent left">
-          <%= link_to source.title, "/#{source.id}", :class => "dataName" %>
+          <%= link_to source.title, source_path(source.slug), :class => "dataName" %>
           <button title="Favorite this data" class="iconFavorite" type="submit">
             <span>Favorite this data</span>
           </button>
-          <p><%= truncate(source.custom[2].value, :length => 350) %></p>
+          <p><%= truncate(source.description, :length => 350) %></p>
         </td>
         <td class="center">
           <ul class="star-rating rated ratedThreeStars">
@@ -92,7 +92,7 @@
             <li class="fiveStars">5</li>
           </ul>
         </td>
-        <td class="center"><a href="#"><%= source.custom[1].value.blank? ? source.custom[0].value : source.custom[1].value %></a></td>
+        <td class="center"><a href="#"><%= DataCatalog::Organization.get(source.organization_id).name %></a></td>
         <td class="right">
           <!--<ul class="downloadFormats">
             <li>
