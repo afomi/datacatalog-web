@@ -35,7 +35,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :contact_submissions, :controller => "admin/contact_submissions"
   end
 
-  map.source ":slug", :controller => "main", :action => "source" 
+  map.source "data/:slug", :controller => "data", :action => "show" 
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
