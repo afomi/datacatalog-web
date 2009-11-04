@@ -15,6 +15,8 @@
 <% content_for :body_class do %>home<% end %>
 
 <div id="ltColumn">
+  <%= show_flash_message %>  
+
   <p><%= @source.description %></p>
   <div class="module">
     <div id="dataDetails">
@@ -185,9 +187,9 @@
 <div class="clear"></div> 
 <div id="commentBox">
   <h3 id="discussionTitle">Discussion</h3>
-  <span id="numberComments">18</span>
+  <span id="numberComments"><%= @source.comments.length %></span>
   <div class="clear"></div>
-  <h4>Most Useful Comments</h4>
+  <!--<h4>Most Useful Comments</h4>
   <ul id="usefulComments">
     <li class="left">
       <div class="comment">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut bibendum ante. Morbi risus elit, porta sit ametmattis fermentum, fringilla id augue. Donec pretium venenatis lorem, quis sagittis lacus elementum sit amet. Aenean euismod placerat tortor vitae luctus.</div>
@@ -217,15 +219,16 @@
     </li>
     <li class="clear"></li>
   </ul>	
-  <div class="clear"></div> 
+  <div class="clear"></div>-->
   <div id="threadedComments">
     <ul>
+      <% @source.comments.each do |comment| -%>
       <li class="odd reply">
         <div class="commentMetaData">
-          <a class="showRepliesArrow" href="#">Show Replies</a>
+          <!--<a class="showRepliesArrow" href="#">Show Replies</a>-->
           <img class="userAvatar" alt="userAvatar" src="/images/avatar.jpg"/>
-          <span class="commentDate">Jan. 14, 2009</span>
-          <span class="author">by <a href="#">james1251</a></span>
+          <span class="commentDate">November 4, 2009</span>
+          <span class="author">by <a href="#"><%= comment.user.name %></a></span>
         </div>
         <div class="rating">
           <form action="#" method="post">
@@ -233,17 +236,21 @@
               <span>Vote This Comment Up</span>
             </button>    
           </form>  
-          <span class="ratingNumber">10</span>  
+          <span class="ratingNumber">0</span>  
         </div>
         <div class="clear"></div>
         <div class="commentContent">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut bibendum ante. Morbi risus elit, porta sit ametmattis fermentum, fringilla id augue.</p>
+          <%= markdownize comment.text %>
         </div>	
         <div class="commentFooter">
-          <a href="#">Reply to This Comment</a>
-          <a href="#">View 1 Reply</a>
-        </div>	
-        <div class="clear"></div>
+          <!--<a href="#">Reply to This Comment</a>
+          <a href="#">View 1 Reply</a>-->
+        </div>
+      </li>
+      <div class="clear"></div>
+      <% end -%>
+      	
+        <!--><div class="clear"></div>
         <ul>
           <li class="even reply">
             <div class="commentMetaData">
@@ -295,15 +302,16 @@
               </li>
             </ul>
           </li>
-        </ul>	
-      </li>    
+        </ul>
+      </li>-->  
+      
     </ul>    
   </div>
   <h3 class="withTip">Your Thoughts</h3>
-  <p class="tip">Find something that was missing, broken, or you’d like to request other sections of this data? Please leave us a comment below.</p>
-  <form action="#" method="post" id="comment">
+  <p class="tip">Have some findings to share? Run across something that was missing or broken? Please leave us a comment below.</p>
+  <form action="/data/<%= @source.slug %>/comment" method="post" id="comment">
     <label id="commentLabel">Comment</label>
-    <textarea id="commentTextarea" class="textarea full" name="text" cols="32" rows="5"></textarea>
+    <textarea id="commentTextarea" class="textarea full" name="comment_text" cols="32" rows="5"></textarea>
     <div id="commentReport">
       <label id="problemLabel">This Comment:</label>
       <label><input class="checkbox" type="checkbox" name="word" />Reports a Problem in the Data</label>

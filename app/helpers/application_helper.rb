@@ -38,5 +38,13 @@ module ApplicationHelper
     content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
     content_tag(:dd, (options[:url] ? link_to(options[:value], options[:url]) : options[:value]))
   end
+  
+  def gravatar_for(user)
+    gravatar_image_tag(user.email, :alt => user.display_name, :title => user.display_name, :class => "avatar")
+  end
+  
+  def markdownize(text)
+    RDiscount.new(text).to_html
+  end
 
 end

@@ -49,20 +49,30 @@ namespace :demo do
     suggestion2.save
 
     # organizations
-    sunlight = DataCatalog::Organization.create(:name => "Sunlight Labs", :url => "http://sunlightlabs.com/")
+    sunlight = DataCatalog::Organization.create(:name => "Sunlight Labs", :url => "http://sunlightlabs.com/", :org_type => "not-for-profit")
     
     # sources
-    DataCatalog::Source.create(:title => "Sunlight Labs API", :url => 'http://services.sunlightlabs.com/api/', 
-                               :source_type => "API", :organization_id => sunlight.id,
+    sl = DataCatalog::Source.create(:title => "Sunlight Labs API", :url => 'http://services.sunlightlabs.com/api/', 
+                               :source_type => "api", :organization_id => sunlight.id,
                                :license => "See Website", :license_url => "http://services.sunlightlabs.com/api/",
                                :documentation_url => "http://wiki.sunlightlabs.com/Sunlight_API_Documentation", 
                                :description => "The Sunlight Labs API provides methods for obtaining basic information on Members of Congress, legislator IDs used by various websites, and lookups between places and the politicians that represent them. The primary purpose of the API is to facilitate mashups involving politicians and the various other APIs that are out there."
                                )
 
-    DataCatalog::Source.create(:title => "Capitol Words API", :url => 'http://capitolwords.org/api/', 
-                               :source_type => "API", :organization_id => sunlight.id,
+    cw = DataCatalog::Source.create(:title => "Capitol Words API", :url => 'http://capitolwords.org/api/', 
+                               :source_type => "api", :organization_id => sunlight.id,
                                :description => "For every day Congress is in session, Capitol Words visualizes the most frequently used words in the Congressional Record, giving you an at-a-glance view of which issues lawmakers address on a daily, weekly, monthly and yearly basis. Capitol Words lets you see what are the most popular words spoken by lawmakers on the House and Senate floor."
                                )
+  
+    # comments
+    DataCatalog.with_key(louis.api_key) do
+      DataCatalog::Comment.create(:source_id => sl.id, :text => "This is a great API!")
+    end
+
+    DataCatalog.with_key(david.api_key) do
+      DataCatalog::Comment.create(:source_id => sl.id, :text => "Had some issues with the XML version...")
+    end
+
   end
   
 end
