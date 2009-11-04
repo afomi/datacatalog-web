@@ -36,6 +36,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.source "data/:slug", :controller => "data", :action => "show" 
+  map.source_comment "data/:slug/comment", :controller => "data", :action => "comment" 
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
