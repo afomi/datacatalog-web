@@ -11,7 +11,8 @@ class DataController < ApplicationController
       comment.children = []
       comment.user = User.find_by_api_id(extract_id(comment.user.href))
       if comment.parent
-        find_parent_comment(@comments, comment.parent.id).children << comment
+        parent = find_parent_comment(@comments, comment.parent.id)
+        parent.children << comment
       else
         @comments << comment
       end
@@ -38,15 +39,14 @@ class DataController < ApplicationController
   
   def find_parent_comment(comments, parent_id)
     comments.each do |comment|
-      if comment.id == parent_id
-        return comment
-      elsif !comment.children.empty?
-        find_parent_comment(comment.children, parent_id)
-      else
-        next
-      end
+      return comment if comment.id == parent_id
     end
-
+    
+    parent = nil
+    comments.each do |comment|
+      parent = find_parent_comment(comment.children, parent_id)
+    end
+    return parent
   end
   
   def set_source
