@@ -11,7 +11,7 @@ class DataController < ApplicationController
       comment.children = []
       comment.user = User.find_by_api_id(extract_id(comment.user.href))
       if comment.parent
-        parent_comment_in(@comments, comment.parent.id).children << comment      
+        find_parent_comment(@comments, comment.parent.id).children << comment
       else
         @comments << comment
       end
@@ -22,11 +22,11 @@ class DataController < ApplicationController
   end
   
   def comment
-    comment = params[:comment]
+    comment = params[:data_catalog_comment]
     DataCatalog.with_key(current_user.api_key) do
       api_params = { :source_id => @source.id, :text => comment[:text] }
       [:parent_id, :reports_problem].each do |field|
-        api_params[field] = comment[field] if comment[field] && comment[field].length > 0
+        api_params[field] = comment[field]  if comment[field] && !comment[field].blank?
       end
       DataCatalog::Comment.create(api_params)
     end
@@ -36,14 +36,17 @@ class DataController < ApplicationController
   
   private
   
-  def parent_comment_in(comments, parent_id)
+  def find_parent_comment(comments, parent_id)
     comments.each do |comment|
       if comment.id == parent_id
         return comment
       elsif !comment.children.empty?
-        return parent_comment_in(comment.children, parent_id)
+        find_parent_comment(comment.children, parent_id)
+      else
+        next
       end
     end
+
   end
   
   def set_source

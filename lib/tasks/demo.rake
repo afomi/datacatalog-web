@@ -74,6 +74,14 @@ namespace :demo do
       
       DataCatalog.with_key(luigi.api_key) do
         c3 = DataCatalog::Comment.create(:source_id => sl.id, :text => "Yeah, it rocks.")
+        
+        DataCatalog.with_key(david.api_key) do
+          c4 = DataCatalog::Comment.create(:parent_id => c3.id, :source_id => sl.id, :text => "No, it doesn't!")
+          
+          DataCatalog.with_key(louis.api_key) do
+            c5 = DataCatalog::Comment.create(:parent_id => c4.id, :source_id => sl.id, :text => "Nice argumentation there, bud.")
+          end
+        end
       end
 
     end
