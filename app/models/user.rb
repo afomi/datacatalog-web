@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   acts_as_tagger
 
   named_scope :alphabetical, :order => 'display_name'
-
+  
   def self.admins
     self.all.select { |u| u.admin? }
   end
@@ -92,6 +92,7 @@ class User < ActiveRecord::Base
       self.api_user = DataCatalog::User.create(:name => self.display_name, :email => self.email)
     end
     self.api_key = self.api_user.primary_api_key
+    self.api_id = self.api_user.id
   end
   
   # Use admin?, curator?, and admin_or_curator? for authorization.
