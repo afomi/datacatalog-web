@@ -1,0 +1,31 @@
+<ul>
+  <% comments.each do |comment| -%>
+  <li class="<%= cycle 'odd', 'even', :name => 'comments' %>">
+    <div class="commentMetaData">
+      <%= gravatar_for comment.user, :class => "userAvatar", :size => 37 %>
+      <span class="commentDate">November 4, 2009</span>
+      <span class="author">by <%= link_to comment.user.display_name, user_path(comment.user) %></span>
+    </div>
+    <div class="rating">
+      <form action="#" method="post">
+        <button title="Vote This Comment Up" class="thumbUp" type="submit">
+          <span>Vote This Comment Up</span>
+        </button>    
+      </form>  
+      <span class="ratingNumber">0</span>  
+    </div>
+    <div class="clear"></div>
+    <div class="commentContent">
+      <%= markdownize comment.text %>
+    </div>
+    <div class="commentFooter">
+      <%= link_to "Reply to This", source_path(@source.slug, :anchor => "comment_form", :parent_id => comment.id)  %>
+    </div>
+    <div class="clear"></div>
+    <% unless comment.children.empty? -%>
+    <%= render 'comments', :comments => comment.children %>
+    <% end -%>
+  </li>
+  <% reset_cycle "comments" %>
+  <% end -%>
+</ul>

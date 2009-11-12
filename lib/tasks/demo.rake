@@ -63,14 +63,19 @@ namespace :demo do
                                :source_type => "api", :organization_id => sunlight.id,
                                :description => "For every day Congress is in session, Capitol Words visualizes the most frequently used words in the Congressional Record, giving you an at-a-glance view of which issues lawmakers address on a daily, weekly, monthly and yearly basis. Capitol Words lets you see what are the most popular words spoken by lawmakers on the House and Senate floor."
                                )
-  
+
     # comments
     DataCatalog.with_key(louis.api_key) do
-      DataCatalog::Comment.create(:source_id => sl.id, :text => "This is a great API!")
-    end
+      c1 = DataCatalog::Comment.create(:source_id => sl.id, :text => "This is a great API!")
 
-    DataCatalog.with_key(david.api_key) do
-      DataCatalog::Comment.create(:source_id => sl.id, :text => "Had some issues with the XML version...")
+      DataCatalog.with_key(david.api_key) do
+        c2 = DataCatalog::Comment.create(:parent_id => c1.id, :source_id => sl.id, :text => "Disagree... Had some issues with the XML version...")
+      end
+      
+      DataCatalog.with_key(luigi.api_key) do
+        c3 = DataCatalog::Comment.create(:source_id => sl.id, :text => "Yeah, it rocks.")
+      end
+
     end
 
   end

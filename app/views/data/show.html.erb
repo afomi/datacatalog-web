@@ -189,135 +189,36 @@
   <h3 id="discussionTitle">Discussion</h3>
   <span id="numberComments"><%= @source.comments.length %></span>
   <div class="clear"></div>
-  <!--<h4>Most Useful Comments</h4>
-  <ul id="usefulComments">
-    <li class="left">
-      <div class="comment">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut bibendum ante. Morbi risus elit, porta sit ametmattis fermentum, fringilla id augue. Donec pretium venenatis lorem, quis sagittis lacus elementum sit amet. Aenean euismod placerat tortor vitae luctus.</div>
-      <div class="rating">
-        <form action="#" method="post">
-          <button title="Vote This Comment Up" class="thumbUp" type="submit">
-            <span>Vote This Comment Up</span>
-          </button>    
-        </form>    
-        <span class="ratingNumber">10</span>
-      </div>    
-      <span class="commentDate">Jan. 14, 2009</span>
-      <span class="author">by <a href="#">james1251</a></span>
-    </li>
-    <li class="right">
-      <div class="comment">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut bibendum ante. Morbi risus elit, porta sit ametmattis fermentum, fringilla id augue. Donec pretium venenatis lorem, quis sagittis lacus elementum sit amet. Aenean euismod placerat tortor vitae luctus.</div>
-      <div class="rating">
-        <form action="#" method="post">
-          <button title="Vote This Comment Up" class="thumbUp" type="submit">
-            <span>Vote This Comment Up</span>
-          </button>    
-        </form>    
-        <span class="ratingNumber">10</span>
-      </div>    
-      <span class="commentDate">Jan. 14, 2009</span>
-      <span class="author">by <a href="#">james1251</a></span>
-    </li>
-    <li class="clear"></li>
-  </ul>	
-  <div class="clear"></div>-->
+  <!-- Render "Most Useful" here-->
   <div id="threadedComments">
-    <ul>
-      <% @source.comments.each do |comment| -%>
-      <li class="odd reply">
-        <div class="commentMetaData">
-          <!--<a class="showRepliesArrow" href="#">Show Replies</a>-->
-          <img class="userAvatar" alt="userAvatar" src="/images/avatar.jpg"/>
-          <span class="commentDate">November 4, 2009</span>
-          <span class="author">by <a href="#"><%= comment.user.name %></a></span>
-        </div>
-        <div class="rating">
-          <form action="#" method="post">
-            <button title="Vote This Comment Up" class="thumbUp" type="submit">
-              <span>Vote This Comment Up</span>
-            </button>    
-          </form>  
-          <span class="ratingNumber">0</span>  
-        </div>
-        <div class="clear"></div>
-        <div class="commentContent">
-          <%= markdownize comment.text %>
-        </div>	
-        <div class="commentFooter">
-          <!--<a href="#">Reply to This Comment</a>
-          <a href="#">View 1 Reply</a>-->
-        </div>
-      </li>
-      <div class="clear"></div>
-      <% end -%>
-      	
-        <!--><div class="clear"></div>
-        <ul>
-          <li class="even reply">
-            <div class="commentMetaData">
-              <a class="showRepliesArrow" href="#">Show Replies</a>
-              <img class="userAvatar" alt="userAvatar" src="/images/avatar.jpg"/>
-              <span class="commentDate">Jan. 14, 2009</span>
-              <span class="author">by <a href="#">james1251</a></span>
-            </div>
-            <div class="rating">
-              <form action="#" method="post">
-                <button title="Vote This Comment Up" class="thumbUp" type="submit">
-                  <span>Vote This Comment Up</span>
-                </button>    
-              </form>  
-              <span class="ratingNumber">10</span>  
-            </div>
-            <div class="clear"></div>
-            <div class="commentContent">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut bibendum ante. Morbi risus elit, porta sit ametmattis fermentum, fringilla id augue.</p>
-            </div>	
-            <div class="commentFooter">
-              <a href="#">Reply to This Comment</a>
-              <a href="#">View 1 Reply</a>
-            </div>	
-            <div class="clear"></div>
-            <ul>
-              <li class="odd noreply">
-                <div class="commentMetaData">
-                  <img class="userAvatar" alt="userAvatar" src="/images/avatar.jpg"/>
-                  <span class="commentDate">Jan. 14, 2009</span>
-                  <span class="author">by <a href="#">james1251</a></span>
-                </div>
-                <div class="rating">
-                  <form action="#" method="post">
-                    <button title="Vote This Comment Up" class="thumbUp" type="submit">
-                      <span>Vote This Comment Up</span>
-                    </button>    
-                  </form>  
-                  <span class="ratingNumber">10</span>  
-                </div>
-                <div class="clear"></div>
-                <div class="commentContent">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut bibendum ante.</p>
-                </div>	
-                <div class="commentFooter">
-                  <a href="#">Reply to This Comment</a>
-                </div>	
-                <div class="clear"></div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>-->  
-      
-    </ul>    
+    <%= render 'comments', :comments => @comments %>
   </div>
+  <a name="comment_form" id="comment_form"></a>
+  <% if current_user -%>
   <h3 class="withTip">Your Thoughts</h3>
   <p class="tip">Have some findings to share? Run across something that was missing or broken? Please leave us a comment below.</p>
-  <form action="/data/<%= @source.slug %>/comment" method="post" id="comment">
-    <label id="commentLabel">Comment</label>
-    <textarea id="commentTextarea" class="textarea full" name="comment_text" cols="32" rows="5"></textarea>
+  
+  <% form_for @comment, :url => source_comment_path(@source.slug), :method => :post, :html => { :id => "comment" } do |f| %>
+    <%= f.hidden_field :parent_id, :value => @parent_id %>
+    
+    <%= f.label :comment, "Comment", :id => "commentLabel" %>
+    <%= f.text_area :text, :id => "commentTextarea", :class => "textarea full", :rows => 5, :cols => 32 %>
+    
     <div id="commentReport">
       <label id="problemLabel">This Comment:</label>
-      <label><input class="checkbox" type="checkbox" name="word" />Reports a Problem in the Data</label>
-    </div>    
+      <label>
+        <input id="comment_reports_problem" class="checkbox" type="checkbox" <%= "checked='checked'" if @reports_problem %> value="1" name="comment[reports_problem]"/>
+        Reports a Problem in the Data
+      </label>
+    </div>
+    
     <button title="post" class="postComment" type="submit">
       <span>Post Comment</span>
     </button>
-  </form>        
+    
+  <% end %>
+  <% else -%>
+  <h3 class="withTip">Sign in to comment</h3>
+  <p class="tip">To leave a comment or report a problem with this data, you must <%= link_to "sign in", signin_url %>. No account yet? <%= link_to "Sign up", signup_url %>.</p>
+  <% end -%>
 </div>        

@@ -4,17 +4,47 @@ class DataController < ApplicationController
   
   def show
     
+    @comment = DataCatalog::Comment.new
+    @comments = []
+    @source.comments.each do |comment|
+      comment.id = extract_id(comment.href)
+      comment.children = []
+      comment.user = User.find_by_api_id(extract_id(comment.user.href))
+      if comment.parent
+        parent_comment_in(@comments, comment.parent.id).children << comment      
+      else
+        @comments << comment
+      end
+    end
+    
+    @parent_id = params[:parent_id]
+    @reports_problem = params[:reports_problem]
   end
   
   def comment
+    comment = params[:comment]
     DataCatalog.with_key(current_user.api_key) do
-      DataCatalog::Comment.create(:source_id => @source.id, :text => params[:comment_text])
+      api_params = { :source_id => @source.id, :text => comment[:text] }
+      [:parent_id, :reports_problem].each do |field|
+        api_params[field] = comment[field] if comment[field] && comment[field].length > 0
+      end
+      DataCatalog::Comment.create(api_params)
     end
     flash[:notice] = "Comment saved!"
-    redirect_to :back
+    redirect_to source_path(@source.slug)
   end
   
   private
+  
+  def parent_comment_in(comments, parent_id)
+    comments.each do |comment|
+      if comment.id == parent_id
+        return comment
+      elsif !comment.children.empty?
+        return parent_comment_in(comment.children, parent_id)
+      end
+    end
+  end
   
   def set_source
     @source = DataCatalog::Source.first(:slug => params[:slug])
