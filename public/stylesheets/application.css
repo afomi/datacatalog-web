@@ -142,8 +142,9 @@ div#downloadFormats a { margin-right: 5px;}
 
 .tip, div#downloadFormats span, ul.downloadFormats span, span.commentDate, span.author{ font-size: 95%; font-style: oblique; color: #928f8c; line-height: 16px; margin-top: 3px; margin-bottom: 15px;}
 
-div#dashboardControls, div#filterData, div#commentBox, div#additionalFields, div#additionalKeys { background: #f4f2ec; border: 2px solid #d9d7d3; -moz-border-radius: 3px; -webkit-border-radius: 3px; padding: 15px; margin-bottom: 30px;}
+div.detailBox, div#dashboardControls, div#filterData, div#commentBox, div#additionalFields, div#additionalKeys { background: #f4f2ec; border: 2px solid #d9d7d3; -moz-border-radius: 3px; -webkit-border-radius: 3px; padding: 15px; margin-bottom: 30px;}
 div#commentBox, div#additionalFields, div#additionalKeys { padding: 25px;}
+div.detailBox input { margin-right: 15px; }
 h3#discussionTitle, span#numberComments { float: left;}
 h3#discussionTitle { margin-right: 15px;}
 span#numberComments { background: url(/images/commentBubble.png) left 2px no-repeat; font-style: oblique; padding-top:1px; padding-bottom: 2px; font-size: 80%; text-align: center; width: 24px; font-weight: bold;}

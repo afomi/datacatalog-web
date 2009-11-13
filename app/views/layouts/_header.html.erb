@@ -11,14 +11,13 @@
       <li id="utilitySignup"><%= link_to "Sign In", signin_path %></li>
     <% end -%>
     </ul> 
-    <form id="searchForm" action="." method="get">
-      <input id="id_skills" type="text" name="skills"/>
+    <form id="searchForm" action="/search" method="get">
+      <input id="term" type="text" name="term" value="<%= @term %>"/>
       <button class="searchBtn" type="submit">
         <span>Search the Catalog</span>
       </button>
     </form>
     <div class="clear"></div>
-    <%= link_to "Advanced Search", search_path , :class => "advancedSearch_link" %>
   </div>
 
   <div id="nav">
