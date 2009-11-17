@@ -53,4 +53,25 @@ module ApplicationHelper
     RDiscount.new(text).to_html
   end
 
+  def star_class(rating)
+    case rating
+    when 1
+      return "ratedOneStar"
+    when 2
+      return "ratedTwoStars"      
+    when 3
+      return "ratedThreeStars"      
+    when 4
+      return "ratedFourStars"  
+    when 5
+      return "ratedFiveStars"
+    else
+      return ""
+    end
+  end
+  
+  def rating_count(average, total)
+    return "0" unless average
+    return (total/average).to_i.to_s
+  end
 end

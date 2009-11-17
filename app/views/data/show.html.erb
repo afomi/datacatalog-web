@@ -66,32 +66,26 @@
       <div id="ratingBox">
         <div class="stars" id="overallRating">
           <h3 class="textReplace withTip" id="header_overall">Overall Rating</h3>
-          <ul class="star-rating ratedFourStars">
-            <li class="oneStar">1</li>
-            <li class="twoStars">2</li>
-            <li class="threeStars">3</li>
-            <li class="fourStars">4</li>
-            <li class="fiveStars">5</li>
-          </ul>
-          <div class="tip">(averaged from 20 votes)</div>
+          <%= render 'shared/star_rating', :rating => @source.rating_stats.average %>
+          <div class="tip">(averaged from <%= rating_count(@source.rating_stats.average, @source.rating_stats.total) %> votes)</div>
         </div>
         <div class="stars" id="yourRating">
           <h3 class="textReplace" id="header_your">Your Rating</h3>
           <ul class="star-rating star-ratingActive">
-            <li title="Terrible" class="oneStar">
-              <a href="#">1</a>
+            <li title="Unusable" class="oneStar">
+              <%= link_to 1, source_rating_path(@source.slug, 1) %>
             </li>
             <li title="Bad" class="twoStars">
-              <a href="#">2</a>
+              <%= link_to 2, source_rating_path(@source.slug, 2) %>
             </li>
-            <li title="Ok" class="threeStars">
-              <a href="#">3</a>
+            <li title="Fair" class="threeStars">
+              <%= link_to 3, source_rating_path(@source.slug, 3) %>
             </li>
             <li title="Good" class="fourStars">
-              <a href="#">4</a>
+              <%= link_to 4, source_rating_path(@source.slug, 4) %>
             </li>
             <li title="Great" class="fiveStars">
-              <a href="#">5</a>
+              <%= link_to 5, source_rating_path(@source.slug, 5) %>
             </li>
           </ul>
         </div>

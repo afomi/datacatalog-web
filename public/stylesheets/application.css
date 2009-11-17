@@ -123,6 +123,8 @@ div#overallRating { padding: 25px 20px 10px;}
 div#overallRating div.tip { margin-bottom: 5px;}
 div#yourRating { padding: 5px 20px 0;}
 ul.star-rating li { float: left; background: url(/images/stars.png) bottom left no-repeat; text-indent: -9999em; display: block; width: 17px; height: 17px; margin: -2px 3px 2px 0;}
+
+ul.star-rating li a { float: left; background: url(/images/stars.png) bottom left no-repeat; text-indent: -9999em; display: block; width: 17px; height: 17px; margin: -2px 3px 2px 0;}
 div#overallRating ul, div#yourRating ul { margin-left: 140px;}
 ul.ratedOneStar li.oneStar, ul.ratedTwoStars li.oneStar, ul.ratedThreeStars li.oneStar, ul.ratedFourStars li.oneStar, ul.ratedFiveStars li.oneStar{ background: url(/images/stars.png) top left no-repeat;}
 ul.ratedTwoStars li.twoStars, ul.ratedThreeStars li.twoStars, ul.ratedFourStars li.twoStars, ul.ratedFiveStars li.twoStars { background: url(/images/stars.png) top left no-repeat; }

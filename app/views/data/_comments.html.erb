@@ -7,12 +7,12 @@
       <span class="author">by <%= link_to comment.user.display_name, user_path(comment.user) %></span>
     </div>
     <div class="rating">
-      <form action="#" method="post">
+      <form action="<%= comment_rating_path(@source.slug, comment.id) %>" method="post">
         <button title="Vote This Comment Up" class="thumbUp" type="submit">
           <span>Vote This Comment Up</span>
-        </button>    
-      </form>  
-      <span class="ratingNumber">0</span>  
+        </button>
+      </form>
+      <span class="ratingNumber"><%= comment.rating_stats.total %></span>  
     </div>
     <div class="clear"></div>
     <div class="commentContent">
