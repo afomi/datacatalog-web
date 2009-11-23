@@ -51,6 +51,14 @@ class DataController < ApplicationController
     redirect_to source_path(@source.slug)
   end    
   
+  def favorite
+    DataCatalog.with_key(current_user.api_key) do
+     DataCatalog::Favorite.create(:source_id => @source.id)
+    end
+    flash[:notice] = "Added as favorite!"
+    redirect_to source_path(@source.slug)
+  end
+  
   private
   
   def find_parent_comment(comments, parent_id)

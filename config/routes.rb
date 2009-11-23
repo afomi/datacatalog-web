@@ -39,6 +39,8 @@ ActionController::Routing::Routes.draw do |map|
   map.source_comment "data/:slug/comment", :controller => "data", :action => "comment" 
   map.source_rating "data/:slug/rating/:value", :controller => "data", :action => "rating" 
   map.comment_rating "data/:slug/comment_rating/:comment_id", :controller => "data", :action => "comment_rating" 
+  map.source_favorite "data/:slug/favorite", :controller => "data", :action => "favorite" 
+
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
