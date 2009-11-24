@@ -124,13 +124,13 @@ div#overallRating div.tip { margin-bottom: 5px;}
 div#yourRating { padding: 5px 20px 0;}
 ul.star-rating li { float: left; background: url(/images/stars.png) bottom left no-repeat; text-indent: -9999em; display: block; width: 17px; height: 17px; margin: -2px 3px 2px 0;}
 
-ul.star-rating li a { float: left; background: url(/images/stars.png) bottom left no-repeat; text-indent: -9999em; display: block; width: 17px; height: 17px; margin: -2px 3px 2px 0;}
+ul.star-rating li a { float: left; background: url(/images/stars.png) bottom left no-repeat; text-indent: -9999em; display: block; width: 17px; height: 17px;}
 div#overallRating ul, div#yourRating ul { margin-left: 140px;}
-ul.ratedOneStar li.oneStar, ul.ratedTwoStars li.oneStar, ul.ratedThreeStars li.oneStar, ul.ratedFourStars li.oneStar, ul.ratedFiveStars li.oneStar{ background: url(/images/stars.png) top left no-repeat;}
-ul.ratedTwoStars li.twoStars, ul.ratedThreeStars li.twoStars, ul.ratedFourStars li.twoStars, ul.ratedFiveStars li.twoStars { background: url(/images/stars.png) top left no-repeat; }
-ul.ratedThreeStars li.threeStars, ul.ratedFourStars li.threeStars, ul.ratedFiveStars li.threeStars { background: url(/images/stars.png) top left no-repeat; }
-ul.ratedFourStars li.fourStars, ul.ratedFiveStars li.fourStars { background: url(/images/stars.png) top left no-repeat; }
-ul.ratedFiveStars li.fiveStars { background: url(/images/stars.png) top left no-repeat; }
+ul.ratedOneStar li.oneStar, ul.ratedTwoStars li.oneStar, ul.ratedThreeStars li.oneStar, ul.ratedFourStars li.oneStar, ul.ratedFiveStars li.oneStar, ul.ratedOneStar li.oneStar a, ul.ratedTwoStars li.oneStar a, ul.ratedThreeStars li.oneStar a, ul.ratedFourStars li.oneStar a, ul.ratedFiveStars li.oneStar a{ background: url(/images/stars.png) top left no-repeat;}
+ul.ratedTwoStars li.twoStars, ul.ratedThreeStars li.twoStars, ul.ratedFourStars li.twoStars, ul.ratedFiveStars li.twoStars, ul.ratedTwoStars li.twoStars a, ul.ratedThreeStars li.twoStars a, ul.ratedFourStars li.twoStars a, ul.ratedFiveStars li.twoStars a { background: url(/images/stars.png) top left no-repeat; }
+ul.ratedThreeStars li.threeStars, ul.ratedFourStars li.threeStars, ul.ratedFiveStars li.threeStars, ul.ratedThreeStars li.threeStars a, ul.ratedFourStars li.threeStars a, ul.ratedFiveStars li.threeStars a { background: url(/images/stars.png) top left no-repeat; }
+ul.ratedFourStars li.fourStars, ul.ratedFiveStars li.fourStars, ul.ratedFourStars li.fourStars a, ul.ratedFiveStars li.fourStars a { background: url(/images/stars.png) top left no-repeat; }
+ul.ratedFiveStars li.fiveStars, ul.ratedFiveStars li.fiveStars a { background: url(/images/stars.png) top left no-repeat; }
 
 ul.you_rateOneStar li.oneStar, ul.you_rateTwoStars li.oneStar, ul.you_rateThreeStars li.oneStar, ul.you_rateFourStars li.oneStar, ul.you_rateFiveStars li.oneStar{ background: url(/images/youRate_stars.png) top left no-repeat;}
 ul.you_rateTwoStars li.twoStars, ul.you_rateThreeStars li.twoStars, ul.you_rateFourStars li.twoStars, ul.you_rateFiveStars li.twoStars { background: url(/images/youRate_stars.png) top left no-repeat; }
