@@ -71,7 +71,7 @@
         </div>
         <div class="stars" id="yourRating">
           <h3 class="textReplace" id="header_your">Your Rating</h3>
-          <ul class="star-rating star-ratingActive">
+          <ul class="you-star-rating star-ratingActive">
             <li title="Unusable" class="oneStar">
               <%= link_to 1, source_rating_path(@source.slug, 1) %>
             </li>
@@ -145,7 +145,7 @@
   <div id="rtColumn">
     <div class="module">
       <h3 class="withTip">My Notes on This Data</h3>
-      <p class="tip">Want to privately remember this data set or something about it, type it below.</p>
+      <p class="tip">Want to keep some private notes on this data source?</p>
       <form action="#" method="post">
         <textarea id="id_description" class="textarea" rows="5" cols="32" name="description"></textarea>
         <button class="saveBtn" type="submit">
