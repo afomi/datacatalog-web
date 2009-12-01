@@ -1,9 +1,5 @@
 <% content_for :title do %>
-  <% if current_user -%>
-  Dashboard
-  <% else -%>
   Welcome to the National Data Catalog
-  <% end -%>
 <% end %>
 
 <% content_for :body_class do %>home<% end %>
@@ -11,35 +7,7 @@
 <%= show_flash_message %>
 
 <div id="ltColumn">
-  <table>
-    <thead>
-      <tr id="titles">
-        <th class="left">Data Source</th>
-        <th class="center">Rating</th>
-        <th class="right">Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% current_user.api_user.favorites.each do |source| -%>
-      <tr class="<%= cycle 'even', 'odd' %>">
-        <td class="left dataContent">
-          <%= link_to source.title, source_path(source.slug), :class => "dataName" %>
-          <p class="clear"><%= truncate(source.description, 140) %></p>
-        </td>
-        <td class="center">
-          <ul class="star-rating rated ratedThreeStars">
-            <li class="oneStar">1</li>
-            <li class="twoStars">2</li>
-            <li class="threeStars">3</li>
-            <li class="fourStars">4</li>
-            <li class="fiveStars">5</li>
-          </ul>
-        </td>
-        <td class="right notes"><a class="notesAvailable" title="Notes" href="#">Notes</a></td>
-      </tr>
-      <% end -%>
-    </tbody>
-  </table>
+
 </div> 
 <div id="rtColumnWrapper">
   <div id="rtColumn">

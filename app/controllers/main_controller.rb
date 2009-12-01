@@ -1,7 +1,11 @@
 class MainController < ApplicationController
   
   def dashboard
-
+    if current_user
+      render 'dashboard' and return
+    else
+      render 'welcome' and return
+    end
   end
   
   def about
