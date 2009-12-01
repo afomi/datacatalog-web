@@ -4,6 +4,11 @@ class DataController < ApplicationController
   
   def show
     
+    @is_favorite = false
+    current_user.api_user.favorites.each do |source|
+      @is_favorite = true if source.slug == params[:slug]
+    end
+    
     @comment = DataCatalog::Comment.new
     @comments = []
     @source.comments.each do |comment|
@@ -56,6 +61,16 @@ class DataController < ApplicationController
      DataCatalog::Favorite.create(:source_id => @source.id)
     end
     flash[:notice] = "Added as favorite!"
+    redirect_to source_path(@source.slug)
+  end
+  
+  def unfavorite
+    DataCatalog.with_key(current_user.api_key) do
+     DataCatalog::Favorite.all(:source_id => @source.id).each do |f|
+       DataCatalog::Favorite.destroy(f.id) if f.user_id == current_user.api_id
+      end
+    end
+    flash[:notice] = "Removed favorite."
     redirect_to source_path(@source.slug)
   end
   

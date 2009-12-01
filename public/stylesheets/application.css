@@ -211,6 +211,9 @@ div#adminUsers a.deleteIcon { margin-right: 30px;}
 a.allLink { font-size: 110%; font-weight: bold; padding-top: 4px;}
 
 a.folder { display: block; background: url(/images/icon_folder.png) left 3px no-repeat; float: left; padding-right: 10px;}
+a.favorite { display: block; background: url(/images/icon_favorite.png) left 3px no-repeat; float: left; padding-left: 23px;}
+a.favorited { display: block; background: url(/images/icon_favorited.png) left 3px no-repeat; float: left; padding-left: 23px;}
+
 .dashboardNav { padding-left: 28px; }
 div#dashboardNav li { margin-bottom: 10px; text-align: right; padding-left:5px;}
 div#dashboardNav li.active { background: #fff; -moz-border-radius: 3px; -webkit-border-radius: 3px; padding: 3px 0 3px 3px;}
