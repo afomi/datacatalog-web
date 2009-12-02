@@ -1,0 +1,9 @@
+<div class="module">
+  <% if @is_favorite -%>
+  <h3 class="withTip">Current Favorite</h3>
+  <%= link_to "Remove as Favorite", source_unfavorite_path(@source.slug), :class => "favorited" %>
+  <% else -%>
+  <h3 class="withTip">Add as Favorite</h3>
+  <%= link_to "Favorite this Data Source", source_favorite_path(@source.slug), :class => "favorite" %>      
+  <% end -%>
+</div>

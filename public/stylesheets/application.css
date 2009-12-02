@@ -89,6 +89,14 @@ li#nav_dataDetails a{ background: url(/images/nav_dataDetails.png) top left no-r
 li#nav_dataDetails a:hover, li#nav_dataDetails a.active{ background: url(/images/nav_dataDetails.png) bottom left no-repeat; width: 103px; height: 30px;}
 li#nav_sitesUseData a{ background: url(/images/nav_sitesUseData.png) top left no-repeat; width: 167px; height: 30px;}
 li#nav_sitesUseData a:hover, li#nav_sitesUseData a.active{ background: url(/images/nav_sitesUseData.png) bottom left no-repeat; width: 167px; height: 30px;}
+li#nav_exampleUsages a{ background: url(/images/nav_exampleUsages.png) top left no-repeat; width: 128px; height: 30px;}
+li#nav_exampleUsages a:hover, li#nav_exampleUsages a.active{ background: url(/images/nav_exampleUsages.png) bottom left no-repeat; width: 128px; height: 30px;}
+li#nav_communityDocs a{ background: url(/images/nav_communityDocs.png) top left no-repeat; width: 130px; height: 30px;}
+li#nav_communityDocs a:hover, li#nav_communityDocs a.active{ background: url(/images/nav_communityDocs.png) bottom left no-repeat; width: 130px; height: 30px;}
+li#nav_privateNotes a{ background: url(/images/nav_privateNotes.png) top left no-repeat; width: 115px; height: 30px;}
+li#nav_privateNotes a:hover, li#nav_privateNotes a.active{ background: url(/images/nav_privateNotes.png) bottom left no-repeat; width: 115px; height: 30px;}
+
+
 
 div#dataDetails dt{ text-transform: uppercase; font-weight: bold; float: left; color: #371d17; width: 110px; padding-top: 2px;}
 div#dataDetails dt { margin-bottom: 5px;}

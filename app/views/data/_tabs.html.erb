@@ -1,0 +1,21 @@
+<% content_for :tabs do %>
+<div id="content_tabs">
+  <ul>
+    <li id="nav_dataDetails">
+      <%= link_to "Data Details", source_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["show"])) %>
+    </li>
+    <li id="nav_exampleUsages">
+      <%= link_to "Example Usages", source_usages_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["usages"])) %>
+    </li>
+    <li id="nav_communityDocs">
+      <%= link_to "Community Docs", source_docs_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["docs"])) %>
+    </li>    
+    <% if current_user -%>
+    <li id="nav_privateNotes">
+      <%= link_to "Private Notes", source_notes_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["notes"])) %>
+    </li>
+    <% end -%>
+  </ul>
+</div>
+<%= link_to "Report a Problem", source_path(@source.slug, :anchor => "comment_form", :reports_problem => 1), :id => "btn_reportProblem", :class => "buttonLink" %>
+<% end %>

@@ -1,0 +1,17 @@
+<% content_for :title do %>
+  <%= @source.title %> - Example Usages
+<% end %>
+
+<%= render 'tabs' %>
+
+<% content_for :body_class do %>home<% end %>
+
+<div id="ltColumn">
+
+</div> 
+<div id="rtColumnWrapper">
+  <div id="rtColumn">
+    <%= render 'sidebar_favorites' %>
+    <%= render 'sidebar_notes' %>
+  </div>
+</div>

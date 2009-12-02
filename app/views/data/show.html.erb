@@ -2,15 +2,7 @@
   <%= @source.title %>
 <% end %>
 
-<% content_for :tabs do %>
-<div id="content_tabs">
-  <ul>
-    <li id="nav_dataDetails"><a class="buttonLink active" href="#">Data Details</a></li>
-    <li id="nav_sitesUseData"><a class="buttonLink" href="#">Example Usages</a></li>
-  </ul>
-</div>
-<%= link_to "Report a Problem", source_path(@source.slug, :anchor => "comment_form", :reports_problem => 1), :id => "btn_reportProblem", :class => "buttonLink" %>
-<% end %>
+<%= render 'tabs' %>
 
 <% content_for :body_class do %>home<% end %>
 
@@ -120,49 +112,8 @@
 </div> 
 <div id="rtColumnWrapper">
   <div id="rtColumn">
-    <div class="module">
-      <% if @is_favorite -%>
-      <h3 class="withTip">Current Favorite</h3>
-      <%= link_to "Remove as Favorite", source_unfavorite_path(@source.slug), :class => "favorited" %>
-      <% else -%>
-      <h3 class="withTip">Add as Favorite</h3>
-      <%= link_to "Favorite this Data Source", source_favorite_path(@source.slug), :class => "favorite" %>      
-      <% end -%>
-    </div>
-    
-    <div class="module">
-      <h3 class="withTip">My Notes on This Data</h3>
-      <p class="tip">Want to keep some private notes on this data source?</p>
-      <form action="#" method="post">
-        <textarea id="id_description" class="textarea" rows="5" cols="32" name="description"></textarea>
-        <button class="saveBtn" type="submit">
-          <span>Save Notes</span>
-        </button>
-      </form>    
-    </div>
-<!--<div id="tags" class="module">
-      <h3>Tags</h3>
-      <ul>
-        <li><a href="#">Chemical Pollution</a></li>
-        <li><a href="#">EPA</a></li>
-        <li><a href="#">TRI Reporting</a></li>
-      </ul>  
-      <a class="allLink" id="addTagLink" href="#">Add a Tag</a>
-      <div id="addTag">
-        <input id="addTagInput" type="text" name="word" />
-        <button class="addTag" type="submit">
-          <span>Add</span>
-        </button>
-      </div>
-    </div>-->
-    <div id="similarSets" class="module">
-      <h3>Similar Data Sets</h3>
-      <ul>
-        <li><a href="#">2005 Toxics Release Inventory data for Guam</a></li>
-        <li><a href="#">2005 Toxics Release Inventory data for Puerto Rico</a></li>
-        <li><a href="#">2005 Toxics Release Inventory data for the District of Columbia</a></li>
-      </ul>    
-    </div>    
+    <%= render 'sidebar_favorites' %>
+    <%= render 'sidebar_notes' %>
   </div> 
 </div>
 <div class="clear"></div> 
