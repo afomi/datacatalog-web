@@ -27,15 +27,13 @@
           <p class="clear"><%= truncate(source.description, 140) %></p>
         </td>
         <td class="center">
-          <ul class="star-rating rated ratedThreeStars">
-            <li class="oneStar">1</li>
-            <li class="twoStars">2</li>
-            <li class="threeStars">3</li>
-            <li class="fourStars">4</li>
-            <li class="fiveStars">5</li>
-          </ul>
+          <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
         </td>
-        <td class="right notes"><a class="notesAvailable" title="Notes" href="#">Notes</a></td>
+        <td class="right notes">
+        <% unless source.user_note.nil? -%>
+          <%= link_to "Notes", source_path(source.slug, :anchor => "notes"), :class => "notesAvailable", :title => "Notes" %>
+        <% end -%>
+        </td>
       </tr>
       <% end -%>
     </tbody>
@@ -45,24 +43,27 @@
   <div id="rtColumn">
     
     <div id="recentComments" class="module">
-      <h3>My Recent Comments</h3>
+      <h3>Recent Comments</h3>
+      <% if @recent_comments.length > 0 -%>
       <dl>
-        <dt><a href="#">Data Set Name</a></dt>
-        <dd>Extraction of offense, arrest, and clearance data as well as law enforcement staffing information from the FBI's Uniform Crime Reporting (UCR) Program.</dd>
-        <dd class="commentDate">Jan. 14, 2009</dd>
-
-        <dt><a href="#">Data Set Name</a></dt>
-        <dd>Extraction of offense, arrest, and clearance data as well as law enforcement staffing information from the FBI's Uniform Crime Reporting (UCR) Program.</dd>
-        <dd class="commentDate">Jan. 14, 2009</dd>
-      </dl>	
-      <a class="allLink" href="#">View All »</a> 
+        <% @recent_comments[0..4].each do |comment| -%>
+        <dt><%= link_to comment.source_title, source_path(comment.source_slug) %></dt>
+        <dd><%= truncate(comment.text, :length => 100) %></dd>
+        <dd class="commentDate">Posted on <%= comment.created_at.to_s(:mdy_slashed) %></dd>
+        <% end -%>
+      </dl>
+      <% else -%>
+      <p>No comments yet...</p>
+      <% end -%>
+      <!--<a class="allLink" href="#">View All »</a>-->
     </div>  
+    
     <div id="yourRatings" class="module">
-      <h3>Your Recent Ratings</h3>
+      <h3>Recently Rated</h3>
       <ul>
-        <li><a href="#">2005 Toxics Release Inventory data for Guam</a></li>
-        <li><a href="#">2005 Toxics Release Inventory data for Puerto Rico</a></li>
-        <li><a href="#">2005 Toxics Release Inventory data for the District of Columbia</a></li>
+        <% @recent_ratings[0..9].each do |rating| -%>
+        <li><%= link_to rating.source_title, source_path(rating.source_slug) %></li>
+        <% end -%>
       </ul>    
     </div>    
   </div>  
