@@ -7,7 +7,13 @@
 <% content_for :body_class do %>home<% end %>
 
 <div id="ltColumn">
-
+  <%= show_flash_message %>
+  <% @notes.each do |note| -%>
+    <h3>Note from <%= note.created_at.to_s(:mdy_slashed) %></h3>
+    <div class="markdowned">
+      <%= markdownize note.text %>
+    </div>
+  <% end -%>
 </div> 
 <div id="rtColumnWrapper">
   <div id="rtColumn">

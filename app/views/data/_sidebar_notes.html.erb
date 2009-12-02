@@ -1,10 +1,12 @@
+<% if current_user -%>
 <div class="module">
   <h3 class="withTip">My Notes on This Data</h3>
   <p class="tip">Want to keep some private notes on this data source?</p>
-  <form action="#" method="post">
-    <textarea id="id_description" class="textarea" rows="5" cols="32" name="description"></textarea>
+  <form action="<%= source_new_note_path(@source.slug) %>" method="post">
+    <textarea id="id_description" class="textarea" rows="5" cols="32" name="text"></textarea>
     <button class="saveBtn" type="submit">
       <span>Save Notes</span>
     </button>
   </form>
 </div>
+<% end -%>

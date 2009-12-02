@@ -408,6 +408,10 @@ div#ltColumn ul#standard_signin li.signIn_cues input.checkbox, div#ltColumn .che
   border: solid 2px #C66;
 }
 
+div.markdowned strong { font-weight: bold;}
+div.markdowned em { font-style: italic;}
+
+
 div#errorExplanation p { color: #371D17;}
 div#errorExplanation ul { list-style-type: disc; padding-left: 40px;}
 div#ltColumn div#errorExplanation li, div#rtColumn div#errorExplanation li  { margin-bottom: 15px;}

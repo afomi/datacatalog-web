@@ -5,8 +5,10 @@ class DataController < ApplicationController
   def show
     
     @is_favorite = false
-    current_user.api_user.favorites.each do |source|
-      @is_favorite = true if source.slug == params[:slug]
+    if current_user
+      current_user.api_user.favorites.each do |source|
+        @is_favorite = true if source.slug == params[:slug]
+      end
     end
     
     @comment = DataCatalog::Comment.new
@@ -72,6 +74,38 @@ class DataController < ApplicationController
     end
     flash[:notice] = "Removed favorite."
     redirect_to source_path(@source.slug)
+  end
+  
+  def notes
+    all_notes = DataCatalog::Note.all(:user_id => current_user.api_id)
+    @notes = []
+    all_notes.each do |note|
+      @notes << note if note.source_id == @source.id
+    end
+  end
+  
+  def new_note
+    DataCatalog.with_key(current_user.api_key) do
+      DataCatalog::Note.create(:source_id => @source.id, :text => params[:text])
+    end
+    flash[:notice] = "Added note."
+    redirect_to source_notes_path(@source.slug)
+  end
+  
+  def update_note
+    DataCatalog.with_key(current_user.api_key) do
+      DataCatalog::Note.update(:id => params[:note_id], :text => params[:text])
+    end
+    flash[:notice] = "Updated note."
+    redirect_to source_notes_path(@source.slug)
+  end
+  
+  def new_document
+    
+  end
+  
+  def update_document
+    
   end
   
   private
