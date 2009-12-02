@@ -78,19 +78,13 @@
       <tr class="<%= cycle 'even','odd' %>">
         <td class="dataContent left">
           <%= link_to source.title, source_path(source.slug), :class => "dataName" %>
-          <button title="Favorite this data" class="iconFavorite" type="submit">
+          <!--<button title="Favorite this data" class="iconFavorite" type="submit">
             <span>Favorite this data</span>
-          </button>
-          <p><%= truncate(source.description, :length => 350) %></p>
+          </button>-->
+          <p class="clear"><%= truncate(source.description, :length => 350) %></p>
         </td>
         <td class="center">
-          <ul class="star-rating rated ratedThreeStars">
-            <li class="oneStar">1</li>
-            <li class="twoStars">2</li>
-            <li class="threeStars">3</li>
-            <li class="fourStars">4</li>
-            <li class="fiveStars">5</li>
-          </ul>
+          <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
         </td>
         <td class="center"><a href="#"><%= DataCatalog::Organization.get(source.organization_id).name %></a></td>
         <td class="right">
