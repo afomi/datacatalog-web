@@ -324,7 +324,7 @@ button.postComment { background: url(/images/btn_postComment.png) top left no-re
 button#addField { background: url(/images/btn_addField.png) top left no-repeat; width: 106px; margin-top: 20px; margin-left: 125px;}
 button.addFolder, button.addTag { background: url(/images/btn_addBig.png) top left no-repeat; width: 69px; height: 22px;}
 button.addTerm { background: url(/images/btn_addTerm.png) top left no-repeat; width: 88px; height: 22px;}
-button.addAgency { background: url(/images/btn_addAgency.png) top left no-repeat; width: 101px; height: 22px; }
+button.addOrganization { background: url(/images/btn_addOrganization.png) top left no-repeat; width: 101px; height: 22px; }
 button.addCategory { background: url(/images/btn_addCategory.png) top left no-repeat; width: 113px; height: 22px; }
 button.submit { background: url(/images/btn_submit.png) top left no-repeat; width: 93px; margin-left: 150px; margin-top: 20px;}
 button.signIn { background: url(/images/btn_signIn.png) top left no-repeat; width: 94px; margin-left: 150px; margin-top: 20px; }
@@ -337,7 +337,7 @@ button.update_admin { background: url(/images/btn_update.png) top left no-repeat
 ul.editAPI button.update { margin-left: 150px;}
 button.generate { background: url(/images/btn_generateAPI.png) top left no-repeat; width: 157px; margin-top: 20px; margin-left: 150px;}
 
-form#sidebarSearch button.addTerm, form#sidebarSearch button.addAgency, form#sidebarSearch button.addCategory { margin-top: 10px;}
+form#sidebarSearch button.addTerm, form#sidebarSearch button.addOrganization, form#sidebarSearch button.addCategory { margin-top: 10px;}
 
 a.calendar { background: url(/images/calendarIcon.png) top right no-repeat; width: 20px; height: 19px; float: left; margin-left: 15px;}
 
