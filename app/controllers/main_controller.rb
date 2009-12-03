@@ -29,6 +29,14 @@ class MainController < ApplicationController
     
   end
   
+  def blog
+    require 'feedzirra'
+    
+    url = "http://sunlightlabs.com/blog/feeds/tag/datacatalog/"
+    feed = Feedzirra::Feed.fetch_and_parse(url)
+    @entries = feed.entries
+  end
+  
   def source
     
     @source = DataCatalog::Source.get(params[:slug])

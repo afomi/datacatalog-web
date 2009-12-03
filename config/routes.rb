@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => "main", :action => "dashboard"
   map.dashboard "dashboard", :controller => "main", :action => "dashboard"
   map.about "about", :controller => "main", :action => 'about'
+  map.blog "blog", :controller => "main", :action => "blog"
   
   map.signout "signout", :controller => "user_sessions", :action => "destroy"
   map.signin "signin", :controller => "user_sessions", :action => "new"
@@ -46,6 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   map.source_notes "data/:slug/notes", :controller => "data", :action => "notes" 
   map.source_new_note "data/:slug/notes/new", :controller => "data", :action => "new_note"
   map.source_update_note "data/:slug/notes/:note_id", :controller => "data", :action => "update_note"
+
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
