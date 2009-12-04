@@ -56,13 +56,15 @@ div#nav li a{ text-indent: -9999em; height: 46px; display: block;}
 
 li#nav_dashboard a{ width: 123px; background: url(/images/nav_dashboard.png) top left no-repeat;}
 li#nav_dashboard a:hover, li#nav_dashboard a.active { width: 123px; background: url(/images/nav_dashboard.png) bottom left no-repeat;}
-li#nav_browse, li#nav_add, li#nav_suggest { margin-left: -2px;}
+li#nav_browse, li#nav_add, li#nav_suggest, li#nav_blog { margin-left: -2px;}
 li#nav_browse a{ width: 134px; background: url(/images/nav_browse.png) top left no-repeat;}
 li#nav_browse a:hover, li#nav_browse a.active { width: 134px; background: url(/images/nav_browse.png) bottom left no-repeat;}
 li#nav_add a{ width: 107px; background: url(/images/nav_add.png) top left no-repeat;}
 li#nav_add a:hover, li#nav_add a.active { width: 107px; background: url(/images/nav_add.png) bottom left no-repeat;}
 li#nav_suggest a{ width: 134px; background: url(/images/nav_suggest.png) top left no-repeat;}
 li#nav_suggest a:hover, li#nav_suggest a.active { width: 134px; background: url(/images/nav_suggest.png) bottom left no-repeat;}
+li#nav_blog a{ width: 78px; background: url(/images/nav_blog.png) top left no-repeat;}
+li#nav_blog a:hover, li#nav_blog a.active { width: 78px; background: url(/images/nav_blog.png) bottom left no-repeat;}
 
 /*columns*/
 
