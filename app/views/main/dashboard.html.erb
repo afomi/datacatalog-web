@@ -46,7 +46,7 @@
       <h3>Recent Comments</h3>
       <% if @recent_comments.length > 0 -%>
       <dl>
-        <% @recent_comments[0..4].each do |comment| -%>
+        <% @recent_comments.take(5) do |comment| -%>
         <dt><%= link_to comment.source_title, source_path(comment.source_slug) %></dt>
         <dd><%= truncate(comment.text, :length => 100) %></dd>
         <dd class="commentDate">Posted on <%= comment.created_at.to_s(:mdy_slashed) %></dd>

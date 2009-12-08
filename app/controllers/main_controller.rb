@@ -11,7 +11,7 @@ class MainController < ApplicationController
 
       @all_ratings = DataCatalog::Rating.all(:user_id => current_user.api_id)
       @recent_ratings = []
-      @all_ratings[0..5].each do |rating|
+      @all_ratings.take(5) do |rating|
         if rating.kind == "source"
           source = DataCatalog::Source.get(rating.source_id)
           rating.source_title = source.title
