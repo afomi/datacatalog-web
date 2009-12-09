@@ -1,10 +1,8 @@
 class BrowseController < ApplicationController
   
   def index
-
     @sources = DataCatalog::Source.all
-    @page = params[:page].to_i || 1
-
+    @page = params[:page].nil? ? 1 : params[:page].to_i
   end
   
 end
