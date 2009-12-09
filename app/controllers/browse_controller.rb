@@ -3,7 +3,7 @@ class BrowseController < ApplicationController
   def index
 
     @sources = DataCatalog::Source.all
-    @page = params[:page] || 1
+    @page = params[:page].to_i || 1
 
   end
   
