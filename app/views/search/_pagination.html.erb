@@ -1,0 +1,11 @@
+<ul class="pagination">
+  <li>
+  <% if (@page.to_i - 1) > 0 -%>
+    <%= link_to "&laquo; Previous", "?page=#{@page.to_i - 1}" %>
+  <% end -%>
+  <%= @page %>
+  <% if (@page.to_i + 1) <= @sources.page_count -%>
+    <%= link_to "Next &raquo;", "?page=#{@page.to_i + 1}" %>
+  <% end -%>
+  </li>
+</ul>

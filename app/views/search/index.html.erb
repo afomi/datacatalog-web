@@ -16,20 +16,11 @@
     <div class="clear"></div>  
   </div>
   
-  <% if @sources.empty? -%>
+  <% if @sources.length == 0 -%>
   <p>No results found! Try searching again.</p>
   <% else -%>
   <div class="tableNav">
-    <ul class="pagination">
-      <li><a href="#">1</a></li>
-    </ul>
-    <div class="perPage">
-      <dl>
-        <dt>Results Per Page:</dt>
-        <dd class="first"><a href="#">50</a></dd>
-        <dd><a href="#">100</a></dd>
-      </dl>
-    </div>
+    <%= render 'pagination' %>
   </div>
   <table id="browseTable">
     <thead>
@@ -41,20 +32,20 @@
       </tr>
     </thead>
     <tbody>
-      <% @sources.each do |source| -%>
+      <% @sources.page(@page).each do |source| -%>
       
       <tr class="<%= cycle 'even','odd' %>">
         <td class="dataContent left">
           <%= link_to source.title, source_path(source.slug), :class => "dataName" %>
-          <button title="Favorite this data" class="iconFavorite" type="submit">
+          <!--<button title="Favorite this data" class="iconFavorite" type="submit">
             <span>Favorite this data</span>
-          </button>
-          <p><%= truncate(source.description, :length => 350) %></p>
+          </button>-->
+          <p class="clear"><%= truncate(source.description, :length => 350) %></p>
         </td>
         <td class="center">
-          <%= render 'shared/star_rating', :rating => source.rating_stats.average %>
+          <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
         </td>
-        <td class="center"><a href="#"><%= DataCatalog::Organization.get(source.organization_id).name %></a></td>
+        <td class="center"><%= DataCatalog::Organization.get(source.organization_id).name %></td>
         <td class="right">
           <!--<ul class="downloadFormats">
             <li>
@@ -67,21 +58,20 @@
             </li>
           </ul>-->
         </td>
-      </tr>
+      </tr>	
+  
       <% end # @sources.each -%>
     </tbody>
-  </table>
+  </table>    
   <div class="tableNav">
-    <ul class="pagination">
-      <li><a href="#">1</a></li>
-    </ul>
-    <div class="perPage">
+    <%= render 'pagination' %>
+    <!--><div class="perPage">
       <dl>
         <dt>Results Per Page:</dt>
-        <dd class="first"><a href="#">50</a></dd>
+        <dd class="first">20</dd>
         <dd><a href="#">100</a></dd>
       </dl>
-    </div>
+    </div>-->
   </div>
   
   <% end -%>
