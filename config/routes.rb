@@ -42,12 +42,18 @@ ActionController::Routing::Routes.draw do |map|
   map.comment_rating "data/:slug/comment_rating/:comment_id", :controller => "data", :action => "comment_rating" 
   map.source_favorite "data/:slug/favorite", :controller => "data", :action => "favorite" 
   map.source_unfavorite "data/:slug/unfavorite", :controller => "data", :action => "unfavorite" 
+
   map.source_usages "data/:slug/usages", :controller => "data", :action => "usages" 
+
   map.source_docs "data/:slug/docs", :controller => "data", :action => "docs" 
+  map.source_edit_docs "data/:slug/docs/edit", :controller => "data", :action => "edit_docs" 
+  map.source_create_doc "data/:slug/docs/create", :controller => "data", :action => "create_doc"
+  map.source_update_doc "data/:slug/docs/:id/update", :controller => "data", :action => "update_doc"   
+  map.source_show_doc "data/:slug/docs/:id", :controller => "data", :action => "show_doc"  
+  
   map.source_notes "data/:slug/notes", :controller => "data", :action => "notes" 
   map.source_new_note "data/:slug/notes/new", :controller => "data", :action => "new_note"
   map.source_update_note "data/:slug/notes/:note_id", :controller => "data", :action => "update_note"
-
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

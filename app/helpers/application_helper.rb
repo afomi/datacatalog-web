@@ -52,6 +52,10 @@ module ApplicationHelper
   def markdownize(text)
     RDiscount.new(text).to_html
   end
+  
+  def markdown_instructions
+    "Use <a href=\"http://www.squarespace.com/display/ShowHelp?section=Markdown\" target=\"_blank\">Markdown</a> for formatting."
+  end
 
   def star_class(rating)
     case rating
@@ -74,4 +78,6 @@ module ApplicationHelper
     return "0" unless average
     return (total.to_i/average.to_i).to_i.to_s
   end
+  
+
 end

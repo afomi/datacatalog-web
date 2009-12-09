@@ -8,9 +8,23 @@
 
 <div id="ltColumn">
 
+<% if @doc -%>
+  <div class="markdowned">
+    <%= markdownize @doc.text %>
+  </div>
+  <hr />
+  <h3>Have your own input?</h3>
+  <p>Help us <%= link_to "edit and improve the documentation", source_edit_docs_path(@source.slug) %>.</p>
+<% else -%>
+  <p>This data source doesn't have any documentation yet.</p>
+  <p>Start <%= link_to "writing it", source_edit_docs_path(@source.slug) %>.</p>
+<% end -%>
+
 </div> 
+
 <div id="rtColumnWrapper">
   <div id="rtColumn">
+    <%= render 'sidebar_docs' %>
     <%= render 'sidebar_favorites' %>
     <%= render 'sidebar_notes' %>
   </div>

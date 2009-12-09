@@ -1,16 +1,8 @@
 class DataController < ApplicationController
-  
-  before_filter :set_source
+  before_filter :require_user, :except => [:show, :docs, :show_doc, :usages]
+  before_filter :set_source, :set_favorite
   
   def show
-    
-    @is_favorite = false
-    if current_user
-      current_user.api_user.favorites.each do |source|
-        @is_favorite = true if source.slug == params[:slug]
-      end
-    end
-    
     @comment = DataCatalog::Comment.new
     @comments = []
     @source.comments.each do |comment|
@@ -24,7 +16,6 @@ class DataController < ApplicationController
         @comments << comment
       end
     end
-    
     @parent_id = params[:parent_id]
     @reports_problem = params[:reports_problem]
   end
@@ -100,12 +91,47 @@ class DataController < ApplicationController
     redirect_to source_notes_path(@source.slug)
   end
   
-  def new_document
-    
+  def docs
+    @docs = DataCatalog::Document.all(:source_id => @source.id)
+    @doc = @docs.first
+    @docs.each do |doc|
+      doc.user = User.find_by_api_id(doc.user_id)
+    end
   end
   
-  def update_document
-    
+  def show_doc
+    @docs = DataCatalog::Document.all(:source_id => @source.id)
+    @doc = DataCatalog::Document.get(params[:id])
+    @docs.each do |doc|
+      doc.user = User.find_by_api_id(doc.user_id)
+    end
+    render 'docs'
+  end
+  
+  def edit_docs
+    @docs = DataCatalog::Document.all(:source_id => @source.id)
+    @doc = @docs.first
+    if @doc.nil?
+      @doc = DataCatalog::Document.new
+      @doc.is_new = true
+    end
+    @doc
+  end
+  
+  def create_doc
+    DataCatalog.with_key(current_user.api_key) do
+      @document = DataCatalog::Document.create(:source_id => @source.id, :text => params[:data_catalog_document][:text])
+    end
+    flash[:notice] = "Updated documentation."
+    redirect_to source_docs_path(@source.slug)
+  end
+  
+  def update_doc
+    DataCatalog.with_key(current_user.api_key) do
+      @document = DataCatalog::Document.update(params[:id], :text => params[:data_catalog_document][:text])
+    end
+    flash[:notice] = "Updated documentation."
+    redirect_to source_docs_path(@source.slug)    
   end
   
   private
@@ -124,6 +150,15 @@ class DataController < ApplicationController
   
   def set_source
     @source = DataCatalog::Source.first(:slug => params[:slug])
+  end
+  
+  def set_favorite
+    @is_favorite = false
+    if current_user
+      current_user.api_user.favorites.each do |source|
+        @is_favorite = true if source.slug == params[:slug]
+      end
+    end
   end
   
 end

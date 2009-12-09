@@ -1,0 +1,26 @@
+<% content_for :title do %>
+  <%= @source.title %> - Community Documentation
+<% end %>
+
+<% content_for :body_class do %>home<% end %>
+
+<div id="ltColumn">
+
+<p><%= markdown_instructions %></p>
+<% form_for @doc, :url => (@doc.is_new ? source_create_doc_path(@source.slug) : source_update_doc_path(@source.slug, @doc.id)) do |f| -%>
+  <%= f.text_area :text, :class => "full mono" %>
+  <button class="update" id="user_submit" type="submit" value="Update" name="commit">
+    <span>Update</span>
+  </button>
+<% end -%>
+<p><br /><%= link_to "&laquo; Go Back", source_docs_path(@source.slug) %></p>
+
+</div> 
+
+<div id="rtColumnWrapper">
+  <div id="rtColumn">
+    <%= render 'sidebar_docs' %>
+    <%= render 'sidebar_favorites' %>
+    <%= render 'sidebar_notes' %>
+  </div>
+</div>
