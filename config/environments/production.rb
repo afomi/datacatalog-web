@@ -23,6 +23,16 @@ config.action_view.cache_template_loading            = true
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
-
+config.action_mailer.delivery_method = :smtp
+mail_settings = YAML.load_file("../mail_settings.yml")
+s = mail_settings["production"]
+config.action_mailer.smtp_settings = {
+  :address      => s["address"],
+  :port         => s["port"],
+  :domain       => s["port"],
+  :authentication => :login,
+  :user_name    => s["user_name"],
+  :password     => s["password"]
+}
 # Enable threaded mode
 # config.threadsafe!

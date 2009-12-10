@@ -1,0 +1,6 @@
+production:
+  address: smtp.mydomain.com
+  port: 25
+  domain: mydomain.com
+  user_name: myuser
+  password: mypass

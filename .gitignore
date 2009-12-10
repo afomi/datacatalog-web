@@ -9,3 +9,4 @@ doc/api
 doc/app
 config/database.yml
 config/api.yml
+config/mail_settings.yml
