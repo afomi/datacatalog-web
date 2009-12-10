@@ -64,6 +64,18 @@ namespace :demo do
                                :description => "For every day Congress is in session, Capitol Words visualizes the most frequently used words in the Congressional Record, giving you an at-a-glance view of which issues lawmakers address on a daily, weekly, monthly and yearly basis. Capitol Words lets you see what are the most popular words spoken by lawmakers on the House and Senate floor."
                                )
 
+    sld = DataCatalog::Source.create(:title => "Sunlight Labs Legislator Data", :url => 'http://github.com/sunlightlabs/apidata/tree/master/legislators/', 
+                               :source_type => "dataset", :organization_id => sunlight.id,
+                               :description => "Repository for collaborative editing of Sunlight Labs API data."
+                               )
+                               
+    csv = DataCatalog::Download.create(:url => "http://github.com/sunlightlabs/apidata/blob/master/legislators/legislators.csv",
+                                       :format => "CSV", :source_id => sld.id,
+                                       :preview => %{"title","firstname","middlename","lastname","name_suffix","nickname","party","state","district","in_office","gender","phone","fax","website","webform","email","congress_office","bioguide_id","votesmart_id","fec_id","govtrack_id","crp_id","eventful_id","twitter_id","congresspedia_url","youtube_url","official_rss","senate_class","birthdate"
+"Rep","Neil","","Abercrombie","","","D","HI","1","1","M","202-225-2726","202-225-4580","http://www.house.gov/abercrombie/","http://www.house.gov/abercrombie/e_form.shtml","Neil.Abercrombie@mail.house.gov","1502 Longworth House Office Building","A000014","26827","H6HI01121","400001","N00007665","P0-001-000016130-0","neilabercrombie","http://www.opencongress.org/wiki/Neil_Abercrombie","http://www.youtube.com/hawaiirep1","http://www.house.gov/apps/list/press/hi01_abercrombie/RSS.xml","","06/26/1938"
+"Rep","Gary","L.","Ackerman","","","D","NY","5","1","M","202-225-2601","202-225-1589","http://ackerman.house.gov/index.html","http://www.house.gov/writerep","","2243 Rayburn House Office Building","A000022","26970","H4NY07011","400003","N00001143","P0-001-000016131-9","","http://www.opencongress.org/wiki/Gary_Ackerman","http://www.youtube.com/RepAckerman","http://www.house.gov/apps/list/press/ny05_ackerman/RSS.xml","","11/19/1942"
+"Rep","Robert","B.","Aderholt","","","R","AL","4","1","M","202-225-4876","202-225-5587","http://aderholt.house.gov/index.html","http://aderholt.house.gov/?sectionid=195&sectiontree=195","","1433 Longworth House Office Building","A000055","441","H6AL04098","400004","N00003028","P0-001-000016132-8","Robert_Aderholt","http://www.opencongress.org/wiki/Robert_Aderholt","http://www.youtube.com/RobertAderholt","http://aderholt.house.gov/","","07/22/1965"})
+
     # comments
     DataCatalog.with_key(louis.api_key) do
       c1 = DataCatalog::Comment.create(:source_id => sl.id, :text => "This is a great API!")
@@ -83,8 +95,9 @@ namespace :demo do
           end
         end
       end
-
     end
+    
+    # download
 
   end
   

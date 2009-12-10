@@ -365,7 +365,7 @@ div#ltColumn form li, div#rtColumn form li, ul#openID_signup li { margin-bottom:
 form#addData input, form#addData textarea { width: 250px;}
 div#ltColumn input, div#ltColumn textarea{ width: 370px;}
 div#ltColumn input.full, div#ltColumn textarea.full{ width: 530px;}
-textarea.mono{ font: 125% "Inconsolata", "Consolas", "Courier New", "Courier", monospace; }
+.mono { font: 125% "Inconsolata", "Consolas", "Courier New", "Courier", monospace; }
 
 div#ltColumn input[checkbox] { text-align: left; }
 div#ltColumn input#source { float: left; margin-right: 15px; width: 250px;}
@@ -396,6 +396,8 @@ form#advancedSearch input.checkbox { float: left; margin-right: 10px; margin-top
 div.formModule { float: left; }
 div.formModule li { margin-bottom: 5px;}
 div.scroll { overflow: auto; width: 440px; height: 80px; padding: 5px; border:2px solid #E2E7E7; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
+div.code{ white-space: pre; width: 530px;}
+
 form#advancedSearch input#searchInput{ width: 280px;}
 form.generateAPI { margin-top: 30px;}
 

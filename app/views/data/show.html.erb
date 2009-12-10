@@ -16,8 +16,7 @@
         <dl>
           
           <%= source_field :attribute => :organization_id, :label => "Organization",
-                           :value => DataCatalog::Organization.get(@source.organization_id).name, 
-                           :url => "#" %>
+                           :value => DataCatalog::Organization.get(@source.organization_id).name %>
           
           <%= source_field :attribute => :categories, :collection => true, :label => "Category",
                            :value => "", :url => "#"%>
@@ -34,7 +33,7 @@
           <%= source_field :attribute => :catalog_name, :label => "Original Catalog", 
                            :value => @source.catalog_name, :url => @source.catalog_url %>
                            
-          <%= source_field :attribute => :released, :label => "Released", 
+          <%= source_field :attribute => :released2, :label => "Released", 
                            :value => @source.released.to_s %>
                            
           <%= source_field :attribute => :period_start, :label => "Period", 
@@ -86,29 +85,27 @@
       <div class="clear"></div> 
     </div> 
 
+    <% unless @source.downloads.empty? -%>
     <div id="downloadFormats">
       <h3>Available Formats for Download</h3>
       <ul>
+        <% @source.downloads.each do |download| -%>
         <li>
-          <a href="#">XML</a>
-          <span>(15MB)</span>
+          <a href="<%= download.url %>"><%= download.format %></a>
         </li>
-        <li>
-          <a href="#">CSV</a>
-          <span>(15MB)</span>
-        </li>
-        <li>
-          <a href="#">XLS</a>
-          <span>(15MB)</span>
-        </li>
+        <% end -%>
       </ul>   
       <div class="clear"></div> 
-    </div> 
+    </div>
+    <% end -%>
   </div>
   
-  <!--><div class="module">
-    <h3>Example of Data</h3>
-  </div>-->
+  <% unless @source.downloads.empty? || @source.downloads.first.nil? || @source.downloads.first.preview.nil?  -%>
+  <div class="module">
+    <h3>Preview of Data</h3>
+    <div class="scroll mono code"><%= @source.downloads.first.preview %></div>
+  </div>
+  <% end -%>
 </div> 
 <div id="rtColumnWrapper">
   <div id="rtColumn">
