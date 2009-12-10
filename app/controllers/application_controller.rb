@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user_session, :current_user
   filter_parameter_logging :password, :password_confirmation
-  before_filter :show_title, :mailer_set_url_options
+  before_filter :show_title, :mailer_set_url_options, :set_analytics
 
   unless ["development", "test"].include?(Rails.env)
     rescue_from ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid, ActionController::RoutingError, 
@@ -25,6 +25,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  
+  def set_analytics
+    analytics = YAML.load_file(Rails.root.to_s + "/config/analytics.yml")
+    @analytics_key = analytics["key"]
+  end
   
   def show_title
     @show_title = true
