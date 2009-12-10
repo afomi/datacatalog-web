@@ -41,12 +41,6 @@
 
           <%= source_field :attribute => :frequency, :label => "Frequency", 
                            :value => @source.frequency.to_s.titlecase %>
-
-          <% if @source.frequency -%>
-          <dt>Frequency</dt>
-          <dd><%= @source.frequency %></dd>
-          <% end -%>
-          
         </dl>
         
         <% unless @source.custom.empty? -%>
@@ -91,7 +85,7 @@
       <ul>
         <% @source.downloads.each do |download| -%>
         <li>
-          <a href="<%= download.url %>"><%= download.format %></a>
+          <a href="<%= download.url %>"><%= download.format.upcase %></a>
         </li>
         <% end -%>
       </ul>   
