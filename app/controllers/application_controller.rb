@@ -11,11 +11,11 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404(e)
-    render :template => 'home/notfound', :status => "404 Not Found"
+    render :template => 'main/notfound', :status => "404 Not Found"
   end
   
   def render_500(e)
-    render :template => 'home/internal_error', :status => "500 Error"
+    render :template => 'main/internal_error', :status => "500 Error"
   end
   
   protected
