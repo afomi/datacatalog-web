@@ -1,11 +1,20 @@
 <ul class="pagination">
   <li>
-  <% if (@page.to_i - 1) > 0 -%>
-    <%= link_to "&laquo; Previous", "?page=#{@page.to_i - 1}" %>
+  <% if @page > 1 -%>
+    <%= link_to "&laquo; Previous", "?page=#{@page - 1}" %>
   <% end -%>
-  <%= @page %>
-  <% if (@page.to_i + 1) <= @sources.page_count -%>
-    <%= link_to "Next &raquo;", "?page=#{@page.to_i + 1}" %>
+  <% @pages.each do |p| %>
+    <% if @page == p[:number]  %>
+      <%= p[:number] %>
+    <% elsif [1, @sources.page_count].include?(p[:number]) ||
+      (@page - 2 .. @page + 2) === p[:number] %>
+      <%= link_to p[:number], p[:path] %>
+    <% else %>
+      &middot;
+    <% end %>
+  <% end -%>
+  <% if @page < @sources.page_count -%>
+    <%= link_to "Next &raquo;", "?page=#{@page + 1}" %>
   <% end -%>
   </li>
 </ul>
