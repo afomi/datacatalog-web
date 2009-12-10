@@ -24,7 +24,7 @@ config.action_view.cache_template_loading            = true
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
 config.action_mailer.delivery_method = :smtp
-mail_settings = YAML.load_file("../mail_settings.yml")
+mail_settings = YAML.load_file(Rails.root.to_s + "/config/mail_settings.yml")
 s = mail_settings["production"]
 config.action_mailer.smtp_settings = {
   :address      => s["address"],
