@@ -13,7 +13,7 @@ class Notifier < ActionMailer::Base
     from          "National Data Catalog <support@nationaldatacatalog.com>"
     recipients    user.email
     sent_on       Time.now
-    body          :profile_url => profile_url
+    body          :profile_url => profile_url, :api_key => user.api_key
   end
 
 end
