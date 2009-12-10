@@ -3,7 +3,11 @@ class Admin::SourcesController < AdminController
   before_filter :get_organizations
   
   def index
-    @sources = DataCatalog::Source.all.sort { |a,b| a.title <=> b.title }
+    @sources = DataCatalog::Source.all
+    @page = params[:page].nil? ? 1 : params[:page].to_i
+    @pages = 1.upto(@sources.page_count).map do |i|
+      { :number => i, :path => "?page=#{i}" }
+    end
   end
   
   def edit

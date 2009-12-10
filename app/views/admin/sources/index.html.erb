@@ -9,17 +9,20 @@
 <% end %>  
 
 <div id="ltColumn">
+  <div class="tableNav">
+    <%= render 'browse/pagination' %>
+  </div>
   <table id="dataSources">
     <thead>
       <tr id="titles">
-        <th class="left sort">Title</th>
-        <th class="left sort">Added On</th>
+        <th class="left">Title</th>
+        <th class="left">Added On</th>
         <!--<th class="center">Notes</th>
         <th class="right sort">Flagged (30)</th>-->
       </tr>  
     </thead>  
     <tbody>
-      <% @sources.each do |source| -%>
+      <% @sources.page(@page).each do |source| -%>
       <tr class="<%= cycle 'even','odd'%>">
         <td class="left">
           <%= link_to source.title, edit_admin_source_path(source.slug) %>
