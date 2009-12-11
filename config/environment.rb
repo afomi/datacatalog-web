@@ -46,10 +46,17 @@ Rails::Initializer.run do |config|
   # Run "rake -D time" for a list of tasks for finding time zone names.
   config.time_zone = 'UTC'
 
-
   config.action_controller.session = {
     :session_key => 'natdatcat',
     :secret      => 'f3f57b71ef9345ffccd0c4e841d8e74bb2e7d2ef692a506aa6c2a3c29d584a55dd18426ffc04610be49956a51af'
   }
+  
+  config.after_initialize do
+    puts "Loading organizations for admin interface..."
+    orgs = DataCatalog::Organization.all.map { |o| [o.name, o.id] }
+    sorted_orgs = orgs.sort_by { |arr| arr.first }
+    APP_CONFIG = {}
+    APP_CONFIG[:organizations] = sorted_orgs
+  end
   
 end

@@ -1,6 +1,6 @@
 class Admin::SourcesController < AdminController
   
-  before_filter :get_organizations
+  before_filter :get_organizations, :except => :index
   
   def index
     @sources = DataCatalog::Source.all
@@ -45,11 +45,10 @@ class Admin::SourcesController < AdminController
     end
   end
   
-  private
+  protected
   
   def get_organizations
-    orgs = DataCatalog::Organization.all.collect { |o| [o.name, o.id] }
-    @organizations = orgs.sort_by { |arr| arr.first }
+    @organizations = APP_CONFIG[:organizations]
   end
   
 end
