@@ -397,6 +397,9 @@ div.formModule { float: left; }
 div.formModule li { margin-bottom: 5px;}
 div.scroll { overflow: auto; width: 440px; height: 80px; padding: 5px; border:2px solid #E2E7E7; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
 div.code{ white-space: pre; width: 530px;}
+div.blog_post {margin-bottom: 40px;}
+
+img.detailimage { float:left; margin-right:20px; }
 
 form#advancedSearch input#searchInput{ width: 280px;}
 form.generateAPI { margin-top: 30px;}

@@ -7,13 +7,12 @@
 
 <div id="ltColumn">
 <% @entries.each do |entry| %>
-
-  <h3><%= entry.title %></h3>
-  <h4><%= entry.published.to_s(:mdy_slashed) %></h4>
-
-  <%= entry.summary %>
-  <p><a href="<%= entry.url %>#comments">Comments</a></p>
-
+  <div class="blog_post">
+    <h3><%= entry.title %></h3>
+    <h4><%= entry.published.to_s(:mdy_slashed) %></h4>
+    <%= entry.summary %>
+    <h4><a href="<%= entry.url %>#comments">Comments &raquo;</a></h4>
+  </div>
 <% end -%>
 </div> 
 <div id="rtColumnWrapper">
