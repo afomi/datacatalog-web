@@ -78,6 +78,5 @@ module ApplicationHelper
     return "0" unless average
     return (total.to_i/average.to_i).to_i.to_s
   end
-  
 
 end

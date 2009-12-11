@@ -38,5 +38,5 @@ class Admin::OrganizationsController < AdminController
       render :show
     end
   end
-  
+
 end
