@@ -1,6 +1,6 @@
 class Admin::SourcesController < AdminController
   
-  before_filter :get_organizations, :except => :index
+  before_filter :get_organizations
   
   def index
     @sources = DataCatalog::Source.all
@@ -45,7 +45,7 @@ class Admin::SourcesController < AdminController
   protected
   
   def get_organizations
-    @organizations = APP_CONFIG[:organizations]
+    @organizations = CACHE.organizations
   end
   
 end

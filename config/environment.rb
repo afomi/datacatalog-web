@@ -7,7 +7,6 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
   
@@ -51,13 +50,9 @@ Rails::Initializer.run do |config|
     :session_key => 'natdatcat',
     :secret      => 'f3f57b71ef9345ffccd0c4e841d8e74bb2e7d2ef692a506aa6c2a3c29d584a55dd18426ffc04610be49956a51af'
   }
-  
+
   config.after_initialize do
-    puts "Loading organizations for admin interface..."
-    orgs = DataCatalog::Organization.all.map { |o| [o.name, o.id] }
-    sorted_orgs = orgs.sort_by { |arr| arr.first }
-    APP_CONFIG = {}
-    APP_CONFIG[:organizations] = sorted_orgs
+    CACHE = Cache.new
   end
   
 end
