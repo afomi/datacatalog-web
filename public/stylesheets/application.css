@@ -384,9 +384,9 @@ form#sidebarSearch select { display: block; margin-bottom: 5px;}
 form#sidebarSearch li#li_submit { border-bottom: 0px; margin-top: 40px;}
 form#sidebarSearch input { width: 136px;}
 
-form#new_user_session li.signIn_cues label { font-size: 95%; font-style: oblique; float: none; text-transform: none; color: #706A67; }
-form#new_user_session li.signIn_cues input.checkbox { float: left; margin: 2px 10px 0 0 ;}
-form#new_user_session li.signIn_cues { margin-left: 150px; }
+form#new_user_session li.signIn_cues label, form#new_user li.signIn_cues label { font-size: 95%; font-style: oblique; float: none; text-transform: none; color: #706A67; width: 400px; }
+form#new_user_session li.signIn_cues input.checkbox, form#new_user li.signIn_cues input.checkbox { float: left; margin: 2px 10px 0 0 ;}
+form#new_user_session li.signIn_cues, form#new_user li.signIn_cues { margin-left: 150px; }
 
 a#additionalData_information { margin-top: 15px; display: block;}
 

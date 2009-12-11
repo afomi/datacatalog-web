@@ -17,3 +17,8 @@
     <%= form.password_field :password_confirmation %>
 </li>
 <% end -%>
+
+<li class="signIn_cues">  
+  <%= form.check_box :list_opt_in, {:class => "checkbox"} %>
+  <%= form.label :remember_me, "Yes, email me updates from the Sunlight Foundation.", {:class => "inline"}  %>
+</li> 
