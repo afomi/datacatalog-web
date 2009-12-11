@@ -4,13 +4,12 @@
     <%= link_to "&laquo; Previous", "?page=#{@page - 1}" %>
   <% end -%>
   <% @pages.each do |p| %>
-    <% if @page == p[:number]  %>
+    <% if p.nil? %>
+      &middot;&middot;&middot;
+    <% elsif @page == p[:number]  %>
       <%= p[:number] %>
-    <% elsif [1, @sources.page_count].include?(p[:number]) ||
-      (@page - 2 .. @page + 2) === p[:number] %>
-      <%= link_to p[:number], p[:path] %>
     <% else %>
-      &middot;
+      <%= link_to p[:number], p[:path] %>
     <% end %>
   <% end -%>
   <% if @page < @sources.page_count -%>
