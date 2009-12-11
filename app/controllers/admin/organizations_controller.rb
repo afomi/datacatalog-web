@@ -1,7 +1,8 @@
 class Admin::OrganizationsController < AdminController
   
   def index
-    @organizations = DataCatalog::Organization.all.sort { |a,b| a.name <=> b.name }
+    @organizations = DataCatalog::Organization.all
+    @pages = paginate(@organizations)
   end
   
   def show
