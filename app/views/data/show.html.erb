@@ -86,6 +86,9 @@
         <% @source.downloads.each do |download| -%>
         <li>
           <a href="<%= download.url %>"><%= download.format.upcase %></a>
+          <% unless download['size'].blank? %>
+            <span>(<%= download['size'] %>)</span>
+          <% end %>
         </li>
         <% end -%>
       </ul>   
