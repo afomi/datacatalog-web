@@ -6,6 +6,7 @@ class Cache
 
   LABELS = %w(
     organizations
+    active_organizations
   )
   
   DATA_LOADING = [['Data is loading...', 0]]
@@ -39,6 +40,9 @@ class Cache
     when :organizations
       puts "Loading all organizations..."
       DataCatalog::Organization.all
+    when :active_organizations
+      puts "Loading organizations with at least one source..."
+      DataCatalog::Organization.all('source_count > 0')
     else
       raise RuntimeError, "label not found : #{label}"
     end

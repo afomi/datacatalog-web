@@ -9,12 +9,7 @@
     <ul>
       <li>
         <label for="organization_list">Agency</label>
-        <select id="organization_list">
-          <option value="all">All Agencies</option>
-          <option value="1">Agency 1</option>
-          <option value="2">Agency 2</option>
-          <option value="3">Agency 3</option>
-        </select>
+        <%= select_tag 'organization_list', options_for_select(@organizations) %>
       </li>
       <li>
         <label for="category_list">Category</label>

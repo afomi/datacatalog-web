@@ -19,7 +19,7 @@ Rails::Initializer.run do |config|
   config.gem 'feedzirra', :version => '>= 0.0.20'
 
   config.gem 'luigi-httparty', :lib => 'httparty', :version => '>= 0.4.4'
-  config.gem 'datacatalog', :version => '>= 0.4.4'
+  config.gem 'datacatalog', :version => '>= 0.4.5'
 
   config.gem "rspec", :lib => false, :version => ">= 1.2.0" 
   config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
