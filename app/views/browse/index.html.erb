@@ -12,30 +12,36 @@
         <%= select_tag 'organization_list', options_for_select(@organizations) %>
       </li>
       <li>
-        <label for="category_list">Category</label>
-        <select id="category_list">
-          <option value="all">All Categories</option>
-          <option value="1">Federal</option>
-          <option value="2">State</option>
-          <option value="3">Municipal</option>
-        </select>
-      </li>
-      <li>
         <label for="format_list">Format</label>
         <select id="format_list">
-          <option value="all">All Formats</option>
+          <option value="all">All</option>
           <option value="1">XML</option>
           <option value="2">CSV</option>
           <option value="3">JSON</option>
         </select>
       </li>
       <li>
-        <label for="state_list">State</label>
-        <select id="state_list">
-          <option value="all">All States</option>
-          <option value="1">State 1</option>
-          <option value="2">State 2</option>
-          <option value="3">State 3</option>
+        <label for="source_type_list">Source Type</label>
+        <select id="source_type_list">
+          <option value="all">All</option>
+          <option value="dataset">Dataset</option>
+          <option value="api">API</option>
+        </select>
+      </li>
+      <li>
+        <label for="release_year_list">Release Year</label>
+        <select id="release_year_list">
+          <option value="all">All</option>
+          <option value="2000">2000</option>
+          <option value="2001">2001</option>
+          <option value="2002">2002</option>
+          <option value="2003">2003</option>
+          <option value="2004">2004</option>
+          <option value="2005">2005</option>
+          <option value="2006">2006</option>
+          <option value="2007">2007</option>
+          <option value="2008">2008</option>
+          <option value="2009">2009</option>
         </select>
       </li>
       <li id="submit">
