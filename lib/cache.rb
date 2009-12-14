@@ -10,17 +10,16 @@ class Cache
   )
   
   def get(label, cache_invalid_after=3600)
-    cache = load_from_file(label)
-    if !cache || cache_expired?(label)
-      run_unless_already_queued(label)
-    end
-    cache ? cache : []
+    run_unless_already_queued(label) if cache_invalid?(label)
+    load_from_file(label)
   end
   
   protected
   
-  def cache_expired?(label, cache_life=3600)
-    modified_at = File.mtime(filename(label))
+  def cache_invalid?(label, cache_life=3600)
+    f_name = filename(label)
+    return true unless File.exist?(f_name)
+    modified_at = File.mtime(f_name)
     (Time.now - modified_at) > cache_life
   end
   

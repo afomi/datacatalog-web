@@ -10,10 +10,10 @@ class BrowseController < ApplicationController
   
   def get_organizations
     orgs = CACHE.get(:active_organizations)
-    if orgs.empty?
-      [['Data is loading...', 0]]
-    else
+    if orgs
       [['All', 'all']].concat(orgs)
+    else
+      [['Data is loading...', 0]]
     end
   end
   
