@@ -370,6 +370,7 @@ form#addData input, form#addData textarea { width: 250px;}
 div#ltColumn input, div#ltColumn textarea{ width: 370px;}
 div#ltColumn input.full, div#ltColumn textarea.full{ width: 530px;}
 .mono { font: 125% "Inconsolata", "Consolas", "Courier New", "Courier", monospace; }
+div#ltColumn select { max-width: 380px; }
 
 div#ltColumn input[checkbox] { text-align: left; }
 div#ltColumn input#source { float: left; margin-right: 15px; width: 250px;}
