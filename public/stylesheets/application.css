@@ -292,6 +292,8 @@ div#commentReport input.checkbox { margin-top: 2px;}
 div#commentReport label#problemLabel { font-weight: bold; margin-top:1px; margin-right: 15px; width: 80px;}
 form#comment { margin-top: 30px;}
 
+div.reports_problem { border: 1px solid #9FE8FF; background-color: #DFF7FF; padding: 5px 10px 5px 10px; }
+
 ul#dataMetaData { margin-bottom: 30px;}
 div#additionalFields input#title { margin-left: 125px;}
 form#addData div#additionalFields label { width: 125px;}

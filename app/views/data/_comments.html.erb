@@ -3,7 +3,7 @@
   <li class="<%= cycle 'odd', 'even', :name => 'comments' %>">
     <div class="commentMetaData">
       <%= gravatar_for comment.user, :class => "userAvatar", :size => 37 %>
-      <span class="commentDate">November 4, 2009</span>
+      <span class="commentDate"><%= Time.parse(comment.created_at).strftime('%b %d, %Y @ %H:%M') %></span>
       <span class="author">by <%= link_to comment.user.display_name, user_path(comment.user) %></span>
     </div>
     <div class="rating">

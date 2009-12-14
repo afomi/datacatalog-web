@@ -121,30 +121,36 @@
   </div>
   <a name="comment_form" id="comment_form"></a>
   <% if current_user -%>
-  <h3 class="withTip">Your Thoughts</h3>
-  <p class="tip">Have some findings to share? Run across something that was missing or broken? Please leave us a comment below.</p>
   
-  <% form_for @comment, :url => source_comment_path(@source.slug), :method => :post, :html => { :id => "comment" } do |f| %>
-    <%= f.hidden_field :parent_id, :value => @parent_id %>
+    <div id="signin_to_comment" class="<%= @reports_problem ? "reports_problem" : "" %>">
+      <h3 class="withTip"><%= @reports_problem ? "Report a Problem" : "Your Thoughts" %></h3>  
+      <p class="tip">Have some findings to share? Run across something that was missing or broken? Please leave us a comment below.</p>
+  
+      <% form_for @comment, :url => source_comment_path(@source.slug), :method => :post, :html => { :id => "comment" } do |f| %>
+        <%= f.hidden_field :parent_id, :value => @parent_id %>
     
-    <%= f.label :comment, "Comment", :id => "commentLabel" %>
-    <%= f.text_area :text, :id => "commentTextarea", :class => "textarea full", :rows => 5, :cols => 32 %>
+        <%= f.label :comment, "Comment", :id => "commentLabel" %>
+        <%= f.text_area :text, :id => "commentTextarea", :class => "textarea full", :rows => 5, :cols => 32 %>
     
-    <div id="commentReport">
-      <label id="problemLabel">This Comment:</label>
-      <label>
-        <input id="comment_reports_problem" class="checkbox" type="checkbox" <%= "checked='checked'" if @reports_problem %> value="1" name="comment[reports_problem]"/>
-        Reports a Problem in the Data
-      </label>
-    </div>
+        <div id="commentReport">
+          <label id="problemLabel">This Comment:</label>
+          <label>
+            <input id="comment_reports_problem" class="checkbox" type="checkbox" <%= "checked='checked'" if @reports_problem %> value="1" name="comment[reports_problem]"/>
+            Reports a Problem in the Data
+          </label>
+        </div>
     
-    <button title="post" class="postComment" type="submit">
-      <span>Post Comment</span>
-    </button>
+        <button title="post" class="postComment" type="submit">
+          <span>Post Comment</span>
+        </button>
+      </div>
+
+    <% end -%>
     
-  <% end %>
   <% else -%>
-  <h3 class="withTip">Sign in to comment</h3>
-  <p class="tip">To leave a comment or report a problem with this data, you must <%= link_to "sign in", signin_url %>. No account yet? <%= link_to "Sign up", signup_url %>.</p>
+  <div id="signin_to_comment" class="<%= @reports_problem ? "reports_problem" : "" %>">
+    <h3 class="withTip"><%= @reports_problem ? "Sign in to report a problem" : "Sign in to comment" %></h3>
+    <p class="tip">To leave a comment or report a problem with this data, you must <%= link_to "sign in", signin_url %>. No account yet? <%= link_to "Sign up", signup_url %>.</p>
+  </div>
   <% end -%>
 </div>        
