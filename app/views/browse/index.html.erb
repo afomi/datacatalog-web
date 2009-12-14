@@ -3,13 +3,13 @@
 <% end %>
 
 <% content_for :body_class do %>browse<% end %>
-  
+
 <div id="column_fullWidth">
-  <!--><div id="filterData">
+  <div id="filterData">
     <ul>
       <li>
-        <label for="id_sources">Agency</label>
-        <select id="id_sources" name="sources">
+        <label for="organization_list">Agency</label>
+        <select id="organization_list">
           <option value="all">All Agencies</option>
           <option value="1">Agency 1</option>
           <option value="2">Agency 2</option>
@@ -17,8 +17,8 @@
         </select>
       </li>
       <li>
-        <label for="id_category">Category</label>
-        <select id="id_categories" name="categories">
+        <label for="category_list">Category</label>
+        <select id="category_list">
           <option value="all">All Categories</option>
           <option value="1">Federal</option>
           <option value="2">State</option>
@@ -26,8 +26,8 @@
         </select>
       </li>
       <li>
-        <label for="id_format">Formats</label>
-        <select id="id_formats" name="formats">
+        <label for="format_list">Format</label>
+        <select id="format_list">
           <option value="all">All Formats</option>
           <option value="1">XML</option>
           <option value="2">CSV</option>
@@ -35,8 +35,8 @@
         </select>
       </li>
       <li>
-        <label for="id_states">States</label>
-        <select id="id_states" name="states">
+        <label for="state_list">State</label>
+        <select id="state_list">
           <option value="all">All States</option>
           <option value="1">State 1</option>
           <option value="2">State 2</option>
@@ -50,7 +50,7 @@
       </li>
     </ul>  
     <div class="clear"></div>  
-  </div>-->
+  </div>
   <div class="tableNav">
     <%= render 'shared/pagination' %>
   </div>
