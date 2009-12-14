@@ -18,7 +18,7 @@ Rails::Initializer.run do |config|
   config.gem 'rdiscount', :version => '>= 1.3.5'
   config.gem 'feedzirra', :version => '>= 0.0.20'
   config.gem 'delayed_job', :version => '>= 1.8.4'
-  
+
   config.gem 'luigi-httparty', :lib => 'httparty', :version => '>= 0.4.4'
   config.gem 'datacatalog', :version => '>= 0.4.5'
 
@@ -30,7 +30,6 @@ Rails::Initializer.run do |config|
   config.gem 'webrat', :version => '>= 0.4.5'
   config.gem 'cucumber', :version => '>= 0.3.94', :source => 'http://gems.github.com'
   config.gem 'bmabey-database_cleaner', :lib => 'database_cleaner', :version => '>= 0.2.2', :source => 'http://gems.github.com'
-  config.gem 'delayed_job', :lib => 'delayed_job'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
