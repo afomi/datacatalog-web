@@ -79,19 +79,20 @@
         </td>
         <td class="center"><%= DataCatalog::Organization.get(source.organization_id).name %></td>
         <td class="right">
-          <!--<ul class="downloadFormats">
+          <% unless source.downloads.empty? -%>
+          <ul class="downloadFormats">
+            <% source.downloads.each do |download| %>
             <li>
-              <a href="#">XML</a>
-              <span>(15MB)</span>
+              <a href="#"><%= download.format.upcase %></a>
+              <% unless download['size'].blank? %>
+                <span>(<%= download['size'] %>)</span>
+              <% end %>
             </li>
-            <li>
-              <a href="#">CSV</a>
-              <span>(15MB)</span>
-            </li>
-          </ul>-->
+            <% end %>
+          </ul>
+          <% end %>
         </td>
-      </tr>	
-  
+      </tr>
       <% end # @sources.each -%>
     </tbody>
   </table>    
