@@ -45,7 +45,7 @@ class Admin::SourcesController < AdminController
   protected
   
   def get_organizations
-    @organizations = CACHE.organizations
+    @organizations = CACHE.get(:organizations)
   end
   
 end
