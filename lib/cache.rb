@@ -9,14 +9,12 @@ class Cache
     active_organizations
   )
   
-  DATA_LOADING = [['Data is loading...', 0]]
-
   def get(label, cache_invalid_after=3600)
     cache = load_from_file(label)
     if !cache || cache_expired?(label)
       run_unless_already_queued(label)
     end
-    cache ? cache : DATA_LOADING
+    cache ? cache : []
   end
   
   protected

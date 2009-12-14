@@ -45,7 +45,12 @@ class Admin::SourcesController < AdminController
   protected
   
   def get_organizations
-    @organizations = CACHE.get(:organizations)
+    orgs = CACHE.get(:organizations)
+    @organizations = if orgs.empty?
+      [['Data is loading...', 0]]
+    else
+      orgs
+    end
   end
   
 end
