@@ -17,7 +17,8 @@ Rails::Initializer.run do |config|
   config.gem 'faker', :version => '>= 0.3.1'
   config.gem 'rdiscount', :version => '>= 1.3.5'
   config.gem 'feedzirra', :version => '>= 0.0.20'
-
+  config.gem 'delayed_job', :version => '>= 1.8.4'
+  
   config.gem 'luigi-httparty', :lib => 'httparty', :version => '>= 0.4.4'
   config.gem 'datacatalog', :version => '>= 0.4.5'
 
