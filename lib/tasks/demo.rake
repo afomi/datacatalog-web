@@ -3,7 +3,7 @@ namespace :demo do
   def clean_slate
 
     DataCatalog::User.all.each do |u|
-      DataCatalog::User.destroy(u.id) unless u.name == "Primary Admin"
+      DataCatalog::User.destroy(u.id) unless u.name =~ /(Primary Admin|Luigi Montanez|David James)/
     end
 
     classes = [DataCatalog::Source, DataCatalog::Organization]
