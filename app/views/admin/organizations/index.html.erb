@@ -9,6 +9,9 @@
 <% end %>  
 
 <div id="ltColumn">
+  <div class="tableNav">
+    <%= render 'shared/pagination', :docs => @organizations %>
+  </div>
   <table id="dataSources">
     <thead>
       <tr id="titles">
@@ -18,7 +21,7 @@
       </tr>  
     </thead>  
     <tbody>
-      <% @organizations.each do |organization| -%>
+      <% @organizations.page(@page).each do |organization| -%>
       <tr class="<%= cycle 'even','odd'%>">
         <td class="left">
           <%= link_to organization.name, admin_organization_path(organization.slug) %>
@@ -27,10 +30,13 @@
           <a href="#"><%= organization.acronym %></a>
         </td>
         <td class="right"><%= organization.created_at.to_s(:mdy_slashed) %></td>
-      </tr>  
+      </tr>
       <% end -%>
-    </tbody>  
-  </table>  
+    </tbody>
+  </table>
+  <div class="tableNav">
+    <%= render 'shared/pagination', :docs => @organizations %>
+  </div>
 </div>
 
 <div id="rtColumnWrapper">

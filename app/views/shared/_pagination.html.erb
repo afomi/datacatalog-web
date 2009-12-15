@@ -1,6 +1,6 @@
 <ul class="pagination">
   <li>
-  <%= pluralize(@sources.length, 'result') -%>
+  <%= pluralize(docs.length, 'result') -%>
   <% if @pages.length > 1 -%>
     ...
     <% if @page > 1 -%>
@@ -15,7 +15,7 @@
         <%= link_to p[:number], p[:path] -%>
       <% end -%>
     <% end -%>
-    <% if @page < @sources.page_count -%>
+    <% if @page < docs.page_count -%>
       <%= link_to "Next &raquo;", "?page=#{@page + 1}" -%>
     <% end -%>
   <% end -%>

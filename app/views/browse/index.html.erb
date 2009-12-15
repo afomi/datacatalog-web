@@ -47,7 +47,7 @@
   </div>
   <% end %>
   <div class="tableNav">
-    <%= render 'shared/pagination' %>
+    <%= render 'shared/pagination', :docs => @sources %>
   </div>
   <table id="browseTable">
     <thead>
@@ -92,7 +92,7 @@
     </tbody>
   </table>    
   <div class="tableNav">
-    <%= render 'shared/pagination' %>
+    <%= render 'shared/pagination', :docs => @sources %>
     <!--><div class="perPage">
       <dl>
         <dt>Results Per Page:</dt>

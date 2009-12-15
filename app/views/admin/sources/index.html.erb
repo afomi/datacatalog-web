@@ -10,7 +10,7 @@
 
 <div id="ltColumn">
   <div class="tableNav">
-    <%= render 'shared/pagination' %>
+    <%= render 'shared/pagination', :docs => @sources %>
   </div>
   <table id="dataSources">
     <thead>
@@ -38,6 +38,9 @@
       <% end -%>
     </tbody>  
   </table>  
+  <div class="tableNav">
+    <%= render 'shared/pagination', :docs => @sources %>
+  </div>
 </div>
 
 <div id="rtColumnWrapper">
