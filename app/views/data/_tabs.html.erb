@@ -4,9 +4,6 @@
     <li id="nav_dataDetails">
       <%= link_to "Data Details", source_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["show"])) %>
     </li>
-    <li id="nav_exampleUsages">
-      <%= link_to "Example Usages", source_usages_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["usages"])) %>
-    </li>
     <li id="nav_communityDocs">
       <%= link_to "Community Docs", source_docs_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["docs"])) %>
     </li>    
