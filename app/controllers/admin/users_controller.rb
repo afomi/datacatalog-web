@@ -1,4 +1,6 @@
 class Admin::UsersController < AdminController
+
+  before_filter :require_admin
   
   def index
     if @search_term = params[:search]

@@ -1,5 +1,5 @@
 class Admin::KeysController < AdminController
-  before_filter :require_user, :find_user
+  before_filter :require_user, :find_user, :require_admin
   
   def destroy
     @user.api_user.delete_api_key!(params[:id])
