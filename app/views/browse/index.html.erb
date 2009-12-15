@@ -5,44 +5,37 @@
 <% content_for :body_class do %>browse<% end %>
 
 <div id="column_fullWidth">
+  <% form_tag '', :method => :get, :id => 'filterDataForm' do %>
   <div id="filterData">
     <ul>
       <li>
         <label for="organization_list">Organization</label>
-        <%= select_tag 'organization_list', options_for_select(@organizations) %>
+        <%= select_tag 'organization_id',
+          options_for_select(@organizations, @filters[:organization_id]),
+          :id => 'organization_list' %>
       </li>
+      <!--
       <li>
-        <label for="format_list">Format</label>
-        <select id="format_list">
+        <label for="source_format_list">Format</label>
+        <select id="source_format_list" name="source_format">
           <option value="all">All</option>
-          <option value="1">XML</option>
-          <option value="2">CSV</option>
-          <option value="3">JSON</option>
+          <option value="xml">XML</option>
+          <option value="csv">CSV</option>
+          <option value="json">JSON</option>
         </select>
       </li>
+      -->
       <li>
         <label for="source_type_list">Source Type</label>
-        <select id="source_type_list">
-          <option value="all">All</option>
-          <option value="dataset">Dataset</option>
-          <option value="api">API</option>
-        </select>
+        <%= select_tag 'source_type',
+          options_for_select(@source_types, @filters[:source_type]),
+          :id => 'source_type_list' %>
       </li>
       <li>
         <label for="release_year_list">Release Year</label>
-        <select id="release_year_list">
-          <option value="all">All</option>
-          <option value="2000">2000</option>
-          <option value="2001">2001</option>
-          <option value="2002">2002</option>
-          <option value="2003">2003</option>
-          <option value="2004">2004</option>
-          <option value="2005">2005</option>
-          <option value="2006">2006</option>
-          <option value="2007">2007</option>
-          <option value="2008">2008</option>
-          <option value="2009">2009</option>
-        </select>
+        <%= select_tag 'release_year',
+          options_for_select(@release_years, @filters[:release_year].to_i),
+          :id => 'release_year_list' %>
       </li>
       <li id="submit">
         <button class="filterBtn" type="submit">
@@ -50,8 +43,9 @@
         </button>
       </li>
     </ul>  
-    <div class="clear"></div>  
+    <div class="clear"></div>
   </div>
+  <% end %>
   <div class="tableNav">
     <%= render 'shared/pagination' %>
   </div>

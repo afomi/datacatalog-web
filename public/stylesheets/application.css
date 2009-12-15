@@ -235,13 +235,14 @@ div#dashboardNav a#addFolderLink { background: url(/images/btn_add.png) left 3px
 input#addFolderInput, input#addTagInput { float: left; margin-right: 15px;}
 div#addFolder, div#addTag { margin-top: 10px;}
 
-div#filterData label{ display: block;}
-div#filterData li { float: left; padding-right: 10px;}
-div#filterData li#submit { float: right;}
-div#filterData label { margin-bottom: 10px;}
-div#filterData { margin-bottom: 50px;}
-select#organization_list { width: 300px; }
-select#format_list { width: 125px; }
+form#filterDataForm label { float: none; }
+div#filterData label { display: block; }
+div#filterData li { float: left; padding-right: 10px; }
+div#filterData li#submit { float: right; }
+div#filterData label { margin-bottom: 10px; }
+div#filterData { margin-bottom: 50px; }
+select#organization_list { width: 350px; }
+select#source_format_list { width: 125px; }
 select#source_type_list { width: 125px; }
 select#release_year_list { width: 125px; }
 
