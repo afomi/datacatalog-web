@@ -1,4 +1,6 @@
 class Cache
+  
+  CACHE_PATH = "#{RAILS_ROOT}/tmp/dj_cache/"
 
   def initialize
     @queued = {}
@@ -55,7 +57,7 @@ class Cache
   
   def filename(label)
     if LABELS.include?(label.to_s)
-      "#{RAILS_ROOT}/tmp/dj_cache/#{label}.yaml"
+      File.join(CACHE_PATH, "#{label}.yaml")
     else
       raise "label not found : #{label}"
     end
