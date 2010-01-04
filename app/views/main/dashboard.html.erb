@@ -1,17 +1,16 @@
 <% content_for :title do %>
-  <% if current_user -%>
   Favorites
-  <% else -%>
-  Welcome to the National Data Catalog
-  <% end -%>
 <% end %>
 
 <% content_for :body_class do %>home<% end %>
 
-
 <div id="ltColumn">
   <%= show_flash_message %>
-
+  <% if current_user.api_user.favorites.empty? -%>
+  <div id="flash_notice">
+    You have no favorites yet. <%= link_to "Browse", browse_path %> for some.
+  </div>
+  <% end -%>
   <table>
     <thead>
       <tr id="titles">
@@ -39,15 +38,15 @@
       <% end -%>
     </tbody>
   </table>
-</div> 
+</div>
 <div id="rtColumnWrapper">
   <div id="rtColumn">
-    
+
     <div id="recentComments" class="module">
       <h3>Recent Comments</h3>
       <% if @recent_comments.length > 0 -%>
       <dl>
-        <% @recent_comments.take(5) do |comment| -%>
+        <% @recent_comments.take(5).each do |comment| -%>
         <dt><%= link_to comment.source_title, source_path(comment.source_slug) %></dt>
         <dd><%= truncate(comment.text, :length => 100) %></dd>
         <dd class="commentDate">Posted on <%= comment.created_at.to_s(:mdy_slashed) %></dd>
@@ -61,14 +60,18 @@
     
     <div id="yourRatings" class="module">
       <h3>Recently Rated</h3>
+      <% if @recent_ratings.length > 0 -%>
       <ul>
-        <% @recent_ratings[0..9].each do |rating| -%>
+        <% @recent_ratings.take(5).each do |rating| -%>
         <li><%= link_to rating.source_title, source_path(rating.source_slug) %></li>
         <% end -%>
-      </ul>    
-    </div>    
-  </div>  
-</div> 
+      </ul>
+      <% else -%>
+      <p>You haven't rated any data sources yet...</p>
+      <% end -%>
+    </div>
+  </div>
+</div>
 
-<div class="clear"></div> 
+<div class="clear"></div>
 </div>
