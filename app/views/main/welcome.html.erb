@@ -1,11 +1,22 @@
+<% content_for :body_class do %>home<% end %>
+
 <% content_for :title do %>
   Welcome to the National Data Catalog
 <% end %>
 
-<% content_for :body_class do %>home<% end %>
-
 <%= show_flash_message %>
-
+<% content_for :feature_box do %>
+  <div id="featureBox">
+    <h2 id="feature_header">Welcome to the National Data Catalog</h2>
+    <div id="catalogDescription">
+      <p>With an account on the National Data Catalog, you'll be able to mark data sources as favorites, participate in discussions, and contribute to documentation.</p>
+      <p>For developers and researchers, <%= link_to "signing up", signup_url %> is the only way to obtain API keys for programmatic access to the National Data Catalog.</p>
+      <a id="lg_signup" class="buttonLink" href="<%=signup_url %>">Sign Up</a>
+    </div> 
+    <div class="clear"></div> 
+  </div> 
+<% end %>
+ 
 <div id="ltColumn">
 <p>The National Data Catalog (NatDatCat) is an open platform for government data sets and APIs. NatDatCat makes it easy to find datasets by and about government, across all levels (federal, state, and local) and across all branches (executive, legislative, and judicial). The data here is imported from several sources and curated by our staff. Currently, we have importers setup for <a href="http://data.gov">Data.Gov</a> and
 the <a href="http://data.octo.dc.gov">DC Data Catalog</a>.</p>
@@ -17,12 +28,7 @@ the <a href="http://data.octo.dc.gov">DC Data Catalog</a>.</p>
     <div id="features" class="module">
       <h3>Open Beta</h3>
       <p>This site is currently in an open beta. There will be bugs. Please report feedback and problems via the <%= link_to "contact form", contact_path %>.</p>      
-    </div>  
-    <div id="about" class="module">
-      <h3>Sign Up</h3>
-      <p>With an account on the National Data Catalog, you'll be able to mark data sources as favorites, participate in discussions, and contribute to documentation.</p>
-      <p>For developers and researchers, <%= link_to "signing up", signup_url %> is the only way to obtain API keys for programmatic access to the National Data Catalog.</p>
-    </div>    
+    </div>      
   </div>  
 </div> 
 

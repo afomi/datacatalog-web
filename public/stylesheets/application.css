@@ -26,6 +26,7 @@ h1 a { background: url(/images/logo.png) top left no-repeat; width: 279px; heigh
 
 div#header { height: 162px; margin-bottom: 40px;}
 h2 { color: #414042; font-style: oblique; font-size: 200%; font-family: Georgia, Times, Times New Roman, serif; margin-bottom: 20px;}
+h2#feature_header { background: url(/images/feature_header.png) top left no-repeat; text-indent: -9999em; width: 286px; height: 180px; display: block; float: left; margin-left: 10px; margin-right: 30px;}
 h3 { color: #371d17; font-size: 160%; margin-bottom: 15px;}
 h3#header_overall { background: url(/images/header_overallRating.png) top left no-repeat; width: 99px; height: 16px; float: left;}
 h3#header_your { background: url(/images/header_yourRating.png) top left no-repeat; width: 99px; height: 16px; float: left;}
@@ -68,9 +69,10 @@ li#nav_blog a:hover, li#nav_blog a.active { width: 78px; background: url(/images
 
 /*columns*/
 
-div#contentHeader { background: url(/images/contentHeader_bar.png) bottom left no-repeat; height: 88px; position: relative;}
-body.dashboard div#contentHeader, body.add div#contentHeader, body.search div#contentHeader, body.advancedSearch div#contentHeader, body.submission div#contentHeader, body.profile div#contentHeader { height: 55px;}
-body.browse div#contentHeader { height: 50px; background: none;}
+div#contentHeader { background: url(/images/contentHeader_bar.png) bottom left no-repeat;  padding-bottom: 20px;}
+body.home div#contentHeader { padding-bottom: 40px; margin-top: 50px;}
+body.lgHeader div#contentHeader { height: 88px; padding-bottom: 0px;}
+body.browse div#contentHeader { background: none;}
 div#ltColumn { width: 610px; margin-right: 30px; float: left; padding-left: 5px; width: 605px; padding-top: 20px;}
 body.home div#rtColumn, body.dashboard div#rtColumn, div.withBg { padding-top: 25px;}
 div#rtColumn { float: left; padding-left: 30px; width: 285px; background: url(/images/rtColumn_bg.jpg) top left repeat-y; margin-top:-6px; padding-right: 5px;}
@@ -348,6 +350,7 @@ button.signIn_openID { background: url(/images/btn_signIn_openID.png) top left n
 button.signUp_openID { background: url(/images/btn_signUp_openID.png) top left no-repeat; width: 172px; margin-left: 150px; margin-top: 20px; }
 button.update { background: url(/images/btn_update.png) top left no-repeat; width: 93px; margin-top: 20px; }
 button.update_admin { background: url(/images/btn_update.png) top left no-repeat; width: 93px; margin-top: 20px; margin-left: 150px;}
+a#lg_signup { background: url(/images/btn_signUp_lg.png) top left no-repeat; width: 183px; height: 42px; margin: 15px auto 0;}
 
 ul.editAPI button.update { margin-left: 150px;}
 button.generate { background: url(/images/btn_generateAPI.png) top left no-repeat; width: 157px; margin-top: 20px; margin-left: 150px;}
@@ -382,6 +385,8 @@ p.seperator { margin-left: 20px; display: block; float: left;}
 select.newLine { margin-left: 150px;}
 div.searched { font-size: 90%; }
 div.searched li { margin: 5px 0;}
+
+div#catalogDescription { float: left; width: 590px; margin-top: 25px; margin-left: 30px; color: #978f8b; font-size: 105%;}
 
 form#sidebarSearch>ul>li { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #dcded8;}
 form#sidebarSearch input.checkbox { float: left; margin-right: 10px; margin-top: 1px; width: 10px;}
@@ -433,13 +438,17 @@ div#errorExplanation ul { list-style-type: disc; padding-left: 40px;}
 div#ltColumn div#errorExplanation li, div#rtColumn div#errorExplanation li  { margin-bottom: 15px;}
 
 div#footer { margin: 10px auto 0; width: 960px;}
-div#footerWrapper { background: url(/images/footerBg.jpg) top left repeat-x; height: 245px; margin-top:80px;}
+div#footerWrapper { background: url(/images/footerBg.jpg) top left repeat-x; height: 200px; margin-top:80px;}
+div#footerNav { margin-bottom: 10px;}
 div#footerNav ul { height: 40px; padding-top: 15px; width: 110px; margin: 0 auto;}
 div#footerNav li { float: left; }
 div#footerNav li a { color: #fff; text-transform: uppercase; text-indent: -9999em; display: block; height: 13px;}
 div#footerNav li#navfooter_about { margin-right: 20px;}
 li#navfooter_about a{ background: url(/images/navFooter_about.png) top center no-repeat; width: 37px;}
 li#navfooter_contact a{ background: url(/images/navFooter_contact.png) top center no-repeat; width: 48px;}
+
+a#foundationLogo { background: url(/images/sunlightlogo_footer.png) top left no-repeat; width: 145px; height: 62px; text-indent: -9999em; display: block; float: left; padding-right: 15px; }
+div#privacyPolicy { float: left; width: 770px; padding-left: 20px; border-left: 1px solid #332927;}
 
 div#footer div#recentData, div#footer div#HigestRatedData { float: left;}
 div#footer div#recentData li, div#footer div#HigestRatedData li { margin-bottom: 5px;}
