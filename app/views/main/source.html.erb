@@ -1,3 +1,5 @@
+<% content_for :body_class do %>detail lgHeader<% end %>
+
 <% content_for :title do %>
   <%= @source.title %>
 <% end %>
@@ -11,8 +13,6 @@
 </div>
 <a id="btn_reportProblem" class="buttonLink" href="#">Report a Problem</a>
 <% end %>
-
-<% content_for :body_class do %>home<% end %>
 
 <div id="ltColumn">
   <p><%= @source.custom[2].value %></p>
