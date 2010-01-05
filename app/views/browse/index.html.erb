@@ -78,7 +78,7 @@
           <ul class="downloadFormats">
             <% source.downloads.each do |download| %>
             <li>
-              <a href="#"><%= download.format.upcase %></a>
+              <a href="<%= download.url %>"><%= download.format.upcase %></a>
               <% unless download['size'].blank? %>
                 <span>(<%= download['size'] %>)</span>
               <% end %>
