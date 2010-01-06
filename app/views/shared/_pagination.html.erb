@@ -1,14 +1,14 @@
+<span class="dataResults"><%= pluralize(docs.length, 'result') -%></span>
 <ul class="pagination">
-  <li>
-  <%= pluralize(docs.length, 'result') -%>
+  
   <% if @pages.length > 1 -%>
-    ...
+  <li>
     <% if @page > 1 -%>
       <%= link_to "&laquo; Previous", "?page=#{@page - 1}" -%>
     <% end -%>
     <% @pages.each do |p| -%>
       <% if p.nil? -%>
-        &middot;&middot;&middot;
+        <span class="ellipsis">&#8230;</span>
       <% elsif @page == p[:number] -%>
         <%= p[:number] -%>
       <% else -%>
@@ -18,6 +18,7 @@
     <% if @page < docs.page_count -%>
       <%= link_to "Next &raquo;", "?page=#{@page + 1}" -%>
     <% end -%>
+    </li>
   <% end -%>
-  </li>
+  
 </ul>

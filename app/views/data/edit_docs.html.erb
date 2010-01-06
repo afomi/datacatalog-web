@@ -1,8 +1,10 @@
+<% content_for :body_class do %>detail lgHeader<% end %>
+
 <% content_for :title do %>
   <%= @source.title %> - Community Documentation
 <% end %>
 
-<% content_for :body_class do %>home<% end %>
+<%= render 'tabs' %>
 
 <div id="ltColumn">
 

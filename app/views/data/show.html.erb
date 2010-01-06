@@ -1,10 +1,10 @@
+<% content_for :body_class do %>detail lgHeader<% end %>
+
 <% content_for :title do %>
   <%= @source.title %>
 <% end %>
 
 <%= render 'tabs' %>
-
-<% content_for :body_class do %>detail lgHeader<% end %>
 
 <div id="ltColumn">
   <%= show_flash_message %>  
@@ -105,7 +105,7 @@
   <% end -%>
 </div> 
 <div id="rtColumnWrapper">
-  <div id="rtColumn">
+  <div id="rtColumn" class="withBg">
     <%= render 'sidebar_favorites' %>
     <%= render 'sidebar_notes' %>
   </div> 

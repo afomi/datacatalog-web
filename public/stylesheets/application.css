@@ -225,6 +225,9 @@ a.allLink { font-size: 110%; font-weight: bold; padding-top: 4px;}
 a.folder { display: block; background: url(/images/icon_folder.png) left 3px no-repeat; float: left; padding-right: 10px;}
 a.favorite { display: block; background: url(/images/icon_favorite.png) left 3px no-repeat; float: left; padding-left: 23px;}
 a.favorited { display: block; background: url(/images/icon_favorited.png) left 3px no-repeat; float: left; padding-left: 23px;}
+div#rtColumn a.favorited { float: none;}
+
+span.dataResults { font-weight: bold; margin-right: 10px; float: left; padding-left:15px; padding-top:5px;}
 
 .dashboardNav { padding-left: 28px; }
 div#dashboardNav li { margin-bottom: 10px; text-align: right; padding-left:5px;}
@@ -249,7 +252,8 @@ select#source_type_list { width: 125px; }
 select#release_year_list { width: 125px; }
 
 div.tableNav { background: url(/images/tableNav_bg.jpg) top left no-repeat; height: 26px; margin-bottom: 40px;}
-div.tableNav ul.pagination { text-align: center; float: left; padding-left: 15px; padding-top:3px;}
+div.tableNav ul.pagination { padding-left: 15px; padding-top:3px;}
+div.tableNav ul.pagination li { margin: 0 3px;}
 div.perPage { float: right; line-height: 14px; padding-top: 5px;}
 div.perPage dd, div.perPage dt { float: left; padding-right: 15px;}
 div.perPage dt { font-weight: bold; padding-top: 2px;}
@@ -436,8 +440,9 @@ div#ltColumn ul#standard_signin li.signIn_cues input.checkbox, div#ltColumn .che
   border: solid 2px #C66;
 }
 
-div.markdowned strong { font-weight: bold;}
-div.markdowned em { font-style: italic;}
+div.note_module strong, div#blog_content strong { font-weight: bold; }
+div.note_module em, div#blog_content em { font-style: italic; }
+div.note_module { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #F2F3F1;}
 
 
 div#errorExplanation p { color: #371D17;}
