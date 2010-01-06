@@ -10,10 +10,16 @@
 <div id="ltColumn">
 <% @entries.each do |entry| %>
   <div class="blog_post">
+    <span class="postMeta">
+      <span class="postmonth"><%= entry.published.to_s(:month) %></span>
+      <span class="postday"><%= entry.published.to_s(:day) %></span>
+    </span>
     <h3><%= entry.title %></h3>
-    <h4><%= entry.published.to_s(:mdy_slashed) %></h4>
-    <%= entry.summary %>
-    <h4><a href="<%= entry.url %>#comments">Comments &raquo;</a></h4>
+    <div id="blog_content">
+      <%= entry.summary %>
+      <a class="allLink" href="<%= entry.url %>#comments">Comments &raquo;</a>
+    </div>
+    <div class="clear"></div>
   </div>
 <% end -%>
 </div> 
