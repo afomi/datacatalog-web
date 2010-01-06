@@ -25,7 +25,7 @@ h1 { float: left; width: 279px; height: 46px; padding-top: 85px;}
 h1 a { background: url(/images/logo.png) top left no-repeat; width: 279px; height: 46px; display: block; text-indent: -9999em;}
 
 div#header { height: 162px; margin-bottom: 40px;}
-h2 { color: #414042; font-style: oblique; font-size: 200%; font-family: Georgia, Times, Times New Roman, serif; margin-bottom: 20px;}
+h2 { color: #414042; font-style: oblique; font-size: 200%; font-family: Georgia, Times, Times New Roman, serif; margin-bottom: 20px; line-height:30px;}
 h2#feature_header { background: url(/images/feature_header.png) top left no-repeat; text-indent: -9999em; width: 286px; height: 180px; display: block; float: left; margin-left: 10px; margin-right: 30px;}
 h3 { color: #371d17; font-size: 160%; margin-bottom: 15px; line-height: 25px;}
 h3#header_overall { background: url(/images/header_overallRating.png) top left no-repeat; width: 99px; height: 16px; float: left;}
@@ -105,7 +105,7 @@ li#nav_privateNotes a:hover, li#nav_privateNotes a.active{ background: url(/imag
 div#dataDetails dt{ text-transform: uppercase; font-weight: bold; float: left; color: #371d17; width: 110px; padding-top: 2px;}
 div#dataDetails dt { margin-bottom: 5px;}
 div#dataDetails dd { margin-bottom: 7px;}
-div#dataDetails { border-bottom: #f2f3f1 1px solid; padding-bottom: 20px; margin-bottom: 20px;}
+div#dataDetails { border-bottom: #f2f3f1 1px solid; padding-bottom: 20px; margin-bottom: 20px; margin-top: 20px;}
 
 li#nav_standard_signin a{ background: url(/images/nav_standard_signin.png) top left no-repeat; width: 135px; height: 30px;}
 li#nav_standard_signin a:hover, li#nav_standard_signin a.active{ background: url(/images/nav_standard_signin.png) bottom left no-repeat; width: 135px; height: 30px;}
@@ -223,9 +223,9 @@ div#adminUsers a.deleteIcon { margin-right: 30px;}
 a.allLink { font-size: 110%; font-weight: bold; padding-top: 4px;}
 
 a.folder { display: block; background: url(/images/icon_folder.png) left 3px no-repeat; float: left; padding-right: 10px;}
-a.favorite { display: block; background: url(/images/icon_favorite.png) left 3px no-repeat; float: left; padding-left: 23px;}
-a.favorited { display: block; background: url(/images/icon_favorited.png) left 3px no-repeat; float: left; padding-left: 23px;}
-div#rtColumn a.favorited { float: none;}
+a.favorite { display: block; background: url(/images/icon_favorite.png) left 1px no-repeat; float: left; padding-left: 23px;}
+a.favorited { display: block; background: url(/images/icon_favorited.png) left 1px no-repeat; float: left; padding-left: 23px;}
+div#rtColumn a.favorited, div#rtColumn a.favorite { float: none;}
 
 span.dataResults { font-weight: bold; margin-right: 10px; float: left; padding-left:15px; padding-top:5px;}
 
@@ -253,7 +253,9 @@ select#release_year_list { width: 125px; }
 
 div.tableNav { background: url(/images/tableNav_bg.jpg) top left no-repeat; height: 26px; margin-bottom: 40px;}
 div.tableNav ul.pagination { padding-left: 15px; padding-top:3px;}
-div.tableNav ul.pagination li { margin: 0 3px;}
+div.tableNav ul.pagination li { margin: 0 3px; float: left;}
+div.tableNav ul.pagination li.pagination_next { margin-left: 10px;}
+div.tableNav ul.pagination li.pagination_previous { margin-right: 10px;}
 div.perPage { float: right; line-height: 14px; padding-top: 5px;}
 div.perPage dd, div.perPage dt { float: left; padding-right: 15px;}
 div.perPage dt { font-weight: bold; padding-top: 2px;}

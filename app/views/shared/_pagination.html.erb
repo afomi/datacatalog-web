@@ -4,7 +4,7 @@
   <% if @pages.length > 1 -%>
   
     <% if @page > 1 -%>
-      <li><%= link_to "&laquo; Previous", "?page=#{@page - 1}" -%></li>
+      <li class="pagination_previous"><%= link_to "&laquo; Previous", "?page=#{@page - 1}" -%></li>
     <% end -%>
     
     <% @pages.each do |p| -%>
@@ -20,7 +20,7 @@
     <% end -%>
     
     <% if @page < docs.page_count -%>
-      <li><%= link_to "Next &raquo;", "?page=#{@page + 1}" -%></li>
+      <li class="pagination_next"><%= link_to "Next &raquo;", "?page=#{@page + 1}" -%></li>
     <% end -%>
   <% end -%>
   

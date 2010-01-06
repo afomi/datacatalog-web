@@ -1,8 +1,8 @@
-<% content_for :title do %>
-  Favorites
-<% end %>
+<% content_for :body_class do %>dashboard<% end %>
 
-<% content_for :body_class do %>home<% end %>
+<% content_for :title do %>
+  My Dashboard
+<% end %>
 
 <div id="ltColumn">
   <%= show_flash_message %>
@@ -41,7 +41,6 @@
 </div>
 <div id="rtColumnWrapper">
   <div id="rtColumn">
-
     <div id="recentComments" class="module">
       <h3>Recent Comments</h3>
       <% if @recent_comments.length > 0 -%>
