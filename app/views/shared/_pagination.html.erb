@@ -2,11 +2,13 @@
 <ul class="pagination">
   
   <% if @pages.length > 1 -%>
-  <li>
+  
     <% if @page > 1 -%>
-      <%= link_to "&laquo; Previous", "?page=#{@page - 1}" -%>
+      <li><%= link_to "&laquo; Previous", "?page=#{@page - 1}" -%></li>
     <% end -%>
+    
     <% @pages.each do |p| -%>
+    <li>
       <% if p.nil? -%>
         <span class="ellipsis">&#8230;</span>
       <% elsif @page == p[:number] -%>
@@ -14,11 +16,12 @@
       <% else -%>
         <%= link_to p[:number], p[:path] -%>
       <% end -%>
-    <% end -%>
-    <% if @page < docs.page_count -%>
-      <%= link_to "Next &raquo;", "?page=#{@page + 1}" -%>
-    <% end -%>
     </li>
+    <% end -%>
+    
+    <% if @page < docs.page_count -%>
+      <li><%= link_to "Next &raquo;", "?page=#{@page + 1}" -%></li>
+    <% end -%>
   <% end -%>
   
 </ul>
