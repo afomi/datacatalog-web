@@ -428,6 +428,8 @@ img.detailimage { float:left; margin-right:20px; }
 form#advancedSearch input#searchInput{ width: 280px;}
 form.generateAPI { margin-top: 30px;}
 
+img.avatar { border: 1px solid #D9D7D3;}
+
 input[type="hidden"] { display: none; }
 
 div#ltColumn ul#standard_signin li.signIn_cues input.checkbox, div#ltColumn .checkbox, div#rtColumn .checkbox, div#column_fullWidth .checkbox{ width: 15px;}
@@ -442,8 +444,8 @@ div#ltColumn ul#standard_signin li.signIn_cues input.checkbox, div#ltColumn .che
   border: solid 2px #C66;
 }
 
-div.note_module strong, div#blog_content strong { font-weight: bold; }
-div.note_module em, div#blog_content em { font-style: italic; }
+div.note_module strong, div#blog_content strong, div.markdowned strong { font-weight: bold; }
+div.note_module em, div#blog_content em, div.markdowned em { font-style: italic; }
 div.note_module { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #F2F3F1;}
 
 
