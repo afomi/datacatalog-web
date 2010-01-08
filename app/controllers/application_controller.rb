@@ -101,6 +101,11 @@ class ApplicationController < ActionController::Base
   def paginate(documents, radius=3)
     @page = params[:page].nil? ? 1 : params[:page].to_i
     max = documents.page_count
+    if @page > max
+      # "Could not find page number #{@page}. The maximum is #{max}."
+      render_404(nil)
+      return
+    end
     list = 1.upto(max).map do |i|
       if [1, max].include?(i) || (@page - radius .. @page + radius) === i
         { :number => i, :path => "?page=#{i}" }
