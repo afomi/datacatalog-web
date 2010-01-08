@@ -22,7 +22,6 @@ class BrowseController < ApplicationController
     if @filters[:release_year]
       conditions['released.year'] = @filters[:release_year].to_i
     end
-    puts "conditions : #{conditions.inspect}"
     DataCatalog::Source.all(conditions)
   end
   
