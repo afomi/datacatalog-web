@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user_session, :current_user
   filter_parameter_logging :password, :password_confirmation
-  before_filter :show_title, :mailer_set_url_options, :set_analytics
+  before_filter :show_title, :mailer_set_url_options, :set_analytics, :set_avatar
 
   unless ["development", "test"].include?(Rails.env)
     rescue_from ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid, ActionController::RoutingError, 
@@ -25,6 +25,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  
+  def set_avatar
+    gender = rand(2) == 1 ? "male" : "female"
+    ActionView::Base.default_gravatar_image =  "http://nationaldatacatalog.com/images/avatar_#{gender}_lg.png"
+  end
   
   def set_analytics
     analytics = YAML.load_file(Rails.root.to_s + "/config/analytics.yml")
