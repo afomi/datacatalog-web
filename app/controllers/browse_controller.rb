@@ -1,9 +1,11 @@
 class BrowseController < ApplicationController
   
   def index
-    @sources = get_filtered_sources
-    @pages = paginate(@sources)
-    filter_form_setup
+    unless read_fragment({ :page => params[:page] || 1 })
+      @sources = get_filtered_sources
+      @pages = paginate(@sources)
+      filter_form_setup
+    end
   end
   
   protected

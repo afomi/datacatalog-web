@@ -1,97 +1,96 @@
 <% content_for :title do %>
     Browse
 <% end %>
-
 <% content_for :body_class do %>browse<% end %>
-
-<div id="column_fullWidth">
-  <% form_tag '', :method => :get, :id => 'filterDataForm' do %>
-  <div id="filterData">
-    <ul>
-      <li>
-        <label for="organization_list">Organization</label>
-        <%= select_tag 'organization_id',
-          options_for_select(@organizations, @filters[:organization_id]),
-          :id => 'organization_list' %>
-      </li>
-      <!--
-      <li>
-        <label for="source_format_list">Format</label>
-        <select id="source_format_list" name="source_format">
-          <option value="all">All</option>
-          <option value="xml">XML</option>
-          <option value="csv">CSV</option>
-          <option value="json">JSON</option>
-        </select>
-      </li>
-      -->
-      <li>
-        <label for="source_type_list">Source Type</label>
-        <%= select_tag 'source_type',
-          options_for_select(@source_types, @filters[:source_type]),
-          :id => 'source_type_list' %>
-      </li>
-      <li>
-        <label for="release_year_list">Release Year</label>
-        <%= select_tag 'release_year',
-          options_for_select(@release_years, @filters[:release_year].to_i),
-          :id => 'release_year_list' %>
-      </li>
-      <li id="submit">
-        <button class="filterBtn" type="submit">
-          <span>Filter Data</span>
-        </button>
-      </li>
-    </ul>  
-    <div class="clear"></div>
-  </div>
-  <% end %>
-  <div class="tableNav">
-    <%= render 'shared/pagination', :docs => @sources %>
-  </div>
-  <table id="browseTable">
-    <thead>
-      <tr id="titles">
-        <th class="left">Data Set</th>
-        <th class="center">Rating</th>
-        <th class="center">Organization</th>
-        <th class="right">Formats</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @sources.page(@page).each do |source| -%>
-        <tr class="<%= cycle 'even','odd' %>">
-          <td class="dataContent left">
-            <%= link_to source.title, source_path(source.slug), :class => "dataName" %>
-            <!--<button title="Favorite this data" class="iconFavorite" type="submit">
-              <span>Favorite this data</span>
-            </button>-->
-            <p class="clear"><%= truncate(source.description, :length => 350) %></p>
-          </td>
-          <td class="center">
-            <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
-          </td>
-          <td class="center"><%= DataCatalog::Organization.get(source.organization_id).name %></td>
-          <td class="right">
-            <% unless source.downloads.empty? -%>
-              <ul class="downloadFormats">
-                <% source.downloads.each do |download| %>
-                <li>
-                  <a href="<%= download.url %>"><%= download.format.upcase %></a>
-                  <% unless download['size'].blank? %>
-                    <span>(<%= download['size'] %>)</span>
-                  <% end %>
-                </li>
-                <% end %>
-              </ul>
-            <% end %>
-          </td>
+<% cache(:page => params[:page] || 1 ) do %>
+  <div id="column_fullWidth">
+    <% form_tag '', :method => :get, :id => 'filterDataForm' do %>
+    <div id="filterData">
+      <ul>
+        <li>
+          <label for="organization_list">Organization</label>
+          <%= select_tag 'organization_id',
+            options_for_select(@organizations, @filters[:organization_id]),
+            :id => 'organization_list' %>
+        </li>
+        <!--
+        <li>
+          <label for="source_format_list">Format</label>
+          <select id="source_format_list" name="source_format">
+            <option value="all">All</option>
+            <option value="xml">XML</option>
+            <option value="csv">CSV</option>
+            <option value="json">JSON</option>
+          </select>
+        </li>
+        -->
+        <li>
+          <label for="source_type_list">Source Type</label>
+          <%= select_tag 'source_type',
+            options_for_select(@source_types, @filters[:source_type]),
+            :id => 'source_type_list' %>
+        </li>
+        <li>
+          <label for="release_year_list">Release Year</label>
+          <%= select_tag 'release_year',
+            options_for_select(@release_years, @filters[:release_year].to_i),
+            :id => 'release_year_list' %>
+        </li>
+        <li id="submit">
+          <button class="filterBtn" type="submit">
+            <span>Filter Data</span>
+          </button>
+        </li>
+      </ul>  
+      <div class="clear"></div>
+    </div>
+    <% end %>
+    <div class="tableNav">
+      <%= render 'shared/pagination', :docs => @sources %>
+    </div>
+    <table id="browseTable">
+      <thead>
+        <tr id="titles">
+          <th class="left">Data Set</th>
+          <th class="center">Rating</th>
+          <th class="center">Organization</th>
+          <th class="right">Formats</th>
         </tr>
-      <% end # @sources.each -%>
-    </tbody>
-  </table>    
-  <div class="tableNav">
-    <%= render 'shared/pagination', :docs => @sources %>
+      </thead>
+      <tbody>
+        <% @sources.page(@page).each do |source| -%>
+          <tr class="<%= cycle 'even','odd' %>">
+            <td class="dataContent left">
+              <%= link_to source.title, source_path(source.slug), :class => "dataName" %>
+              <!--<button title="Favorite this data" class="iconFavorite" type="submit">
+                <span>Favorite this data</span>
+              </button>-->
+              <p class="clear"><%= truncate(source.description, :length => 350) %></p>
+            </td>
+            <td class="center">
+              <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
+            </td>
+            <td class="center"><%= DataCatalog::Organization.get(source.organization_id).name %></td>
+            <td class="right">
+              <% unless source.downloads.empty? -%>
+                <ul class="downloadFormats">
+                  <% source.downloads.each do |download| %>
+                  <li>
+                    <a href="<%= download.url %>"><%= download.format.upcase %></a>
+                    <% unless download['size'].blank? %>
+                      <span>(<%= download['size'] %>)</span>
+                    <% end %>
+                  </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </td>
+          </tr>
+        <% end # @sources.each -%>
+      </tbody>
+    </table>    
+    <div class="tableNav">
+      <%= render 'shared/pagination', :docs => @sources %>
+    </div>
   </div>
-</div>
-  
+<% end %>
