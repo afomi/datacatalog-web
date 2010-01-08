@@ -1,17 +1,16 @@
 class BrowseController < ApplicationController
   
   def index
+    filter_form_setup
     unless read_fragment({ :page => params[:page] || 1 })
       @sources = get_filtered_sources
       @pages = paginate(@sources)
-      filter_form_setup
     end
   end
   
   protected
   
   def get_filtered_sources
-    @filters = get_filters([:organization_id, :source_type, :release_year])
     conditions = {}
     if @filters[:organization_id]
       conditions[:organization_id] = @filters[:organization_id]
@@ -35,6 +34,7 @@ class BrowseController < ApplicationController
   end
   
   def filter_form_setup
+    @filters = get_filters([:organization_id, :source_type, :release_year])
     @organizations = get_organizations
     @source_types  = get_source_types
     @release_years = get_release_years

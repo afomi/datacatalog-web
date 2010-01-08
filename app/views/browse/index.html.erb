@@ -1,11 +1,8 @@
 <% content_for :title do %>Browse<% end %>
 <% content_for :body_class do %>browse<% end %>
 <div id="column_fullWidth">
-  <% cache('filter_by_org') do %>
-    <%= render :partial => 'filter_by_org' %>
-  <% end %>
-
-  <% cache(:page => params[:page] || 1 ) do %>
+  <%= render :partial => 'filters' %>
+  <% cache(:page => params[:page] || 1 ) do -%>
     <%= render :partial => 'sources' %>
-  <% end %>
+  <% end -%>
 </div>
