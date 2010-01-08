@@ -2,13 +2,20 @@ class BrowseController < ApplicationController
   
   def index
     filter_form_setup
-    unless read_fragment({ :page => params[:page] || 1 })
-      @sources = get_filtered_sources
-      @pages = paginate(@sources)
+    if !params[:reload].blank?
+      expire_fragment({ :page => params[:page] || 1 })
+      browse_setup
+    elsif !read_fragment({ :page => params[:page] || 1 })
+      browse_setup
     end
   end
   
   protected
+  
+  def browse_setup
+    @sources = get_filtered_sources
+    @pages = paginate(@sources)
+  end
   
   def get_filtered_sources
     conditions = {}
