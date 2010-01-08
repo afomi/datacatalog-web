@@ -9,7 +9,7 @@ class Notifier < ActionMailer::Base
   end
 
   def welcome_message(user)
-    subject       "Thanks for confirming!"
+    subject       user.openid_identifier ? "Thanks for signing up!" : "Thanks for confirming!"
     from          "National Data Catalog <support@nationaldatacatalog.com>"
     recipients    user.email
     sent_on       Time.now
