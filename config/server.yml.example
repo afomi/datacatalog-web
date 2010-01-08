@@ -1,0 +1,5 @@
+development:
+  base_uri: "http://localhost:3000"
+
+test: 
+  base_uri: "http://localhost:4000"

@@ -1,5 +1,5 @@
 class BrowseController < ApplicationController
-  
+
   def index
     filter_form_setup
     if !params[:reload].blank?
