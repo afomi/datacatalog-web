@@ -112,6 +112,7 @@
 </div>
 <div class="clear"></div> 
 <div id="commentBox">
+  <% if @comments.length > 0 -%>
   <h3 id="discussionTitle">Discussion</h3>
   <span id="numberComments"><%= @source.comments.length %></span>
   <div class="clear"></div>
@@ -119,6 +120,7 @@
   <div id="threadedComments">
     <%= render 'comments', :comments => @comments %>
   </div>
+  <% end -%>
   <a name="comment_form" id="comment_form"></a>
   <% if current_user -%>
   
