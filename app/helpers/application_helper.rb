@@ -6,6 +6,7 @@ module ApplicationHelper
   end
   
   def active_if(options)
+    return "" if options[:current_user] and !current_user
     if options[:action]
       options[:action].each do |action|
         return "active" if params[:action] == action
