@@ -5,7 +5,7 @@
       <%= link_to "Data Details", source_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["show"])) %>
     </li>
     <li id="nav_communityDocs">
-      <%= link_to "Community Docs", source_docs_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["docs", "edit_docs"])) %>
+      <%= link_to "Community Docs", source_docs_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["docs", "edit_docs", "show_doc"])) %>
     </li>    
     <% if current_user -%>
     <li id="nav_privateNotes">
