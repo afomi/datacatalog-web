@@ -111,6 +111,9 @@ class DataController < ApplicationController
   def edit_docs
     @docs = DataCatalog::Document.all(:source_id => @source.id)
     @doc = @docs.first
+    @docs.each do |doc|
+      doc.user = User.find_by_api_id(doc.user_id)
+    end
     if @doc.nil?
       @doc = DataCatalog::Document.new
       @doc.is_new = true
