@@ -54,7 +54,7 @@ class DataController < ApplicationController
      DataCatalog::Favorite.create(:source_id => @source.id)
     end
     flash[:notice] = "Added as favorite!"
-    redirect_to source_path(@source.slug)
+    redirect_to :back
   end
   
   def unfavorite
@@ -64,7 +64,7 @@ class DataController < ApplicationController
       end
     end
     flash[:notice] = "Removed favorite."
-    redirect_to source_path(@source.slug)
+    redirect_to :back
   end
   
   def notes
