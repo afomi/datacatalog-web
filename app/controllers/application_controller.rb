@@ -106,7 +106,7 @@ class ApplicationController < ActionController::Base
   def paginate(documents, radius=3)
     @page = params[:page].nil? ? 1 : params[:page].to_i
     max = documents.page_count
-    if @page > max
+    if max > 0 && @page > max
       # "Could not find page number #{@page}. The maximum is #{max}."
       render_404(nil)
       return
