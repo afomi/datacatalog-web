@@ -1,11 +1,14 @@
 class BrowseController < ApplicationController
 
   def index
+    @cacheable_params = params.delete_if do |key, value|
+      %w(action controller reload).include?(key) || value == 'all'
+    end
     filter_form_setup
     if !params[:reload].blank?
-      expire_fragment({ :page => params[:page] || 1 })
+      expire_fragment(@cacheable_params)
       browse_setup
-    elsif !read_fragment({ :page => params[:page] || 1 })
+    elsif !read_fragment(@cacheable_params)
       browse_setup
     end
   end

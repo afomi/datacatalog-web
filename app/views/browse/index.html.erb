@@ -3,7 +3,7 @@
 <div id="column_fullWidth">
   <%= render :partial => 'filters' %>
   <%= show_flash_message %>
-  <% cache(:page => params[:page] || 1 ) do -%>
+  <% cache(@cacheable_params) do -%>
     <%= render :partial => 'sources' %>
   <% end -%>
 </div>
