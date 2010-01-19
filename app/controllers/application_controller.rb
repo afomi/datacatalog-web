@@ -112,9 +112,7 @@ class ApplicationController < ActionController::Base
       return
     end
     list = 1.upto(max).map do |i|
-      if [1, max].include?(i) || (@page - radius .. @page + radius) === i
-        { :number => i, :path => "?page=#{i}" }
-      end
+      i if [1, max].include?(i) || (@page - radius .. @page + radius) === i
     end
     list.extend(Squeezable).squeeze
   end
