@@ -1,7 +1,7 @@
 class BrowseController < ApplicationController
 
   def index
-    @cacheable_params = params.delete_if do |key, value|
+    @cacheable_params = params.dup.delete_if do |key, value|
       %w(action controller reload).include?(key) || value == 'all'
     end
     filter_form_setup
