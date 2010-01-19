@@ -1,6 +1,7 @@
 <% form_tag '', :method => :get, :id => 'filterDataForm' do %>
   <div id="filterData">
     <ul>
+      <%= hidden_field_tag :page, 1 %>
       <li>
         <label for="organization_list">Organization</label>
         <%= select_tag 'organization_id',
