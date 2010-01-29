@@ -37,7 +37,8 @@ module ApplicationHelper
     end
     
     content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
-    content_tag(:dd, (options[:url] ? link_to(options[:value], options[:url]) : options[:value]))
+    content_tag(:dd, (options[:url] ? link_to(options[:value], options[:url]) : options[:value])) +
+    content_tag(:div, "", :class => 'clear')
   end
   
   def gravatar_for(user, options)
