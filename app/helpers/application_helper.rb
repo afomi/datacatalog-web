@@ -41,6 +41,20 @@ module ApplicationHelper
     content_tag(:div, "", :class => 'clear')
   end
   
+  def org_field(options)
+    
+    if options[:collection]
+      return nil if @org.send(options[:attribute]).empty?
+    else
+      return nil unless @org.send(options[:attribute])
+    end
+    
+    content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
+    content_tag(:dd, (options[:url] ? link_to(options[:value], options[:url]) : 
+                     (options[:titleize] ? options[:value].titleize : options[:value]))) +
+    content_tag(:div, "", :class => 'clear')
+  end 
+  
   def gravatar_for(user, options)
     options.reverse_merge!(:class => "avatar", :size => 64)
     gravatar_image_tag(user.email, :alt => user.display_name, 

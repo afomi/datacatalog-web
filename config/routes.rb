@@ -55,6 +55,8 @@ ActionController::Routing::Routes.draw do |map|
   map.source_new_note "data/:slug/notes/new", :controller => "data", :action => "new_note"
   map.source_update_note "data/:slug/notes/:note_id", :controller => "data", :action => "update_note"
 
+  map.org "org/:slug", :controller => "org", :action => "show" 
+
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 

@@ -1,0 +1,42 @@
+<% content_for :body_class do %>detail<% end %>
+
+<% content_for :title do %>
+  <%= @org.name %>
+<% end %>
+
+<div id="ltColumn">
+  <%= show_flash_message %>  
+
+  <p><%= @org.description %></p>
+  <div class="module">
+    <div id="dataDetails">
+      <div id="metaDetails">
+        <dl>
+          <%= org_field :attribute => :org_type, :label => "Type",
+                           :value => @org.org_type, :titleize => true %>
+
+          <%= org_field :attribute => :level, :label => "Level",
+                           :value => @org.level, :titleize => true %>
+          
+          <%= org_field :attribute => :acronym, :label => "Acronym",
+                           :value => @org.acronym %>
+          
+          <%= org_field :attribute => :names, :collection => true, :label => "Alternate Names",
+                           :value => @org.alternate_names %>
+                           
+          <%= org_field :attribute => :url, :label => "URL",
+                           :value => truncate(@org.url, :length => 35), :url => @org.url %>
+
+          <%= org_field :attribute => :source_count, :label => "# of Sources", :value => @org.source_count %>
+        </dl>        
+      </div><!-- metaDetails -->
+
+    <div class="clear"></div> 
+
+    </div><!-- dataDetails -->
+  </div><!-- module -->
+</div>
+<div class="clear"></div> 
+    <%= render :partial => 'browse/sources' %>
+
+    

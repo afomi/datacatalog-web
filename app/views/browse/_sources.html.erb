@@ -25,7 +25,8 @@
         <td class="center">
           <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
         </td>
-        <td class="center"><%= DataCatalog::Organization.get(source.organization_id).name %></td>
+        <% org = DataCatalog::Organization.get(source.organization_id) -%>
+        <td class="center"><%= link_to org.name, org_path(org.slug) %></td>
         <td class="right">
           <% unless source.downloads.empty? -%>
             <ul class="downloadFormats">
