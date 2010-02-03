@@ -36,22 +36,41 @@ module ApplicationHelper
       return nil unless @source.send(options[:attribute])
     end
     
-    content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
-    content_tag(:dd, (options[:url] ? link_to(options[:value], options[:url]) : options[:value])) +
-    content_tag(:div, "", :class => 'clear')
-  end
-  
-  def org_field(options)
-    
-    if options[:collection]
-      return nil if @org.send(options[:attribute]).empty?
+    if options[:url]
+      dd_content = link_to(options[:value], options[:url])
+    elsif options[:titleize]
+      dd_content = options[:value].titleize
+    elsif options[:collection]
+      dd_content = options[:value].join(", ")
     else
-      return nil unless @org.send(options[:attribute])
+      dd_content = options[:value]
     end
     
     content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
-    content_tag(:dd, (options[:url] ? link_to(options[:value], options[:url]) : 
-                     (options[:titleize] ? options[:value].titleize : options[:value]))) +
+    content_tag(:dd, dd_content) +
+    content_tag(:div, "", :class => 'clear')
+  end
+  
+  def detail_field(obj, options)
+    
+    if options[:collection]
+      return nil if obj.send(options[:attribute]).empty?
+    else
+      return nil unless obj.send(options[:attribute])
+    end
+    
+    if options[:url]
+      dd_content = link_to(options[:value], options[:url])
+    elsif options[:titleize]
+      dd_content = options[:value].titleize
+    elsif options[:collection]
+      dd_content = options[:value].join(", ")
+    else
+      dd_content = options[:value]
+    end
+        
+    content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
+    content_tag(:dd, dd_content) +
     content_tag(:div, "", :class => 'clear')
   end 
   
