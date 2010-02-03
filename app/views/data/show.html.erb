@@ -15,31 +15,31 @@
       <div id="metaDetails">
         <dl>
           
-          <%= source_field :attribute => :organization_id, :label => "Organization",
+          <%= detail_field @source, :attribute => :organization_id, :label => "Organization",
                            :value => DataCatalog::Organization.get(@source.organization_id).name %>
           
-          <%= source_field :attribute => :categories, :collection => true, :label => "Category",
+          <%= detail_field @source, :attribute => :categories, :collection => true, :label => "Category",
                            :value => "", :url => "#"%>
                            
-          <%= source_field :attribute => :url, :label => "Homepage",
+          <%= detail_field @source, :attribute => :url, :label => "Homepage",
                            :value => truncate(@source.url, :length => 35), :url => @source.url %>
 
-          <%= source_field :attribute => :documentation_url, :label => "Official Docs",
+          <%= detail_field @source, :attribute => :documentation_url, :label => "Official Docs",
                            :value => truncate(@source.documentation_url, :length => 35), :url => @source.documentation_url %>
 
-          <%= source_field :attribute => :license, :label => "License",
+          <%= detail_field @source, :attribute => :license, :label => "License",
                            :value => @source.license, :url => @source.license_url %>
           
-          <%= source_field :attribute => :catalog_name, :label => "Original Catalog", 
+          <%= detail_field @source, :attribute => :catalog_name, :label => "Original Catalog", 
                            :value => @source.catalog_name, :url => @source.catalog_url %>
                            
-          <%= source_field :attribute => :released2, :label => "Released", 
+          <%= detail_field @source, :attribute => :released2, :label => "Released", 
                            :value => @source.released.to_s %>
                            
-          <%= source_field :attribute => :period_start, :label => "Period", 
+          <%= detail_field @source, :attribute => :period_start, :label => "Period", 
                            :value => @source.period_start.to_s + " to " + @source.period_end.to_s %>
 
-          <%= source_field :attribute => :frequency, :label => "Frequency", 
+          <%= detail_field @source, :attribute => :frequency, :label => "Frequency", 
                            :value => @source.frequency.to_s.titlecase %>
         </dl>
         

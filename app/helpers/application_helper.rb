@@ -27,29 +27,6 @@ module ApplicationHelper
     end
     message
   end
-
-  def source_field(options)
-    
-    if options[:collection]
-      return nil if @source.send(options[:attribute]).empty?
-    else
-      return nil unless @source.send(options[:attribute])
-    end
-    
-    if options[:url]
-      dd_content = link_to(options[:value], options[:url])
-    elsif options[:titleize]
-      dd_content = options[:value].titleize
-    elsif options[:collection]
-      dd_content = options[:value].join(", ")
-    else
-      dd_content = options[:value]
-    end
-    
-    content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
-    content_tag(:dd, dd_content) +
-    content_tag(:div, "", :class => 'clear')
-  end
   
   def detail_field(obj, options)
     
