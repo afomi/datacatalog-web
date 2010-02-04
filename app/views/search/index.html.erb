@@ -28,7 +28,7 @@
         <th class="left">Data Set</th>
         <th class="center">Rating</th>
         <th class="center">Organization</th>
-        <th class="right">Formats</th>
+        <th class="center">Formats</th>
       </tr>
     </thead>
     <tbody>
@@ -46,7 +46,7 @@
           <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
         </td>
         <td class="center"><%= DataCatalog::Organization.get(source.organization_id).name %></td>
-        <td class="right">
+        <td class="center">
           <!--<ul class="downloadFormats">
             <li>
               <a href="#">XML</a>
