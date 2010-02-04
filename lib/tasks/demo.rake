@@ -125,7 +125,7 @@ namespace :demo do
   end
   
   def create_downloads
-    csv = DataCatalog::Download.create(
+    @csv = DataCatalog::Download.create(
       :url       => "http://github.com/sunlightlabs/apidata/blob/master/legislators/legislators.csv",
       :format    => "CSV",
       :source_id => @sunlight_labs_legislator_data.id,
