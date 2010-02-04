@@ -1,10 +1,10 @@
-<% content_for :body_class do %>detail<% end %>
+<% content_for :body_class do %>detail organization<% end %>
 
 <% content_for :title do %>
-  <%= @org.name %>
+  Results for “<%= @org.name %>”
 <% end %>
 
-<div id="ltColumn">
+<div id="column_fullWidth">
   <%= show_flash_message %>  
 
   <p><%= @org.description %></p>
@@ -35,8 +35,5 @@
 
     </div><!-- dataDetails -->
   </div><!-- module -->
+<%= render :partial => 'browse/sources' %>
 </div>
-<div class="clear"></div> 
-    <%= render :partial => 'browse/sources' %>
-
-    
