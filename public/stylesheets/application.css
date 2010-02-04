@@ -102,10 +102,13 @@ li#nav_privateNotes a:hover, li#nav_privateNotes a.active{ background: url(/imag
 
 
 
-div#dataDetails dt{ text-transform: uppercase; font-weight: bold; float: left; color: #371d17; width: 110px; padding-top: 2px;}
-div#dataDetails dt { margin-bottom: 5px;}
+div#dataDetails dt{ text-transform: uppercase; font-weight: bold; float: left; color: #371d17; width: 110px; padding-top: 2px; margin-bottom: 5px;}
 div#dataDetails dd { margin-bottom: 7px;}
 div#dataDetails { border-bottom: #f2f3f1 1px solid; padding-bottom: 20px; margin-bottom: 20px; margin-top: 20px;}
+
+body.organization div#dataDetails { border-bottom: none; padding-bottom: 0;}
+body.organization div#dataDetails dd { width: 300px; float: left;}
+body.organization div#metaDetails { width: 920px; padding-right: 0;}
 
 li#nav_standard_signin a{ background: url(/images/nav_standard_signin.png) top left no-repeat; width: 135px; height: 30px;}
 li#nav_standard_signin a:hover, li#nav_standard_signin a.active{ background: url(/images/nav_standard_signin.png) bottom left no-repeat; width: 135px; height: 30px;}
@@ -260,6 +263,9 @@ div.perPage { float: right; line-height: 14px; padding-top: 5px;}
 div.perPage dd, div.perPage dt { float: left; padding-right: 15px;}
 div.perPage dt { font-weight: bold; padding-top: 2px;}
 div.perPage dd.first{ border-right: 1px solid; margin-right: 15px; }
+
+div.org_metaDetails { background: url(/images/tableNav_org.jpg) top left repeat-y; border-top: 1px solid #e6e6e4; border-bottom: 1px solid #e6e6e4; padding: 20px; font-size: 95%; margin-bottom: 30px;}
+div.org_metaDetails p { width: 700px; line-height: 19px;}
 
 span.ratingNumber { font-weight: bold; font-size: 160%; float: right; padding-top: 8px; margin-right: 15px;}
 button.thumbUp { float: right; }
