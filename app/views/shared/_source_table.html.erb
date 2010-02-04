@@ -1,0 +1,44 @@
+<table id="browseTable">
+  <thead>
+    <tr id="titles">
+      <th class="left">Data Set</th>
+      <th class="center">Rating</th>
+      <th class="center">Organization</th>
+      <th class="right">Formats</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sources.page(@page).each do |source| -%>
+      <tr class="<%= cycle 'even','odd' %>">
+        <td class="dataContent left">
+          <%= link_to source.title, source_path(source.slug), :class => "dataName" %>
+          <a href="<%= source_favorite_path(source.slug) %>">
+            <button title="Add as Favorite" class="iconFavorite" type="submit">
+              <span>Favorite this data</span>
+            </button>
+          </a>
+          <p class="clear"><%= truncate(source.description, :length => 350) %></p>
+        </td>
+        <td class="center">
+          <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
+        </td>
+        <% org = DataCatalog::Organization.get(source.organization_id) -%>
+        <td class="center"><%= link_to org.name, org_path(org.slug) %></td>
+        <td class="right">
+          <% unless source.downloads.empty? -%>
+            <ul class="downloadFormats">
+              <% source.downloads.each do |download| %>
+              <li>
+                <a href="<%= download.url %>"><%= download.format.upcase %></a>
+                <% unless download['size'].blank? %>
+                  <span>(<%= download['size'] %>)</span>
+                <% end %>
+              </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </td>
+      </tr>
+    <% end # @sources.each -%>
+  </tbody>
+</table> 

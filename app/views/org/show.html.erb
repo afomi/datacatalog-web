@@ -5,35 +5,42 @@
 <% end %>
 
 <div id="column_fullWidth">
-  <%= show_flash_message %>  
 
-  <p><%= @org.description %></p>
-  <div class="module">
+  <div class="tableNav CHANGEME">
+    <p><%= @org.description %></p>
+
     <div id="dataDetails">
       <div id="metaDetails">
         <dl>
           <%= detail_field @org, :attribute => :org_type, :label => "Type",
-                           :value => @org.org_type, :titleize => true %>
+          :value => @org.org_type, :titleize => true %>
 
           <%= detail_field @org, :attribute => :level, :label => "Level",
-                           :value => @org.level, :titleize => true %>
-          
+          :value => @org.level, :titleize => true %>
+
           <%= detail_field @org, :attribute => :acronym, :label => "Acronym",
-                           :value => @org.acronym %>
-          
+          :value => @org.acronym %>
+
           <%= detail_field @org, :attribute => :names, :collection => true, :label => "Other Names",
-                           :value => @org.names %>
-                           
+          :value => @org.names %>
+
           <%= detail_field @org, :attribute => :url, :label => "URL",
-                           :value => truncate(@org.url, :length => 35), :url => @org.url %>
+          :value => truncate(@org.url, :length => 35), :url => @org.url %>
 
           <%= detail_field @org, :attribute => :source_count, :label => "# of Sources", :value => @org.source_count %>
         </dl>        
       </div><!-- metaDetails -->
 
-    <div class="clear"></div> 
+      <div class="clear"></div> 
 
     </div><!-- dataDetails -->
-  </div><!-- module -->
-<%= render :partial => 'browse/sources' %>
+
+    <%= render 'shared/pagination', :docs => @sources %>
+  </div>  
+
+  <%= show_flash_message %>  
+  <%= render 'shared/source_table' %>
+  <div class="tableNav">
+    <%= render 'shared/pagination', :docs => @sources %>
+  </div>
 </div>
