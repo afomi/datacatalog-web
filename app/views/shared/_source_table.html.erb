@@ -4,7 +4,7 @@
       <th class="left">Data Set</th>
       <th class="center">Rating</th>
       <th class="center">Organization</th>
-      <th class="right">Formats</th>
+      <th class="center">Formats</th>
     </tr>
   </thead>
   <tbody>
@@ -24,7 +24,7 @@
         </td>
         <% org = DataCatalog::Organization.get(source.organization_id) -%>
         <td class="center"><%= link_to org.name, org_path(org.slug) %></td>
-        <td class="right">
+        <td class="center">
           <% unless source.downloads.empty? -%>
             <ul class="downloadFormats">
               <% source.downloads.each do |download| %>
