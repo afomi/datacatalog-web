@@ -13,21 +13,21 @@
       <div id="metaDetails">
         <dl>
           <%= detail_field @org, :attribute => :org_type, :label => "Type",
-          :value => @org.org_type, :titleize => true %>
+          :value => @org.org_type, :titleize => true, :noclear => true %>
 
           <%= detail_field @org, :attribute => :level, :label => "Level",
-          :value => @org.level, :titleize => true %>
+          :value => @org.level, :titleize => true, :noclear => true  %>
 
           <%= detail_field @org, :attribute => :acronym, :label => "Acronym",
-          :value => @org.acronym %>
+          :value => "ABC", :noclear => true  %>
 
           <%= detail_field @org, :attribute => :names, :collection => true, :label => "Other Names",
-          :value => @org.names %>
+          :value => @org.names, :noclear => true  %>
 
           <%= detail_field @org, :attribute => :url, :label => "URL",
-          :value => truncate(@org.url, :length => 35), :url => @org.url %>
+          :value => truncate(@org.url, :length => 35), :url => @org.url, :noclear => true  %>
 
-          <%= detail_field @org, :attribute => :source_count, :label => "# of Sources", :value => @org.source_count %>
+          <%= detail_field @org, :attribute => :source_count, :label => "# of Sources", :value => @org.source_count, :noclear => true  %>
         </dl>        
       </div><!-- metaDetails -->
 
