@@ -45,10 +45,13 @@ module ApplicationHelper
     else
       dd_content = options[:value]
     end
-        
-    content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
+    
+    
+    output = content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
     content_tag(:dd, dd_content) +
-    (options[:noclear] ? "" : content_tag(:div, "", :class => 'clear'))
+    (options[:noclear] && !@clear ? "" : content_tag(:div, "", :class => 'clear'))
+    @clear = !@clear
+    output
   end 
   
   def gravatar_for(user, options)
