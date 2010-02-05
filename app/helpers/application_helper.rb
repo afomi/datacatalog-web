@@ -33,7 +33,8 @@ module ApplicationHelper
     if options[:collection]
       return nil if obj.send(options[:attribute]).empty?
     else
-      return nil unless obj.send(options[:attribute])
+      return nil if obj.send(options[:attribute]).blank?
+      #return nil unless obj.send(options[:attribute])
     end
     
     if options[:url]

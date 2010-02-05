@@ -19,7 +19,7 @@
           :value => @org.level, :titleize => true, :noclear => true  %>
 
           <%= detail_field @org, :attribute => :acronym, :label => "Acronym",
-          :value => "ABC", :noclear => true  %>
+          :value => @org.acronym, :noclear => true  %>
 
           <%= detail_field @org, :attribute => :names, :collection => true, :label => "Other Names",
           :value => @org.names, :noclear => true  %>
