@@ -21,8 +21,8 @@ body{
 div#headerWrapper { background: url(/images/headerRepeat.jpg) top left repeat-x; }
 div#pageMain { background: url(/images/headerMain.jpg) top left no-repeat; width: 960px; margin: 0 auto; margin-bottom: 50px;}
 
-h1 { float: left; width: 279px; height: 46px; padding-top: 85px;}
-h1 a { background: url(/images/logo.png) top left no-repeat; width: 279px; height: 46px; display: block; text-indent: -9999em;}
+h1 { float: left; width: 290px; height: 53px; padding-top: 78px;}
+h1 a { background: url(/images/logo.png) top left no-repeat; width: 290px; height: 53px; display: block; text-indent: -9999em;}
 
 div#header { height: 162px; margin-bottom: 40px;}
 h2 { color: #414042; font-style: oblique; font-size: 200%; font-family: Georgia, Times, Times New Roman, serif; margin-bottom: 20px; line-height:30px;}
