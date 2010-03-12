@@ -22,56 +22,11 @@
   <div class="tableNav">
     <%= render 'shared/pagination', :docs => @sources %>
   </div>
-  <table id="browseTable">
-    <thead>
-      <tr id="titles">
-        <th class="left">Data Set</th>
-        <th class="center">Rating</th>
-        <th class="center">Organization</th>
-        <th class="center">Formats</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @sources.page(@page).each do |source| -%>
-      
-      <tr class="<%= cycle 'even','odd' %>">
-        <td class="dataContent left">
-          <%= link_to source.title, source_path(source.slug), :class => "dataName" %>
-          <!--<button title="Favorite this data" class="iconFavorite" type="submit">
-            <span>Favorite this data</span>
-          </button>-->
-          <p class="clear"><%= truncate(source.description, :length => 350) %></p>
-        </td>
-        <td class="center">
-          <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
-        </td>
-        <td class="center"><%= DataCatalog::Organization.get(source.organization_id).name %></td>
-        <td class="center">
-          <!--<ul class="downloadFormats">
-            <li>
-              <a href="#">XML</a>
-              <span>(15MB)</span>
-            </li>
-            <li>
-              <a href="#">CSV</a>
-              <span>(15MB)</span>
-            </li>
-          </ul>-->
-        </td>
-      </tr>	
   
-      <% end # @sources.each -%>
-    </tbody>
-  </table>    
+  <%= render 'shared/source_table' %>
+
   <div class="tableNav">
     <%= render 'shared/pagination', :docs => @sources %>
-    <!--><div class="perPage">
-      <dl>
-        <dt>Results Per Page:</dt>
-        <dd class="first">20</dd>
-        <dd><a href="#">100</a></dd>
-      </dl>
-    </div>-->
   </div>
   
   <% end -%>
