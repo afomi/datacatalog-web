@@ -3,6 +3,13 @@
     <ul>
       <%= hidden_field_tag :page, 1 %>
       <li>
+        <label for="jurisdiction_list">Jurisdiction</label>
+        <%= select_tag 'jurisdiction_id',
+          options_for_select(@jurisdictions, @filters[:jurisdiction_id]),
+          :id => 'jurisdiction_list' %>
+      </li>
+
+      <li>
         <label for="organization_list">Organization</label>
         <%= select_tag 'organization_id',
           options_for_select(@organizations, @filters[:organization_id]),

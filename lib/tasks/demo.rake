@@ -6,7 +6,7 @@ namespace :demo do
         DataCatalog::User.destroy(u.id)
       end
     end
-    classes = [DataCatalog::Source, DataCatalog::Organization]
+    classes = [DataCatalog::Source, DataCatalog::Organization, DataCatalog::Download, DataCatalog::Comment]
     classes.each do |class_constant|
       class_constant.all.each do |instance|
         class_constant.destroy(instance.id)
@@ -88,10 +88,16 @@ namespace :demo do
   end
   
   def create_organizations
+    @ngo = DataCatalog::Organization.create(
+      :name       => "Non-Governmental Organizations",
+      :org_type   => "not-for-profit",
+      :top_level  => true
+    )
     @sunlight_labs = DataCatalog::Organization.create(
-      :name     => "Sunlight Labs",
-      :url      => "http://sunlightlabs.com/",
-      :org_type => "not-for-profit"
+      :name      => "Sunlight Labs",
+      :url       => "http://sunlightlabs.com/",
+      :org_type  => "not-for-profit",
+      :parent_id => @ngo.id
     )
   end
   

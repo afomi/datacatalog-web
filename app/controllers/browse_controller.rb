@@ -22,6 +22,9 @@ class BrowseController < ApplicationController
   
   def get_filtered_sources
     conditions = {}
+    if @filters[:jurisdiction_id]
+      conditions[:jurisdiction_id] = @filters[:jurisdiction_id]
+    end    
     if @filters[:organization_id]
       conditions[:organization_id] = @filters[:organization_id]
     end
@@ -44,10 +47,15 @@ class BrowseController < ApplicationController
   end
   
   def filter_form_setup
-    @filters = get_filters([:organization_id, :source_type, :release_year])
+    @filters = get_filters([:jurisdiction_id, :organization_id, :source_type, :release_year])
+    @jurisdictions = get_jurisdictions
     @organizations = get_organizations
     @source_types  = get_source_types
     @release_years = get_release_years
+  end
+  
+  def get_jurisdictions
+    [['All', 'all']].concat(DataCatalog::Organization.all(:top_level => true).map { |j| [j.name, j.id]})
   end
   
   def get_organizations
