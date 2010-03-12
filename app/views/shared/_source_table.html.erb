@@ -23,8 +23,19 @@
         <td class="center">
           <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
         </td>
-        <td class="center"><%= link_to source.organization.name, org_path(source.organization.slug) %></td>
-        <td class="center"><%= link_to source.jurisdiction.name, org_path(source.jurisdiction.slug) %></td>        
+        <td class="center">
+          <% organization = source.organization %>
+          <% if organization %>
+            <%= link_to organization.name, org_path(organization.slug) %>
+          <% end %>
+        </td>
+        <% jurisdiction = source.organization -%>
+        <td class="center">
+          <% jurisdiction = source.jurisdiction %>
+          <% if organization %>
+            <%= link_to jurisdiction.name, org_path(jurisdiction.slug) %>
+          <% end %>
+        </td>
         <td class="center">
           <% unless source.downloads.empty? -%>
             <ul class="downloadFormats">
