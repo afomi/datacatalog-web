@@ -2,7 +2,8 @@
   <thead>
     <tr id="titles">
       <th class="left">Data Set</th>
-      <th class="center">Rating</th>
+      <th class="left">Rating</th>
+      <th class="center">Jurisdiction</th>      
       <th class="center">Organization</th>
       <th class="center">Formats</th>
     </tr>
@@ -22,8 +23,8 @@
         <td class="center">
           <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
         </td>
-        <% org = DataCatalog::Organization.get(source.organization_id) -%>
-        <td class="center"><%= link_to org.name, org_path(org.slug) %></td>
+        <td class="center"><%= link_to source.organization.name, org_path(source.organization.slug) %></td>
+        <td class="center"><%= link_to source.jurisdiction.name, org_path(source.jurisdiction.slug) %></td>        
         <td class="center">
           <% unless source.downloads.empty? -%>
             <ul class="downloadFormats">
