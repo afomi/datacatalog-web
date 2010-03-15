@@ -3,6 +3,7 @@ class Cache
   CACHE_PATH = "#{RAILS_ROOT}/tmp/dj_cache/"
 
   LABELS = %w(
+    jurisdictions
     organizations
     active_organizations
   )
@@ -26,6 +27,9 @@ class Cache
   def run_query(label)
     logger = Delayed::Worker.logger
     o1 = case label
+    when :jurisdictions
+      logger.info "Loading all jurisdictions..."
+      DataCatalog::Organization.all(:top_level => true)      
     when :organizations
       logger.info "Loading all organizations..."
       DataCatalog::Organization.all

@@ -55,7 +55,12 @@ class BrowseController < ApplicationController
   end
   
   def get_jurisdictions
-    [['All', 'all']].concat(DataCatalog::Organization.all(:top_level => true).map { |j| [j.name, j.id]})
+    jurisdictions = CACHE.get(:jurisdictions)
+    if jurisdictions
+      [['All', 'all']].concat(jurisdictions)
+    else
+      [['Data is loading...', 0]]
+    end
   end
   
   def get_organizations
