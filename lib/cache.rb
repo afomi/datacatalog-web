@@ -39,11 +39,8 @@ class Cache
     else
       raise RuntimeError, "label not found : #{label}"
     end
-    # logger.info "Building array with name and id..."
     o2 = o1.map { |o| [o.name, o.id] }
-    # logger.info "Sorting array..."
     o3 = o2.sort_by { |x| x[0] }
-    # logger.info "Saving..."
     write_to_file(label, o3)
     logger.info "Done."
   end
