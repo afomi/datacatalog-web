@@ -32,6 +32,7 @@ namespace :deploy do
   end
   
   task :restart_delayed_job do
+    run "cd #{current_path}; RAILS_ENV=production rake jobs:cache:clear"
     run "cd #{current_path}; RAILS_ENV=production script/delayed_job restart"
   end
   
