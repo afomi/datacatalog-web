@@ -27,6 +27,12 @@
           <%= detail_field @org, :attribute => :url, :label => "URL",
           :value => truncate(@org.url, :length => 45), :url => @org.url, :noclear => true  %>
 
+          <%= detail_field @org, :attribute => :url, :label => "Home Page",
+          :value => truncate(@org.home_url, :length => 45), :url => @org.home_url, :noclear => true  %>
+
+          <%= detail_field @org, :attribute => :url, :label => "Catalog URL",
+          :value => truncate(@org.catalog_url, :length => 45), :url => @org.catalog_url, :noclear => true  %>
+
         </dl>        
       </div><!-- metaDetails -->
 
