@@ -35,9 +35,9 @@
                            
           <%= detail_field @source, :attribute => :released2, :label => "Released", 
                            :value => @source.released.to_s %>
-                           
+
           <%= detail_field @source, :attribute => :period_start, :label => "Period", 
-                           :value => @source.period_start.to_s + " to " + @source.period_end.to_s %>
+                           :value => kronos_to_string_range(@source.period_start, @source.period_end) %>
 
           <%= detail_field @source, :attribute => :frequency, :label => "Frequency", 
                            :value => @source.frequency.to_s.titlecase %>

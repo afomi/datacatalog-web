@@ -52,6 +52,17 @@ module ApplicationHelper
     output
   end 
   
+  def kronos_to_string(kronos_hash)
+    return '' if kronos_hash.blank?
+    k = Kronos.from_hash(kronos_hash)
+    k.valid? ? k.to_s : ''
+  end
+  
+  def kronos_to_string_range(kronos_1, kronos_2)
+    k1, k2 = kronos_to_string(kronos_1), kronos_to_string(kronos_2)
+    k1.blank? || k2.blank? ? '' : "#{k1} to #{k2}"
+  end
+  
   def gravatar_for(user, options)
     options.reverse_merge!(:class => "avatar", :size => 64)
     gravatar_image_tag(user.email, :alt => user.display_name, 
