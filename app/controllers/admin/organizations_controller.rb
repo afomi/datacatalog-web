@@ -21,7 +21,7 @@ class Admin::OrganizationsController < AdminController
       flash[:notice] = "Organization created!"
       redirect_to admin_organization_path(organization.slug)
     rescue DataCatalog::BadRequest => e
-      flash[:error] = build_error_msg(e)
+      flash[:error] = build_error_message(e.errors)
       render :new
     end
   end
@@ -35,7 +35,7 @@ class Admin::OrganizationsController < AdminController
       flash[:notice] = "Organization saved!"
       redirect_to admin_organization_path(params[:organization][:slug])
     rescue DataCatalog::BadRequest => e
-      flash[:error] = build_error_msg(e)
+      flash[:error] = build_error_message(e.errors)
       render :show
     end
   end

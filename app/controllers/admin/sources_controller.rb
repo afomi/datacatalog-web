@@ -23,7 +23,7 @@ class Admin::SourcesController < AdminController
       flash[:notice] = "Source created!"
       redirect_to admin_source_path(source.slug)
     rescue DataCatalog::BadRequest => e
-      flash[:error] = build_error_msg(e)
+      flash[:error] = build_error_message(e.errors)
       render :new
     end
   end
@@ -37,7 +37,7 @@ class Admin::SourcesController < AdminController
       flash[:notice] = "Source saved!"
       redirect_to edit_admin_source_path(params[:source][:slug])
     rescue DataCatalog::BadRequest => e
-      flash[:error] = build_error_msg(e)
+      flash[:error] = build_error_message(e.errors)
       render :edit
     end
   end

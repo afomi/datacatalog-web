@@ -91,23 +91,17 @@ class ApplicationController < ActionController::Base
       redirect_to :back
       return
     rescue DataCatalog::BadRequest => e
-      flash[:error] = build_error_msg(e)
+      flash[:error] = build_error_message(e.errors)
       redirect_to :back
       return
     end
   end
   
-  def build_error_msg(e)
-    error_hash = eval(e)
-    error = ""
-    error_hash.each do |k,v|
-      error += "<p>Problem with: " + k.upcase + "</p><ul>"
-      v.each do |msg|
-        error += "<li>" + msg + "</li>"
-      end
-      error += "</ul>"
-    end
-    error
+  def build_error_message(error_hash)
+    error_hash.map do |key, messages|
+      "<p>#{key}</p>" +
+      "<ul>" + messages.map { |m| "<li>#{m}</li>" }.join("") + "</ul>"
+    end.join("")
   end
   
   def paginate(documents, radius=3)
