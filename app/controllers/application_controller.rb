@@ -5,9 +5,16 @@ class ApplicationController < ActionController::Base
   before_filter :show_title, :mailer_set_url_options, :set_analytics, :set_avatar
 
   unless ["development", "test"].include?(Rails.env)
-    rescue_from ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid, ActionController::RoutingError, 
-                ActionController::UnknownController,ActionController::UnknownAction, :with => :render_404
-    rescue_from NoMethodError, ActiveRecord::StatementInvalid, ActionView::TemplateError, :with => :render_500
+    rescue_from ActiveRecord::RecordNotFound,
+      ActiveRecord::RecordInvalid,
+      ActionController::RoutingError,
+      ActionController::UnknownController,
+      ActionController::UnknownAction,
+      :with => :render_404
+    rescue_from NoMethodError,
+      ActiveRecord::StatementInvalid,
+      ActionView::TemplateError,
+      :with => :render_500
   end
 
   def render_404(e)
