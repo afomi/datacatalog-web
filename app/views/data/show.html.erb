@@ -22,10 +22,10 @@
                            :value => "", :url => "#"%>
                            
           <%= detail_field @source, :attribute => :url, :label => "Homepage",
-                           :value => truncate(@source.url, :length => 35), :url => @source.url %>
+                           :value => truncate(@source.url, :length => 30), :url => @source.url %>
 
           <%= detail_field @source, :attribute => :documentation_url, :label => "Official Docs",
-                           :value => truncate(@source.documentation_url, :length => 35), :url => @source.documentation_url %>
+                           :value => truncate(@source.documentation_url, :length => 30), :url => @source.documentation_url %>
 
           <%= detail_field @source, :attribute => :license, :label => "License",
                            :value => @source.license, :url => @source.license_url %>
