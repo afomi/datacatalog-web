@@ -29,12 +29,10 @@ module ApplicationHelper
   end
   
   def detail_field(obj, options)
-    
     if options[:collection]
       return nil if obj.send(options[:attribute]).empty?
     else
       return nil if obj.send(options[:attribute]).blank?
-      #return nil unless obj.send(options[:attribute])
     end
     
     if options[:url]
@@ -47,10 +45,9 @@ module ApplicationHelper
       dd_content = options[:value]
     end
     
-    
     output = content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
-    content_tag(:dd, dd_content) +
-    (options[:noclear] && !@clear ? "" : content_tag(:div, "", :class => 'clear'))
+      content_tag(:dd, dd_content) +
+      (options[:noclear] && !@clear ? "" : content_tag(:div, "", :class => 'clear'))
     @clear = !@clear
     output
   end 
