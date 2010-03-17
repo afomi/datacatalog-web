@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <% @sources.page(@page).each do |source| -%>
-      <tr class="<%= cycle 'even','odd' %>">
+      <tr class="<%= cycle 'even', 'odd' %>">
         <td class="dataContent left">
           <%= link_to source.title, source_path(source.slug), :class => "dataName" %>
           <a href="<%= source_favorite_path(source.slug) %>">
@@ -24,15 +24,15 @@
           <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
         </td>
         <td class="center">
-          <% organization = source.organization %>
-          <% if organization %>
-            <%= link_to organization.name, org_path(organization.slug) %>
+          <% jurisdiction = source.jurisdiction %>
+          <% if jurisdiction %>
+            <%= link_to jurisdiction.name, org_path(jurisdiction.slug) %>
           <% end %>
         </td>
         <td class="center">
-          <% jurisdiction = source.jurisdiction %>
+          <% organization = source.organization %>
           <% if organization %>
-            <%= link_to jurisdiction.name, org_path(jurisdiction.slug) %>
+            <%= link_to organization.name, org_path(organization.slug) %>
           <% end %>
         </td>
         <td class="center">
