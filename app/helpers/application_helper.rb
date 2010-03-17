@@ -35,14 +35,14 @@ module ApplicationHelper
       return nil if obj.send(options[:attribute]).blank?
     end
     
-    if options[:url]
-      dd_content = link_to(options[:value], options[:url])
+    dd_content = if options[:url]
+      link_to(options[:value], options[:url])
     elsif options[:titleize]
-      dd_content = options[:value].titleize
+      options[:value].titleize
     elsif options[:collection]
-      dd_content = options[:value].join(", ")
+      options[:value].join(", ")
     else
-      dd_content = options[:value]
+      options[:value]
     end
     
     output = content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
