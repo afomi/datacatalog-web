@@ -453,16 +453,21 @@ div#ltColumn ul#standard_signin li.signIn_cues input.checkbox, div#ltColumn .che
   border: solid 2px #C66;
 }
 
+div#flash_notice p, div#flash_error p, div#errorExplanation p {
+	color: #371D17;
+}
+div#flash_notice ul, div#flash_error ul, div#errorExplanation ul {
+	list-style-type: disc; padding-left: 40px;
+}
+div#flash_notice li, div#flash_error li, div#ltColumn div#errorExplanation li, div#rtColumn div#errorExplanation li {
+	margin-bottom: 15px;
+}
+
 div.note_module strong, div#blog_content strong, div.markdowned strong { font-weight: bold; }
 div.note_module em, div#blog_content em, div.markdowned em { font-style: italic; }
 div.note_module { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #F2F3F1;}
 div.note_module ul, div#blog_content ul, div.markdowned ul { list-style: disc; padding-left: 20px; margin-bottom: 20px;}
 div.note_module ol, div#blog_content ol, div.markdowned ol { list-style: decimal; margin-bottom: 20px;}
-
-
-div#errorExplanation p { color: #371D17;}
-div#errorExplanation ul { list-style-type: disc; padding-left: 40px;}
-div#ltColumn div#errorExplanation li, div#rtColumn div#errorExplanation li  { margin-bottom: 15px;}
 
 div#footer { margin: 10px auto 0; width: 960px;}
 div#footerWrapper { background: url(/images/footerBg.jpg) top left repeat-x; height: 200px; margin-top:80px;}
