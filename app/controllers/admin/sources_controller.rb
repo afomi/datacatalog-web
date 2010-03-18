@@ -1,5 +1,7 @@
 class Admin::SourcesController < AdminController
   
+  KRONOS_FIELDS = [:released, :period_start, :period_end]
+  
   before_filter :get_organizations
   
   def index
@@ -9,6 +11,9 @@ class Admin::SourcesController < AdminController
   
   def edit
     @source = DataCatalog::Source.first(:slug => params[:id])
+    KRONOS_FIELDS.each do |key|
+      @source[key] = Kronos.from_hash(@source[key]).to_s
+    end
   end
   
   def new
@@ -30,6 +35,9 @@ class Admin::SourcesController < AdminController
 
   def update
     @source = DataCatalog::Source.get(params[:id])
+    KRONOS_FIELDS.each do |key|
+      params[:source][key] = Kronos.parse(params[:source][key]).to_hash
+    end
     @source.update(params[:source])
     
     begin
