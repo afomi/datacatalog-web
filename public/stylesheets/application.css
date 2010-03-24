@@ -11,15 +11,16 @@ a:visited{outline: none; color: #046f8c}
 a:hover{outline: none; color: #046f8c}
 a:active{outline: none; color: #046f8c}
 
-body{
-	color:#706a67;
-	font-size: 76%;
-  	line-height: 20px;
-  	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+body {
+  background-color: #2d2220;
+  color: #706a67;
+  font-size: 76%;
+  line-height: 20px;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
-div#headerWrapper { background: url(/images/headerRepeat.jpg) top left repeat-x; }
-div#pageMain { background: url(/images/headerMain.jpg) top left no-repeat; width: 960px; margin: 0 auto; margin-bottom: 50px;}
+div#headerWrapper { background: url(/images/headerRepeat.jpg) top left repeat-x; background-color: white; }
+div#pageMain { background: url(/images/headerMain.jpg) top left no-repeat; width: 960px; margin: 0 auto; margin-bottom: 50px; background-color: white;}
 
 h1 { float: left; width: 290px; height: 53px; padding-top: 78px;}
 h1 a { background: url(/images/logo.png) top left no-repeat; width: 290px; height: 53px; display: block; text-indent: -9999em;}
@@ -469,8 +470,8 @@ div.note_module { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px 
 div.note_module ul, div#blog_content ul, div.markdowned ul { list-style: disc; padding-left: 20px; margin-bottom: 20px;}
 div.note_module ol, div#blog_content ol, div.markdowned ol { list-style: decimal; margin-bottom: 20px;}
 
-div#footer { margin: 10px auto 0; width: 960px;}
-div#footerWrapper { background: url(/images/footerBg.jpg) top left repeat-x; height: 200px; margin-top:80px;}
+div#footer { margin: 10px auto 0; width: 960px; }
+div#footerWrapper { background: url(/images/footerBg.jpg) top left repeat-x; height: 200px; margin-top:80px; background-color: white;}
 div#footerNav { margin-bottom: 10px;}
 div#footerNav ul { height: 40px; padding-top: 15px; width: 110px; margin: 0 auto;}
 div#footerNav li { float: left; }
