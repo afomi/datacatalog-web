@@ -4,8 +4,12 @@ class SearchController < ApplicationController
   
   def index
     @term = params[:term]
-    @sources = @term.blank? ? [] : DataCatalog::Source.search(@term)
-    @pages = paginate(@sources)
+    if @term.blank?
+      redirect_to :back
+    else
+      @sources = DataCatalog::Source.search(@term)
+      @pages = paginate(@sources)
+    end
   end
   
 end
