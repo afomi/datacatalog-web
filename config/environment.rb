@@ -20,6 +20,7 @@ Rails::Initializer.run do |config|
   config.gem 'delayed_job', :version => '>= 1.8.4'
   config.gem 'datacatalog', :version => '>= 0.4.12'
   config.gem 'kronos', :version => '>= 0.1.6'
+  config.gem 'unindentable', :version => '>= 0.0.1'
   config.gem "rspec", :lib => false, :version => ">= 1.2.0" 
   config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
   config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :version => ">= 2.10.0", :source => 'http://gems.github.com'
@@ -52,5 +53,7 @@ Rails::Initializer.run do |config|
   config.after_initialize do
     CACHE = Cache.new
   end
+  
+  config.middleware.use "Rack::Honeypot"
   
 end
