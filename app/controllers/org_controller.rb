@@ -11,11 +11,8 @@ class OrgController < ApplicationController
   protected
   
   def find_sources(org)
-    if @org.top_level
-      DataCatalog::Source.all(:jurisdiction_id => @org.id)
-    else
-      DataCatalog::Source.all(:organization_id => @org.id)
-    end
+    key = @org.top_level ? :jurisdiction_id : :organization_id
+    DataCatalog::Source.all(key => @org.id)
   end
   
 end
