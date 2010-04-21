@@ -21,7 +21,9 @@
 </li>
 <li>
   <%= fields.label :org_type, "Type" %>
-  <%= fields.select :org_type, ['Governmental', 'Non-governmental'] %>
+  <%= fields.select :org_type, [['Governmental', 'governmental'], 
+                                ['Non-governmental', 'non-governmental'],
+                                ['Commercial', 'commercial']] %>
 </li>
 <li>
   <%= fields.label :description %>
