@@ -1,4 +1,6 @@
 class Admin::OrganizationsController < AdminController
+
+  before_filter :get_parents
   
   def index
     @organizations = DataCatalog::Organization.all
@@ -9,7 +11,7 @@ class Admin::OrganizationsController < AdminController
     @organization = DataCatalog::Organization.first(:slug => params[:id])
   end
 
-  def new
+  def new    
     @organization = DataCatalog::Organization.new
   end
 
@@ -37,6 +39,17 @@ class Admin::OrganizationsController < AdminController
     rescue DataCatalog::BadRequest => e
       flash[:error] = build_error_message(e.errors)
       render :show
+    end
+  end
+
+  protected
+  
+  def get_parents
+    orgs = CACHE.get(:organizations)
+    @parents = if orgs
+      orgs
+    else
+      [['Data is loading...', 0]]
     end
   end
 
