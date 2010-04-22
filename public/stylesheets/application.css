@@ -28,8 +28,8 @@ h1 a { background: url(/images/logo.png) top left no-repeat; width: 290px; heigh
 div#header { height: 162px; margin-bottom: 40px;}
 h2 { color: #414042; font-style: oblique; font-size: 200%; font-family: Georgia, Times, Times New Roman, serif; margin-bottom: 20px; line-height:30px;}
 h2#feature_header { background: url(/images/feature_header.png) top left no-repeat; text-indent: -9999em; width: 286px; height: 180px; display: block; float: left; margin-left: 10px; margin-right: 30px;}
-div#feature_video { background: url(/images/feature_header.png) top left no-repeat; width: 400px; height: 280px; display: block; float: left; margin-left: 10px; margin-right: 30px;}
-div#catalogDescription { float: left; width: 450px; margin-top: 5px; margin-left: 30px; color: #978f8b; font-size: 105%;}
+div#feature_video { background: url(/images/feature_header.png) top left no-repeat; width: 370px; height: 250px; display: block; float: left; margin-left: 10px; margin-right: 30px; border: 1px solid #CECCCA;}
+div#catalogDescription { float: left; width: 500px; margin-top: 5px; margin-left: 30px; color: #978f8b; font-size: 105%;}
 div#catalogDescription ul { padding: 0px 10px 10px 10px; margin-left: 15px;}
 div#catalogDescription ul li { list-style-type: disc; }
 
