@@ -31,7 +31,9 @@ h2#feature_header { background: url(/images/feature_header.png) top left no-repe
 div#feature_video { background: url(/images/feature_header.png) top left no-repeat; width: 370px; height: 250px; display: block; float: left; margin-left: 10px; margin-right: 30px; border: 1px solid #CECCCA;}
 div#catalogDescription { float: left; width: 500px; margin-top: 5px; margin-left: 30px; color: #978f8b; font-size: 105%;}
 div#catalogDescription ul { padding: 0px 10px 10px 10px; margin-left: 15px;}
-div#catalogDescription ul li { list-style-type: disc; }
+div#catalogDescription ul li { list-style-type: disc; float: left; width: 200px; line-height: 15px; margin-bottom: 10px;}
+p#featureDescription { font-size: 130%; line-height: 25px; font-family: Georgia, Times, Times New Roman, serif; margin-top: 15px;}
+p#featureBlurb { font-family: Georgia, Times, Times New Roman, serif; font-style: oblique; padding: 25px 50px 0; line-height: 18px; text-align: center;}
 
 h3 { color: #371d17; font-size: 160%; margin-bottom: 15px; line-height: 25px;}
 h3#header_overall { background: url(/images/header_overallRating.png) top left no-repeat; width: 99px; height: 16px; float: left;}
