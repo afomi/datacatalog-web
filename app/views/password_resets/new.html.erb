@@ -1,0 +1,34 @@
+
+<% content_for :title do %>
+Forgot Password?
+<% end %>
+
+<div id="ltColumn">
+  <%= show_flash_message %>
+
+  <div class="tab_pane">
+    <p>We'll email you instructions on how to reset your password.</p>
+    <% form_tag send_reset_path do -%>
+    <ul id="standard_signin">
+      <li>
+        <%= label_tag :email %>
+        <%= text_field_tag :email_address %>
+      </li>
+      <li>
+        <button class="submit" id="user_session_submit" type="submit" value="Submit" name="commit">
+          <span>Send Reset</span>
+        </button>
+      </li>    
+    </ul>
+    <% end %>
+  </div>
+    
+</div><!-- ltColumn -->
+
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <h3>No account yet?</h3>
+    <p>You'll need to <%= link_to "sign up", signup_path %> first.</p>
+  </div>
+</div>    
+<div class="clear"></div>

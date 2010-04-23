@@ -1,0 +1,39 @@
+
+<% content_for :title do %>
+Reset Your Password
+<% end %>
+
+<div id="ltColumn">
+  <%= show_flash_message %>
+
+  <div class="tab_pane">
+    <p>Enter in a new password.</p>
+    <% form_tag perform_reset_path do -%>
+    <%= hidden_field_tag :token, params[:token] %>
+    <ul id="standard_signin">
+      <li>
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+      </li>
+      <li>
+        <%= label_tag "Confirm Password" %>
+        <%= password_field_tag :password_confirmation %>
+      </li>
+      <li>
+        <button class="submit" id="user_session_submit" type="submit" value="Submit" name="commit">
+          <span>Submit</span>
+        </button>
+      </li>    
+    </ul>
+    <% end %>
+  </div>
+    
+</div><!-- ltColumn -->
+
+<div id="rtColumnWrapper">
+  <div id="rtColumn" class="withBg">
+    <h3>No account yet?</h3>
+    <p>You'll need to <%= link_to "sign up", signup_path %> first.</p>
+  </div>
+</div>    
+<div class="clear"></div>
