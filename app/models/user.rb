@@ -86,6 +86,11 @@ class User < ActiveRecord::Base
     reset_perishable_token!
     Notifier.deliver_welcome_message(self)
   end
+  
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    Notifier.deliver_password_reset_instructions(self)
+  end
 
   def create_api_user
     if (found_user = DataCatalog::User.first(:email => self.email))
