@@ -34,7 +34,7 @@ Sign In
         <li class="signIn_cues">  
           <%= f.check_box :remember_me, {:class => "checkbox"} %>
           <%= f.label :remember_me, "Stay Signed In", {:class => "inline"}  %>
-          <a href="#">Forgot Your Password?</a>
+          <%= link_to "Forgot Your Password?", forgot_path %>
         </li>  
         <li>
           <button class="signIn" id="user_session_submit" type="submit" value="Sign In" name="commit">
