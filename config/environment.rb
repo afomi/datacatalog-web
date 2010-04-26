@@ -18,6 +18,7 @@ Rails::Initializer.run do |config|
   config.gem 'rdiscount', :version => '>= 1.3.5'
   config.gem 'feedzirra', :version => '>= 0.0.20'
   config.gem 'delayed_job', :version => '>= 1.8.4'
+  config.gem 'httparty', :verstion => '>= 0.5.2'
   config.gem 'datacatalog', :version => '>= 0.4.13'
   config.gem 'kronos', :version => '>= 0.1.6'
   config.gem 'unindentable', :version => '>= 0.0.1'
