@@ -26,7 +26,7 @@ class Admin::SourcesController < AdminController
     begin
       source = DataCatalog::Source.create(params[:source])
       flash[:notice] = "Source created!"
-      redirect_to admin_source_path(source.slug)
+      redirect_to edit_admin_source_path(source.slug)
     rescue DataCatalog::BadRequest => e
       flash[:error] = build_error_message(e.errors)
       render :new
