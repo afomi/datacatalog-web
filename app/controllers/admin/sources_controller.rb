@@ -21,8 +21,10 @@ class Admin::SourcesController < AdminController
   end
   
   def create
+    KRONOS_FIELDS.each do |key|
+      params[:source][key] = Kronos.parse(params[:source][key]).to_hash
+    end    
     @source = DataCatalog::Source.new(params[:source])
-
     begin
       source = DataCatalog::Source.create(params[:source])
       flash[:notice] = "Source created!"
