@@ -2,7 +2,7 @@ class Admin::SourcesController < AdminController
   
   KRONOS_FIELDS = [:released, :period_start, :period_end]
   
-  before_filter :get_organizations
+  before_filter :get_organizations, :set_frequencies
   
   def index
     @sources = DataCatalog::Source.all
@@ -59,6 +59,40 @@ class Admin::SourcesController < AdminController
     else
       [['Data is loading...', 0]]
     end
+  end
+  
+  def set_frequencies
+    @frequencies = [
+        "each second"  ,
+        "each minute"  ,
+        "each hour"    ,
+        "each day"     ,
+        "each week"    ,
+        "each month"   ,
+        "each quarter" ,
+        "each year"    ,
+        "hourly"       ,
+        "daily"        ,
+        "weekly"       ,
+        "fortnightly"  ,
+        "monthly"      ,
+        "quarterly"    ,
+        "biannually"   ,
+        "semiannual"   ,
+        "semi-annual"  ,
+        "semiannually" ,
+        "annual"       ,
+        "annually"     ,
+        "yearly"       ,
+        "biennial"     ,
+        "biennially"   ,
+        "quadrennial"  ,
+        "quadrennially",
+        "decade"       ,
+        "one time"     ,
+        "one-time"     ,
+        "other"        ,
+        "unknown"]
   end
   
 end
