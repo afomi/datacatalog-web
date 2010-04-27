@@ -26,8 +26,12 @@
 
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
-    <div id="dashboardNav" class="module">
-      <h3>Stats</h3>
+    <div class="module">
+      <h3>Public Pages</h3>
+      <ul>
+        <li><%= link_to "Data Details", source_path(@source.slug) %></li>
+        <li><%= link_to "Community Docs", source_docs_path(@source.slug) %></li>
+      </ul>
       <div class="clear"></div>
     </div>
     <a href="<%= new_admin_source_path %>"><img src="/images/btn_addSource.png" /></a>

@@ -230,7 +230,7 @@ div#recentComments dd.commentDate, dd.resolvedDate { font-style: oblique; margin
 .resolver { margin-right: 10px;}
 
 div#yourRatings li, div#similarSets li { margin-bottom: 10px;}
-span.adminName, div#adminUsers a.deleteIcon { float: left; margin-right: 15px;}
+div#adminUsers a.deleteIcon { float: right; margin-right: 15px;}
 div#adminUsers a.deleteIcon { margin-right: 30px;}
 
 a.allLink { font-size: 110%; font-weight: bold; padding-top: 4px;}
