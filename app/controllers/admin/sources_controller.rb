@@ -64,37 +64,7 @@ class Admin::SourcesController < AdminController
   end
   
   def set_frequencies
-    @frequencies = [
-        "each second"  ,
-        "each minute"  ,
-        "each hour"    ,
-        "each day"     ,
-        "each week"    ,
-        "each month"   ,
-        "each quarter" ,
-        "each year"    ,
-        "hourly"       ,
-        "daily"        ,
-        "weekly"       ,
-        "fortnightly"  ,
-        "monthly"      ,
-        "quarterly"    ,
-        "biannually"   ,
-        "semiannual"   ,
-        "semi-annual"  ,
-        "semiannually" ,
-        "annual"       ,
-        "annually"     ,
-        "yearly"       ,
-        "biennial"     ,
-        "biennially"   ,
-        "quadrennial"  ,
-        "quadrennially",
-        "decade"       ,
-        "one time"     ,
-        "one-time"     ,
-        "other"        ,
-        "unknown"]
+    @frequencies = Frequency.list
   end
   
 end
