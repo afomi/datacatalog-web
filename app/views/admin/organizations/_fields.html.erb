@@ -6,10 +6,12 @@
   <%= fields.label :acronym %>
   <%= fields.text_field :acronym %>
 </li>
+<% unless @organization.top_level -%>
 <li>
   <%= fields.label :parent_id, "Parent" %>
   <%= fields.select :parent_id, @parents %>
 </li>
+<% end -%>
 <li>
   <%= fields.label :slug, "URL Slug" %>
   <%= fields.text_field :slug %>
