@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  <%= @source.title %>
+  <%= @source.title + " - New Download" %>
 <% end %>
 
 <% content_for :body_class do %>admin<% end %>
@@ -10,27 +10,28 @@
 
 <div id="ltColumn">
 
-<% form_for :source, @source, :url => admin_source_path(@source.id), :html => {:method => :put} do |f| -%>
+<% form_for :download, @download, :url => admin_source_downloads_path(@source.id), :html => {:method => :post} do |f| -%>
   <%= show_flash_message %>
   <ul>
     <%= render 'fields', :object => f %>
     <li>
-      <button class="update_admin" id="user_submit" type="submit" value="Update" name="commit">
-        <span>Update</span>
+      <button class="submit" id="user_submit" type="submit" value="Submit" name="commit">
+        <span>Submit</span>
       </button>
     </li>
   </ul>
-
 <% end -%>
 </div>
 
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
     <div class="module">
-      <h3>Downloads</h3>
+      <h3>Other Downloads</h3>
       <ul>
         <% @source.downloads.each do |download| -%>
-        <li><%= link_to download.format.upcase, edit_admin_source_download_path(@source.slug,extract_id(download.href)) %></li>
+          <% if extract_id(download.href) != @download.id -%>
+          <li><%= link_to download.format.upcase, edit_admin_source_download_path(@source.slug,extract_id(download.href)) %></li>
+          <% end -%>
         <% end -%>
         <li><%= link_to "+ Add New +", new_admin_source_download_path(@source.slug) %></li>
       </ul>
@@ -47,8 +48,7 @@
     <div class="module">
       <h3>Quick Links</h3>
       <ul>
-        <li><%= link_to "Add New Source", new_admin_source_path %></li>
-        <li><%= link_to "Add New Organization", new_admin_organization_path %></li>
+        <li><%= link_to "&laquo; Back to Source", edit_admin_source_path(@source.slug) %></li>
       </ul>
     </div>
   </div>

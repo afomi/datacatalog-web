@@ -1,0 +1,23 @@
+<li>
+  <%= fields.label :format %>
+  <%= text_field_tag 'download[format]', @download.format %>
+</li>
+<li>
+  <%= fields.label :url, "URL" %>
+  <%= fields.text_field :url %>
+</li>
+<li>
+  <%= fields.label :size, "Size" %>
+  <%= text_field_tag "download[size][number]", 
+                      @download['size']['number'],
+                      :style => "width: 50px" 
+                      %>
+  <%= select_tag "download[size][unit]", 
+                 options_for_select(['', 'B','KB','MB','GB','TB','PB','EB'], @download['size']['unit']),
+                 :style => "width: 50px" 
+                 %>
+</li>
+<li>
+  <%= fields.label :preview, "Data Preview" %>
+  <%= fields.text_area :preview %>
+</li>

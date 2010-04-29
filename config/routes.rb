@@ -32,7 +32,9 @@ ActionController::Routing::Routes.draw do |map|
   map.browse "browse", :controller => "browse", :action => "index"
 
   map.resource :admin, :controller => "admin" do |admin|
-    admin.resources :sources, :controller => "admin/sources"
+    admin.resources :sources, :controller => "admin/sources" do |source|
+      source.resources :downloads, :controller => "admin/downloads"
+    end
     admin.resources :organizations, :controller => "admin/organizations"
     admin.resources :data_suggestions, :controller => "admin/data_suggestions"
     admin.resources :users, :controller => "admin/users" do |user|
