@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
   end
 
   def confirmed?
-    self.confirmed_at || false
+    confirmed_at ? true : false
   end
 
   def confirm!
