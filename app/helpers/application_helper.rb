@@ -6,18 +6,13 @@ module ApplicationHelper
   end
   
   def active_if(options)
-    return "" if options[:current_user] and !current_user
-    if options[:action]
-      options[:action].each do |action|
-        return "active" if params[:action] == action
-      end
-    elsif options[:controller]
-      options[:controller].each do |controller|
-        return "active" if params[:controller] == controller
-      end
+    actions = options[:action] || []
+    controllers = options[:controller] || []
+    if actions.include?(params[:action]) || controllers.include?(params[:controller])
+      "active"
     else
+      ""
     end
-    return ""
   end
   
   def show_flash_message
