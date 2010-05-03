@@ -7,11 +7,12 @@ class SuggestController < ApplicationController
   def suggest
     @data_suggestion = DataSuggestion.new(params[:data_suggestion])
     if @data_suggestion.save
+      Notifier.deliver_data_suggestion(@data_suggestion)
       flash[:notice] = "Thanks! Your suggestion has been received. It will be reviewed by our curators."
+      redirect_to suggest_path
     else
-      render :action => 'index' and return
+      render :action => 'index'
     end
-    redirect_to suggest_path
   end
   
 end
