@@ -1,5 +1,6 @@
 default_run_options[:pty] = true
 
+set :environment, (ENV['target'] || 'staging')
 set :application, "datacatalog-web"
 set :repository,  "git@github.com:sunlightlabs/datacatalog-web.git"
 set :scm, "git"
@@ -7,10 +8,19 @@ set :user, "datcat"
 set :use_sudo, false
 set :deploy_via, :remote_cache
 set :deploy_to, "/home/datcat/www/datacatalog-web"
+set :domain, "nationaldatacatalog.com"
 
-role :web, "nationaldatacatalog.com"
-role :app, "nationaldatacatalog.com"
-role :db,  "nationaldatacatalog.com", :primary => true 
+if environment == 'production'
+  set :domain, 'nationaldatacatalog.com'
+  set :branch, 'production'
+else
+  set :domain, 'staging.nationaldatacatalog.com'
+  set :branch, 'master'
+end
+
+role :web, domain
+role :app, domain
+role :db,  domain, :primary => true 
 
 namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
@@ -35,7 +45,6 @@ namespace :deploy do
     run "cd #{current_path}; RAILS_ENV=production rake jobs:cache:clear"
     run "cd #{current_path}; RAILS_ENV=production script/delayed_job restart"
   end
-  
 end
 
 after 'deploy:update_code' do
