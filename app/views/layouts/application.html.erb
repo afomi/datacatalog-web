@@ -6,8 +6,7 @@
 
   <title><%= yield :title %> | National Data Catalog</title>
   <script src="http://services.sunlightlabs.com/brandingbar/hat_js/natdatcat/" type="text/javascript"></script>
-  <%= stylesheet_link_tag 'jquery-ui' %>
-  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag :all, :cache => true %>
 
   <!--[if IE 6]><link rel="stylesheet" href="buggy.css" type="text/css" media="screen" /><![endif]-->
   <!--[if IE 7]><link rel="stylesheet" href="buggy7.css" type="text/css" media="screen" /><![endif]-->
