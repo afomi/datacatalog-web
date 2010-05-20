@@ -21,6 +21,11 @@ class MainController < ApplicationController
       end
       render 'dashboard' and return
     else
+      @source_count = DataCatalog::Source.all.length
+      @importers = DataCatalog::Importer.all
+      imports = DataCatalog::Import.all
+      sorted_imports = imports.sort_by { |i| i.finished_at }
+      @last_updated = sorted_imports.last.finished_at
       render 'welcome' and return
     end
   end
