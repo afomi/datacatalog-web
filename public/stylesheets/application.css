@@ -59,7 +59,7 @@ a.advancedSearch_link { float: right;}
 
 /*nav*/
 
-div#nav { margin-left: 465px; float: right;}
+div#nav { width: 465px; float: right; margin-top: 78px;}
 div#nav li { float: left; height: 46px; margin-top: -15px; }
 div#nav li a{ text-indent: -9999em; height: 46px; display: block;}
 
