@@ -14,11 +14,11 @@
     <div id="catalogDescription">
       <p id="featureDescription">The National Data Catalog is an open platform for government data sets and APIs. It makes it easy to find datasets by and about government, across all levels (federal, state, and local) and across all branches (executive, legislative, and judicial). The data here is imported from multiple sources and curated by our staff.</p>
       <p>
-        Our catalog contains <%= pluralize(@source_count, "data set") %> and was last updated
-        <%= time_ago_in_words(@last_updated) %> ago.
         We aggregate sources from:
         <% @importers.each do |importer| %>
           <a href="http://<%= importer.name %>"><%= importer.name %></a>,
+        Our catalog contains
+        <%= pluralize(@source_count, "data set") %><% if @last_updated %>and was last updated <%= time_ago_in_words(@last_updated) %> ago<% end %>.
         <% end %>
         and the Sunlight Foundation and its partners.
       </p>

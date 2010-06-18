@@ -25,7 +25,11 @@ class MainController < ApplicationController
       @importers = DataCatalog::Importer.all
       imports = DataCatalog::Import.all
       sorted_imports = imports.sort_by { |i| i.finished_at }
-      @last_updated = sorted_imports.last.finished_at
+      @last_updated = if sorted_imports.empty?
+        nil
+      else
+        sorted_imports.last.finished_at
+      end
       render 'welcome' and return
     end
   end
