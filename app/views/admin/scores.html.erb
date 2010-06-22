@@ -1,0 +1,74 @@
+<% content_for :title do %>
+  @current_dataset.name Score
+<% end %>
+
+<% content_for :body_class do %>admin<% end %>
+
+  <div id="leftTable">
+  <h3>Precent Missing by Field</h3>
+  <table id="missing">
+    <tr id="titles">
+      <th class="left">property</th>
+      <th class="right sort">% missing</th>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>50</td>
+    </tr>
+  </table>
+  <!--replace with real collection_select--!>
+  <p>Sort by Importer<br />
+  <%= select 'Importer', :importer, %w[Utah Data.gov Michigan] %>
+  </p>
+</div>
+
+<div id="midTable">
+  <h3>Source Scores</h3>
+  <table id="individual">
+    <tr id="titles">
+      <th class="left sort">source name</th>
+      <th class="mid sort">score</th>
+      <th class="right sort">last updated</th>
+    </tr>
+    <tr>
+      <td>Employment cost trends</td>
+      <td>4</td>
+      <td>11/09/10</td>
+    </tr>
+    <tr>
+      <td>Worldwide M5 Earthquakes Past 7 Days </td>
+      <td>7</td>
+      <td>07/05/10</td>
+    </tr>
+    <tr>
+      <td>Tax Year 2001 SOI Exempt Organization Study</td>
+      <td>17</td>
+      <td>10/13/10</td>
+    </tr>
+  </table>
+  <p>
+  <%= text_field :individual_records, :filter %>
+  <%= button_to "Filter"%>
+  </p>
+</div>
+
+<div id="rightTable">
+  <h3>Score Statistics by Importer</h3>
+  <table id="Importers">
+    <tr id="titles">
+      <th class="left">Importer</th>
+      <th class="left sort">min</th>
+      <th class="mid sort">mean</th>
+      <th class="right sort">max</th>
+    </tr>
+    <tr>
+      <td>San Francisco</td>
+      <td>20</td>
+      <td>40</td>
+      <td>60</td>
+    </tr>
+  </table>
+</div>
+
+    <!-- TODO:Bussiness logic --!>
+
