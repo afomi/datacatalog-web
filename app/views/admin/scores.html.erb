@@ -11,7 +11,7 @@
       <th class="left">property</th>
       <th class="right sort">% missing</th>
     </tr>
-    <tr>
+    <tr class="even">
       <td>title</td>
       <td>50</td>
     </tr>
@@ -30,17 +30,17 @@
       <th class="mid sort">score</th>
       <th class="right sort">last updated</th>
     </tr>
-    <tr>
+    <tr class="even">
       <td>Employment cost trends</td>
       <td>4</td>
       <td>11/09/10</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td>Worldwide M5 Earthquakes Past 7 Days </td>
       <td>7</td>
       <td>07/05/10</td>
     </tr>
-    <tr>
+    <tr class="even">
       <td>Tax Year 2001 SOI Exempt Organization Study</td>
       <td>17</td>
       <td>10/13/10</td>
@@ -48,6 +48,7 @@
   </table>
   <p>
   <%= text_field :individual_records, :filter %>
+  <%= select 'Importer', :importer, %w[All Utah Data.gov Michigan] %>
   <%= button_to "Filter"%>
   </p>
 </div>
@@ -61,7 +62,7 @@
       <th class="mid sort">mean</th>
       <th class="right sort">max</th>
     </tr>
-    <tr>
+    <tr class="even">
       <td>San Francisco</td>
       <td>20</td>
       <td>40</td>
