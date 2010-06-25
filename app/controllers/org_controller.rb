@@ -3,9 +3,14 @@ class OrgController < ApplicationController
   
   def show
     @org = DataCatalog::Organization.first(:slug => params[:slug])
-    @sources = find_sources(@org)
-    @pages = paginate(@sources)
-    @clear = false
+    if @org
+      @sources = find_sources(@org)
+      @pages = paginate(@sources)
+      @clear = false
+    else
+      render_404(nil)
+      return
+    end
   end
   
   protected
