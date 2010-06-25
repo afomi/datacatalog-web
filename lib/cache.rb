@@ -29,7 +29,7 @@ class Cache
     o1 = case label
     when :jurisdictions
       logger.info "Loading all jurisdictions..."
-      DataCatalog::Organization.all(:top_level => true)      
+      DataCatalog::Organization.all(:top_level => true)
     when :organizations
       logger.info "Loading all organizations..."
       DataCatalog::Organization.all
