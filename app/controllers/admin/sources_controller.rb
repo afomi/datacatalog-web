@@ -41,7 +41,6 @@ class Admin::SourcesController < AdminController
       params[:source][key] = Kronos.parse(params[:source][key]).to_hash
     end
     @source.update(params[:source])
-    
     begin
       source = DataCatalog::Source.update(params[:id], params[:source])
       flash[:notice] = "Source saved!"

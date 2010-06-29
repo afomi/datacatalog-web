@@ -8,8 +8,8 @@ class Admin::ContactSubmissionsController < AdminController
     else  
       @folder_name = params[:folder]
     end
-    
-    @submissions = ContactSubmission.reverse_chronological.find_tagged_with(@folder_name, :on => :folders)
+    @submissions = ContactSubmission.reverse_chronological.find_tagged_with(
+      @folder_name, :on => :folders)
   end
   
   def show

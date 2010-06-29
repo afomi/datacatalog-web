@@ -11,13 +11,13 @@ class Admin::OrganizationsController < AdminController
     @organization = DataCatalog::Organization.first(:slug => params[:id])
   end
 
-  def new    
+  def new
     @organization = DataCatalog::Organization.new
   end
 
-  def create    
-    @organization = DataCatalog::Organization.new(params[:organization])
-
+  def create
+    @organization = DataCatalog::Organization.new(
+      params[:organization])
     begin
       organization = DataCatalog::Organization.create(params[:organization])
       flash[:notice] = "Organization created!"
@@ -31,9 +31,9 @@ class Admin::OrganizationsController < AdminController
   def update
     @organization = DataCatalog::Organization.get(params[:id])
     @organization.update(params[:organization])
-    
     begin
-      organization = DataCatalog::Organization.update(params[:id], params[:organization])
+      organization = DataCatalog::Organization.update(
+        params[:id], params[:organization])
       flash[:notice] = "Organization saved!"
       redirect_to admin_organization_path(params[:organization][:slug])
     rescue DataCatalog::BadRequest => e

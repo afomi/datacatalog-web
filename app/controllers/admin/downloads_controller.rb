@@ -10,7 +10,9 @@ class Admin::DownloadsController < AdminController
     if params[:download][:size][:number].blank?
       params[:download].delete(:size)
     else
-      params[:download][:size][:bytes] = params[:download][:size][:number].to_i * (2 ** power_of(params[:download][:size][:unit]))
+      params[:download][:size][:bytes] =
+        params[:download][:size][:number].to_i *
+        (2 ** power_of(params[:download][:size][:unit]))
     end
     params[:download][:source_id] = params[:source_id]
     @download = DataCatalog::Download.new(params[:download])
@@ -22,7 +24,7 @@ class Admin::DownloadsController < AdminController
     rescue DataCatalog::BadRequest => e
       flash[:error] = build_error_message(e.errors)
       render :new
-    end      
+    end
   end
   
   def edit
@@ -32,11 +34,12 @@ class Admin::DownloadsController < AdminController
   def update
     @source = DataCatalog::Source.get(params[:source_id])
     @download = DataCatalog::Download.get(params[:id])
-    
     if params[:download][:size][:number].blank?
       params[:download].delete(:size)
     else
-      params[:download][:size][:bytes] = params[:download][:size][:number].to_i * (2 ** power_of(params[:download][:size][:unit]))
+      params[:download][:size][:bytes] =
+        params[:download][:size][:number].to_i *
+        (2 ** power_of(params[:download][:size][:unit]))
     end
     begin
       download = DataCatalog::Download.update(params[:id], params[:download])
