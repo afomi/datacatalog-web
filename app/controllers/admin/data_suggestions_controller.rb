@@ -3,10 +3,10 @@ class Admin::DataSuggestionsController < AdminController
   before_filter :set_folders
   
   def index
-    if params[:folder].blank?
-      @folder_name = "Inbox"
+    @folder_name = if params[:folder].blank?
+      "Inbox"
     else  
-      @folder_name = params[:folder]
+      params[:folder]
     end
     @suggestions = DataSuggestion.reverse_chronological.find_tagged_with(
       @folder_name, :on => :folders)

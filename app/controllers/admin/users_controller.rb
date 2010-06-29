@@ -2,16 +2,19 @@ class Admin::UsersController < AdminController
 
   before_filter :require_admin
   
+  EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
+  
   def index
-    if @search_term = params[:search]
-      if @search_term =~ /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
-        @users = User.find_all_by_email(@search_term)
+    @search_term = params[:search]
+    @users = if @search_term
+      if @search_term =~ EMAIL_REGEX
+        User.find_all_by_email(@search_term)
       else
-        @users = User.find(:all, :conditions =>
+        User.find(:all, :conditions => 
           ["display_name LIKE ?", "%#{@search_term}%"])
-      end  
+      end
     else
-      @users = User.alphabetical
+      User.alphabetical
     end
   end
   
