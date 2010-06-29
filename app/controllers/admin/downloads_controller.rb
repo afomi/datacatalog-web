@@ -52,7 +52,6 @@ class Admin::DownloadsController < AdminController
   end
   
   def destroy
-    logger.info "Hasdjflasjfdlllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
     @download = DataCatalog::Download.get(params[:id])
     @source = DataCatalog::Source.get(@download.source_id)
     DataCatalog::Download.destroy(params[:id])
