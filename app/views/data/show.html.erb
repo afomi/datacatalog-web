@@ -15,8 +15,11 @@
       <div id="metaDetails">
         <dl>
           
-          <%= detail_field @source, :attribute => :organization_id, :label => "Organization",
-                           :value => DataCatalog::Organization.get(@source.organization_id).name %>
+          <%= detail_field @source,
+            :attribute => :organization_id,
+            :label     => "Organization",
+            :value     => DataCatalog::Organization.get(@source.organization_id).name,
+            :url       => org_path(@source.organization.slug) %>
           
           <%= detail_field @source, :attribute => :categories, :collection => true, :label => "Category",
                            :value => "", :url => "#"%>
