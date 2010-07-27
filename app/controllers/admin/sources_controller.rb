@@ -56,14 +56,14 @@ class Admin::SourcesController < AdminController
   def get_organizations
     orgs = CACHE.get(:organizations)
     @organizations = if orgs
-      orgs
+      [""].concat(orgs)
     else
       [['Data is loading...', 0]]
     end
   end
   
   def set_frequencies
-    @frequencies = Frequency.list
+    @frequencies = [""].concat(Frequency.list)
   end
   
 end
