@@ -2,7 +2,7 @@ default_run_options[:pty] = true
 
 set :environment, (ENV['target'] || 'staging')
 set :application, "datacatalog-web"
-set :repository,  "git@github.com:sunlightlabs/datacatalog-web.git"
+set :repository,  "git://github.com/sunlightlabs/#{application}.git"
 set :scm, "git"
 set :user, "datcat"
 set :use_sudo, false
