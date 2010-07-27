@@ -47,7 +47,8 @@ class BrowseController < ApplicationController
   end
   
   def filter_form_setup
-    @filters = get_filters([:jurisdiction_id, :organization_id, :source_type, :release_year])
+    @filters = get_filters([
+      :jurisdiction_id, :organization_id, :source_type, :release_year])
     @jurisdictions = get_jurisdictions
     @organizations = get_organizations
     @source_types  = get_source_types
