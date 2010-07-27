@@ -7,7 +7,7 @@ set :scm, "git"
 set :user, "datcat"
 set :use_sudo, false
 set :deploy_via, :remote_cache
-set :deploy_to, "/home/datcat/www/datacatalog-web"
+set :deploy_to, "/home/#{user}/www/#{application}"
 set :domain, "nationaldatacatalog.com"
 
 if environment == 'production'
