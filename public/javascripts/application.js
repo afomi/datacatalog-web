@@ -32,10 +32,6 @@ $(document).ready(function(){
       } 
   );
   
-  $("#released").datepicker({ changeYear: true, changeMonth: true });
-  $("#period_start").datepicker({ changeYear: true, changeMonth: true });
-  $("#period_end").datepicker({ changeYear: true, changeMonth: true });
-  
   $("li#moveBtn a.buttonLink").toggle(
     function(){
        $(this).addClass("active");
