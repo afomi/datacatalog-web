@@ -74,7 +74,7 @@ class BrowseController < ApplicationController
   end
   
   def get_source_types
-    %w(All Dataset API).map { |s| [s, s.downcase] }
+    %w(All Dataset API Interactive).map { |s| [s, s.downcase] }
   end
   
   def get_release_years
