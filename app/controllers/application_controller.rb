@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   protected
     
   def extract_id(href)
-    /\/(.*)\/(.*)/.match(href)[2]
+    %r{/(.*)/(.*)}.match(href)[2]
   end
 
   private
