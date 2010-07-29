@@ -80,24 +80,18 @@ module ApplicationHelper
 
   def star_class(rating)
     case rating
-    when 1
-      return "ratedOneStar"
-    when 2
-      return "ratedTwoStars"      
-    when 3
-      return "ratedThreeStars"      
-    when 4
-      return "ratedFourStars"  
-    when 5
-      return "ratedFiveStars"
-    else
-      return ""
+    when 1 then "ratedOneStar"
+    when 2 then "ratedTwoStars"
+    when 3 then "ratedThreeStars"
+    when 4 then "ratedFourStars"
+    when 5 then "ratedFiveStars"
+    else ""
     end
   end
   
   def rating_count(average, total)
     return "0" unless average
-    return (total.to_i/average.to_i).to_i.to_s
+    (total.to_i / average.to_i).to_i.to_s
   end
   
   def extract_id(href)
