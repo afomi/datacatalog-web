@@ -75,7 +75,8 @@ module ApplicationHelper
   end
   
   def markdown_instructions
-    "Use <a href=\"http://www.squarespace.com/display/ShowHelp?section=Markdown\" target=\"_blank\">Markdown</a> for formatting."
+    url = "http://www.squarespace.com/display/ShowHelp?section=Markdown"
+    %(Use <a href="#{url}" target="_blank">Markdown</a> for formatting.)
   end
 
   def star_class(rating)
