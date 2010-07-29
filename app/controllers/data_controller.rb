@@ -153,6 +153,7 @@ class DataController < ApplicationController
   
   def set_source
     @source = DataCatalog::Source.first(:slug => params[:slug])
+    render_404(nil) unless @source
   end
   
   def set_favorite
