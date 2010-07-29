@@ -88,11 +88,9 @@ class ApplicationController < ActionController::Base
     rescue DataCatalog::Unauthorized
       flash[:error] = "Unauthorized API Key! (#{DataCatalog.api_key})"
       redirect_to :back
-      return
     rescue DataCatalog::BadRequest => e
       flash[:error] = build_error_message(e.errors)
       redirect_to :back
-      return
     end
   end
   
