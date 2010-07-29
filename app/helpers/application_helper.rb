@@ -60,12 +60,14 @@ module ApplicationHelper
   
   def gravatar_for(user, options)
     options.reverse_merge!(:class => "avatar", :size => 64)
-    gravatar_image_tag(user.email, :alt => user.display_name, 
-                                   :title => user.display_name, 
-                                   :class => options[:class],
-                                   :width => options[:size],
-                                   :height => options[:size],
-                                   :gravatar => { :size => options[:size] })
+    gravatar_image_tag(user.email,
+      :alt      => user.display_name,
+      :title    => user.display_name,
+      :class    => options[:class],
+      :width    => options[:size],
+      :height   => options[:size],
+      :gravatar => { :size => options[:size] }
+    )
   end
   
   def markdownize(text)
