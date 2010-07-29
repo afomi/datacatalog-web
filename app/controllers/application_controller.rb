@@ -62,7 +62,6 @@ class ApplicationController < ActionController::Base
       store_location
       flash[:notice] = "You must be logged in to take that action."
       redirect_to signin_url
-      return false
     end
   end
 
@@ -71,7 +70,6 @@ class ApplicationController < ActionController::Base
       store_location
       flash[:notice] = "You must be logged out to take that action."
       redirect_to profile_url
-      return false
     end
   end
 
