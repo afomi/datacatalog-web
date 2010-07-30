@@ -3,10 +3,10 @@
 <% end %>
 
 <% content_for :body_class do %>admin<% end %>
-  
+
 <% content_for :tabs do %>
   <%= render 'admin/tabs' %>
-<% end %>  
+<% end %>
 
 <div id="ltColumn">
   <div class="tableNav">
@@ -19,8 +19,8 @@
         <th class="left">Added On</th>
         <!--<th class="center">Notes</th>
         <th class="right sort">Flagged (30)</th>-->
-      </tr>  
-    </thead>  
+      </tr>
+    </thead>
     <tbody>
       <% @sources.page(@page).each do |source| -%>
       <tr class="<%= cycle 'even','odd'%>">
@@ -34,10 +34,10 @@
         <td title="Resolve Data Set">
           <a class="flaggedData" href="#">Flagged Data</a>
         </td>-->
-      </tr>  
+      </tr>
       <% end -%>
-    </tbody>  
-  </table>  
+    </tbody>
+  </table>
   <div class="tableNav">
     <%= render 'shared/pagination', :docs => @sources %>
   </div>
@@ -58,7 +58,7 @@
         </dd>
       </dl>
     </div>
-    <a href="<%= new_admin_source_path %>"><img src="/images/btn_addSource.png" /></a>    
+    <a href="<%= new_admin_source_path %>"><img src="/images/btn_addSource.png" /></a>
   </div>
 </div>
 <div class="clear"></div>

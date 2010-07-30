@@ -3,13 +3,13 @@
 <% end %>
 
 <% content_for :body_class do %>admin<% end %>
-  
+
 <% content_for :tabs do %>
   <%= render 'admin/tabs' %>
-<% end %>  
+<% end %>
 
 <div id="ltColumn">
-  <%= show_flash_message %>  
+  <%= show_flash_message %>
   <div id="user_keys">
   <table id="keys">
     <tr id="titles">
@@ -33,7 +33,7 @@
     <% end %>
   </table>
   </div>
-  
+
 </div>
 
 <div id="rtColumnWrapper">
@@ -49,7 +49,7 @@
           <%= form.label :email %>
           <%= form.text_field :email %>
       </li>
-      <% if @user.openid_identifier.blank? -%> 
+      <% if @user.openid_identifier.blank? -%>
       <li>
           <%= form.label :password, form.object.new_record? ? nil : "Change Password" %>
           <%= form.password_field :password %>
@@ -67,13 +67,13 @@
       <li>
           <%= form.check_box :curator, :checked => @user.curator? %>&nbsp;Curator?
       </li>
-      
+
       <button class="update" id="user_submit" type="submit" value="Update" name="commit">
         <span>Update</span>
       </button>
     </ul>
   <% end %>
-  
+
   <div class="clear"></div>
   </div>
 </div>

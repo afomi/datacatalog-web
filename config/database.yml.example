@@ -1,7 +1,7 @@
 development: &default
   database: dcweb_development
   username: root
-  password: 
+  password:
   adapter:  mysql
   host:     localhost
 

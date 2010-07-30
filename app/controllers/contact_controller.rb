@@ -1,9 +1,9 @@
 class ContactController < ApplicationController
-  
+
   def index
     @contact_submission = ContactSubmission.new
   end
-  
+
   def submit
     @contact_submission = ContactSubmission.new(params[:contact_submission])
     if @contact_submission.save
@@ -14,5 +14,5 @@ class ContactController < ApplicationController
       render :action => 'index'
     end
   end
-  
+
 end

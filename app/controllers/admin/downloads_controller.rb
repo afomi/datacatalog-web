@@ -1,11 +1,11 @@
 class Admin::DownloadsController < AdminController
   before_filter :find_source
-  
+
   def new
     @download = DataCatalog::Download.new
     @download['size'] = {}
   end
-  
+
   def create
     if params[:download][:size][:number].blank?
       params[:download].delete(:size)
@@ -26,11 +26,11 @@ class Admin::DownloadsController < AdminController
       render :new
     end
   end
-  
+
   def edit
     @download = DataCatalog::Download.get(params[:id])
   end
-  
+
   def update
     @source = DataCatalog::Source.get(params[:source_id])
     @download = DataCatalog::Download.get(params[:id])
@@ -50,20 +50,20 @@ class Admin::DownloadsController < AdminController
       render :edit
     end
   end
-  
+
   def destroy
     @download = DataCatalog::Download.get(params[:id])
     @source = DataCatalog::Source.get(@download.source_id)
     DataCatalog::Download.destroy(params[:id])
     redirect_to edit_admin_source_path(@source.slug)
   end
-  
+
   protected
-  
+
   def find_source
     @source = DataCatalog::Source.first(:slug => params[:source_id])
   end
-  
+
   def power_of(unit)
     return case unit
       when 'B'  then 0
@@ -73,7 +73,7 @@ class Admin::DownloadsController < AdminController
       when 'PB' then 40
       when 'PB' then 50
       else 0
-    end 
+    end
   end
 
 end

@@ -8,11 +8,11 @@ Given /^I am a site visitor who already has signed up with "([^\"]*)"$/ do |emai
   @user = User.find_by_api_key(u.api_key)
 end
 
-Given /^I have signed up but not yet confirmed$/ do 
+Given /^I have signed up but not yet confirmed$/ do
   User.create!(:display_name => 'John D.', :email => 'some@email.com', :password => 'test', :password_confirmation => 'test')
 end
 
-Given /^I have signed up via OpenID but not yet confirmed$/ do 
+Given /^I have signed up via OpenID but not yet confirmed$/ do
   User.create!(:display_name => 'John D.', :email => 'some1@email.com', :openid_identifier => "http://someid.com/")
 end
 

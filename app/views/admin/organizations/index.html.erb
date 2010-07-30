@@ -3,10 +3,10 @@
 <% end %>
 
 <% content_for :body_class do %>admin<% end %>
-  
+
 <% content_for :tabs do %>
   <%= render 'admin/tabs' %>
-<% end %>  
+<% end %>
 
 <div id="ltColumn">
   <div class="tableNav">
@@ -18,8 +18,8 @@
         <th class="left sort">Name</th>
         <th class="left">Acronym</th>
         <th class="right">Date Added</th>
-      </tr>  
-    </thead>  
+      </tr>
+    </thead>
     <tbody>
       <% @organizations.page(@page).each do |organization| -%>
       <tr class="<%= cycle 'even','odd'%>">

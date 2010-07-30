@@ -12,19 +12,19 @@ class BrowseController < ApplicationController
       browse_setup
     end
   end
-  
+
   protected
-  
+
   def browse_setup
     @sources = get_filtered_sources
     @pages = paginate(@sources)
   end
-  
+
   def get_filtered_sources
     conditions = {}
     if @filters[:jurisdiction_id]
       conditions[:jurisdiction_id] = @filters[:jurisdiction_id]
-    end    
+    end
     if @filters[:organization_id]
       conditions[:organization_id] = @filters[:organization_id]
     end
@@ -36,7 +36,7 @@ class BrowseController < ApplicationController
     end
     DataCatalog::Source.all(conditions)
   end
-  
+
   def get_filters(list)
     filters = {}
     list.each do |item|
@@ -45,7 +45,7 @@ class BrowseController < ApplicationController
     end
     filters
   end
-  
+
   def filter_form_setup
     @filters = get_filters([
       :jurisdiction_id, :organization_id, :source_type, :release_year])
@@ -54,7 +54,7 @@ class BrowseController < ApplicationController
     @source_types  = get_source_types
     @release_years = get_release_years
   end
-  
+
   def get_jurisdictions
     jurisdictions = CACHE.get(:jurisdictions)
     if jurisdictions
@@ -63,7 +63,7 @@ class BrowseController < ApplicationController
       [['Data is loading...', 0]]
     end
   end
-  
+
   def get_organizations
     orgs = CACHE.get(:active_organizations)
     if orgs
@@ -72,14 +72,14 @@ class BrowseController < ApplicationController
       [['Data is loading...', 0]]
     end
   end
-  
+
   def get_source_types
     %w(All Dataset API Interactive).map { |s| [s, s.downcase] }
   end
-  
+
   def get_release_years
     years = Time.now.year.downto(1950).map { |y| [y, y] }
     [['All', 'all']].concat(years)
   end
-  
+
 end

@@ -1,5 +1,5 @@
 <div id="contentHeader">
-  <% if params[:action] == 'dashboard' && !current_user %>  
+  <% if params[:action] == 'dashboard' && !current_user %>
     <%= yield(:feature_box) %>
   <% else %>
     <h2><%= h yield(:title) %></h2>

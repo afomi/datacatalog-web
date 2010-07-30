@@ -3,7 +3,7 @@ Feature: Contact Us
   In order to ask about the curation process on the site
   As a user
   I want to send in a question about it
-  
+
   Scenario: Use contact form as a site visitor
     Given I am a site visitor
     When I go to the contact form
@@ -39,5 +39,5 @@ Feature: Contact Us
     Given I am signed in
     When I go to the contact form
     And I fill in "Comments" with "Some message."
-    And I press "Submit" 
+    And I press "Submit"
     Then I should see "Your message has been received"

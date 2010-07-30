@@ -3,10 +3,10 @@
 <% end %>
 
 <% content_for :body_class do %>admin<% end %>
-  
+
 <% content_for :tabs do %>
   <%= render 'admin/tabs' %>
-<% end %>  
+<% end %>
 
 <div id="ltColumn">
   <% if @search_term.blank? -%>
@@ -19,7 +19,7 @@
       <li id="deleteBtn"><a class="buttonLink" href="#">Delete</a></li>
     </ul>
     <div class="clear"></div>
-  </div>-->  
+  </div>-->
     <table id="usersTable">
       <thead>
         <tr id="titles">
@@ -43,7 +43,7 @@
 </div>
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
-    
+
     <div id="search" class="module">
       <h3>Search for User</h3>
       <% form_tag admin_users_path, :method => :get do -%>
@@ -54,7 +54,7 @@
       <% end -%>
       <p class="tip">Enter in a name or email address.</p>
     </div>
-    
+
     <div id="adminUsers" class="module">
       <h3>Curators</h3>
       <ul class="adminUsers">
@@ -77,7 +77,7 @@
         <li class="clear"></li>
       </ul>
     </div>
-    
+
     <div id="adminUsers" class="module">
       <h3>Admins</h3>
       <ul class="adminUsers">
@@ -90,6 +90,6 @@
         <li class="clear"></li>
       </ul>
     </div>
-    
+
   </div>
 </div>

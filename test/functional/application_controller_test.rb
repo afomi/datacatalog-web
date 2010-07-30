@@ -1,11 +1,11 @@
 require 'test_helper'
 
 class ApplicationControllerTest < ActionController::TestCase
-  
+
   def setup
     @controller = ApplicationController.new
   end
-  
+
   test "simple error hash" do
     h = { 'frequency' => ['is invalid'] }
     expected = "<p>frequency</p><ul><li>is invalid</li></ul>"

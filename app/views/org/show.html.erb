@@ -33,18 +33,18 @@
           <%= detail_field @org, :attribute => :url, :label => "Catalog URL",
           :value => truncate(@org.catalog_url, :length => 45), :url => @org.catalog_url, :noclear => true  %>
 
-        </dl>        
+        </dl>
       </div><!-- metaDetails -->
 
-      <div class="clear"></div> 
+      <div class="clear"></div>
 
     </div><!-- dataDetails -->
 
     <%= render 'shared/pagination', :docs => @sources %>
-    <div class="clear"></div> 
-  </div>  
+    <div class="clear"></div>
+  </div>
 
-  <%= show_flash_message %>  
+  <%= show_flash_message %>
   <%= render 'shared/source_table' %>
   <div class="tableNav">
     <%= render 'shared/pagination', :docs => @sources %>

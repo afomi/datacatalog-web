@@ -1,5 +1,5 @@
 class Cache
-  
+
   CACHE_PATH = "#{RAILS_ROOT}/tmp/dj_cache/"
 
   LABELS = %w(
@@ -7,23 +7,23 @@ class Cache
     organizations
     active_organizations
   )
-  
+
   def get(label, cache_invalid_after=3600)
     if cache_invalid?(label)
       self.send_later(:run_query, label)
     end
     load_from_file(label)
   end
-  
+
   protected
-  
+
   def cache_invalid?(label, cache_life=3600)
     f_name = filename(label)
     return true unless File.exist?(f_name)
     modified_at = File.mtime(f_name)
     (Time.now - modified_at) > cache_life
   end
-  
+
   def run_query(label)
     logger = Delayed::Worker.logger
     o1 = case label
@@ -44,7 +44,7 @@ class Cache
     write_to_file(label, o3)
     logger.info "Done."
   end
-  
+
   def filename(label)
     if LABELS.include?(label.to_s)
       File.join(CACHE_PATH, "#{label}.yaml")
@@ -52,7 +52,7 @@ class Cache
       raise "label not found : #{label}"
     end
   end
-  
+
   def write_to_file(label, object)
     f_name = filename(label)
     FileUtils.mkdir_p(File.dirname(f_name))
@@ -60,7 +60,7 @@ class Cache
       YAML.dump(object, file)
     end
   end
-  
+
   def load_from_file(label)
     f_name = filename(label)
     return nil unless File.exist?(f_name)

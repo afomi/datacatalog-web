@@ -2,13 +2,13 @@ module NavigationHelpers
 
   def path_to(page_name)
     case page_name
-    
+
     when /the homepage/
       '/'
     when /sign up/
       'signup'
     when /sign in/
-      'signin'    
+      'signin'
     when /sign out/
       'signout'
     when /my profile/
@@ -17,7 +17,7 @@ module NavigationHelpers
       'contact'
     when /the data source suggestion form/
       'suggest'
-          
+
     # Add more mappings here.
     # Here is a more fancy example:
     #

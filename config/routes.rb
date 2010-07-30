@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  
+
   map.root                                                        :controller => "main",            :action => "dashboard"
   map.about              "about",                                 :controller => "main",            :action => "about"
   map.blog               "blog",                                  :controller => "main",            :action => "blog"
@@ -34,7 +34,7 @@ ActionController::Routing::Routes.draw do |map|
   map.source_update_note "data/:slug/notes/:note_id",             :controller => "data",            :action => "update_note"
   map.source_usages      "data/:slug/usages",                     :controller => "data",            :action => "usages"
   map.suggest            "suggest",                               :controller => "suggest",         :action => "index"
-  
+
   map.resources :users
   map.resource :profile, :controller => "users" do |profile|
     profile.resources :keys

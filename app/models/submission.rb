@@ -25,25 +25,25 @@ class Submission < ActiveRecord::Base
   named_scope :read, :conditions => {:status => 'Read'}
   named_scope :archived, :conditions => {:status => 'Archived'}
   named_scope :reverse_chronological, :order => 'created_at DESC'
-  
+
   def unread!
     self.status = 'Unread'
   end
-  
+
   def read!
     self.status = 'Read'
   end
-  
+
   def archived!
     self.status = 'Archived'
   end
-  
-  private 
-  
+
+  private
+
   def identify_submitter
     if user_id.nil? and (name.blank? or email.blank?)
       errors.add_to_base("Your name and email are required")
     end
   end
-  
+
 end

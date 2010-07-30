@@ -25,7 +25,7 @@
 class User < ActiveRecord::Base
 
   validates_presence_of :email, :display_name
-  
+
   attr_accessor :api_user, :curator
 
   before_save :set_update_params
@@ -38,15 +38,15 @@ class User < ActiveRecord::Base
   acts_as_tagger
 
   named_scope :alphabetical, :order => 'display_name'
-  
+
   def self.admins
     self.all.select { |u| u.admin? }
   end
-  
+
   def self.curators
     self.all.select { |u| u.curator? }
   end
-  
+
   def after_find
     self.api_user = self.api_key ? DataCatalog::User.get_by_api_key(self.api_key) : nil
   rescue ActiveRecord::MissingAttributeError, DataCatalog::NotFound
@@ -55,11 +55,11 @@ class User < ActiveRecord::Base
 
   def set_update_params
     @updated_params = {}
-    
+
     @updated_params[:name] = self.display_name if self.display_name_changed?
     @updated_params[:email] = self.email if self.email_changed?
     @updated_params[:curator] = self.curator if self.curator
-    
+
     @updated_params
   end
 
@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
     reset_perishable_token!
     Notifier.deliver_welcome_message(self)
   end
-  
+
   def deliver_password_reset_instructions!
     reset_perishable_token!
     Notifier.deliver_password_reset_instructions(self)
@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
     self.api_key = self.api_user.primary_api_key
     self.api_id = self.api_user.id
   end
-  
+
   # Use admin?, curator?, and admin_or_curator? for authorization.
   # Never use curator (sans question mark), as it is an in-memory accessor.
   def admin?
@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
   def curator?
     self.api_user.curator
   end
-  
+
   # Use admin?, curator?, and admin_or_curator? for authorization.
   # Never use curator (sans question mark), as it is an in-memory accessor.
   def admin_or_curator?

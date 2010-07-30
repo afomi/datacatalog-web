@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create, :confirm]
   before_filter :require_user, :only => [:show, :edit, :update]
-  
+
   def new
     @user = User.new
   end
-  
+
   def create
     @user = User.new(params[:user])
     @user.save do |result|
@@ -26,18 +26,18 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   def show
     @user = @current_user
     @key = DataCatalog::ApiKey.new
   end
- 
+
   def edit
     @user = @current_user
     @key = DataCatalog::ApiKey.new
-    
+
   end
-  
+
   def update
     @user = @current_user
     @user.attributes = params[:user]
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   def confirm
     @user = User.find_using_perishable_token(params[:token], 1.month)
     if @user.nil? || @user.confirmed?

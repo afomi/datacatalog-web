@@ -7,23 +7,23 @@
 <%= render 'tabs' %>
 
 <div id="ltColumn">
-  <%= show_flash_message %>  
+  <%= show_flash_message %>
 
   <p><%= @source.description %></p>
   <div class="module">
     <div id="dataDetails">
       <div id="metaDetails">
         <dl>
-          
+
           <%= detail_field @source,
             :attribute => :organization_id,
             :label     => "Organization",
             :value     => @source.organization.name,
             :url       => org_path(@source.organization.slug) %>
-          
+
           <%= detail_field @source, :attribute => :categories, :collection => true, :label => "Category",
                            :value => "", :url => "#"%>
-                           
+
           <%= detail_field @source, :attribute => :url, :label => "Homepage",
                            :value => truncate(@source.url, :length => 30), :url => @source.url %>
 
@@ -32,20 +32,20 @@
 
           <%= detail_field @source, :attribute => :license, :label => "License",
                            :value => @source.license, :url => @source.license_url %>
-          
-          <%= detail_field @source, :attribute => :catalog_name, :label => "Original Catalog", 
+
+          <%= detail_field @source, :attribute => :catalog_name, :label => "Original Catalog",
                            :value => @source.catalog_name, :url => @source.catalog_url %>
-                           
-          <%= detail_field @source, :attribute => :released2, :label => "Released", 
+
+          <%= detail_field @source, :attribute => :released2, :label => "Released",
                            :value => @source.released.to_s %>
 
-          <%= detail_field @source, :attribute => :period_start, :label => "Period", 
+          <%= detail_field @source, :attribute => :period_start, :label => "Period",
                            :value => kronos_to_string_range(@source.period_start, @source.period_end) %>
 
-          <%= detail_field @source, :attribute => :frequency, :label => "Frequency", 
+          <%= detail_field @source, :attribute => :frequency, :label => "Frequency",
                            :value => @source.frequency.to_s.titlecase %>
         </dl>
-        
+
         <% unless @source.custom.empty? -%>
         <!--<a class="allLink" id="additionalData_information" href="#">View Additional Information</a>-->
         <% end -%>
@@ -77,10 +77,10 @@
             </li>
           </ul>
         </div>
-      </div> 
+      </div>
 
-      <div class="clear"></div> 
-    </div> 
+      <div class="clear"></div>
+    </div>
 
     <% unless @source.downloads.empty? -%>
     <div id="downloadFormats">
@@ -94,26 +94,26 @@
           <% end %>
         </li>
         <% end -%>
-      </ul>   
-      <div class="clear"></div> 
+      </ul>
+      <div class="clear"></div>
     </div>
     <% end -%>
   </div>
-  
+
   <% unless @source.downloads.empty? || @source.downloads.first.nil? || @source.downloads.first.preview.nil?  -%>
   <div class="module">
     <h3>Preview of Data</h3>
     <div class="scroll mono code"><%= @source.downloads.first.preview %></div>
   </div>
   <% end -%>
-</div> 
+</div>
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
     <%= render 'sidebar_favorites' %>
     <%= render 'sidebar_notes' %>
-  </div> 
+  </div>
 </div>
-<div class="clear"></div> 
+<div class="clear"></div>
 <div id="commentBox">
   <% if @comments.length > 0 -%>
   <h3 id="discussionTitle">Discussion</h3>
@@ -126,17 +126,17 @@
   <% end -%>
   <a name="comment_form" id="comment_form"></a>
   <% if current_user -%>
-  
+
     <div id="signin_to_comment" class="<%= @reports_problem ? "reports_problem" : "" %>">
-      <h3 class="withTip"><%= @reports_problem ? "Report a Problem" : "Your Thoughts" %></h3>  
+      <h3 class="withTip"><%= @reports_problem ? "Report a Problem" : "Your Thoughts" %></h3>
       <p class="tip">Have some findings to share? Run across something that was missing or broken? Please leave us a comment below.</p>
-  
+
       <% form_for @comment, :url => source_comment_path(@source.slug), :method => :post, :html => { :id => "comment" } do |f| %>
         <%= f.hidden_field :parent_id, :value => @parent_id %>
-    
+
         <%= f.label :comment, "Comment", :id => "commentLabel" %>
         <%= f.text_area :text, :id => "commentTextarea", :class => "textarea full", :rows => 5, :cols => 32 %>
-    
+
         <div id="commentReport">
           <label id="problemLabel">This Comment:</label>
           <label>
@@ -144,18 +144,18 @@
             Reports a Problem in the Data
           </label>
         </div>
-    
+
         <button title="post" class="postComment" type="submit">
           <span>Post Comment</span>
         </button>
       </div>
 
     <% end -%>
-    
+
   <% else -%>
   <div id="signin_to_comment" class="<%= @reports_problem ? "reports_problem" : "" %>">
     <h3 class="withTip"><%= @reports_problem ? "Sign in to report a problem" : "Sign in to comment" %></h3>
     <p class="tip">To leave a comment or report a problem with this data, you must <%= link_to "sign in", signin_url %>. No account yet? <%= link_to "Sign up", signup_url %>.</p>
   </div>
   <% end -%>
-</div>        
+</div>

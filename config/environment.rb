@@ -9,7 +9,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
-  
+
   config.gem 'authlogic', :version => '>= 2.1.1'
   config.gem "authlogic-oid", :lib => "authlogic_openid", :version => '>= 1.0.4'
   config.gem "ruby-openid", :lib => "openid", :version => '>= 2.1.7'
@@ -23,7 +23,7 @@ Rails::Initializer.run do |config|
   config.gem 'frequency', :version => '>= 0.1.5'
   config.gem 'kronos', :version => '>= 0.1.6'
   config.gem 'unindentable', :version => '>= 0.0.1'
-  config.gem "rspec", :lib => false, :version => ">= 1.2.0" 
+  config.gem "rspec", :lib => false, :version => ">= 1.2.0"
   config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
   config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :version => ">= 2.10.0", :source => 'http://gems.github.com'
   config.gem 'rr', :version => '>= 0.10.0'
@@ -55,7 +55,7 @@ Rails::Initializer.run do |config|
   config.after_initialize do
     CACHE = Cache.new
   end
-  
+
   config.middleware.use "Rack::Honeypot"
-  
+
 end

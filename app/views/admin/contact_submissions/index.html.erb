@@ -3,10 +3,10 @@
 <% end %>
 
 <% content_for :body_class do %>admin<% end %>
-  
+
 <% content_for :tabs do %>
   <%= render 'admin/tabs' %>
-<% end %>    
+<% end %>
 
 <div id="ltColumn">
   <div id="dashboardControls">
@@ -24,7 +24,7 @@
             </li>
             <% end # if -%>
             <% end # @folders.each -%>
-            
+
             <li class="divider"></li>
             <li id="manageFolders">
               <a class="dashboardNav" href="#">Manage Folders</a>
@@ -35,7 +35,7 @@
       </li>
     </ul>
     <div class="clear"></div>
-  </div>   
+  </div>
   <table id="messagesTable">
     <thead>
       <tr id="titles">
@@ -55,8 +55,8 @@
         <% else -%>
           <%= link_to submission.name, admin_contact_submission_path(submission), :class => "dataName" %>
         <% end # if user -%>
-        </td>  
-        <td class="left">          
+        </td>
+        <td class="left">
           <p><%= truncate(submission.comments, :length => 130) %></p>
         </td>
         <td class="right"><%= submission.created_at.to_s(:mdy_slashed) %></td>
@@ -66,7 +66,7 @@
     </tbody>
   </table>
 </div>
- 
+
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
     <div id="dashboardNav" class="module">
@@ -77,9 +77,9 @@
           <span><%= folder.count %></span>
         </li>
         <% end -%>
-      </ul>   
+      </ul>
       <div class="clear"></div>
     </div>
-  </div>  
-</div> 
+  </div>
+</div>
 <div class="clear"></div>

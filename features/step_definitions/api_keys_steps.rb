@@ -1,8 +1,8 @@
-Given /^I am signed in$/ do 
+Given /^I am signed in$/ do
   u = User.create!(:display_name => 'John D.', :email => 'some@email.com', :password => 'test', :password_confirmation => 'test')
   u.confirm!
   @user = User.find_by_api_key(u.api_key)
-  
+
   visit signin_path
   fill_in("Email", :with => "some@email.com")
   fill_in("Password", :with => "test")

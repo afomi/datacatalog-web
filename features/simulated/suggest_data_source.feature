@@ -3,7 +3,7 @@ Feature: Suggest data source
   In order to suggest information about a new data set
   As a user
   I want to be able to fill in a form with pertinent data and comments
-  
+
   Scenario: Use suggestion form as a site visitor
     Given I am a site visitor
     When I go to the data source suggestion form
@@ -44,5 +44,5 @@ Feature: Suggest data source
     And I fill in "Data Source Title" with "Vampire Bat Data"
     And I fill in "Data Source URL" with "http://vampire.bat"
     And I fill in "Comments" with "They can be dangerous."
-    And I press "Submit" 
+    And I press "Submit"
     Then I should see "Your suggestion has been received"

@@ -14,14 +14,14 @@ ActionController::Base.class_eval do
   def begin_open_id_authentication(identity_url, options = {})
     yield OpenIdAuthentication::Result.new(:successful), normalize_identifier(identity_url), nil
   end
-  
+
 end
 
 Before do
   DataCatalog::User.all.each do |u|
     DataCatalog::User.destroy(u.id) unless u.name == "Primary Admin"
   end
-  
+
   DataCatalog::Source.all.each do |s|
     DataCatalog::Source.destroy(s.id)
   end

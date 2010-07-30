@@ -3,7 +3,7 @@ Feature: Sign up via OpenID
   In order to register an account for the website
   As a site visitor
   I want to enter in my OpenID to create an account
-  
+
   Scenario: Sign up with OpenID
     Given I am a site visitor
     When I go to sign up

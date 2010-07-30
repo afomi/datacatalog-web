@@ -20,30 +20,30 @@ class ApplicationController < ActionController::Base
   def render_404(e)
     render :template => 'main/not_found', :status => "404 Not Found"
   end
-  
+
   def render_500(e)
     render :template => 'main/internal_error', :status => "500 Error"
   end
-  
+
   protected
-    
+
   def extract_id(href)
     %r{/(.*)/(.*)}.match(href)[2]
   end
 
   private
-  
+
   def set_avatar
     gender = rand(2) == 1 ? "male" : "female"
     ActionView::Base.default_gravatar_image =
       "http://nationaldatacatalog.com/images/avatar_#{gender}_lg.png"
   end
-  
+
   def set_analytics
     analytics = YAML.load_file(Rails.root.to_s + "/config/analytics.yml")
     @analytics_key = analytics["key"]
   end
-  
+
   def show_title
     @show_title = true
   end
@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
   def mailer_set_url_options
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
-  
+
   def handle_api_errors
     begin
       yield
@@ -93,14 +93,14 @@ class ApplicationController < ActionController::Base
       redirect_to :back
     end
   end
-  
+
   def build_error_message(error_hash)
     error_hash.map do |key, messages|
       "<p>#{key}</p>" +
       "<ul>" + messages.map { |m| "<li>#{m}</li>" }.join("") + "</ul>"
     end.join("")
   end
-  
+
   def paginate(documents, radius=3)
     @page = params[:page].nil? ? 1 : params[:page].to_i
     max = documents.page_count

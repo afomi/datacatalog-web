@@ -1,7 +1,7 @@
 namespace :cache do
-  
+
   namespace :browse do
-  
+
     desc "Refresh the cache"
     task :refresh => [:expire_filtered, :refresh_unfiltered]
 
@@ -32,7 +32,7 @@ namespace :cache do
         end
       end
     end
-  
+
     def get_base_uri
       env = ENV['RAILS_ENV'] || 'development'
       config_file = File.join(File.dirname(__FILE__), "/../../config/server.yml")
@@ -45,16 +45,16 @@ namespace :cache do
       yield
       Time.now - t
     end
-  
+
     def fetch_page(base_uri, page)
       status = nil
       uri = URI.join(base_uri, "/browse?page=#{page}&reload=true")
-      t = time_block do 
+      t = time_block do
         open(uri) { |f| status = f.status }
       end
       [status, t]
     end
-  
+
   end
 
 end

@@ -20,13 +20,13 @@ end
 
 role :web, domain
 role :app, domain
-role :db,  domain, :primary => true 
+role :db,  domain, :primary => true
 
 namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
   end
-  
+
   task :symlink_config do
     shared_config = File.join(shared_path, 'config')
     release_config = "#{release_path}/config"
@@ -34,13 +34,13 @@ namespace :deploy do
       run "ln -s #{shared_config}/#{file}.yml #{release_config}/#{file}.yml"
     end
   end
-  
+
   task :symlink_delayed_job do
     shared = File.join(shared_path, 'tmp/dj_cache')
     release = "#{release_path}/tmp/dj_cache"
     run "ln -s #{shared} #{release}"
   end
-  
+
   task :restart_delayed_job do
     run "cd #{current_path}; RAILS_ENV=production rake jobs:cache:clear"
     run "cd #{current_path}; RAILS_ENV=production script/delayed_job restart"

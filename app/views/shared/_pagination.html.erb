@@ -5,7 +5,7 @@
       <li class="pagination_previous"><%= link_to "&laquo; Previous",
         params.merge({ :page => @page - 1 }) -%></li>
     <% end -%>
-    
+
     <% @pages.each do |p| -%>
     <li>
       <% if p.nil? -%>
@@ -17,11 +17,11 @@
       <% end -%>
     </li>
     <% end -%>
-    
+
     <% if @page < docs.page_count -%>
       <li class="pagination_next"><%= link_to "Next &raquo;",
         params.merge({ :page => @page + 1 }) -%></li>
     <% end -%>
   <% end -%>
-  
+
 </ul>

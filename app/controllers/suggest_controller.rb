@@ -1,9 +1,9 @@
 class SuggestController < ApplicationController
-  
+
   def index
     @data_suggestion = DataSuggestion.new
   end
-  
+
   def suggest
     @data_suggestion = DataSuggestion.new(params[:data_suggestion])
     if @data_suggestion.save
@@ -14,5 +14,5 @@ class SuggestController < ApplicationController
       render :action => 'index'
     end
   end
-  
+
 end

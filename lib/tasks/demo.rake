@@ -1,5 +1,5 @@
 namespace :demo do
-  
+
   def clean_slate
     DataCatalog::User.all.each do |u|
       unless u.email =~ /(^.*sunlightfoundation.com$)/
@@ -13,13 +13,13 @@ namespace :demo do
       end
     end
   end
-  
+
   def set_up_api
     dc_config = YAML.load_file(File.dirname(__FILE__) + "/../../config/api.yml")
     DataCatalog.api_key = dc_config[RAILS_ENV]['api_key']
     DataCatalog.base_uri = dc_config[RAILS_ENV]['base_uri']
   end
-  
+
   desc "Setup seed data for app demo"
   task :seed => ["db:reset"] do
     set_up_api
@@ -48,7 +48,7 @@ namespace :demo do
       :password_confirmation => 'demo'
     )
     @david.confirm!
-    
+
     @louis = User.create!(
       :display_name          => 'Louis Brandeis',
       :email                 => 'louis@brandeis.edu',
@@ -57,7 +57,7 @@ namespace :demo do
     )
     @louis.confirm!
   end
-  
+
   def create_submissions
     @contact1 = ContactSubmission.create!(
       :user_id  => @louis.id,
@@ -70,7 +70,7 @@ namespace :demo do
     )
     @contact2.folder_list = ['Whacky']
     @contact2.save!
-    
+
     @suggestion1 = DataSuggestion.create!(
       :user_id  => @louis.id,
       :title    => "LOUISdb API",
@@ -86,7 +86,7 @@ namespace :demo do
     @suggestion2.folder_list = ['Science']
     @suggestion2.save!
   end
-  
+
   def create_organizations
     @ngo = DataCatalog::Organization.create(
       :name       => "Non-Governmental Organizations",
@@ -100,22 +100,22 @@ namespace :demo do
       :parent_id => @ngo.id
     )
   end
-  
+
   def create_sources
     @sunlight_labs_api = DataCatalog::Source.create(
       :title             => "Sunlight Labs API",
-      :url               => 'http://services.sunlightlabs.com/api/', 
+      :url               => 'http://services.sunlightlabs.com/api/',
       :source_type       => "api",
       :organization_id   => @sunlight_labs.id,
       :license           => "See Website",
       :license_url       => "http://services.sunlightlabs.com/api/",
-      :documentation_url => "http://wiki.sunlightlabs.com/Sunlight_API_Documentation", 
+      :documentation_url => "http://wiki.sunlightlabs.com/Sunlight_API_Documentation",
       :description       => "The Sunlight Labs API provides methods for obtaining basic information on Members of Congress, legislator IDs used by various websites, and lookups between places and the politicians that represent them. The primary purpose of the API is to facilitate mashups involving politicians and the various other APIs that are out there."
     )
 
     @capitol_words_api = DataCatalog::Source.create(
       :title           => "Capitol Words API",
-      :url             => 'http://capitolwords.org/api/', 
+      :url             => 'http://capitolwords.org/api/',
       :source_type     => "api",
       :organization_id => @sunlight_labs.id,
       :description     => "For every day Congress is in session, Capitol Words visualizes the most frequently used words in the Congressional Record, giving you an at-a-glance view of which issues lawmakers address on a daily, weekly, monthly and yearly basis. Capitol Words lets you see what are the most popular words spoken by lawmakers on the House and Senate floor."
@@ -123,13 +123,13 @@ namespace :demo do
 
     @sunlight_labs_legislator_data = DataCatalog::Source.create(
       :title           => "Sunlight Labs Legislator Data",
-      :url             => 'http://github.com/sunlightlabs/apidata/tree/master/legislators/', 
+      :url             => 'http://github.com/sunlightlabs/apidata/tree/master/legislators/',
       :source_type     => "dataset",
       :organization_id => @sunlight_labs.id,
       :description     => "Repository for collaborative editing of Sunlight Labs API data."
     )
   end
-  
+
   def create_downloads
     @csv = DataCatalog::Download.create(
       :url       => "http://github.com/sunlightlabs/apidata/blob/master/legislators/legislators.csv",
@@ -143,7 +143,7 @@ namespace :demo do
       }
     )
   end
-  
+
   def create_comments
     @comments = []
     DataCatalog.with_key(@louis.api_key) do

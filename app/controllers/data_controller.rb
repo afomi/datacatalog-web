@@ -1,7 +1,7 @@
 class DataController < ApplicationController
   before_filter :require_user, :except => [:show, :docs, :show_doc, :usages]
   before_filter :set_source, :set_favorite
-  
+
   def show
     @comment = DataCatalog::Comment.new
     @comments = []
@@ -19,7 +19,7 @@ class DataController < ApplicationController
     @parent_id = params[:parent_id]
     @reports_problem = params[:reports_problem]
   end
-  
+
   def comment
     comment = params[:data_catalog_comment]
     DataCatalog.with_key(current_user.api_key) do
@@ -32,7 +32,7 @@ class DataController < ApplicationController
     flash[:notice] = "Comment saved!"
     redirect_to source_path(@source.slug)
   end
-  
+
   def rating
     DataCatalog.with_key(current_user.api_key) do
       DataCatalog::Rating.create(:kind => "source", :source_id => @source.id, :value => params[:value])
@@ -40,15 +40,15 @@ class DataController < ApplicationController
     flash[:notice] = "Rating saved!"
     redirect_to source_path(@source.slug)
   end
-  
+
   def comment_rating
     DataCatalog.with_key(current_user.api_key) do
       DataCatalog::Rating.create(:kind => "comment", :comment_id => params[:comment_id], :value => 1)
     end
     flash[:notice] = "Comment rating saved!"
     redirect_to source_path(@source.slug)
-  end    
-  
+  end
+
   def favorite
     DataCatalog.with_key(current_user.api_key) do
      DataCatalog::Favorite.create(:source_id => @source.id)
@@ -56,7 +56,7 @@ class DataController < ApplicationController
     flash[:notice] = "Added as favorite!"
     redirect_to :back
   end
-  
+
   def unfavorite
     DataCatalog.with_key(current_user.api_key) do
      DataCatalog::Favorite.all(:source_id => @source.id).each do |f|
@@ -66,7 +66,7 @@ class DataController < ApplicationController
     flash[:notice] = "Removed favorite."
     redirect_to :back
   end
-  
+
   def notes
     all_notes = DataCatalog::Note.all(:user_id => current_user.api_id)
     @notes = []
@@ -74,7 +74,7 @@ class DataController < ApplicationController
       @notes << note if note.source_id == @source.id
     end
   end
-  
+
   def new_note
     DataCatalog.with_key(current_user.api_key) do
       DataCatalog::Note.create(:source_id => @source.id, :text => params[:text])
@@ -82,7 +82,7 @@ class DataController < ApplicationController
     flash[:notice] = "Added note."
     redirect_to source_notes_path(@source.slug)
   end
-  
+
   def update_note
     DataCatalog.with_key(current_user.api_key) do
       DataCatalog::Note.update(:id => params[:note_id], :text => params[:text])
@@ -90,7 +90,7 @@ class DataController < ApplicationController
     flash[:notice] = "Updated note."
     redirect_to source_notes_path(@source.slug)
   end
-  
+
   def docs
     @docs = DataCatalog::Document.all(:source_id => @source.id)
     @doc = @docs.first
@@ -98,7 +98,7 @@ class DataController < ApplicationController
       doc.user = User.find_by_api_id(doc.user_id)
     end
   end
-  
+
   def show_doc
     @docs = DataCatalog::Document.all(:source_id => @source.id)
     @doc = DataCatalog::Document.get(params[:id])
@@ -107,7 +107,7 @@ class DataController < ApplicationController
     end
     render 'docs'
   end
-  
+
   def edit_docs
     @docs = DataCatalog::Document.all(:source_id => @source.id)
     @doc = @docs.first
@@ -120,7 +120,7 @@ class DataController < ApplicationController
     end
     @doc
   end
-  
+
   def create_doc
     DataCatalog.with_key(current_user.api_key) do
       @document = DataCatalog::Document.create(:source_id => @source.id, :text => params[:data_catalog_document][:text])
@@ -128,34 +128,34 @@ class DataController < ApplicationController
     flash[:notice] = "Updated documentation."
     redirect_to source_docs_path(@source.slug)
   end
-  
+
   def update_doc
     DataCatalog.with_key(current_user.api_key) do
       @document = DataCatalog::Document.update(params[:id], :text => params[:data_catalog_document][:text])
     end
     flash[:notice] = "Updated documentation."
-    redirect_to source_docs_path(@source.slug)    
+    redirect_to source_docs_path(@source.slug)
   end
-  
+
   private
-  
+
   def find_parent_comment(comments, parent_id)
     comments.each do |comment|
       return comment if comment.id == parent_id
     end
-    
+
     parent = nil
     comments.each do |comment|
       parent = find_parent_comment(comment.children, parent_id)
     end
     return parent
   end
-  
+
   def set_source
     @source = DataCatalog::Source.first(:slug => params[:slug])
     render_404(nil) unless @source
   end
-  
+
   def set_favorite
     @is_favorite = false
     if current_user
@@ -164,5 +164,5 @@ class DataController < ApplicationController
       end
     end
   end
-  
+
 end

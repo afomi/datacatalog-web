@@ -1,29 +1,29 @@
 class Admin::SourcesController < AdminController
-  
+
   KRONOS_FIELDS = [:released, :period_start, :period_end]
-  
+
   before_filter :get_organizations, :set_frequencies
-  
+
   def index
     @sources = DataCatalog::Source.all
     @pages = paginate(@sources)
   end
-  
+
   def edit
     @source = DataCatalog::Source.first(:slug => params[:id])
     KRONOS_FIELDS.each do |key|
       @source[key] = Kronos.from_hash(@source[key]).to_s
     end
   end
-  
+
   def new
     @source = DataCatalog::Source.new
   end
-  
+
   def create
     KRONOS_FIELDS.each do |key|
       params[:source][key] = Kronos.parse(params[:source][key]).to_hash
-    end    
+    end
     @source = DataCatalog::Source.new(params[:source])
     begin
       source = DataCatalog::Source.create(params[:source])
@@ -50,9 +50,9 @@ class Admin::SourcesController < AdminController
       render :edit
     end
   end
-  
+
   protected
-  
+
   def get_organizations
     orgs = CACHE.get(:organizations)
     @organizations = if orgs
@@ -61,9 +61,9 @@ class Admin::SourcesController < AdminController
       [['Data is loading...', 0]]
     end
   end
-  
+
   def set_frequencies
     @frequencies = [""].concat(Frequency.list)
   end
-  
+
 end

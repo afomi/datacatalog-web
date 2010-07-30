@@ -1,10 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  
+
   def custom_error_messages
     { :header_message => "", :message => "The following problems occurred:" }
   end
-  
+
   def active_if(options)
     actions = options[:action] || []
     controllers = options[:controller] || []
@@ -14,7 +14,7 @@ module ApplicationHelper
       ""
     end
   end
-  
+
   def show_flash_message
     message = ""
     flash.each do |name, msg|
@@ -22,14 +22,14 @@ module ApplicationHelper
     end
     message
   end
-  
+
   def detail_field(obj, options)
     if options[:collection]
       return nil if obj.send(options[:attribute]).empty?
     else
       return nil if obj.send(options[:attribute]).blank?
     end
-    
+
     dd_content = if options[:url]
       link_to(options[:value], options[:url])
     elsif options[:titleize]
@@ -39,25 +39,25 @@ module ApplicationHelper
     else
       options[:value]
     end
-    
+
     output = content_tag(:dt, (options[:label] || options[:attribute].to_s.humanize)) +
       content_tag(:dd, dd_content) +
       (options[:noclear] && !@clear ? "" : content_tag(:div, "", :class => 'clear'))
     @clear = !@clear
     output
-  end 
-  
+  end
+
   def kronos_to_string(kronos_hash)
     return '' if kronos_hash.blank?
     k = Kronos.from_hash(kronos_hash)
     k.valid? ? k.to_s : ''
   end
-  
+
   def kronos_to_string_range(kronos_1, kronos_2)
     k1, k2 = kronos_to_string(kronos_1), kronos_to_string(kronos_2)
     k1.blank? || k2.blank? ? '' : "#{k1} to #{k2}"
   end
-  
+
   def gravatar_for(user, options)
     options.reverse_merge!(:class => "avatar", :size => 64)
     gravatar_image_tag(user.email,
@@ -69,11 +69,11 @@ module ApplicationHelper
       :gravatar => { :size => options[:size] }
     )
   end
-  
+
   def markdownize(text)
     RDiscount.new(text).to_html
   end
-  
+
   def markdown_instructions
     url = "http://www.squarespace.com/display/ShowHelp?section=Markdown"
     %(Use <a href="#{url}" target="_blank">Markdown</a> for formatting.)
@@ -89,14 +89,14 @@ module ApplicationHelper
     else ""
     end
   end
-  
+
   def rating_count(average, total)
     return "0" unless average
     (total.to_i / average.to_i).to_i.to_s
   end
-  
+
   def extract_id(href)
     %r{/(.*)/(.*)}.match(href)[2]
-  end  
+  end
 
 end

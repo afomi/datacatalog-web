@@ -3,10 +3,10 @@
 <% end %>
 
 <% content_for :body_class do %>admin<% end %>
-  
+
 <% content_for :tabs do %>
   <%= render 'admin/tabs' %>
-<% end %>    
+<% end %>
 
 <div id="ltColumn">
   <div id="dashboardControls">
@@ -24,7 +24,7 @@
             </li>
             <% end # if -%>
             <% end # @folders.each -%>
-            
+
             <li class="divider"></li>
             <li id="manageFolders">
               <a class="dashboardNav" href="#">Manage Folders</a>
@@ -35,7 +35,7 @@
       </li>
     </ul>
     <div class="clear"></div>
-  </div>   
+  </div>
   <table id="suggestedData">
     <thead>
       <tr id="titles">
@@ -63,7 +63,7 @@
     </tbody>
   </table>
 </div>
- 
+
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
     <div id="dashboardNav" class="module">
@@ -74,9 +74,9 @@
           <span><%= folder.count %></span>
         </li>
         <% end -%>
-      </ul>   
+      </ul>
       <div class="clear"></div>
     </div>
-  </div>  
-</div> 
+  </div>
+</div>
 <div class="clear"></div>

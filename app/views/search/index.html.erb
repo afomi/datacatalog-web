@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :body_class do %>browse<% end %>
-  
+
 <div id="column_fullWidth">
   <div class="detailBox">
     <form id="searchForm" action="/search" method="get">
@@ -13,21 +13,21 @@
         <span>Search the Catalog</span>
       </button>
     </form>
-    <div class="clear"></div>  
+    <div class="clear"></div>
   </div>
-  
+
   <% if @sources.length == 0 -%>
   <p>No results found! Try searching again.</p>
   <% else -%>
   <div class="tableNav">
     <%= render 'shared/pagination', :docs => @sources %>
   </div>
-  
+
   <%= render 'shared/source_table' %>
 
   <div class="tableNav">
     <%= render 'shared/pagination', :docs => @sources %>
   </div>
-  
+
   <% end -%>
 </div>       

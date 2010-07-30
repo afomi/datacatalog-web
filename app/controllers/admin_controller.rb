@@ -1,12 +1,12 @@
 class AdminController < ApplicationController
   before_filter :require_user, :require_curator
-  
+
   def show
 
   end
-  
+
   private
-  
+
   def require_curator
     unless current_user.admin_or_curator?
       store_location
@@ -14,7 +14,7 @@ class AdminController < ApplicationController
       redirect_to dashboard_path
     end
   end
-  
+
   def require_admin
     unless current_user.admin?
       store_location
@@ -22,5 +22,5 @@ class AdminController < ApplicationController
       redirect_to dashboard_path
     end
   end
-  
+
 end

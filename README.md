@@ -6,11 +6,11 @@ Front-end web app.
 
 Other the standard Rails stack, the biggest requirement is the National Data Catalog API, which is a Sinatra app that uses MongoDB as it's data store. Please navigate to the [datacatalog-api](http://github.com/sunlightlabs/datacatalog-api) repository to get set up on that end.
 
-        sudo gem sources -a http://gems.github.com 
+        sudo gem sources -a http://gems.github.com
         sudo gem install authlogic authlogic-oid ruby-openid nokogiri faker httparty
         sudo gem install rspec rspec-rails thoughtbot-shoulda rr
         sudo gem install notahat-machinist webrat cucumber bmabey-database_cleaner
-        
+
 ### Setup
 
 1. Configure `config/api.yml` to point to your API instance.

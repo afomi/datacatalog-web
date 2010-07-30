@@ -5,9 +5,9 @@
 <li>
     <%= form.label :email %>
     <%= form.text_field :email %>
-</li>    
+</li>
 
-<% if @user.openid_identifier.blank? -%> 
+<% if @user.openid_identifier.blank? -%>
 <li>
     <%= form.label :password, form.object.new_record? ? nil : "Change Password" %>
     <%= form.password_field :password %>
@@ -18,7 +18,7 @@
 </li>
 <% end -%>
 
-<li class="signIn_cues">  
+<li class="signIn_cues">
   <%= form.check_box :list_opt_in, {:class => "checkbox"} %>
   <%= form.label :remember_me, "Yes, email me updates from the Sunlight Foundation.", {:class => "inline"}  %>
-</li> 
+</li>

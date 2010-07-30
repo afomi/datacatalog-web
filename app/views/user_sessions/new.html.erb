@@ -9,9 +9,9 @@ Sign In
   <ul class="tabs">
     <li id="nav_standard_signin"><a class="buttonLink active" href="#">Standard Sign In</a></li>
     <li id="nav_openid_signin"><a class="buttonLink" href="#">OpenID Sign In</a></li>
-  </ul>    
-</div> 
-<div class="clear"></div>  
+  </ul>
+</div>
+<div class="clear"></div>
 <% end %>
 
 <div id="ltColumn">
@@ -27,24 +27,24 @@ Sign In
           <%= f.label :email %>
           <%= f.text_field :email %>
         </li>
-        <li>  
+        <li>
           <%= f.label :password %>
-          <%= f.password_field :password %>    
+          <%= f.password_field :password %>
         </li>
-        <li class="signIn_cues">  
+        <li class="signIn_cues">
           <%= f.check_box :remember_me, {:class => "checkbox"} %>
           <%= f.label :remember_me, "Stay Signed In", {:class => "inline"}  %>
           <%= link_to "Forgot Your Password?", forgot_path %>
-        </li>  
+        </li>
         <li>
           <button class="signIn" id="user_session_submit" type="submit" value="Sign In" name="commit">
             <span>Sign In</span>
           </button>
-        </li>    
+        </li>
       </ul>
       <% end %>
     </div>
-    
+
     <div class="tab_pane">
       <% form_for @user_session, :url => user_session_path, :id => "" do |f| %>
       <%= f.error_messages custom_error_messages %>
@@ -57,8 +57,8 @@ Sign In
         <li>
           <button class="signIn_openID" id="user_session_submit_openID" type="submit" value="Sign In Via OpenID" name="commit">
             <span>Sign In With OpenID</span>
-          </button>    
-        </li>    
+          </button>
+        </li>
       </ul>
       <% end %>
     </div>
@@ -70,5 +70,5 @@ Sign In
     <h3>No account yet?</h3>
     <p>You'll need to <%= link_to "sign up", signup_path %> first.</p>
   </div>
-</div>    
+</div>
 <div class="clear"></div>

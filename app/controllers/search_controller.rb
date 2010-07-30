@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
 
   RADIUS = 3
-  
+
   def index
     @term = params[:term]
     if @term.blank?
@@ -11,5 +11,5 @@ class SearchController < ApplicationController
       @pages = paginate(@sources)
     end
   end
-  
+
 end

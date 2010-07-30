@@ -19,13 +19,13 @@ Feature: Watch data source
     When I click on the "New Watch List" link
     And I give it a name of "Farm Data"
     Then a new, empty watch list named "Farm Data" is available to use
-    
+
   Scenario: Save current data source to custom watch list
     Given I am viewing a data source and have a custom watch list named "Farm Data"
     When I click on the "Watch" link
     And I choose to save it to "Farm Data" when prompted
     Then the data source is added to my "Farm Data" watch list
-    
+
   Scenario: Move data source from one watch list to another
     Given I am viewing my Watch lists
     And I have a watch list named "My Watch List"

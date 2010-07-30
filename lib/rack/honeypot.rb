@@ -26,17 +26,17 @@ module Rack
     def spambot_submission?(form_hash)
       form_hash && form_hash[@input_name] && form_hash[@input_name] != @input_value
     end
-    
+
     def send_to_dead_end
       [200, {'Content-Type' => 'text/html', "Content-Length" => "0"}, []]
     end
-    
+
     def build_response_body(response)
       response_body = ""
       response.each { |part| response_body += part }
       response_body
     end
-    
+
     def recalculate_body_length(headers, body)
       new_headers = headers
       new_headers["Content-Length"] = body.length.to_s

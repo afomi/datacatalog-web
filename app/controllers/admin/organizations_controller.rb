@@ -1,12 +1,12 @@
 class Admin::OrganizationsController < AdminController
 
   before_filter :get_parents
-  
+
   def index
     @organizations = DataCatalog::Organization.all
     @pages = paginate(@organizations)
   end
-  
+
   def show
     @organization = DataCatalog::Organization.first(:slug => params[:id])
   end
@@ -43,7 +43,7 @@ class Admin::OrganizationsController < AdminController
   end
 
   protected
-  
+
   def get_parents
     orgs = CACHE.get(:organizations)
     @parents = if orgs

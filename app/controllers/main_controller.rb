@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-  
+
   def dashboard
     if current_user
       @recent_comments = DataCatalog::Comment.all(:user_id => current_user.api_id)
@@ -33,24 +33,24 @@ class MainController < ApplicationController
       render 'welcome' and return
     end
   end
-  
+
   def about
-    
+
   end
-  
+
   def blog
     require 'feedzirra'
-    
+
     url = "http://sunlightlabs.com/blog/feeds/tag/datacatalog/" #natdatcat or data.gov
     feed = Feedzirra::Feed.fetch_and_parse(url)
     @entries = feed.entries
   end
-  
+
   def source
-    
+
     @source = DataCatalog::Source.get(params[:slug])
-    
+
   end
-  
-  
+
+
 end
