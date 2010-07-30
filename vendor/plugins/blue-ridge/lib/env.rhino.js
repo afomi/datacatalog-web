@@ -3,7 +3,7 @@
 */
 var __env__ = {};
 (function($env){
-    
+
     //You can emulate different user agents by overriding these after loading env
     $env.appCodeName  = "EnvJS";//eg "Mozilla"
     $env.appName      = "Resig/20070309 BirdDog/0.0.0.1";//eg "Gecko/20070309 Firefox/2.0.0.3"
@@ -11,7 +11,7 @@ var __env__ = {};
     //set this to true and see profile/profile.js to select which methods
     //to profile
     $env.profile = false;
-    
+
     $env.log = function(msg, level){
          print(' '+ (level?level:'LOG') + ':\t['+ new Date()+"] {ENVJS} "+msg);
     };
@@ -19,32 +19,32 @@ var __env__ = {};
     $env.info   = function(){};
     $env.warn   = function(){};
     $env.error  = function(){};
-    
+
     //uncomment these if you want to get some internal log statementes
     /*$env.debug  = function(msg){
-        $env.log(msg,"DEBUG"); 
+        $env.log(msg,"DEBUG");
     };
     $env.info   = function(msg){
-        $env.log(msg,"INFO"); 
+        $env.log(msg,"INFO");
     };*/
     $env.warn   = function(msg){
-        $env.log(msg,"WARNIING");    
+        $env.log(msg,"WARNIING");
     };
     $env.error = function(msg, e){
         $env.log(msg+ " Line: "+ $env.lineSource(e),'ERROR');
         $env.log(e||"",'ERROR');
     };
-    
+
     $env.info("Initializing Rhino Platform Env");
-    
+
     $env.lineSource = function(e){
         return e&&e.rhinoException?e.rhinoException.lineSource():"(line ?)";
     };
-    
+
     $env.hashCode = function(obj){
         return obj?obj.hashCode().toString()+'':null;
     };
-    
+
     //For Java the window.location object is a java.net.URL
     $env.location = function(path, base){
       var protocol = new RegExp('(^file\:|^http\:|^https\:)');
@@ -63,7 +63,7 @@ var __env__ = {};
             }
         }
     };
-    
+
     //For Java the window.timer is created using the java.lang.Thread in combination
     //with the java.lang.Runnable
     $env.timer = function(fn, time){
@@ -78,13 +78,13 @@ var __env__ = {};
             }
         }));
     };	
-    
+
     //Since we're running in rhino I guess we can safely assume
     //java is 'enabled'.  I'm sure this requires more thought
     //than I've given it here
     $env.javaEnabled = true;	
-    
-    
+
+
     //Used in the XMLHttpRquest implementation to run a
     // request in a seperate thread
     $env.runAsync = function(fn){
@@ -93,40 +93,40 @@ var __env__ = {};
             run: fn
         }))).start();
     };
-    
+
     //Used to write to a local file
     $env.writeToFile = function(text, url){
         $env.debug("writing text to url : " + url);
-        var out = new java.io.FileWriter( 
-            new java.io.File( 
+        var out = new java.io.FileWriter(
+            new java.io.File(
                 new java.net.URI(url.toString())));	
         out.write( text, 0, text.length );
         out.flush();
         out.close();
     };
-    
+
     //Used to write to a local file
     $env.writeToTempFile = function(text, suffix){
         $env.debug("writing text to temp url : " + suffix);
         // Create temp file.
         var temp = java.io.File.createTempFile("envjs-tmp", suffix);
-    
+
         // Delete temp file when program exits.
         temp.deleteOnExit();
-    
+
         // Write to temp file
         var out = new java.io.FileWriter(temp);
         out.write(text, 0, text.length);
         out.close();
         return temp.getAbsolutePath().toString()+'';
     };
-    
+
     //Used to delete a local file
     $env.deleteFile = function(url){
         var file = new java.io.File( new java.net.URI( url ) );
         file["delete"]();
     };
-    
+
     $env.connection = function(xhr, responseHandler){
         var url = java.net.URL(xhr.url);//, $w.location);
       var connection;
@@ -140,20 +140,20 @@ var __env__ = {};
                 connection = url.openConnection();
                 connection.connect();
             }
-        } else { 
+        } else {
             connection = url.openConnection();
             connection.setRequestMethod( xhr.method );
-            
+
             // Add headers to Java connection
             for (var header in xhr.headers){
                 connection.addRequestProperty(header+'', xhr.headers[header]+'');
           }connection.connect();
-            
+
             // Stick the response headers into responseHeaders
-            for (var i = 0; ; i++) { 
-                var headerName = connection.getHeaderFieldKey(i); 
-                var headerValue = connection.getHeaderField(i); 
-                if (!headerName && !headerValue) break; 
+            for (var i = 0; ; i++) {
+                var headerName = connection.getHeaderFieldKey(i);
+                var headerValue = connection.getHeaderField(i);
+                if (!headerName && !headerValue) break;
                 if (headerName)
                     xhr.responseHeaders[headerName+''] = headerValue+'';
             }
@@ -162,7 +162,7 @@ var __env__ = {};
                 xhr.readyState = 4;
                 xhr.status = parseInt(connection.responseCode,10) || undefined;
                 xhr.statusText = connection.responseMessage || "";
-                
+
                 var contentEncoding = connection.getContentEncoding() || "utf-8",
                     stream = (contentEncoding.equalsIgnoreCase("gzip") || contentEncoding.equalsIgnoreCase("decompress") )?
                             new java.util.zip.GZIPInputStream(connection.getInputStream()) :
@@ -181,59 +181,59 @@ var __env__ = {};
 
                 xhr.responseText = java.nio.charset.Charset.forName("UTF-8").
                     decode(java.nio.ByteBuffer.wrap(baos.toByteArray())).toString()+"";
-                
+
         }
         if(responseHandler){
           responseHandler();
         }
     };
-    
+
     var htmlDocBuilder = Packages.javax.xml.parsers.DocumentBuilderFactory.newInstance();
     htmlDocBuilder.setNamespaceAware(false);
     htmlDocBuilder.setValidating(false);
-    
+
     $env.parseHTML = function(htmlstring){
         return htmlDocBuilder.newDocumentBuilder().parse(
                   new java.io.ByteArrayInputStream(
                         (new java.lang.String(htmlstring)).getBytes("UTF8")))+"";
     };
-    
+
     var xmlDocBuilder = Packages.javax.xml.parsers.DocumentBuilderFactory.newInstance();
     xmlDocBuilder.setNamespaceAware(true);
     xmlDocBuilder.setValidating(true);
-    
+
     $env.parseXML = function(xmlstring){
         return xmlDocBuilder.newDocumentBuilder().parse(
                   new java.io.ByteArrayInputStream(
                         (new java.lang.String(xmlstring)).getBytes("UTF8")))+"";
     };
-    
-    
+
+
     $env.xpath = function(expression, doc){
     return Packages.javax.xml.xpath.
       XPathFactory.newInstance().newXPath().
         evaluate(expression, doc, javax.xml.xpath.XPathConstants.NODESET);
     };
-    
-    $env.tmpdir         = java.lang.System.getProperty("java.io.tmpdir"); 
-    $env.os_name        = java.lang.System.getProperty("os.name"); 
-    $env.os_arch        = java.lang.System.getProperty("os.arch"); 
-    $env.os_version     = java.lang.System.getProperty("os.version"); 
-    $env.lang           = java.lang.System.getProperty("user.lang"); 
+
+    $env.tmpdir         = java.lang.System.getProperty("java.io.tmpdir");
+    $env.os_name        = java.lang.System.getProperty("os.name");
+    $env.os_arch        = java.lang.System.getProperty("os.arch");
+    $env.os_version     = java.lang.System.getProperty("os.version");
+    $env.lang           = java.lang.System.getProperty("user.lang");
     $env.platform       = "Rhino ";//how do we get the version
-    
+
     $env.safeScript = function(){
-      //do nothing  
+      //do nothing
     };
-    
+
     $env.scriptTypes = {
         "text/javascript"   :false,
         "text/envjs"        :true
     };
-    
+
     $env.loadLocalScript = function(script, parser){
         $env.debug("loading script ");
-        var types, type, src, i, base, 
+        var types, type, src, i, base,
             docWrites = [],
             write = document.write,
             writeln = document.writeln;
@@ -277,25 +277,25 @@ var __env__ = {};
             document.writeln = writeln;
         }
     };
-    
+
     $env.loadInlineScript = function(script){
         $env.debug("loading inline script :" + script.text);
         var tmpFile = $env.writeToTempFile(script.text, 'js') ;
         $env.info("loading " + tmpFile);
         load(tmpFile);
     };
-    
+
 })(__env__);/*
 *	policy.js
 */
 var __policy__ = {};
 (function($policy, $env){
-    
+
     //you can change these to $env.safeScript to avoid loading scripts
     //or change to $env.loadLocalScripts to load local scripts
     //$policy.loadScript    = $env.safeScript;
     $policy.loadScript    = $env.loadLocalScript;
-    
+
 })(__policy__, __env__);/*
  * Pure JavaScript Browser Environment
  *   By John Resig <http://ejohn.org/>
@@ -321,7 +321,7 @@ var $log = $env.log,
     $info = $env.info,
     $warn = $env.warn,
     $error = $env.error;
-    
+
 //The version of this application
 var $version = "0.1";
 //This should be hooked to git or svn or whatever
@@ -334,7 +334,7 @@ var $revision = "0.0.0.0";
 // read only boolean specifies whether the window has been closed
 var $closed = false;
 
-// a read/write string that specifies the default message that appears in the status line 
+// a read/write string that specifies the default message that appears in the status line
 var $defaultStatus = "Done";
 
 // a read-only reference to the Document object belonging to this window
@@ -362,13 +362,13 @@ var $name = 'Resig Env Browser';
 // a read-only reference to the Navigator object
 /**> $navigator - see navigator.js <**/
 
-// a read/write reference to the Window object that contained the script that called open() to 
+// a read/write reference to the Window object that contained the script that called open() to
 //open this browser window.  This property is valid only for top-level window objects.
 var $opener;
 
 // Read-only properties that specify the total height and width, in pixels, of the browser window.
 // These dimensions include the height and width of the menu bar, toolbars, scrollbars, window
-// borders and so on.  These properties are not supported by IE and IE offers no alternative 
+// borders and so on.  These properties are not supported by IE and IE offers no alternative
 // properties;
 var $outerHeight = $innerHeight, $outerWidth = $innerWidth;
 
@@ -381,7 +381,7 @@ var $pageXOffset = 0, $pageYOffset = 0;
 // refers to the window or frame that conatins it.
 var $parent;
 
-// a read-only refernce to the Screen object that specifies information about the screen: 
+// a read-only refernce to the Screen object that specifies information about the screen:
 // the number of available pixels and the number of available colors.
 /**> $screen - see screen.js <**/
 
@@ -396,7 +396,7 @@ var $self;
 var $status = '';
 
 // a read-only reference to the top-level window that contains this window.  If this
-// window is a top-level window it is simply a refernce to itself.  If this window 
+// window is a top-level window it is simply a refernce to itself.  If this window
 // is a frame, the top property refers to the top-level window that contains the frame.
 var $top;
 
@@ -443,8 +443,8 @@ $w.open = function(url, name, features, replace){
 
 $w.close = function(){
   //TODO
-};     
-  
+};
+
 /* Time related functions - see timer.js
 *   - clearTimeout
 *   - clearInterval
@@ -458,7 +458,7 @@ $w.close = function(){
 *   - attachEvent
 *   - detachEvent
 *   - removeEventListener
-*   
+*
 * These functions are identical to the Element equivalents.
 */
 
@@ -493,7 +493,7 @@ $w.close = function(){
 /*
 * Shared utility methods
 */
-// Helper method for extending one object with another.  
+// Helper method for extending one object with another.
 function __extend__(a,b) {
 	for ( var i in b ) {
 		var g = b.__lookupGetter__(i), s = b.__lookupSetter__(i);
@@ -511,7 +511,7 @@ function __extend__(a,b) {
 // as in might be useful to the parser and other areas as well
 function trim( str ){
     return (str || "").replace( /^\s+|\s+$/g, "" );
-    
+
 };
 /*function trim( str ){
     var start = -1,
@@ -553,9 +553,9 @@ var DOMNodeList = function(ownerDocument, parentNode) {
     this.length = 0;
     this.parentNode = parentNode;
     this.ownerDocument = ownerDocument;
-    
+
     this._readonly = false;
-    
+
     __setArray__(this, []);
 };
 __extend__(DOMNodeList.prototype, {
@@ -565,12 +565,12 @@ __extend__(DOMNodeList.prototype, {
         if ((index >= 0) && (index < this.length)) { // bounds check
             ret = this[index];                    // return selected Node
         }
-        
+
         return ret;                                    // if the index is out of bounds, default value null is returned
     },
     get xml() {
         var ret = "";
-        
+
         // create string containing the concatenation of the string values of each child
         for (var i=0; i < this.length; i++) {
             if(this[i]){
@@ -582,7 +582,7 @@ __extend__(DOMNodeList.prototype, {
                 }
             }
         }
-        
+
         return ret;
     },
     toArray: function () {
@@ -632,7 +632,7 @@ var __findItemIndex__ = function (nodelist, id) {
  */
 var __insertBefore__ = function(nodelist, newChild, refChildIndex) {
     if ((refChildIndex >= 0) && (refChildIndex < nodelist.length)) { // bounds check
-        
+
         if (newChild.nodeType == DOMNode.DOCUMENT_FRAGMENT_NODE) {  // node is a DocumentFragment
             // append the children of DocumentFragment
             Array.prototype.splice.apply(nodelist,[refChildIndex, 0].concat(newChild.childNodes.toArray()));
@@ -655,10 +655,10 @@ var __insertBefore__ = function(nodelist, newChild, refChildIndex) {
  */
 var __replaceChild__ = function(nodelist, newChild, refChildIndex) {
     var ret = null;
-    
+
     if ((refChildIndex >= 0) && (refChildIndex < nodelist.length)) { // bounds check
         ret = nodelist[refChildIndex];            // preserve old child for return
-    
+
         if (newChild.nodeType == DOMNode.DOCUMENT_FRAGMENT_NODE) {  // node is a DocumentFragment
             // get array containing children prior to refChild
             Array.prototype.splice.apply(nodelist,[refChildIndex, 1].concat(newChild.childNodes.toArray()));
@@ -668,7 +668,7 @@ var __replaceChild__ = function(nodelist, newChild, refChildIndex) {
             nodelist[refChildIndex] = newChild;
         }
     }
-    
+
     return ret;                                   // return replaced node
 };
 
@@ -682,14 +682,14 @@ var __replaceChild__ = function(nodelist, newChild, refChildIndex) {
  */
 var __removeChild__ = function(nodelist, refChildIndex) {
     var ret = null;
-    
+
     if (refChildIndex > -1) {                              // found it!
         ret = nodelist[refChildIndex];                    // return removed node
-        
+
         // rebuild array without removed child
         Array.prototype.splice.apply(nodelist,[refChildIndex, 1]);
     }
-    
+
     return ret;                                   // return removed node
 };
 
@@ -709,7 +709,7 @@ var __appendChild__ = function(nodelist, newChild) {
         // simply add node to array (links between Nodes are made at higher level)
         Array.prototype.push.apply(nodelist, [newChild]);
     }
-    
+
 };
 
 /**
@@ -723,12 +723,12 @@ var __appendChild__ = function(nodelist, newChild) {
  */
 var __cloneNodes__ = function(nodelist, deep, parentNode) {
     var cloneNodeList = new DOMNodeList(nodelist.ownerDocument, parentNode);
-    
+
     // create list containing clones of each child
     for (var i=0; i < nodelist.length; i++) {
         __appendChild__(cloneNodeList, nodelist[i].cloneNode(deep));
     }
-    
+
     return cloneNodeList;
 };
 
@@ -753,14 +753,14 @@ DOMNamedNodeMap.prototype = new DOMNodeList;
 __extend__(DOMNamedNodeMap.prototype, {
     getNamedItem : function(name) {
         var ret = null;
-        
+
         // test that Named Node exists
         var itemIndex = __findNamedItemIndex__(this, name);
-        
+
         if (itemIndex > -1) {                          // found it!
             ret = this[itemIndex];                // return NamedNode
         }
-        
+
         return ret;                                    // if node is not found, default value null is returned
     },
     setNamedItem : function(arg) {
@@ -770,25 +770,25 @@ __extend__(DOMNamedNodeMap.prototype, {
             if (this.ownerDocument != arg.ownerDocument) {
               throw(new DOMException(DOMException.WRONG_DOCUMENT_ERR));
             }
-        
+
             // throw Exception if DOMNamedNodeMap is readonly
             if (this._readonly || (this.parentNode && this.parentNode._readonly)) {
               throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
             }
-        
+
             // throw Exception if arg is already an attribute of another Element object
             if (arg.ownerElement && (arg.ownerElement != this.parentNode)) {
               throw(new DOMException(DOMException.INUSE_ATTRIBUTE_ERR));
             }
       }
-    
+
       // get item index
       var itemIndex = __findNamedItemIndex__(this, arg.name);
       var ret = null;
-    
+
       if (itemIndex > -1) {                          // found it!
             ret = this[itemIndex];                // use existing Attribute
-        
+
             // throw Exception if DOMAttr is readonly
             if (__ownerDocument__(this).implementation.errorChecking && ret._readonly) {
               throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
@@ -801,50 +801,50 @@ __extend__(DOMNamedNodeMap.prototype, {
             Array.prototype.push.apply(this, [arg]);
             this[arg.name] = arg;
       }
-    
+
       arg.ownerElement = this.parentNode;            // update ownerElement
-    
+
       return ret;                                    // return old node or null
     },
     removeNamedItem : function(name) {
           var ret = null;
           // test for exceptions
           // throw Exception if DOMNamedNodeMap is readonly
-          if (__ownerDocument__(this).implementation.errorChecking && 
+          if (__ownerDocument__(this).implementation.errorChecking &&
                 (this._readonly || (this.parentNode && this.parentNode._readonly))) {
               throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
           }
-        
+
           // get item index
           var itemIndex = __findNamedItemIndex__(this, name);
-        
+
           // throw Exception if there is no node named name in this map
           if (__ownerDocument__(this).implementation.errorChecking && (itemIndex < 0)) {
             throw(new DOMException(DOMException.NOT_FOUND_ERR));
           }
-        
+
           // get Node
           var oldNode = this[itemIndex];
           //this[oldNode.name] = undefined;
-        
+
           // throw Exception if Node is readonly
           if (__ownerDocument__(this).implementation.errorChecking && oldNode._readonly) {
             throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
           }
-        
+
           // return removed node
           return __removeChild__(this, itemIndex);
     },
     getNamedItemNS : function(namespaceURI, localName) {
           var ret = null;
-        
+
           // test that Named Node exists
           var itemIndex = __findNamedItemNSIndex__(this, namespaceURI, localName);
-        
+
           if (itemIndex > -1) {                          // found it!
             ret = this[itemIndex];                // return NamedNode
           }
-        
+
           return ret;                                    // if node is not found, default value null is returned
     },
     setNamedItemNS : function(arg) {
@@ -854,22 +854,22 @@ __extend__(DOMNamedNodeMap.prototype, {
             if (this._readonly || (this.parentNode && this.parentNode._readonly)) {
               throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
             }
-        
+
             // throw Exception if arg was not created by this Document
             if (__ownerDocument__(this) != __ownerDocument__(arg)) {
               throw(new DOMException(DOMException.WRONG_DOCUMENT_ERR));
             }
-        
+
             // throw Exception if arg is already an attribute of another Element object
             if (arg.ownerElement && (arg.ownerElement != this.parentNode)) {
               throw(new DOMException(DOMException.INUSE_ATTRIBUTE_ERR));
             }
           }
-        
+
           // get item index
           var itemIndex = __findNamedItemNSIndex__(this, arg.namespaceURI, arg.localName);
           var ret = null;
-        
+
           if (itemIndex > -1) {                          // found it!
             ret = this[itemIndex];                // use existing Attribute
             // throw Exception if DOMAttr is readonly
@@ -883,50 +883,50 @@ __extend__(DOMNamedNodeMap.prototype, {
             Array.prototype.push.apply(this, [arg]);
           }
           arg.ownerElement = this.parentNode;
-        
-        
+
+
           return ret;                                    // return old node or null
     },
     removeNamedItemNS : function(namespaceURI, localName) {
           var ret = null;
-        
+
           // test for exceptions
           // throw Exception if DOMNamedNodeMap is readonly
           if (__ownerDocument__(this).implementation.errorChecking && (this._readonly || (this.parentNode && this.parentNode._readonly))) {
             throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
           }
-        
+
           // get item index
           var itemIndex = __findNamedItemNSIndex__(this, namespaceURI, localName);
-        
+
           // throw Exception if there is no matching node in this map
           if (__ownerDocument__(this).implementation.errorChecking && (itemIndex < 0)) {
             throw(new DOMException(DOMException.NOT_FOUND_ERR));
           }
-        
+
           // get Node
           var oldNode = this[itemIndex];
-        
+
           // throw Exception if Node is readonly
           if (__ownerDocument__(this).implementation.errorChecking && oldNode._readonly) {
             throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
           }
-        
+
           return __removeChild__(this, itemIndex);             // return removed node
     },
     get xml() {
           var ret = "";
-        
+
           // create string containing concatenation of all (but last) Attribute string values (separated by spaces)
           for (var i=0; i < this.length -1; i++) {
             ret += this[i].xml +" ";
           }
-        
+
           // add last Attribute to string (without trailing space)
           if (this.length > 0) {
             ret += this[this.length -1].xml;
           }
-        
+
           return ret;
     }
 
@@ -1073,7 +1073,7 @@ DOMNamespaceNodeMap.prototype = new DOMNamedNodeMap;
 __extend__(DOMNamespaceNodeMap.prototype, {
     get xml() {
           var ret = "";
-        
+
           // identify namespaces declared local to this Element (ie, not inherited)
           for (var ind = 0; ind < this.length; ind++) {
             // if namespace declaration does not exist in the containing node's, parentNode's namespaces
@@ -1091,7 +1091,7 @@ __extend__(DOMNamespaceNodeMap.prototype, {
               ret += this[ind].xml +" ";
             }
           }
-        
+
           return ret;
     }
 });
@@ -1125,7 +1125,7 @@ var DOMNode = function(ownerDocument) {
   if (ownerDocument) {
     this._id = ownerDocument._genId();           // generate unique internal id
   }
-  
+
   this.namespaceURI = "";                        // The namespace URI of this node (Level 2)
   this.prefix       = "";                        // The namespace prefix of this node (Level 2)
   this.localName    = "";                        // The localName of this node (Level 2)
@@ -1133,7 +1133,7 @@ var DOMNode = function(ownerDocument) {
   this.nodeName = "";                            // The name of this node
   this.nodeValue = "";                           // The value of this node
   this.className = "";                           // The CSS class name of this node.
-  
+
   // The parent of this node. All nodes, except Document, DocumentFragment, and Attr may have a parent.
   // However, if a node has just been created and not yet added to the tree, or if it has been removed from the tree, this is null
   this.parentNode      = null;
@@ -1180,48 +1180,48 @@ __extend__(DOMNode.prototype, {
     },
     insertBefore : function(newChild, refChild) {
         var prevNode;
-        
+
         // test for exceptions
         if (__ownerDocument__(this).implementation.errorChecking) {
             // throw Exception if DOMNode is readonly
             if (this._readonly) {
                 throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
             }
-            
+
             // throw Exception if newChild was not created by this Document
             if (__ownerDocument__(this) != __ownerDocument__(newChild)) {
                 throw(new DOMException(DOMException.WRONG_DOCUMENT_ERR));
             }
-            
+
             // throw Exception if the node is an ancestor
             if (__isAncestor__(this, newChild)) {
                 throw(new DOMException(DOMException.HIERARCHY_REQUEST_ERR));
             }
         }
-        
+
         if (refChild) {                                // if refChild is specified, insert before it
             // find index of refChild
             var itemIndex = __findItemIndex__(this.childNodes, refChild._id);
-            
+
             // throw Exception if there is no child node with this id
             if (__ownerDocument__(this).implementation.errorChecking && (itemIndex < 0)) {
               throw(new DOMException(DOMException.NOT_FOUND_ERR));
             }
-            
+
             // if the newChild is already in the tree,
             var newChildParent = newChild.parentNode;
             if (newChildParent) {
               // remove it
               newChildParent.removeChild(newChild);
             }
-            
+
             // insert newChild into childNodes
-            __insertBefore__(this.childNodes, newChild, 
+            __insertBefore__(this.childNodes, newChild,
                 __findItemIndex__(this.childNodes, refChild._id));
-            
+
             // do node pointer surgery
             prevNode = refChild.previousSibling;
-            
+
             // handle DocumentFragment
             if (newChild.nodeType == DOMNode.DOCUMENT_FRAGMENT_NODE) {
               if (newChild.childNodes.length > 0) {
@@ -1229,7 +1229,7 @@ __extend__(DOMNode.prototype, {
                 for (var ind = 0; ind < newChild.childNodes.length; ind++) {
                   newChild.childNodes[ind].parentNode = this;
                 }
-            
+
                 // link refChild to last child of DocumentFragment
                 refChild.previousSibling = newChild.childNodes[newChild.childNodes.length-1];
               }
@@ -1241,16 +1241,16 @@ __extend__(DOMNode.prototype, {
             prevNode = this.lastChild;
             this.appendChild(newChild);
         }
-        
+
         if (newChild.nodeType == DOMNode.DOCUMENT_FRAGMENT_NODE) {
             // do node pointer surgery for DocumentFragment
             if (newChild.childNodes.length > 0) {
-                if (prevNode) {  
+                if (prevNode) {
                     prevNode.nextSibling = newChild.childNodes[0];
                 }else {                                         // this is the first child in the list
                     this.firstChild = newChild.childNodes[0];
                 }
-            
+
                 newChild.childNodes[0].previousSibling = prevNode;
                 newChild.childNodes[newChild.childNodes.length-1].nextSibling = refChild;
             }
@@ -1261,79 +1261,79 @@ __extend__(DOMNode.prototype, {
             }else {                                         // this is the first child in the list
               this.firstChild = newChild;
             }
-            
+
             newChild.previousSibling = prevNode;
             newChild.nextSibling     = refChild;
         }
-        
+
         return newChild;
     },
     replaceChild : function(newChild, oldChild) {
         var ret = null;
-        
+
         // test for exceptions
         if (__ownerDocument__(this).implementation.errorChecking) {
             // throw Exception if DOMNode is readonly
             if (this._readonly) {
                 throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
             }
-        
+
             // throw Exception if newChild was not created by this Document
             if (__ownerDocument__(this) != __ownerDocument__(newChild)) {
                 throw(new DOMException(DOMException.WRONG_DOCUMENT_ERR));
             }
-        
+
             // throw Exception if the node is an ancestor
             if (__isAncestor__(this, newChild)) {
                 throw(new DOMException(DOMException.HIERARCHY_REQUEST_ERR));
             }
         }
-        
+
         // get index of oldChild
         var index = __findItemIndex__(this.childNodes, oldChild._id);
-        
+
         // throw Exception if there is no child node with this id
         if (__ownerDocument__(this).implementation.errorChecking && (index < 0)) {
             throw(new DOMException(DOMException.NOT_FOUND_ERR));
         }
-        
+
         // if the newChild is already in the tree,
         var newChildParent = newChild.parentNode;
         if (newChildParent) {
             // remove it
             newChildParent.removeChild(newChild);
         }
-        
+
         // add newChild to childNodes
         ret = __replaceChild__(this.childNodes,newChild, index);
-        
-        
+
+
         if (newChild.nodeType == DOMNode.DOCUMENT_FRAGMENT_NODE) {
             // do node pointer surgery for Document Fragment
             if (newChild.childNodes.length > 0) {
                 for (var ind = 0; ind < newChild.childNodes.length; ind++) {
                     newChild.childNodes[ind].parentNode = this;
                 }
-                
+
                 if (oldChild.previousSibling) {
                     oldChild.previousSibling.nextSibling = newChild.childNodes[0];
                 } else {
                     this.firstChild = newChild.childNodes[0];
                 }
-                
+
                 if (oldChild.nextSibling) {
                     oldChild.nextSibling.previousSibling = newChild;
                 } else {
                     this.lastChild = newChild.childNodes[newChild.childNodes.length-1];
                 }
-                
+
                 newChild.childNodes[0].previousSibling = oldChild.previousSibling;
                 newChild.childNodes[newChild.childNodes.length-1].nextSibling = oldChild.nextSibling;
             }
         } else {
             // do node pointer surgery for newChild
             newChild.parentNode = this;
-            
+
             if (oldChild.previousSibling) {
                 oldChild.previousSibling.nextSibling = newChild;
             }else{
@@ -1354,21 +1354,21 @@ __extend__(DOMNode.prototype, {
         if (__ownerDocument__(this).implementation.errorChecking && (this._readonly || oldChild._readonly)) {
             throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
         }
-        
+
         // get index of oldChild
         var itemIndex = __findItemIndex__(this.childNodes, oldChild._id);
-        
+
         // throw Exception if there is no child node with this id
         if (__ownerDocument__(this).implementation.errorChecking && (itemIndex < 0)) {
             throw(new DOMException(DOMException.NOT_FOUND_ERR));
         }
-        
+
         // remove oldChild from childNodes
         __removeChild__(this.childNodes, itemIndex);
-        
+
         // do node pointer surgery
         oldChild.parentNode = null;
-        
+
         if (oldChild.previousSibling) {
             oldChild.previousSibling.nextSibling = oldChild.nextSibling;
         }else {
@@ -1379,10 +1379,10 @@ __extend__(DOMNode.prototype, {
         }else {
             this.lastChild = oldChild.previousSibling;
         }
-        
+
         oldChild.previousSibling = null;
         oldChild.nextSibling = null;
-        
+
         return oldChild;
     },
     appendChild : function(newChild) {
@@ -1392,35 +1392,35 @@ __extend__(DOMNode.prototype, {
         if (this._readonly) {
           throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
         }
-    
+
         // throw Exception if arg was not created by this Document
         if (__ownerDocument__(this) != __ownerDocument__(this)) {
           throw(new DOMException(DOMException.WRONG_DOCUMENT_ERR));
         }
-    
+
         // throw Exception if the node is an ancestor
         if (__isAncestor__(this, newChild)) {
           throw(new DOMException(DOMException.HIERARCHY_REQUEST_ERR));
         }
       }
-    
+
       // if the newChild is already in the tree,
       var newChildParent = newChild.parentNode;
       if (newChildParent) {
         // remove it
         newChildParent.removeChild(newChild);
       }
-    
+
       // add newChild to childNodes
       __appendChild__(this.childNodes, newChild);
-    
+
       if (newChild.nodeType == DOMNode.DOCUMENT_FRAGMENT_NODE) {
         // do node pointer surgery for DocumentFragment
         if (newChild.childNodes.length > 0) {
           for (var ind = 0; ind < newChild.childNodes.length; ind++) {
             newChild.childNodes[ind].parentNode = this;
           }
-    
+
           if (this.lastChild) {
             this.lastChild.nextSibling = newChild.childNodes[0];
             newChild.childNodes[0].previousSibling = this.lastChild;
@@ -1445,7 +1445,7 @@ __extend__(DOMNode.prototype, {
           this.firstChild = newChild;
         }
       }
-      
+
       return newChild;
     },
     hasChildNodes : function() {
@@ -1464,14 +1464,14 @@ __extend__(DOMNode.prototype, {
     normalize : function() {
         var inode;
         var nodesToRemove = new DOMNodeList();
-        
+
         if (this.nodeType == DOMNode.ELEMENT_NODE || this.nodeType == DOMNode.DOCUMENT_NODE) {
             var adjacentTextNode = null;
-        
+
             // loop through all childNodes
             for(var i = 0; i < this.childNodes.length; i++) {
                 inode = this.childNodes.item(i);
-            
+
                 if (inode.nodeType == DOMNode.TEXT_NODE) { // this node is a text node
                     if (inode.length < 1) {                  // this text node is empty
                         __appendChild__(nodesToRemove, inode);      // add this node to the list of nodes to be remove
@@ -1488,7 +1488,7 @@ __extend__(DOMNode.prototype, {
                     inode.normalize();                       // normalise non Text childNodes
                 }
             }
-                
+
             // remove redundant Text Nodes
             for(var i = 0; i < nodesToRemove.length; i++) {
                 inode = nodesToRemove.item(i);
@@ -1511,23 +1511,23 @@ __extend__(DOMNode.prototype, {
     },
     getElementsByTagNameNS : function(namespaceURI, localName) {
         // delegate to _getElementsByTagNameNSRecursive
-        return __getElementsByTagNameNSRecursive__(this, namespaceURI, localName, 
+        return __getElementsByTagNameNSRecursive__(this, namespaceURI, localName,
             new DOMNodeList(__ownerDocument__(this)));
     },
     importNode : function(importedNode, deep) {
-        
+
         var importNode;
         //$debug("importing node " + importedNode.nodeName + "(?deep = "+deep+")");
         //there is no need to perform namespace checks since everything has already gone through them
         //in order to have gotten into the DOM in the first place. The following line
         //turns namespace checking off in ._isValidNamespace
         __ownerDocument__(this)._performingImportNodeOperation = true;
-        
+
             if (importedNode.nodeType == DOMNode.ELEMENT_NODE) {
                 if (!__ownerDocument__(this).implementation.namespaceAware) {
                     // create a local Element (with the name of the importedNode)
                     importNode = __ownerDocument__(this).createElement(importedNode.tagName);
-                
+
                     // create attributes matching those of the importedNode
                     for(var i = 0; i < importedNode.attributes.length; i++) {
                         importNode.setAttribute(importedNode.attributes.item(i).name, importedNode.attributes.item(i).value);
@@ -1535,13 +1535,13 @@ __extend__(DOMNode.prototype, {
                 }else {
                     // create a local Element (with the name & namespaceURI of the importedNode)
                     importNode = __ownerDocument__(this).createElementNS(importedNode.namespaceURI, importedNode.nodeName);
-                
+
                     // create attributes matching those of the importedNode
                     for(var i = 0; i < importedNode.attributes.length; i++) {
-                        importNode.setAttributeNS(importedNode.attributes.item(i).namespaceURI, 
+                        importNode.setAttributeNS(importedNode.attributes.item(i).namespaceURI,
                             importedNode.attributes.item(i).name, importedNode.attributes.item(i).value);
                     }
-                
+
                     // create namespace definitions matching those of the importedNode
                     for(var i = 0; i < importedNode._namespaces.length; i++) {
                         importNode._namespaces[i] = __ownerDocument__(this).createNamespace(importedNode._namespaces.item(i).localName);
@@ -1555,17 +1555,17 @@ __extend__(DOMNode.prototype, {
                 } else {
                     // create a local Attribute (with the name & namespaceURI of the importedAttribute)
                     importNode = __ownerDocument__(this).createAttributeNS(importedNode.namespaceURI, importedNode.nodeName);
-                
+
                     // create namespace definitions matching those of the importedAttribute
                     for(var i = 0; i < importedNode._namespaces.length; i++) {
                         importNode._namespaces[i] = __ownerDocument__(this).createNamespace(importedNode._namespaces.item(i).localName);
                         importNode._namespaces[i].value = importedNode._namespaces.item(i).value;
                     }
                 }
-            
+
                 // set the value of the local Attribute to match that of the importedAttribute
                 importNode.value = importedNode.value;
-                
+
             } else if (importedNode.nodeType == DOMNode.DOCUMENT_FRAGMENT) {
                 // create a local DocumentFragment
                 importNode = __ownerDocument__(this).createDocumentFragment();
@@ -1588,17 +1588,17 @@ __extend__(DOMNode.prototype, {
             } else {  // throw Exception if nodeType is not supported
                 throw(new DOMException(DOMException.NOT_SUPPORTED_ERR));
             }
-            
+
             if (deep) {                                    // recurse childNodes
                 for(var i = 0; i < importedNode.childNodes.length; i++) {
                     importNode.appendChild(__ownerDocument__(this).importNode(importedNode.childNodes.item(i), true));
                 }
             }
-            
+
             //reset _performingImportNodeOperation
             __ownerDocument__(this)._performingImportNodeOperation = false;
             return importNode;
-        
+
     },
     contains : function(node){
             while(node && node != this ){
@@ -1620,7 +1620,7 @@ __extend__(DOMNode.prototype, {
         number += (my_location < node_location && 4)
         number += (my_location > node_location && 2)
         return number;
-    } 
+    }
 
 });
 
@@ -1633,21 +1633,21 @@ __extend__(DOMNode.prototype, {
  * @return : DOMNodeList
  */
 var __getElementsByTagNameRecursive__ = function (elem, tagname, nodeList) {
-    
+
     if (elem.nodeType == DOMNode.ELEMENT_NODE || elem.nodeType == DOMNode.DOCUMENT_NODE) {
-    
-        if(elem.nodeType !== DOMNode.DOCUMENT_NODE && 
-            ((elem.nodeName.toUpperCase() == tagname.toUpperCase()) || 
+
+        if(elem.nodeType !== DOMNode.DOCUMENT_NODE &&
+            ((elem.nodeName.toUpperCase() == tagname.toUpperCase()) ||
                 (tagname == "*")) ){
             __appendChild__(nodeList, elem);               // add matching node to nodeList
         }
-    
+
         // recurse childNodes
         for(var i = 0; i < elem.childNodes.length; i++) {
             nodeList = __getElementsByTagNameRecursive__(elem.childNodes.item(i), tagname, nodeList);
         }
     }
-    
+
     return nodeList;
 };
 
@@ -1733,7 +1733,7 @@ __extend__(DOMNamespace.prototype, {
           else {  // handle default namespace
             ret += "xmlns=\""+ __escapeXML__(this.nodeValue) +"\"";
           }
-        
+
           return ret;
     },
     toString: function(){
@@ -1778,18 +1778,18 @@ __extend__(DOMCharacterData.prototype,{
         // append data
         this.data = "" + this.data + arg;
     },
-    deleteData: function(offset, count){ 
+    deleteData: function(offset, count){
         // throw Exception if DOMCharacterData is readonly
         if (__ownerDocument__(this).implementation.errorChecking && this._readonly) {
             throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
         }
         if (this.data) {
             // throw Exception if offset is negative or greater than the data length,
-            if (__ownerDocument__(this).implementation.errorChecking && 
+            if (__ownerDocument__(this).implementation.errorChecking &&
                 ((offset < 0) || (offset >  this.data.length) || (count < 0))) {
                 throw(new DOMException(DOMException.INDEX_SIZE_ERR));
             }
-            
+
             // delete data
             if(!count || (offset + count) > this.data.length) {
               this.data = this.data.substring(0, offset);
@@ -1804,14 +1804,14 @@ __extend__(DOMCharacterData.prototype,{
         if(__ownerDocument__(this).implementation.errorChecking && this._readonly){
             throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
         }
-        
+
         if(this.data){
             // throw Exception if offset is negative or greater than the data length,
-            if (__ownerDocument__(this).implementation.errorChecking && 
+            if (__ownerDocument__(this).implementation.errorChecking &&
                 ((offset < 0) || (offset >  this.data.length))) {
                 throw(new DOMException(DOMException.INDEX_SIZE_ERR));
             }
-            
+
             // insert data
             this.data =  this.data.substring(0, offset).concat(arg, this.data.substring(offset));
         }else {
@@ -1819,7 +1819,7 @@ __extend__(DOMCharacterData.prototype,{
             if (__ownerDocument__(this).implementation.errorChecking && (offset != 0)) {
                throw(new DOMException(DOMException.INDEX_SIZE_ERR));
             }
-            
+
             // set data
             this.data = arg;
         }
@@ -1829,14 +1829,14 @@ __extend__(DOMCharacterData.prototype,{
         if (__ownerDocument__(this).implementation.errorChecking && this._readonly) {
             throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
         }
-        
+
         if (this.data) {
             // throw Exception if offset is negative or greater than the data length,
-            if (__ownerDocument__(this).implementation.errorChecking && 
+            if (__ownerDocument__(this).implementation.errorChecking &&
                 ((offset < 0) || (offset >  this.data.length) || (count < 0))) {
                 throw(new DOMException(DOMException.INDEX_SIZE_ERR));
             }
-            
+
             // replace data
             this.data = this.data.substring(0, offset).
                 concat(arg, this.data.substring(offset + count));
@@ -1850,7 +1850,7 @@ __extend__(DOMCharacterData.prototype,{
         if (this.data) {
             // throw Exception if offset is negative or greater than the data length,
             // or the count is negative
-            if (__ownerDocument__(this).implementation.errorChecking && 
+            if (__ownerDocument__(this).implementation.errorChecking &&
                 ((offset < 0) || (offset > this.data.length) || (count < 0))) {
                 throw(new DOMException(DOMException.INDEX_SIZE_ERR));
             }
@@ -1896,27 +1896,27 @@ __extend__(DOMText.prototype,{
     // And a new Text node, which is inserted as the next sibling of this node, contains all the content at and after the offset point.
     splitText : function(offset) {
         var data, inode;
-        
+
         // test for exceptions
         if (__ownerDocument__(this).implementation.errorChecking) {
             // throw Exception if Node is readonly
             if (this._readonly) {
               throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
             }
-            
+
             // throw Exception if offset is negative or greater than the data length,
             if ((offset < 0) || (offset > this.data.length)) {
               throw(new DOMException(DOMException.INDEX_SIZE_ERR));
             }
         }
-        
+
         if (this.parentNode) {
             // get remaining string (after offset)
             data  = this.substringData(offset);
-            
+
             // create new TextNode with remaining string
             inode = __ownerDocument__(this).createTextNode(data);
-            
+
             // attach new TextNode
             if (this.nextSibling) {
               this.parentNode.insertBefore(inode, this.nextSibling);
@@ -1924,11 +1924,11 @@ __extend__(DOMText.prototype,{
             else {
               this.parentNode.appendChild(inode);
             }
-            
+
             // remove remaining string from original TextNode
             this.deleteData(offset);
         }
-        
+
         return inode;
     },
     get nodeType(){
@@ -1938,7 +1938,7 @@ __extend__(DOMText.prototype,{
         return __escapeXML__(""+ this.nodeValue);
     },
     toString: function(){
-        return "Text #" + this._id;    
+        return "Text #" + this._id;
     }
 });
 
@@ -1977,7 +1977,7 @@ __extend__(DOMCDATASection.prototype,{
         return "CDATA #"+this._id;
     }
 });$debug("Defining Comment");
-/* 
+/*
 * Comment - DOM Level 2
 */
 $w.__defineGetter__("Comment", function(){
@@ -2040,10 +2040,10 @@ $w.__defineGetter__("Attr", function(){
 var DOMAttr = function(ownerDocument) {
     this.DOMNode = DOMNode;
     this.DOMNode(ownerDocument);
-                   
+
     this.ownerElement = null;               // set when Attr is added to NamedNodeMap
 };
-DOMAttr.prototype = new DOMNode; 
+DOMAttr.prototype = new DOMNode;
 __extend__(DOMAttr.prototype, {
     // the name of this attribute
     get name(){
@@ -2076,7 +2076,7 @@ __extend__(DOMAttr.prototype, {
     toString : function(){
         return "Attr #" + this._id + " " + this.name;
     }
-});    
+});
 
 $debug("Defining Element");
 /*
@@ -2098,17 +2098,17 @@ $w.__defineGetter__("Element", function(){
  */
 var DOMElement = function(ownerDocument) {
     this.DOMNode  = DOMNode;
-    this.DOMNode(ownerDocument);                   
+    this.DOMNode(ownerDocument);
     this.id = "";                                  // the ID of the element
 };
 DOMElement.prototype = new DOMNode;
 __extend__(DOMElement.prototype, {	
     // The name of the element.
     get tagName(){
-        return this.nodeName;  
+        return this.nodeName;
     },
     set tagName(name){
-        this.nodeName = name;  
+        this.nodeName = name;
     },
     addEventListener        : function(){ window.addEventListener.apply(this, arguments) },
 	removeEventListener     : function(){ window.removeEventListener.apply(this, arguments) },
@@ -2133,28 +2133,28 @@ __extend__(DOMElement.prototype, {
             if (!attr) {
                 attr = __ownerDocument__(this).createAttribute(name);  // otherwise create it
             }
-            
-            
+
+
             // test for exceptions
             if (__ownerDocument__(this).implementation.errorChecking) {
                 // throw Exception if Attribute is readonly
                 if (attr._readonly) {
                     throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
                 }
-                
+
                 // throw Exception if the value string contains an illegal character
                 if (!__isValidString__(value)) {
                     throw(new DOMException(DOMException.INVALID_CHARACTER_ERR));
                 }
             }
-            
+
             if (__isIdDeclaration__(name)) {
             //    this.id = value;  // cache ID for getElementById()
             }
-            
+
             // assign values to properties (and aliases)
             attr.value     = value;
-            
+
             // add/replace Attribute in NamedNodeMap
             this.attributes.setNamedItem(attr);
         }
@@ -2180,15 +2180,15 @@ __extend__(DOMElement.prototype, {
       if (__ownerDocument__(this).implementation.errorChecking && oldAttr._readonly) {
         throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
       }
-    
+
       // get item index
       var itemIndex = this.attributes._findItemIndex(oldAttr._id);
-    
+
       // throw Exception if node does not exist in this map
       if (__ownerDocument__(this).implementation.errorChecking && (itemIndex < 0)) {
         throw(new DOMException(DOMException.NOT_FOUND_ERR));
       }
-    
+
       return this.attributes._removeChild(itemIndex);
     },
     getAttributeNS : function(namespaceURI, localName) {
@@ -2203,41 +2203,41 @@ __extend__(DOMElement.prototype, {
     setAttributeNS : function(namespaceURI, qualifiedName, value) {
         // call DOMNamedNodeMap.getNamedItem
         var attr = this.attributes.getNamedItem(namespaceURI, qualifiedName);
-        
+
         if (!attr) {  // if Attribute exists, use it
             // otherwise create it
             attr = __ownerDocument__(this).createAttributeNS(namespaceURI, qualifiedName);
         }
-        
+
         var value = value+'';
-        
+
         // test for exceptions
         if (__ownerDocument__(this).implementation.errorChecking) {
             // throw Exception if Attribute is readonly
             if (attr._readonly) {
                 throw(new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR));
             }
-            
+
             // throw Exception if the Namespace is invalid
             if (!__isValidNamespace__(namespaceURI, qualifiedName)) {
                 throw(new DOMException(DOMException.NAMESPACE_ERR));
             }
-            
+
             // throw Exception if the value string contains an illegal character
             if (!__isValidString__(value)) {
                 throw(new DOMException(DOMException.INVALID_CHARACTER_ERR));
             }
         }
-        
+
         // if this Attribute is an ID
         if (__isIdDeclaration__(name)) {
             this.id = value;  // cache ID for getElementById()
         }
-        
+
         // assign values to properties (and aliases)
         attr.value     = value;
         attr.nodeValue = value;
-        
+
         // delegate to DOMNamedNodeMap.setNamedItem
         this.attributes.setNamedItemNS(attr);
     },
@@ -2254,7 +2254,7 @@ __extend__(DOMElement.prototype, {
         if ((newAttr.prefix == "") &&  __isIdDeclaration__(newAttr.name)) {
             this.id = newAttr.value+'';  // cache ID for getElementById()
         }
-        
+
         // delegate to DOMNamedNodeMap.setNamedItemNS
         return this.attributes.setNamedItemNS(newAttr);
     },
@@ -2271,20 +2271,20 @@ __extend__(DOMElement.prototype, {
     },
     get xml() {
         var ret = "";
-        
+
         // serialize namespace declarations
         var ns = this._namespaces.xml;
         if (ns.length > 0) ns = " "+ ns;
-        
+
         // serialize Attribute declarations
         var attrs = this.attributes.xml;
         if (attrs.length > 0) attrs = " "+ attrs;
-        
+
         // serialize this Element
         ret += "<" + this.nodeName.toLowerCase() + ns + attrs +">";
         ret += this.childNodes.xml;
         ret += "</" + this.nodeName.toLowerCase()+">";
-        
+
         return ret;
     },
     toString : function(){
@@ -2321,7 +2321,7 @@ DOMException.INVALID_MODIFICATION_ERR       = 13;
 DOMException.NAMESPACE_ERR                  = 14;
 DOMException.INVALID_ACCESS_ERR             = 15;
 $debug("Defining DocumentFragment");
-/* 
+/*
 * DocumentFragment - DOM Level 2
 */
 $w.__defineGetter__("DocumentFragment", function(){
@@ -2349,12 +2349,12 @@ __extend__(DOMDocumentFragment.prototype,{
     get xml(){
         var xml = "",
             count = this.childNodes.length;
-        
+
         // create string concatenating the serialized ChildNodes
         for (var i = 0; i < count; i++) {
             xml += this.childNodes.item(i).xml;
         }
-        
+
         return xml;
     },
     toString : function(){
@@ -4158,7 +4158,7 @@ $implementation.namespaceAware = false;
 $implementation.errorChecking = false;$debug("Defining Document");
 /*
 * Document - DOM Level 2
-*  The Document object is not directly 
+*  The Document object is not directly
 */
 $w.__defineGetter__('Document', function(){
   return function(){
@@ -4179,19 +4179,19 @@ var DOMDocument = function(implementation) {
     //$log("\tcreating dom document");
     this.DOMNode = DOMNode;
     this.DOMNode(this);
-    
+
     this.doctype = null;                  // The Document Type Declaration (see DocumentType) associated with this document
     this.implementation = implementation; // The DOMImplementation object that handles this document.
     this.documentElement = null;          // This is a convenience attribute that allows direct access to the child node that is the root element of the document
-    
+
     this.nodeName  = "#document";
     this._id = 0;
     this._lastId = 0;
     this._parseComplete = false;                   // initially false, set to true by parser
     this._url = "";
-    
+
     this.ownerDocument = null;
-    
+
     this._performingImportNodeOperation = false;
     //$log("\tfinished creating dom document " + this);
 };
@@ -4203,8 +4203,8 @@ __extend__(DOMDocument.prototype, {
 	detachEvent             : function(){ window.removeEventListener.apply(this, arguments); },
 	dispatchEvent           : function(){ window.dispatchEvent.apply(this, arguments); },
 
-    get styleSheets(){ 
-        return [];/*TODO*/ 
+    get styleSheets(){
+        return [];/*TODO*/
     },
     get all(){
         return this.getElementsByTagName("*");
@@ -4212,7 +4212,7 @@ __extend__(DOMDocument.prototype, {
     loadXML : function(xmlStr) {
         // create SAX Parser
         var parser = new XMLP(xmlStr+'');
-        
+
         // create DOM Document
         var doc = new HTMLDocument(this.implementation);
         if(this === $document){
@@ -4246,11 +4246,11 @@ __extend__(DOMDocument.prototype, {
                 _this.loadXML(
                 "<html><head></head><body>"+
                     "<h1>Parse Error</h1>"+
-                    "<p>"+e.toString()+"</p>"+  
+                    "<p>"+e.toString()+"</p>"+
                 "</body></html>");
             }
             _this._url = url;
-            
+
         	$info("Sucessfully loaded document at "+url);
         	var event = document.createEvent();
         	event.initEvent("load");
@@ -4258,30 +4258,30 @@ __extend__(DOMDocument.prototype, {
         };
         xhr.send();
     },
-	createEvent             : function(eventType){ 
+	createEvent             : function(eventType){
         var event;
         if(eventType === "UIEvents"){ event = new UIEvent();}
         else if(eventType === "MouseEvents"){ event = new MouseEvent();}
-        else{ event = new Event(); } 
+        else{ event = new Event(); }
         return event;
     },
-    createExpression        : function(xpath, nsuriMap){ 
+    createExpression        : function(xpath, nsuriMap){
         return null;/*TODO*/
     },
     createElement : function(tagName) {
           //$debug("DOMDocument.createElement( "+tagName+" )");
           // throw Exception if the tagName string contains an illegal character
-          if (__ownerDocument__(this).implementation.errorChecking 
+          if (__ownerDocument__(this).implementation.errorChecking
             && (!__isValidName__(tagName))) {
             throw(new DOMException(DOMException.INVALID_CHARACTER_ERR));
           }
-        
+
           // create DOMElement specifying 'this' as ownerDocument
           var node = new DOMElement(this);
-        
+
           // assign values to properties (and aliases)
           node.tagName  = tagName;
-        
+
           return node;
     },
     createDocumentFragment : function() {
@@ -4292,61 +4292,61 @@ __extend__(DOMDocument.prototype, {
     createTextNode: function(data) {
           // create DOMText specifying 'this' as ownerDocument
           var node = new DOMText(this);
-        
+
           // assign values to properties (and aliases)
           node.data      = data;
-        
+
           return node;
     },
     createComment : function(data) {
           // create DOMComment specifying 'this' as ownerDocument
           var node = new DOMComment(this);
-        
+
           // assign values to properties (and aliases)
           node.data      = data;
-        
+
           return node;
     },
     createCDATASection : function(data) {
           // create DOMCDATASection specifying 'this' as ownerDocument
           var node = new DOMCDATASection(this);
-        
+
           // assign values to properties (and aliases)
           node.data      = data;
-        
+
           return node;
     },
     createProcessingInstruction : function(target, data) {
           // throw Exception if the target string contains an illegal character
           //$log("DOMDocument.createProcessingInstruction( "+target+" )");
-          if (__ownerDocument__(this).implementation.errorChecking 
+          if (__ownerDocument__(this).implementation.errorChecking
             && (!__isValidName__(target))) {
             throw(new DOMException(DOMException.INVALID_CHARACTER_ERR));
           }
-        
+
           // create DOMProcessingInstruction specifying 'this' as ownerDocument
           var node = new DOMProcessingInstruction(this);
-        
+
           // assign values to properties (and aliases)
           node.target    = target;
           node.data      = data;
-        
+
           return node;
     },
     createAttribute : function(name) {
         // throw Exception if the name string contains an illegal character
         //$log("DOMDocument.createAttribute( "+target+" )");
-        if (__ownerDocument__(this).implementation.errorChecking 
+        if (__ownerDocument__(this).implementation.errorChecking
             && (!__isValidName__(name))) {
             throw(new DOMException(DOMException.INVALID_CHARACTER_ERR));
         }
-        
+
         // create DOMAttr specifying 'this' as ownerDocument
         var node = new DOMAttr(this);
-        
+
         // assign values to properties (and aliases)
         node.name     = name;
-        
+
         return node;
     },
     createElementNS : function(namespaceURI, qualifiedName) {
@@ -4357,23 +4357,23 @@ __extend__(DOMDocument.prototype, {
             if (!__isValidNamespace__(this, namespaceURI, qualifiedName)) {
               throw(new DOMException(DOMException.NAMESPACE_ERR));
             }
-        
+
             // throw Exception if the qualifiedName string contains an illegal character
             if (!__isValidName__(qualifiedName)) {
               throw(new DOMException(DOMException.INVALID_CHARACTER_ERR));
             }
           }
-        
+
           // create DOMElement specifying 'this' as ownerDocument
           var node  = new DOMElement(this);
           var qname = __parseQName__(qualifiedName);
-        
+
           // assign values to properties (and aliases)
           node.namespaceURI = namespaceURI;
           node.prefix       = qname.prefix;
           node.localName    = qname.localName;
           node.tagName      = qualifiedName;
-        
+
           return node;
     },
     createAttributeNS : function(namespaceURI, qualifiedName) {
@@ -4383,37 +4383,37 @@ __extend__(DOMDocument.prototype, {
             if (!__isValidNamespace__(this, namespaceURI, qualifiedName, true)) {
               throw(new DOMException(DOMException.NAMESPACE_ERR));
             }
-        
+
             // throw Exception if the qualifiedName string contains an illegal character
             if (!__isValidName__(qualifiedName)) {
               throw(new DOMException(DOMException.INVALID_CHARACTER_ERR));
             }
           }
-        
+
           // create DOMAttr specifying 'this' as ownerDocument
           var node  = new DOMAttr(this);
           var qname = __parseQName__(qualifiedName);
-        
+
           // assign values to properties (and aliases)
           node.namespaceURI = namespaceURI;
           node.prefix       = qname.prefix;
           node.localName    = qname.localName;
           node.name         = qualifiedName;
           node.nodeValue    = "";
-        
+
           return node;
     },
     createNamespace : function(qualifiedName) {
           // create DOMNamespace specifying 'this' as ownerDocument
           var node  = new DOMNamespace(this);
           var qname = __parseQName__(qualifiedName);
-        
+
           // assign values to properties (and aliases)
           node.prefix       = qname.prefix;
           node.localName    = qname.localName;
           node.name         = qualifiedName;
           node.nodeValue    = "";
-        
+
           return node;
     },
     getElementById : function(elementId) {
@@ -4432,7 +4432,7 @@ __extend__(DOMDocument.prototype, {
                 }
             }
           }
-          
+
           //if(retNode == null){$log("Couldn't find id " + elementId);}
           return retNode;
     },
@@ -4446,8 +4446,8 @@ __extend__(DOMDocument.prototype, {
         //$log("Serializing " + this);
         return this.documentElement.xml;
     },
-	toString: function(){ 
-	    return "Document" +  (typeof this._url == "string" ? ": " + this._url : ""); 
+	toString: function(){
+	    return "Document" +  (typeof this._url == "string" ? ": " + this._url : "");
     },
 	get defaultView(){ //TODO: why isnt this just 'return $w;'?
 		return { getComputedStyle: function(elem){
@@ -4473,40 +4473,40 @@ var __isValidNamespace__ = function(doc, namespaceURI, qualifiedName, isAttribut
         //to have gotten into the DOM in the first place
         return true;
       }
-    
+
       var valid = true;
       // parse QName
       var qName = __parseQName__(qualifiedName);
-    
-    
+
+
       //only check for namespaces if we're finished parsing
       if (this._parseComplete == true) {
-    
+
         // if the qualifiedName is malformed
         if (qName.localName.indexOf(":") > -1 ){
             valid = false;
         }
-    
+
         if ((valid) && (!isAttribute)) {
             // if the namespaceURI is not null
             if (!namespaceURI) {
             valid = false;
             }
         }
-    
+
         // if the qualifiedName has a prefix
         if ((valid) && (qName.prefix == "")) {
             valid = false;
         }
-    
+
       }
-    
+
       // if the qualifiedName has a prefix that is "xml" and the namespaceURI is
       //  different from "http://www.w3.org/XML/1998/namespace" [Namespaces].
       if ((valid) && (qName.prefix == "xml") && (namespaceURI != "http://www.w3.org/XML/1998/namespace")) {
         valid = false;
       }
-    
+
       return valid;
 };
 /*
@@ -4575,7 +4575,7 @@ var __isValidNamespace__ = function(doc, namespaceURI, qualifiedName, isAttribut
 
 			// Make sure we're not in a script or style element
 			if ( !stack.last() || !special[ stack.last() ] ) {
-            
+
 		        //$log("HTMLParser: ... ");
 				// Comment
 				if ( html.indexOf("<!--") === 0 ) {
@@ -4692,8 +4692,8 @@ var __isValidNamespace__ = function(doc, namespaceURI, qualifiedName, isAttribut
 			// Find the closest opened tag of the same type
 				for ( pos = stack.length - 1; pos >= 0; pos-- ){
 					//$log("parseEndTag : "+stack[ pos ] );
-					if ( stack[ pos ] == tagName ){ 
-					    break; 
+					if ( stack[ pos ] == tagName ){
+					    break;
 				    }
 				}
             }
@@ -4763,7 +4763,7 @@ var __isValidNamespace__ = function(doc, namespaceURI, qualifiedName, isAttribut
 		}
 		
 		var elems = [],
-			documentElement = doc.documentElement || 
+			documentElement = doc.documentElement ||
 			    doc.getDocumentElement && doc.getDocumentElement();
 				
 		// If we're dealing with an empty document then we
@@ -4793,7 +4793,7 @@ var __isValidNamespace__ = function(doc, namespaceURI, qualifiedName, isAttribut
 		//$log("HTMLtoDOM: Parsing... ");
 		HTMLParser( html, {
 			start: function( tagName, attrs, unary ) {
-			    
+			
 				var elem;
 		        //$log("HTMLtoDOM: createElement... " + tagName);
 				elem = doc.createElement( tagName );
@@ -4804,7 +4804,7 @@ var __isValidNamespace__ = function(doc, namespaceURI, qualifiedName, isAttribut
 					elem.setAttribute( attrs[ attr ].name, attrs[ attr ].value );
 				}
 				
-				if ( !doc.documentElement ){		            
+				if ( !doc.documentElement ){		
 				    //$log("HTMLtoDOM: documentElement... " +  elem.nodeName);
 		            doc.documentElement = elem;
 			        doc.appendChild( elem );
@@ -4852,7 +4852,7 @@ var __isValidNamespace__ = function(doc, namespaceURI, qualifiedName, isAttribut
 $debug("Defining HTMLDocument");
 /*
 * HTMLDocument - DOM Level 2
-*  The Document object is not directly 
+*  The Document object is not directly
 */
 $w.__defineGetter__("HTMLDocument", function(){
   return function(){
@@ -4878,13 +4878,13 @@ HTMLDocument.prototype = new DOMDocument;
 __extend__(HTMLDocument.prototype, {
     createElement: function(tagName){
           // throw Exception if the tagName string contains an illegal character
-          if (__ownerDocument__(this).implementation.errorChecking && 
+          if (__ownerDocument__(this).implementation.errorChecking &&
                 (!__isValidName__(tagName))) {
               throw(new DOMException(DOMException.INVALID_CHARACTER_ERR));
           }
           tagName = tagName.toUpperCase();
           // create DOMElement specifying 'this' as ownerDocument
-          //This is an html document so we need to use explicit interfaces per the 
+          //This is an html document so we need to use explicit interfaces per the
           if(     tagName.match(/^A$/))                 {node = new HTMLAnchorElement(this);}
           else if(tagName.match(/AREA/))                {node = new HTMLAreaElement(this);}
           else if(tagName.match(/BASE/))                {node = new HTMLBaseElement(this);}
@@ -4934,69 +4934,69 @@ __extend__(HTMLDocument.prototype, {
           else{
             node = new HTMLElement(this);
           }
-        
+
           // assign values to properties (and aliases)
           node.tagName  = tagName;
           return node;
     },
     get anchors(){
         return new HTMLCollection(this.getElementsByTagName('a'), 'Anchor');
-        
+
     },
     get applets(){
         return new HTMLCollection(this.getElementsByTagName('applet'), 'Applet');
-        
+
     },
-    get body(){ 
+    get body(){
         var nodelist = this.getElementsByTagName('body');
         return nodelist.item(0);
-        
+
     },
     set body(html){
         return this.replaceNode(this.body,html);
-        
+
     },
     //set/get cookie see cookie.js
     get domain(){
         return this._domain||window.location.domain;
-        
+
     },
     set domain(){
-        /* TODO - requires a bit of thought to enforce domain restrictions */ 
-        return; 
-        
+        /* TODO - requires a bit of thought to enforce domain restrictions */
+        return;
+
     },
     get forms(){
       return new HTMLCollection(this.getElementsByTagName('form'), 'Form');
     },
     get images(){
         return new HTMLCollection(this.getElementsByTagName('img'), 'Image');
-        
+
     },
-    get lastModified(){ 
+    get lastModified(){
         /* TODO */
-        return this._lastModified; 
-    
+        return this._lastModified;
+
     },
     get links(){
         return new HTMLCollection(this.getElementsByTagName('a'), 'Link');
-        
+
     },
     get location(){
         return $w.location
     },
     get referrer(){
         /* TODO */
-        return this._refferer; 
-        
+        return this._refferer;
+
     },
     get URL(){
         /* TODO*/
-        return this._url; 
-        
+        return this._url;
+
     },
-	close : function(){ 
-	    /* TODO */ 
+	close : function(){
+	    /* TODO */
 	    this._open = false;
     },
 	getElementsByName : function(name){
@@ -5013,33 +5013,33 @@ __extend__(HTMLDocument.prototype, {
         }
         return retNodes;
 	},
-	open : function(){ 
+	open : function(){
 	    /* TODO */
-	    this._open = true;  
+	    this._open = true;
     },
-	write: function(htmlstring){ 
+	write: function(htmlstring){
 	    /* TODO */
-	    return; 
+	    return;
 	
     },
-	writeln: function(htmlstring){ 
-	    this.write(htmlstring+'\n'); 
+	writeln: function(htmlstring){
+	    this.write(htmlstring+'\n');
     },
-	toString: function(){ 
-	    return "Document" +  (typeof this._url == "string" ? ": " + this._url : ""); 
+	toString: function(){
+	    return "Document" +  (typeof this._url == "string" ? ": " + this._url : "");
     },
-	get innerHTML(){ 
-	    return this.documentElement.outerHTML; 
-	    
+	get innerHTML(){
+	    return this.documentElement.outerHTML;
+	
     },
 	get __html__(){
 	    return true;
-	    
+	
     }
 });
 
-//This is useful as html elements that modify the dom must also run through the new 
-//nodes and determine if they are javascript tags and load it.  This is really the fun 
+//This is useful as html elements that modify the dom must also run through the new
+//nodes and determine if they are javascript tags and load it.  This is really the fun
 //parts! ;)
 function __execScripts__( node ) {
 	if ( node.nodeName == "SCRIPT" ) {
@@ -5065,38 +5065,38 @@ $w.__defineGetter__("HTMLElement", function(){
 var HTMLElement = function(ownerDocument) {
     this.DOMElement = DOMElement;
     this.DOMElement(ownerDocument);
-    
+
     this.$css2props = null;
 };
 HTMLElement.prototype = new DOMElement;
 __extend__(HTMLElement.prototype, {
-		get className() { 
-		    return this.getAttribute("class")||""; 
-		    
+		get className() {
+		    return this.getAttribute("class")||"";
+		
 	    },
-		set className(val) { 
-		    return this.setAttribute("class",trim(val)); 
-		    
+		set className(val) {
+		    return this.setAttribute("class",trim(val));
+		
 	    },
-		get dir() { 
-		    return this.getAttribute("dir")||"ltr"; 
-		    
+		get dir() {
+		    return this.getAttribute("dir")||"ltr";
+		
 	    },
-		set dir(val) { 
-		    return this.setAttribute("dir",val); 
-		    
+		set dir(val) {
+		    return this.setAttribute("dir",val);
+		
 	    },
-		get id(){  
-		    return this.getAttribute('id')||''; 
-		    
+		get id(){
+		    return this.getAttribute('id')||'';
+		
 	    },
-		set id(id){  
-		    this.setAttribute('id', id); 
-            
+		set id(id){
+		    this.setAttribute('id', id);
+
 	    },
-		get innerHTML(){  
-		    return this.childNodes.xml; 
-		    
+		get innerHTML(){
+		    return this.childNodes.xml;
+		
 	    },
 		set innerHTML(html){
 		    $debug("htmlElement.innerHTML("+html+")");
@@ -5109,20 +5109,20 @@ __extend__(HTMLElement.prototype, {
 			}
 			var importedNode;
 			while(parent.firstChild != null){
-	            importedNode = this.importNode( 
+	            importedNode = this.importNode(
 	                parent.removeChild( parent.firstChild ), true);
-			    this.appendChild( importedNode );   
+			    this.appendChild( importedNode );
 		    }
 		    //Mark for garbage collection
 		    doc = null;
 		},
-		get lang() { 
-		    return this.getAttribute("lang")||""; 
-		    
+		get lang() {
+		    return this.getAttribute("lang")||"";
+		
 	    },
-		set lang(val) { 
-		    return this.setAttribute("lang",val); 
-		    
+		set lang(val) {
+		    return this.setAttribute("lang",val);
+		
 	    },
 		get offsetHeight(){
 		    return Number(this.style["height"].replace("px",""));
@@ -5142,7 +5142,7 @@ __extend__(HTMLElement.prototype, {
 	    },
 		scrollHeight: 0,
 		scrollWidth: 0,
-		scrollLeft: 0, 
+		scrollLeft: 0,
 		scrollRight: 0,
 		get style(){
 		    if(this.$css2props === null){
@@ -5152,23 +5152,23 @@ __extend__(HTMLElement.prototype, {
 	        }
 	        return this.$css2props
 		},
-		get title() { 
-		    return this.getAttribute("title")||""; 
-		    
+		get title() {
+		    return this.getAttribute("title")||"";
+		
 	    },
-		set title(val) { 
-		    return this.setAttribute("title",val); 
-		    
+		set title(val) {
+		    return this.setAttribute("title",val);
+		
 	    },
 		//Not in the specs but I'll leave it here for now.
-		get outerHTML(){ 
-		    return this.xml; 
-		    
+		get outerHTML(){
+		    return this.xml;
+		
 	    },
 	    scrollIntoView: function(){
 	        /*TODO*/
 	        return;
-	    
+	
         },
 		onclick: function(event){
 		    __eval__(this.getAttribute('onclick')||'')
@@ -5211,35 +5211,35 @@ var __eval__ = function(script){
 };
 
 var __registerEventAttrs__ = function(elm){
-    if(elm.hasAttribute('onclick')){ 
-        elm.addEventListener('click', elm.onclick ); 
+    if(elm.hasAttribute('onclick')){
+        elm.addEventListener('click', elm.onclick );
     }
-    if(elm.hasAttribute('ondblclick')){ 
-        elm.addEventListener('dblclick', elm.onclick ); 
+    if(elm.hasAttribute('ondblclick')){
+        elm.addEventListener('dblclick', elm.onclick );
     }
-    if(elm.hasAttribute('onkeydown')){ 
-        elm.addEventListener('keydown', elm.onclick ); 
+    if(elm.hasAttribute('onkeydown')){
+        elm.addEventListener('keydown', elm.onclick );
     }
-    if(elm.hasAttribute('onkeypress')){ 
-        elm.addEventListener('keypress', elm.onclick ); 
+    if(elm.hasAttribute('onkeypress')){
+        elm.addEventListener('keypress', elm.onclick );
     }
-    if(elm.hasAttribute('onkeyup')){ 
-        elm.addEventListener('keyup', elm.onclick ); 
+    if(elm.hasAttribute('onkeyup')){
+        elm.addEventListener('keyup', elm.onclick );
     }
-    if(elm.hasAttribute('onmousedown')){ 
-        elm.addEventListener('mousedown', elm.onclick ); 
+    if(elm.hasAttribute('onmousedown')){
+        elm.addEventListener('mousedown', elm.onclick );
     }
-    if(elm.hasAttribute('onmousemove')){ 
-        elm.addEventListener('mousemove', elm.onclick ); 
+    if(elm.hasAttribute('onmousemove')){
+        elm.addEventListener('mousemove', elm.onclick );
     }
-    if(elm.hasAttribute('onmouseout')){ 
-        elm.addEventListener('mouseout', elm.onclick ); 
+    if(elm.hasAttribute('onmouseout')){
+        elm.addEventListener('mouseout', elm.onclick );
     }
-    if(elm.hasAttribute('onmouseover')){ 
-        elm.addEventListener('mouseover', elm.onclick ); 
+    if(elm.hasAttribute('onmouseover')){
+        elm.addEventListener('mouseover', elm.onclick );
     }
-    if(elm.hasAttribute('onmouseup')){ 
-        elm.addEventListener('mouseup', elm.onclick ); 
+    if(elm.hasAttribute('onmouseup')){
+        elm.addEventListener('mouseup', elm.onclick );
     }
     return elm;
 };
@@ -5293,31 +5293,31 @@ var HTMLCollection = function(nodelist, type){
   for (var i=0; i<nodelist.length; i++) {
       this[i] = nodelist[i];
   }
-  
+
   this.length = nodelist.length;
 
 }
 
 HTMLCollection.prototype = {
-        
+
     item : function (idx) {
         var ret = null;
-        if ((idx >= 0) && (idx < this.length)) { 
-            ret = this[idx];                    
+        if ((idx >= 0) && (idx < this.length)) {
+            ret = this[idx];
         }
-    
-        return ret;   
+
+        return ret;
     },
-    
+
     namedItem : function (name) {
     }
 };
 
 /*var HTMLCollection = function(nodelist, type){
-  var $items = [], 
+  var $items = [],
       $item, i;
   if(type === "Anchor" ){
-    for(i=0;i<nodelist.length;i++){ 
+    for(i=0;i<nodelist.length;i++){
       //The name property is required to be add to the collection
       if(nodelist.item(i).name){
         item = new nodelist.item(i);
@@ -5326,7 +5326,7 @@ HTMLCollection.prototype = {
       }
     }
   }else if(type === "Link"){
-    for(i=0;i<nodelist.length;i++){ 
+    for(i=0;i<nodelist.length;i++){
       //The name property is required to be add to the collection
       if(nodelist.item(i).href){
         item = new nodelist.item(i);
@@ -5335,7 +5335,7 @@ HTMLCollection.prototype = {
       }
     }
   }else if(type === "Form"){
-    for(i=0;i<nodelist.length;i++){ 
+    for(i=0;i<nodelist.length;i++){
       //The name property is required to be add to the collection
       if(nodelist.item(i).href){
         item = new nodelist.item(i);
@@ -5352,7 +5352,7 @@ HTMLCollection.prototype = {
 };*/
 
 	$debug("Defining HTMLAnchorElement");
-/* 
+/*
 * HTMLAnchorElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLAnchorElement", function(){
@@ -5368,114 +5368,114 @@ var HTMLAnchorElement = function(ownerDocument) {
 };
 HTMLAnchorElement.prototype = new HTMLElement;
 __extend__(HTMLAnchorElement.prototype, {
-	get accessKey() { 
-	    return this.getAttribute("accesskey") || ""; 
-	    
+	get accessKey() {
+	    return this.getAttribute("accesskey") || "";
+	
     },
-	set accessKey(val) { 
-	    return this.setAttribute("accesskey",val); 
-	    
+	set accessKey(val) {
+	    return this.setAttribute("accesskey",val);
+	
     },
-	get charset() { 
-	    return this.getAttribute("charset") || ""; 
-	    
+	get charset() {
+	    return this.getAttribute("charset") || "";
+	
     },
-	set charset(val) { 
-	    return this.setAttribute("charset",val); 
-	    
+	set charset(val) {
+	    return this.setAttribute("charset",val);
+	
     },
-	get coords() { 
-	    return this.getAttribute("coords") || ""; 
-	    
+	get coords() {
+	    return this.getAttribute("coords") || "";
+	
     },
-	set coords(val) { 
-	    return this.setAttribute("coords",val); 
-	    
+	set coords(val) {
+	    return this.setAttribute("coords",val);
+	
     },
-	get href() { 
-	    return this.getAttribute("href") || ""; 
-	    
+	get href() {
+	    return this.getAttribute("href") || "";
+	
     },
-	set href(val) { 
-	    return this.setAttribute("href",val); 
-	    
+	set href(val) {
+	    return this.setAttribute("href",val);
+	
     },
-	get hreflang() { 
-	    return this.getAttribute("hreflang") || ""; 
-	    
+	get hreflang() {
+	    return this.getAttribute("hreflang") || "";
+	
     },
-	set hreflang(val) { 
-	    return this.setAttribute("hreflang",val); 
-	    
+	set hreflang(val) {
+	    return this.setAttribute("hreflang",val);
+	
     },
-	get name() { 
-	    return this.getAttribute("name") || ""; 
-	    
+	get name() {
+	    return this.getAttribute("name") || "";
+	
     },
-	set name(val) { 
-	    return this.setAttribute("name",val); 
-	    
+	set name(val) {
+	    return this.setAttribute("name",val);
+	
     },
-	get rel() { 
-	    return this.getAttribute("rel") || ""; 
-	    
+	get rel() {
+	    return this.getAttribute("rel") || "";
+	
     },
-	set rel(val) { 
-	    return this.setAttribute("rel",val); 
-	    
+	set rel(val) {
+	    return this.setAttribute("rel",val);
+	
     },
-	get rev() { 
-	    return this.getAttribute("rev") || ""; 
-	    
+	get rev() {
+	    return this.getAttribute("rev") || "";
+	
     },
-	set rev(val) { 
-	    return this.setAttribute("rev",val); 
-	    
+	set rev(val) {
+	    return this.setAttribute("rev",val);
+	
     },
-	get shape() { 
-	    return this.getAttribute("shape") || ""; 
-	    
+	get shape() {
+	    return this.getAttribute("shape") || "";
+	
     },
-	set shape(val) { 
-	    return this.setAttribute("shape",val); 
-	    
+	set shape(val) {
+	    return this.setAttribute("shape",val);
+	
     },
-	get tabIndex() { 
-	    return this.getAttribute("tabindex") || ""; 
-	    
+	get tabIndex() {
+	    return this.getAttribute("tabindex") || "";
+	
     },
-	set tabIndex(val) { 
-	    return this.setAttribute("tabindex",val); 
-	    
+	set tabIndex(val) {
+	    return this.setAttribute("tabindex",val);
+	
     },
-	get target() { 
-	    return this.getAttribute("target") || ""; 
-	    
+	get target() {
+	    return this.getAttribute("target") || "";
+	
     },
-	set target(val) { 
-	    return this.setAttribute("target",val); 
-	    
+	set target(val) {
+	    return this.setAttribute("target",val);
+	
     },
-	get type() { 
-	    return this.getAttribute("type") || ""; 
-	    
+	get type() {
+	    return this.getAttribute("type") || "";
+	
     },
-	set type(val) { 
-	    return this.setAttribute("type",val); 
-	    
+	set type(val) {
+	    return this.setAttribute("type",val);
+	
     },
 	blur:function(){
 	    __blur__(this);
-	    
+	
     },
 	focus:function(){
 	    __focus__(this);
-	    
+	
     }
 });
 
 			$debug("Defining Anchor");
-/* 
+/*
 * Anchor - DOM Level 2
 */
 $w.__defineGetter__("Anchor", function(){
@@ -5530,7 +5530,7 @@ Anchor.prototype = new Anchor;
 			return m&&m.length>1?m[1]:"/";
 		},
 		set pathname(_pathname){
-			this.href = this.protocol + this.host + _pathname + 
+			this.href = this.protocol + this.host + _pathname +
 				this.search + this.hash;
 		},
 		get port(){
@@ -5538,14 +5538,14 @@ Anchor.prototype = new Anchor;
 			return m&&m.length>1?m[1]:"";
 		},
 		set port(_port){
-			this.href = this.protocol + this.hostname + ":"+_port + this.pathname + 
+			this.href = this.protocol + this.hostname + ":"+_port + this.pathname +
 				this.search + this.hash;
 		},
 		get protocol(){
 			return protocol.exec(this.href)[0];
 		},
 		set protocol(_protocol){
-			this.href = _protocol + this.host + this.pathname + 
+			this.href = _protocol + this.host + this.pathname +
 				this.search + this.hash;
 		},
 		get search(){
@@ -5553,14 +5553,14 @@ Anchor.prototype = new Anchor;
 			return m&&m.length>1?m[1]:"";
 		},
 		set search(_search){
-			this.href = this.protocol + this.host + this.pathname + 
+			this.href = this.protocol + this.host + this.pathname +
 				_search + this.hash;
 		}
   });
 
 })();
 			$debug("Defining HTMLAreaElement");
-/* 
+/*
 * HTMLAreaElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLAreaElement", function(){
@@ -5621,7 +5621,7 @@ __extend__(HTMLAreaElement.prototype, {
 });
 
 			$debug("Defining HTMLBaseElement");
-/* 
+/*
 * HTMLBaseElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLBaseElement", function(){
@@ -5652,7 +5652,7 @@ __extend__(HTMLBaseElement.prototype, {
 });
 
 			$debug("Defining HTMLQuoteElement");
-/* 
+/*
 * HTMLQuoteElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLQuoteElement", function(){
@@ -5676,7 +5676,7 @@ __extend__(HTMLQuoteElement.prototype, {
 });
 
 			$debug("Defining HTMLButtonElement");
-/* 
+/*
 * HTMLButtonElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLButtonElement", function(){
@@ -5725,7 +5725,7 @@ __extend__(HTMLButtonElement.prototype, {
 });
 
 			$debug("Defining HTMLTableColElement");
-/* 
+/*
 * HTMLTableColElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLTableColElement", function(){
@@ -5779,7 +5779,7 @@ __extend__(HTMLTableColElement.prototype, {
 });
 
 			$debug("Defining HTMLModElement");
-/* 
+/*
 * HTMLModElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLModElement", function(){
@@ -5809,7 +5809,7 @@ __extend__(HTMLModElement.prototype, {
 });
 
 			$debug("Defining HTMLFieldSetElement");
-/* 
+/*
 * HTMLFieldSetElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLFieldSetElement", function(){
@@ -5834,7 +5834,7 @@ __extend__(HTMLFieldSetElement.prototype, {
 });
 
 			$debug("Defining HTMLFormElement");
-/* 
+/*
 * HTMLAnchorElement - DOM Level 2
 */
 $w.__defineGetter__("Form", function(){
@@ -5854,74 +5854,74 @@ var HTMLFormElement = function(ownerDocument){
 };
 HTMLFormElement.prototype = new HTMLElement;
 __extend__(HTMLFormElement.prototype,{
-    get acceptCharset(){ 
+    get acceptCharset(){
         return this.getAttribute('accept-charset');
-        
+
     },
     set acceptCharset(acceptCharset){
         this.setAttribute('accept-charset', acceptCharset);
-        
+
     },
     get action(){
         return this.getAttribute('action');
-        
+
     },
     set action(action){
         this.setAttribute('action', action);
-        
+
     },
     get elements() {
         return this.getElementsByTagName("*");
-        
+
     },
     get enctype(){
         return this.getAttribute('enctype');
-        
+
     },
     set enctype(enctype){
         this.setAttribute('enctype', enctype);
-        
+
     },
     get length() {
         return this.elements.length;
-        
+
     },
     get method(){
         return this.getAttribute('method');
-        
+
     },
     set method(action){
         this.setAttribute('method', method);
-        
+
     },
 	get name() {
-	    return this.getAttribute("name") || ""; 
-	    
+	    return this.getAttribute("name") || "";
+	
     },
-	set name(val) { 
-	    return this.setAttribute("name",val); 
-	    
+	set name(val) {
+	    return this.setAttribute("name",val);
+	
     },
-	get target() { 
-	    return this.getAttribute("target") || ""; 
-	    
+	get target() {
+	    return this.getAttribute("target") || "";
+	
     },
-	set target(val) { 
-	    return this.setAttribute("target",val); 
-	    
+	set target(val) {
+	    return this.setAttribute("target",val);
+	
     },
 	submit:function(){
 	    __submit__(this);
-	    
+	
     },
 	reset:function(){
 	    __reset__(this);
-	    
+	
     }
 });
 
 			$debug("Defining HTMLFrameElement");
-/* 
+/*
 * HTMLFrameElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLFrameElement", function(){
@@ -6002,7 +6002,7 @@ __extend__(HTMLFrameElement.prototype, {
 });
 
 			$debug("Defining HTMLFrameSetElement");
-/* 
+/*
 * HTMLFrameSetElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLFrameSetElement", function(){
@@ -6032,7 +6032,7 @@ __extend__(HTMLFrameSetElement.prototype, {
 });
 
 			$debug("Defining HTMLHeadElement");
-/* 
+/*
 * HTMLHeadElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLHeadElement", function(){
@@ -6071,7 +6071,7 @@ var __evalScript__ = function(newChild){
     //check to see if this is a script element and apply a script loading strategy
     //the check against the ownerDocument isnt really enough to support frames in
     // the long run, but for now it's ok
-    if(newChild.nodeType == DOMNode.ELEMENT_NODE && 
+    if(newChild.nodeType == DOMNode.ELEMENT_NODE &&
         newChild.ownerDocument == window.document ){
         if(newChild.nodeName.toUpperCase() == "SCRIPT"){
             $debug("loading script via policy. ");
@@ -6079,7 +6079,7 @@ var __evalScript__ = function(newChild){
         }
     }
 };$debug("Defining HTMLIFrameElement");
-/* 
+/*
 * HTMLIFrameElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLIFrameElement", function(){
@@ -6094,23 +6094,23 @@ var HTMLIFrameElement = function(ownerDocument) {
 };
 HTMLIFrameElement.prototype = new HTMLFrameElement;
 __extend__(HTMLIFrameElement.prototype, {
-	get height() { 
-	    return this.getAttribute("height") || ""; 
+	get height() {
+	    return this.getAttribute("height") || "";
     },
-	set height(val) { 
-	    return this.setAttribute("height",val); 
+	set height(val) {
+	    return this.setAttribute("height",val);
     },
-	get width() { 
-	    return this.getAttribute("width") || ""; 
+	get width() {
+	    return this.getAttribute("width") || "";
     },
-	set width(val) { 
-	    return this.setAttribute("width",val); 
+	set width(val) {
+	    return this.setAttribute("width",val);
     }
 });
 
 
 			$debug("Defining HTMLImageElement");
-/* 
+/*
 * HTMLImageElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLImageElement", function(){
@@ -6170,7 +6170,7 @@ __extend__(HTMLImageElement.prototype, {
 });
 
 			$debug("Defining HTMLInputElement");
-/* 
+/*
 * HTMLInputElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLInputElement", function(){
@@ -6284,24 +6284,24 @@ __extend__(HTMLInputElement.prototype, {
     },
 	blur:function(){
 	    __blur__(this);
-	    
+	
     },
 	focus:function(){
 	    __focus__(this);
-	    
+	
     },
 	select:function(){
 	    __select__(this);
-	    
+	
     },
 	click:function(){
 	    __click__(this);
-	    
+	
     }
 });
 
 			$debug("Defining HTMLLabelElement");
-/* 
+/*
 * HTMLLabelElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLLabelElement", function(){
@@ -6338,7 +6338,7 @@ __extend__(HTMLLabelElement.prototype, {
 });
 
 			$debug("Defining HTMLLegendElement");
-/* 
+/*
 * HTMLLegendElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLLegendElement", function(){
@@ -6369,7 +6369,7 @@ __extend__(HTMLLegendElement.prototype, {
 });
 
 			/**
-* Link - HTMLElement 
+* Link - HTMLElement
 */
 $w.__defineGetter__("Link", function(){
   return function(){
@@ -6379,7 +6379,7 @@ $w.__defineGetter__("Link", function(){
 
 
 $debug("Defining HTMLLinkElement");
-/* 
+/*
 * HTMLLinkElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLLinkElement", function(){
@@ -6453,7 +6453,7 @@ __extend__(HTMLLinkElement.prototype, {
 			
 
 			$debug("Defining HTMLMapElement");
-/* 
+/*
 * HTMLMapElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLMapElement", function(){
@@ -6480,7 +6480,7 @@ __extend__(HTMLMapElement.prototype, {
 });
 
 			$debug("Defining HTMLMetaElement");
-/* 
+/*
 * HTMLMetaElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLMetaElement", function(){
@@ -6522,7 +6522,7 @@ __extend__(HTMLMetaElement.prototype, {
 });
 
 			$debug("Defining HTMLObjectElement");
-/* 
+/*
 * HTMLObjectElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLObjectElement", function(){
@@ -6615,7 +6615,7 @@ __extend__(HTMLObjectElement.prototype, {
 });
 
 			$debug("Defining HTMLOptGroupElement");
-/* 
+/*
 * HTMLOptGroupElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLOptGroupElement", function(){
@@ -6645,7 +6645,7 @@ __extend__(HTMLOptGroupElement.prototype, {
 });
 
 			$debug("Defining HTMLOptionElement");
-/* 
+/*
 * HTMLOptionElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLOptionElement", function(){
@@ -6711,7 +6711,7 @@ __extend__(HTMLOptionElement.prototype, {
 });
 
 			$debug("Defining HTMLParamElement");
-/* 
+/*
 * HTMLParamElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLParamElement", function(){
@@ -6753,7 +6753,7 @@ __extend__(HTMLParamElement.prototype, {
 });
 
 			$debug("Defining HTMLScriptElement");
-/* 
+/*
 * HTMLScriptElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLScriptElement", function(){
@@ -6775,7 +6775,7 @@ __extend__(HTMLScriptElement.prototype, {
             if (this.childNodes[i].nodeType == DOMNode.CDATA_SECTION_NODE) {
                 return this.childNodes[i].nodeValue;
             }
-        } 
+        }
         // otherwise there will be a text node containing the script
         if (this.childNodes[0] && this.childNodes[0].nodeType == DOMNode.TEXT_NODE) {
             return this.childNodes[0].nodeValue;
@@ -6822,7 +6822,7 @@ __extend__(HTMLScriptElement.prototype, {
 });
 
             $debug("Defining HTMLSelectElement");
-/* 
+/*
 * HTMLSelectElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLSelectElement", function(){
@@ -6927,7 +6927,7 @@ __extend__(HTMLSelectElement.prototype, {
 });
 
 			$debug("Defining HTMLStyleElement");
-/* 
+/*
 * HTMLStyleElement - DOM Level 2
 */
 $w.__defineGetter__("HTMLStyleElement", function(){
@@ -6963,7 +6963,7 @@ __extend__(HTMLStyleElement.prototype, {
 });
 
 			$debug("Defining HTMLTableElement");
-/* 
+/*
 * HTMLTableElement - DOM Level 2
 * Implementation Provided by Steven Wood
 */
@@ -6982,31 +6982,31 @@ var HTMLTableElement = function(ownerDocument) {
 
 HTMLTableElement.prototype = new HTMLElement;
 __extend__(HTMLTableElement.prototype, {
-    
+
     get rows() {
         return new HTMLCollection(this.getElementsByTagName("tr"));
     },
-    
+
     insertRow : function (idx) {
         if (idx === undefined) {
             throw new Error("Index omitted in call to HTMLTableElement.insertRow ");
         }
-        
+
         var numRows = this.rows.length,
             node = null;
-        
+
         if (idx > numRows) {
             throw new Error("Index > rows.length in call to HTMLTableElement.insertRow");
         }
-        
+
         var row = document.createElement("tr");
-        // If index is -1 or equal to the number of rows, 
-        // the row is appended as the last row. If index is omitted 
+        // If index is -1 or equal to the number of rows,
+        // the row is appended as the last row. If index is omitted
         // or greater than the number of rows, an error will result
         if (idx === -1 || idx === numRows) {
             this.appendChild(row);
         } else {
-            
+
 
             node = this.firstChild;
 
@@ -7014,21 +7014,21 @@ __extend__(HTMLTableElement.prototype, {
                 node = node.nextSibling;
             }
         }
-            
+
         this.insertBefore(row, node);
-        
+
         return row;
     },
-    
+
     deleteRow : function (idx) {
         var elem = this.rows[idx];
         this.removeChild(elem);
     }
-    
+
 });
 
 			$debug("Defining HTMLTableCellElement");
-/* 
+/*
 * HTMLTableCellElement - DOM Level 2
 * Implementation Provided by Steven Wood
 */
@@ -7044,14 +7044,14 @@ var HTMLTableCellElement = function(ownerDocument) {
 };
 HTMLTableCellElement.prototype = new HTMLElement;
 __extend__(HTMLTableCellElement.prototype, {
-    
-    
+
+
     // TODO :
-    
+
 });
 
 			$debug("Defining HTMLRowElement");
-/* 
+/*
 * HTMLRowElement - DOM Level 2
 * Implementation Provided by Steven Wood
 */
@@ -7068,38 +7068,38 @@ var HTMLTableRowElement = function(ownerDocument) {
 };
 HTMLTableRowElement.prototype = new HTMLElement;
 __extend__(HTMLTableRowElement.prototype, {
-    
+
     // align gets or sets the horizontal alignment of data within cells of the row.
     get align() {
         return this.getAttribute("align");
     },
-     
+
     get bgColor() {
         return this.getAttribute("bgcolor");
     },
-         
+
     get cells() {
         var nl = this.getElementsByTagName("td");
         return new HTMLCollection(nl);
     },
-       
+
     get ch() {
         return this.getAttribute("ch");
     },
-     
+
     set ch(ch) {
         this.setAttribute("ch", ch);
     },
-    
-    // ch gets or sets the alignment character for cells in a column. 
+
+    // ch gets or sets the alignment character for cells in a column.
     set chOff(chOff) {
         this.setAttribute("chOff", chOff);
     },
-     
+
     get chOff(chOff) {
         return this.getAttribute("chOff");
     },
-   
+
     get rowIndex() {
         var nl = this.parentNode.childNodes;
         for (var i=0; i<nl.length; i++) {
@@ -7117,7 +7117,7 @@ __extend__(HTMLTableRowElement.prototype, {
             }
         }
     },
-     
+
     get vAlign () {
          return this.getAttribute("vAlign");
     },
@@ -7126,20 +7126,20 @@ __extend__(HTMLTableRowElement.prototype, {
         if (idx === undefined) {
             throw new Error("Index omitted in call to HTMLTableRow.insertCell");
         }
-        
+
         var numCells = this.cells.length,
             node = null;
-        
+
         if (idx > numCells) {
             throw new Error("Index > rows.length in call to HTMLTableRow.insertCell");
         }
-        
+
         var cell = document.createElement("td");
 
         if (idx === -1 || idx === numCells) {
             this.appendChild(cell);
         } else {
-            
+
 
             node = this.firstChild;
 
@@ -7147,18 +7147,18 @@ __extend__(HTMLTableRowElement.prototype, {
                 node = node.nextSibling;
             }
         }
-            
+
         this.insertBefore(cell, node);
-        
+
         return cell;
     },
-    
+
     deleteCell : function (idx) {
         var elem = this.cells[idx];
         this.removeChild(elem);
     }
-    
-    
+
+
 });
 
 			$debug("Defining Event");
@@ -7243,14 +7243,14 @@ __extend__(CSS2Properties.prototype, {
     get cssText(){
         return Array.prototype.apply.join(this,[';\n']);
     },
-    set cssText(cssText){ 
-        __cssTextToStyles__(this, cssText); 
+    set cssText(cssText){
+        __cssTextToStyles__(this, cssText);
     },
     getPropertyCSSValue : function(){
-        
+
     },
     getPropertyPriority : function(){
-        
+
     },
     getPropertyValue : function(name){
 		var camelCase = name.replace(/\-(\w)/g, function(all, letter){
@@ -7270,10 +7270,10 @@ __extend__(CSS2Properties.prototype, {
         return this[index];
     },
     removeProperty: function(){
-        
+
     },
     setProperty: function(){
-        
+
     },
     toString:function(){
         if (this.length >0){
@@ -7301,7 +7301,7 @@ var __cssTextToStyles__ = function(css2props, cssText){
 			}));
             $debug('CSS Style Name:  ' + camelCaseName);
             if(css2props[camelCaseName]!==undefined){
-                //set the value internally with camelcase name 
+                //set the value internally with camelcase name
                 $debug('Setting css ' + camelCaseName + ' to ' + value);
                 css2props[camelCaseName] = value;
             };
@@ -7439,7 +7439,7 @@ var __supportedStyles__ = {
     width:	"",
     wordSpacing:	"",
     zIndex:	""
-};/* 
+};/*
 * CSSRule - DOM Level 2
 */
 $w.__defineGetter__("CSSRule", function(){
@@ -7449,7 +7449,7 @@ $w.__defineGetter__("CSSRule", function(){
 });
 
 var CSSRule = function(options){
-  var $style, 
+  var $style,
       $selectorText = options.selectorText?options.selectorText:"";
       $style = new CSS2Properties({
           cssText:options.cssText?options.cssText:null
@@ -7466,7 +7466,7 @@ var CSSRule = function(options){
       }
     });
 };
-/* 
+/*
 * CSSStyleSheet - DOM Level 2
 */
 $w.__defineGetter__("CSSStyleSheet", function(){
@@ -7476,13 +7476,13 @@ $w.__defineGetter__("CSSStyleSheet", function(){
 });
 
 var CSSStyleSheet = function(options){
-    var $cssRules, 
+    var $cssRules,
         $disabled = options.disabled?options.disabled:false,
         $href = options.href?options.href:null,
         $parentStyleSheet = options.parentStyleSheet?options.parentStyleSheet:null,
         $title = options.title?options.title:"",
         $type = "text/css";
-        
+
     function parseStyleSheet(text){
         $debug("parsing css");
         //this is pretty ugly, but text is the entire text of a stylesheet
@@ -7553,7 +7553,7 @@ $w.__defineGetter__("location", function(url){
 			//setting the hash is the only property of the location object
 			//that doesn't cause the window to reload
 			_hash = _hash.indexOf('#')===0?_hash:"#"+_hash;	
-			$location = this.protocol + this.host + this.pathname + 
+			$location = this.protocol + this.host + this.pathname +
 				this.search + _hash;
 			setHistory(_hash, "hash");
 		},
@@ -7561,7 +7561,7 @@ $w.__defineGetter__("location", function(url){
 			return this.hostname + (this.port !== "")?":"+this.port:"";
 		},
 		set host(_host){
-			$w.location = this.protocol + _host + this.pathname + 
+			$w.location = this.protocol + _host + this.pathname +
 				this.search + this.hash;
 		},
 		get hostname(){
@@ -7585,7 +7585,7 @@ $w.__defineGetter__("location", function(url){
 			return m&&m.length>1?m[1]:"/";
 		},
 		set pathname(_pathname){
-			$w.location = this.protocol + this.host + _pathname + 
+			$w.location = this.protocol + this.host + _pathname +
 				this.search + this.hash;
 		},
 		get port(){
@@ -7593,14 +7593,14 @@ $w.__defineGetter__("location", function(url){
 			return m&&m.length>1?m[1]:"";
 		},
 		set port(_port){
-			$w.location = this.protocol + this.hostname + ":"+_port + this.pathname + 
+			$w.location = this.protocol + this.hostname + ":"+_port + this.pathname +
 				this.search + this.hash;
 		},
 		get protocol(){
 			return protocol.exec(this.href)[0];
 		},
 		set protocol(_protocol){
-			$w.location = _protocol + this.host + this.pathname + 
+			$w.location = _protocol + this.host + this.pathname +
 				this.search + this.hash;
 		},
 		get search(){
@@ -7608,7 +7608,7 @@ $w.__defineGetter__("location", function(url){
 			return m&&m.length>1?m[1]:"";
 		},
 		set search(_search){
-			$w.location = this.protocol + this.host + this.pathname + 
+			$w.location = this.protocol + this.host + this.pathname +
 				_search + this.hash;
 		},
 		toString: function(){
@@ -7666,7 +7666,7 @@ $w.__defineGetter__("location", function(url){
 		};
 	});
 
-	//Here locationPart is the particutlar method/attribute 
+	//Here locationPart is the particutlar method/attribute
 	// of the location object that was modified.  This allows us
 	// to modify the correct portion of the location object
 	// when we navigate the history
@@ -7697,7 +7697,7 @@ $w.__defineGetter__("navigator", function(){
 			return $appName;
 		},
 		get appVersion(){
-			return $version +" ("+ 
+			return $version +" ("+
 			    $w.navigator.platform +"; "+
 			    "U; "+//?
 			    $env.os_name+" "+$env.os_arch+" "+$env.os_version+"; "+
@@ -7748,10 +7748,10 @@ window.setInterval = function(fn, time){
 	var num = $timers.length;
 	
     if (typeof fn == 'string') {
-        var fnstr = fn; 
-        fn = function() { 
-            eval(fnstr); 
-        }; 
+        var fnstr = fn;
+        fn = function() {
+            eval(fnstr);
+        };
     }
 	if(time===0){
 	    fn();
@@ -7765,7 +7765,7 @@ window.setInterval = function(fn, time){
 
 window.clearInterval = window.clearTimeout = function(num){
 	if ( $timers[num] ) {
-	    
+	
 	    $debug("Deleting timer number "+num);
 		$timers[num].stop();
 		delete $timers[num];
@@ -7822,7 +7822,7 @@ $w.dispatchEvent = function(event){
                 fn.call( _this, event );
             });
         }
-    
+
         if ( this["on" + event.type] )
             this["on" + event.type].call( _this, event );
     }
@@ -7874,7 +7874,7 @@ $w.XMLHttpRequest = function(){
 };
 
 XMLHttpRequest.prototype = {
-	open: function(method, url, async, user, password){ 
+	open: function(method, url, async, user, password){
 		this.readyState = 1;
 		if (async === false ){
 			this.async = false;
@@ -7897,7 +7897,7 @@ XMLHttpRequest.prototype = {
       				if ( _this.responseText.match(/^\s*</) ) {
       				  if(responseXML){
       				      return responseXML;
-      				      
+      				
   				      }else{
         					try {
         					    $debug("parsing response text into xml document");
@@ -7974,7 +7974,7 @@ var $availHeight  = 600,
     $colorDepth    = 16,
     $height       = 600,
     $width        = 800;
-    
+
 $w.__defineGetter__("screen", function(){
   return {
     get availHeight(){return $availHeight;},
@@ -8021,7 +8021,7 @@ $w.scrollTo = function(x,y){
 */
 $debug("Initializing Window Dialogs.");
 $w.alert = function(message){
- //TODO 
+ //TODO
 };
 
 $w.confirm = function(question){
@@ -8074,7 +8074,7 @@ window.$profiler;
 		else if (advice.type == _around) {
 			aspect = function() {
 				var invocation = { object: this, args: arguments };
-				return advice.value.apply(invocation.object, [{ arguments: invocation.args, method: method, proceed : 
+				return advice.value.apply(invocation.object, [{ arguments: invocation.args, method: method, proceed :
 					function() {
 						return old.apply(invocation.object, invocation.args);
 					}
@@ -8082,7 +8082,7 @@ window.$profiler;
 			};
 		}
 
-		aspect.unweave = function() { 
+		aspect.unweave = function() {
 			source[method] = old;
 			pointcut = source = aspect = old = null;
 		};
@@ -8118,7 +8118,7 @@ window.$profiler;
 			if (advices.length == 0)
 				throw 'No method: ' + pointcut.method;
 
-		} 
+		}
 		else
 		{
 			// Return as an array of one element
@@ -8129,10 +8129,10 @@ window.$profiler;
 
 	};
 
-	window.$profiler = 
+	window.$profiler =
 	{
 		/**
-		 * Creates an advice after the defined point-cut. The advice will be executed after the point-cut method 
+		 * Creates an advice after the defined point-cut. The advice will be executed after the point-cut method
 		 * has completed execution successfully, and will receive one parameter with the result of the execution.
 		 * This function returns an array of weaved aspects (Function).
 		 *
@@ -8144,7 +8144,7 @@ window.$profiler;
 		 *
 		 * @name after
 		 * @param Map pointcut Definition of the point-cut to apply the advice. A point-cut is the definition of the object/s and method/s to be weaved.
-		 * @option Object target Target object to be weaved. 
+		 * @option Object target Target object to be weaved.
 		 * @option String method Name of the function to be weaved. Regex are supported, but not on built-in objects.
 		 * @param Function advice Function containing the code that will get called after the execution of the point-cut. It receives one parameter
 		 *                        with the result of the point-cut's execution.
@@ -8158,7 +8158,7 @@ window.$profiler;
 		},
 
 		/**
-		 * Creates an advice before the defined point-cut. The advice will be executed before the point-cut method 
+		 * Creates an advice before the defined point-cut. The advice will be executed before the point-cut method
 		 * but cannot modify the behavior of the method, or prevent its execution.
 		 * This function returns an array of weaved aspects (Function).
 		 *
@@ -8170,7 +8170,7 @@ window.$profiler;
 		 *
 		 * @name before
 		 * @param Map pointcut Definition of the point-cut to apply the advice. A point-cut is the definition of the object/s and method/s to be weaved.
-		 * @option Object target Target object to be weaved. 
+		 * @option Object target Target object to be weaved.
 		 * @option String method Name of the function to be weaved. Regex are supported, but not on built-in objects.
 		 * @param Function advice Function containing the code that will get called before the execution of the point-cut.
 		 *
@@ -8189,20 +8189,20 @@ window.$profiler;
 		 * This function returns an array of weaved aspects (Function).
 		 *
 		 * @example jQuery.aop.around( {target: window, method: 'MyGlobalMethod'}, function(invocation) {
-		 *                alert('# of Arguments: ' + invocation.arguments.length); 
-		 *                return invocation.proceed(); 
+		 *                alert('# of Arguments: ' + invocation.arguments.length);
+		 *                return invocation.proceed();
 		 *          } );
 		 * @result Array<Function>
 		 *
-		 * @example jQuery.aop.around( {target: String, method: 'indexOf'}, function(invocation) { 
-		 *                alert('Searching: ' + invocation.arguments[0] + ' on: ' + this); 
-		 *                return invocation.proceed(); 
+		 * @example jQuery.aop.around( {target: String, method: 'indexOf'}, function(invocation) {
+		 *                alert('Searching: ' + invocation.arguments[0] + ' on: ' + this);
+		 *                return invocation.proceed();
 		 *          } );
 		 * @result Array<Function>
 		 *
 		 * @example jQuery.aop.around( {target: window, method: /Get(\d+)/}, function(invocation) {
-		 *                alert('Executing ' + invocation.method); 
-		 *                return invocation.proceed(); 
+		 *                alert('Executing ' + invocation.method);
+		 *                return invocation.proceed();
 		 *          } );
 		 * @desc Matches all global methods starting with 'Get' and followed by a number.
 		 * @result Array<Function>
@@ -8210,7 +8210,7 @@ window.$profiler;
 		 *
 		 * @name around
 		 * @param Map pointcut Definition of the point-cut to apply the advice. A point-cut is the definition of the object/s and method/s to be weaved.
-		 * @option Object target Target object to be weaved. 
+		 * @option Object target Target object to be weaved.
 		 * @option String method Name of the function to be weaved. Regex are supported, but not on built-in objects.
 		 * @param Function advice Function containing the code that will get called around the execution of the point-cut. This advice will be called with one
 		 *                        argument containing one function '.proceed()', the collection of arguments '.arguments', and the matched method name '.method'.
@@ -8236,9 +8236,9 @@ window.$profiler;
 		 *
 		 * @name introduction
 		 * @param Map pointcut Definition of the point-cut to apply the advice. A point-cut is the definition of the object/s and method/s to be weaved.
-		 * @option Object target Target object to be weaved. 
+		 * @option Object target Target object to be weaved.
 		 * @option String method Name of the function to be weaved.
-		 * @param Function advice Function containing the code that will be executed on the point-cut. 
+		 * @param Function advice Function containing the code that will be executed on the point-cut.
 		 *
 		 * @type Array<Function>
 		 * @cat Plugins/General
@@ -8275,10 +8275,10 @@ var $profile = window.$profile = {};
 
 var __profile__ = function(id, invocation){
     var start = new Date().getTime();
-    var retval = invocation.proceed(); 
+    var retval = invocation.proceed();
     var finish = new Date().getTime();
     $profile[id] = $profile[id] ? $profile[id] : {};
-    $profile[id].callCount = $profile[id].callCount !== undefined ? 
+    $profile[id].callCount = $profile[id].callCount !== undefined ?
         $profile[id].callCount+1 : 0;
     $profile[id].times = $profile[id].times ? $profile[id].times : [];
     $profile[id].times[$profile[id].callCount++] = (finish-start);
@@ -8317,78 +8317,78 @@ if(__env__.profile){
     */
     window.$profiler.around({ target: CSS2Properties,  method:"getPropertyCSSValue"}, function(invocation) {
         return __profile__("CSS2Properties.getPropertyCSSValue", invocation);
-    });  
+    });
     window.$profiler.around({ target: CSS2Properties,  method:"getPropertyPriority"}, function(invocation) {
         return __profile__("CSS2Properties.getPropertyPriority", invocation);
-    });  
+    });
     window.$profiler.around({ target: CSS2Properties,  method:"getPropertyValue"}, function(invocation) {
         return __profile__("CSS2Properties.getPropertyValue", invocation);
-    });  
+    });
     window.$profiler.around({ target: CSS2Properties,  method:"item"}, function(invocation) {
         return __profile__("CSS2Properties.item", invocation);
-    });  
+    });
     window.$profiler.around({ target: CSS2Properties,  method:"removeProperty"}, function(invocation) {
         return __profile__("CSS2Properties.removeProperty", invocation);
-    });  
+    });
     window.$profiler.around({ target: CSS2Properties,  method:"setProperty"}, function(invocation) {
         return __profile__("CSS2Properties.setProperty", invocation);
-    });  
+    });
     window.$profiler.around({ target: CSS2Properties,  method:"toString"}, function(invocation) {
         return __profile__("CSS2Properties.toString", invocation);
-    });  
-               
-    
+    });
+
+
     /**
     *   DOMNode
     */
-                    
+
     window.$profiler.around({ target: DOMNode,  method:"hasAttributes"}, function(invocation) {
         return __profile__("DOMNode.hasAttributes", invocation);
-    });          
+    });
     window.$profiler.around({ target: DOMNode,  method:"insertBefore"}, function(invocation) {
         return __profile__("DOMNode.insertBefore", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"replaceChild"}, function(invocation) {
         return __profile__("DOMNode.replaceChild", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"removeChild"}, function(invocation) {
         return __profile__("DOMNode.removeChild", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"replaceChild"}, function(invocation) {
         return __profile__("DOMNode.replaceChild", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"appendChild"}, function(invocation) {
         return __profile__("DOMNode.appendChild", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"hasChildNodes"}, function(invocation) {
         return __profile__("DOMNode.hasChildNodes", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"cloneNode"}, function(invocation) {
         return __profile__("DOMNode.cloneNode", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"normalize"}, function(invocation) {
         return __profile__("DOMNode.normalize", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"isSupported"}, function(invocation) {
         return __profile__("DOMNode.isSupported", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"getElementsByTagName"}, function(invocation) {
         return __profile__("DOMNode.getElementsByTagName", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"getElementsByTagNameNS"}, function(invocation) {
         return __profile__("DOMNode.getElementsByTagNameNS", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"importNode"}, function(invocation) {
         return __profile__("DOMNode.importNode", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"contains"}, function(invocation) {
         return __profile__("DOMNode.contains", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNode,  method:"compareDocumentPosition"}, function(invocation) {
         return __profile__("DOMNode.compareDocumentPosition", invocation);
-    }); 
-    
-    
+    });
+
+
     /**
     *   DOMDocument
     */
@@ -8455,221 +8455,221 @@ if(__env__.profile){
     window.$profiler.around({ target: DOMDocument,  method:"normalizeDocument"}, function(invocation) {
         return __profile__("DOMDocument.normalizeDocument", invocation);
     });
-    
-    
+
+
     /**
     *   HTMLDocument
-    */      
+    */
     window.$profiler.around({ target: HTMLDocument,  method:"createElement"}, function(invocation) {
         return __profile__("HTMLDocument.createElement", invocation);
-    }); 
-    
+    });
+
     /**
     *   DOMParser
-    */      
+    */
     window.$profiler.around({ target: DOMParser,  method:"parseFromString"}, function(invocation) {
         return __profile__("DOMParser.parseFromString", invocation);
-    }); 
-    
+    });
+
     /**
     *   DOMNodeList
-    */      
+    */
     window.$profiler.around({ target: DOMNodeList,  method:"item"}, function(invocation) {
         return __profile__("DOMNode.item", invocation);
-    }); 
+    });
     window.$profiler.around({ target: DOMNodeList,  method:"toString"}, function(invocation) {
         return __profile__("DOMNode.toString", invocation);
-    }); 
-    
+    });
+
     /**
     *   XMLP
-    */      
+    */
     window.$profiler.around({ target: XMLP,  method:"_addAttribute"}, function(invocation) {
         return __profile__("XMLP._addAttribute", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_checkStructure"}, function(invocation) {
         return __profile__("XMLP._checkStructure", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_clearAttributes"}, function(invocation) {
         return __profile__("XMLP._clearAttributes", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_findAttributeIndex"}, function(invocation) {
         return __profile__("XMLP._findAttributeIndex", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"getAttributeCount"}, function(invocation) {
         return __profile__("XMLP.getAttributeCount", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"getAttributeName"}, function(invocation) {
         return __profile__("XMLP.getAttributeName", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"getAttributeValue"}, function(invocation) {
         return __profile__("XMLP.getAttributeValue", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"getAttributeValueByName"}, function(invocation) {
         return __profile__("XMLP.getAttributeValueByName", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"getColumnNumber"}, function(invocation) {
         return __profile__("XMLP.getColumnNumber", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"getContentBegin"}, function(invocation) {
         return __profile__("XMLP.getContentBegin", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"getContentEnd"}, function(invocation) {
         return __profile__("XMLP.getContentEnd", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"getLineNumber"}, function(invocation) {
         return __profile__("XMLP.getLineNumber", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"getName"}, function(invocation) {
         return __profile__("XMLP.getName", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"next"}, function(invocation) {
         return __profile__("XMLP.next", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_parse"}, function(invocation) {
         return __profile__("XMLP._parse", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_parse"}, function(invocation) {
         return __profile__("XMLP._parse", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_parseAttribute"}, function(invocation) {
         return __profile__("XMLP._parseAttribute", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_parseCDATA"}, function(invocation) {
         return __profile__("XMLP._parseCDATA", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_parseComment"}, function(invocation) {
         return __profile__("XMLP._parseComment", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_parseDTD"}, function(invocation) {
         return __profile__("XMLP._parseDTD", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_parseElement"}, function(invocation) {
         return __profile__("XMLP._parseElement", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_parseEntity"}, function(invocation) {
         return __profile__("XMLP._parseEntity", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_parsePI"}, function(invocation) {
         return __profile__("XMLP._parsePI", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_parseText"}, function(invocation) {
         return __profile__("XMLP._parseText", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_replaceEntities"}, function(invocation) {
         return __profile__("XMLP._replaceEntities", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_replaceEntity"}, function(invocation) {
         return __profile__("XMLP._replaceEntity", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_setContent"}, function(invocation) {
         return __profile__("XMLP._setContent", invocation);
-    }); 
+    });
     window.$profiler.around({ target: XMLP,  method:"_setErr"}, function(invocation) {
         return __profile__("XMLP._setErr", invocation);
-    }); 
-    
-    
+    });
+
+
     /**
     *   SAXDriver
-    */      
+    */
     window.$profiler.around({ target: SAXDriver,  method:"parse"}, function(invocation) {
         return __profile__("SAXDriver.parse", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"setDocumentHandler"}, function(invocation) {
         return __profile__("SAXDriver.setDocumentHandler", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"setErrorHandler"}, function(invocation) {
         return __profile__("SAXDriver.setErrorHandler", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"setLexicalHandler"}, function(invocation) {
         return __profile__("SAXDriver.setLexicalHandler", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"getColumnNumber"}, function(invocation) {
         return __profile__("SAXDriver.getColumnNumber", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"getLineNumber"}, function(invocation) {
         return __profile__("SAXDriver.getLineNumber", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"getMessage"}, function(invocation) {
         return __profile__("SAXDriver.getMessage", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"getPublicId"}, function(invocation) {
         return __profile__("SAXDriver.getPublicId", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"getSystemId"}, function(invocation) {
         return __profile__("SAXDriver.getSystemId", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"getLength"}, function(invocation) {
         return __profile__("SAXDriver.getLength", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"getName"}, function(invocation) {
         return __profile__("SAXDriver.getName", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"getValue"}, function(invocation) {
         return __profile__("SAXDriver.getValue", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"getValueByName"}, function(invocation) {
         return __profile__("SAXDriver.getValueByName", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"_fireError"}, function(invocation) {
         return __profile__("SAXDriver._fireError", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"_fireEvent"}, function(invocation) {
         return __profile__("SAXDriver._fireEvent", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXDriver,  method:"_parseLoop"}, function(invocation) {
         return __profile__("SAXDriver._parseLoop", invocation);
-    }); 
-    
+    });
+
     /**
-    *   SAXStrings    
+    *   SAXStrings
     */
     window.$profiler.around({ target: SAXStrings,  method:"getColumnNumber"}, function(invocation) {
         return __profile__("SAXStrings.getColumnNumber", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXStrings,  method:"getLineNumber"}, function(invocation) {
         return __profile__("SAXStrings.getLineNumber", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXStrings,  method:"indexOfNonWhitespace"}, function(invocation) {
         return __profile__("SAXStrings.indexOfNonWhitespace", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXStrings,  method:"indexOfWhitespace"}, function(invocation) {
         return __profile__("SAXStrings.indexOfWhitespace", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXStrings,  method:"isEmpty"}, function(invocation) {
         return __profile__("SAXStrings.isEmpty", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXStrings,  method:"lastIndexOfNonWhitespace"}, function(invocation) {
         return __profile__("SAXStrings.lastIndexOfNonWhitespace", invocation);
-    }); 
+    });
     window.$profiler.around({ target: SAXStrings,  method:"replace"}, function(invocation) {
         return __profile__("SAXStrings.replace", invocation);
-    }); 
-    
+    });
+
     /**
     *   Stack - SAX Utility
     window.$profiler.around({ target: Stack,  method:"clear"}, function(invocation) {
         return __profile__("Stack.clear", invocation);
-    }); 
+    });
     window.$profiler.around({ target: Stack,  method:"count"}, function(invocation) {
         return __profile__("Stack.count", invocation);
-    }); 
+    });
     window.$profiler.around({ target: Stack,  method:"destroy"}, function(invocation) {
         return __profile__("Stack.destroy", invocation);
-    }); 
+    });
     window.$profiler.around({ target: Stack,  method:"peek"}, function(invocation) {
         return __profile__("Stack.peek", invocation);
-    }); 
+    });
     window.$profiler.around({ target: Stack,  method:"pop"}, function(invocation) {
         return __profile__("Stack.pop", invocation);
-    }); 
+    });
     window.$profiler.around({ target: Stack,  method:"push"}, function(invocation) {
         return __profile__("Stack.push", invocation);
-    }); 
+    });
     */
 }
-      
+
 /*
 *	document.js
 *
@@ -8726,17 +8726,17 @@ document.__defineSetter__("cookie", function(cookie){
 	var i,name,value,properties = {},attr,attrs = cookie.split(";");
 	//for now the strategy is to simply create a json object
 	//and post it to a file in the .cookies.js file.  I hate parsing
-	//dates so I decided not to implement support for 'expires' 
+	//dates so I decided not to implement support for 'expires'
 	//(which is deprecated) and instead focus on the easier 'max-age'
-	//(which succeeds 'expires') 
+	//(which succeeds 'expires')
 	cookie = {};//keyword properties of the cookie
 	for(i=0;i<attrs.length;i++){
 		attr = attrs[i].split("=");
 		if(attr.length > 0){
 			name = trim(attr[0]);
 			value = trim(attr[1]);
-			if(name=='max-age'){ 
-				//we'll have to set a timer to check these 
+			if(name=='max-age'){
+				//we'll have to set a timer to check these
 				//and garbage collect expired cookies
 				cookie[name] = parseInt(value, 10);
 			} else if(name=='domain'){
@@ -8760,7 +8760,7 @@ document.__defineSetter__("cookie", function(cookie){
 		}
 	}
 	if(!cookie['max-age']){
-		//it's a transient cookie so it only lasts as long as 
+		//it's a transient cookie so it only lasts as long as
 		//the window.location remains the same
 		mergeCookie($cookies.temporary, cookie, properties);
 	}else if(cookie['max-age']===0){
@@ -8834,7 +8834,7 @@ try{
 *	outro.js
 */
 
-})(window, __env__, __policy__); 
+})(window, __env__, __policy__);
 
 }catch(e){
     __env__.error("ERROR LOADING ENV : " + e + "\nLINE SOURCE:\n" +__env__.lineSource(e));

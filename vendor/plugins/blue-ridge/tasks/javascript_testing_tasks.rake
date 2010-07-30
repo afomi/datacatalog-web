@@ -25,7 +25,7 @@ namespace :test do
       raise "JavaScript test failures" unless all_fine
     end
   end
-  
+
   task :javascript => :javascripts
 end
 
@@ -45,7 +45,7 @@ end
 namespace :js do
   task :fixtures do
     fixture_dir = "#{RAILS_ROOT}/#{find_base_dir}/fixtures"
-    
+
     if PLATFORM[/darwin/]
       system("open #{fixture_dir}")
     elsif PLATFORM[/linux/]
@@ -54,7 +54,7 @@ namespace :js do
       puts "You can run your in-browser fixtures from #{fixture_dir}."
     end
   end
-  
+
   task :shell do
     rlwrap = `which rlwrap`.chomp
     system("#{rlwrap} #{rhino_command} -f #{plugin_prefix}/lib/shell.js -f -")

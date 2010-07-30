@@ -7,25 +7,25 @@ var BlueRidge = {
     // * specs/javascripts/fixtures
     // * examples/javascripts/fixtures
     url = "../" + url;
-  
+
     var head = document.getElementsByTagName("head")[0];
     var script = document.createElement("script");
     script.src = url;
-  
+
     options = options || {};
-  
+
     if(options['onload']) {
       // Attach handlers for all browsers
       script.onload = script.onreadystatechange = options['onload'];
     }
-  
+
     head.appendChild(script);
   },
-  
+
   debug: function(message){
     document.writeln(message + " <br/>");
   },
-  
+
   deriveSpecNameFromCurrentFile: function(){
     var file_prefix = new String(window.location).match(/.*\/(.*?)\.html/)[1];
     return file_prefix + "_spec.js";

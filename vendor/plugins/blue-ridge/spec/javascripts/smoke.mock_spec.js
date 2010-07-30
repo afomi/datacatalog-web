@@ -15,7 +15,7 @@ Screw.Unit(function() {
 
       it("should fail when an expectation is called too many times", function() {
         var m = mock();
-        m.should_receive('bar').exactly('once');  
+        m.should_receive('bar').exactly('once');
         m.bar();
         m.bar();
         try {
@@ -38,7 +38,7 @@ Screw.Unit(function() {
           expect(e).to(equal, 'expected bar() to be called exactly 1 times but it got called 0 times');
         }
       });
-      
+
 			it("should not check arguments when with_arguments is not used", function() {
 				var m = mock()
 				m.should_receive('bar').exactly('once');
@@ -57,7 +57,7 @@ Screw.Unit(function() {
 				m.bar();
 				m.bar();
 			});
-		  
+		
 			it("should allow return values directly from mocks",function() {
 				var m = mock()
 				m.should_receive('bar').exactly('once').and_return('hello');
@@ -69,22 +69,22 @@ Screw.Unit(function() {
 			it("should only mock the exact method signature when with_arguments is used", function() {
 				mockObj = mock()
 				baz = {a:'a dummy obj'}
-				mockObj.should_receive('foo').with_arguments('bar',baz).and_return('foobar'); 
+				mockObj.should_receive('foo').with_arguments('bar',baz).and_return('foobar');
 				expect(mockObj.foo('bar',baz)).to(equal, 'foobar');
 			});
-      
+
 			it("should throw an arguments mismatched error if the arguments aren't matched", function() {
 				mockObj = mock()
-				mockObj.should_receive('foo').with_arguments('bar').and_return('foobar'); 
-				try { 
-				  mockObj.foo('chicken'); 
-				} catch(e) {  
+				mockObj.should_receive('foo').with_arguments('bar').and_return('foobar');
+				try {
+				  mockObj.foo('chicken');
+				} catch(e) {
 				  expect(e).to(equal, 'expected foo with ("bar") but received it with ("chicken")')
 				}
 			});
 			it("should allow mocking multiple method signatures with different returns", function() {
 				mockObj = mock()
-				mockObj.should_receive('foo').with_arguments('bar').and_return('foobar'); 
+				mockObj.should_receive('foo').with_arguments('bar').and_return('foobar');
 				mockObj.should_receive('foo').with_arguments('mouse').and_return('cheese');
 				expect(mockObj.foo('mouse')).to(equal, 'cheese');
 				expect(mockObj.foo('bar')).to(equal, 'foobar');
@@ -182,21 +182,21 @@ Screw.Unit(function() {
 				foo = function() { return 'bar' };
 				mockObj = mock_function(foo);
 			});
-      
+
       it("should leave the original intact", function() {
         expect(foo()).to(equal,'bar');
       });
-      
+
       it("should still execute the mock like the original", function() {
         expect(mockObj()).to(equal,'bar');
       });
-      
+
       it("should still execute the mock like the original with arguments", function() {
         var a = function(x,y,z) { return x+y+z };
         aMock = mock_function(a)
         expect(aMock('a','b','c')).to(equal,'abc');
       });
-      
+
       it("should allow expectations to be set as usual", function() {
         mockObj.should_receive('baz').exactly('once').and_return(1);
         mockObj.baz()
@@ -206,7 +206,7 @@ Screw.Unit(function() {
         mockObj.should_be_invoked();
         mockObj();
       });
-      
+
       it("should allow expectation rules to be set", function() {
         mockObj.should_be_invoked().exactly('twice').with_arguments('a');
         mockObj('a');
@@ -217,14 +217,14 @@ Screw.Unit(function() {
         mockObj.should_be_invoked().and_return('bar');
         expect(mockObj('foo')).to(equal, 'bar');
       });
-      
+
       it("should allow multiple return values to be set through the argument matchers", function() {
         mockObj.should_be_invoked().with_arguments('foo').and_return('bar');
         mockObj.should_be_invoked().with_arguments('bar').and_return('foo');
         expect(mockObj('foo')).to(equal, 'bar');
         expect(mockObj('bar')).to(equal, 'foo');
       });
-      
+
       it("allows passing in a name for the function as a second argument to make error messages clearer", function() {
         mock_function(foo, 'foo').should_be_invoked().exactly('once');
         try {
@@ -257,7 +257,7 @@ Screw.Unit(function() {
 		  });
 		  after(function() {
 	      delete(Array.prototype.remove);
-		  });		  
+		  });		
 		});
 		
 		describe("an objects prototype", function() {
@@ -268,6 +268,6 @@ Screw.Unit(function() {
 				(new Aobj()).aFunction();
 				(new Aobj()).aFunction();
 			});
-		});	    
+		});	
 	});
 });

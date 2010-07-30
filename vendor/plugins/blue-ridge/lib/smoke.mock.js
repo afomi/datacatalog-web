@@ -37,7 +37,7 @@ Smoke.Mock = function(originalObj) {
 		this._valuesBeforeMocking[attr] = this[attr];
 		if(this._expectations[attr].length == 1) {
   		this[attr] = Smoke.Mock.Expectation.stub(this, attr);
-		} 
+		}
 		return expectation;
 	};
 
@@ -100,10 +100,10 @@ Smoke.Mock.Expectation.stub = function(mock, attr) {
       if (!matched) {
         this[0].argumentMismatchError(args)
       }
-      return return_value;        
+      return return_value;
     }.apply(mock._expectations[attr], arguments);
   }
-} 
+}
 
 
 Smoke.Mock.Expectation.prototype = {
@@ -160,7 +160,7 @@ Smoke.Mock.Expectation.prototype = {
 	},
 	parseCount: function(c){
 		switch(c){
-			case 'once': 
+			case 'once':
 				return 1;
 			case 'twice':
 				return 2;

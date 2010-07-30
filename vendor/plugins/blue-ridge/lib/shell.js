@@ -2,7 +2,7 @@
   var _old_quit = this.quit;
   this.__defineGetter__("exit", function(){ _old_quit() });
   this.__defineGetter__("quit", function(){ _old_quit() });
-  
+
   print("=================================================");
   print(" Rhino JavaScript Shell");
   print(" To exit type 'exit', 'quit', or 'quit()'.");
@@ -19,7 +19,7 @@
 
   load(plugin_prefix + "/lib/jquery-1.3.2.js");
   print(" - jQuery-1.3.2 loaded");
-  
+
   load(plugin_prefix + "/lib/jquery.print.js");
   print(" - jQuery print lib loaded");
 

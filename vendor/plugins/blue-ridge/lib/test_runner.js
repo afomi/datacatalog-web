@@ -6,9 +6,9 @@ if(arguments.length == 0) {
 var PLUGIN_PREFIX = environment["blue.ridge.prefix"] || "../../vendor/plugins/blue-ridge";
 
 var BlueRidge = {
-  require: function(file, options){ 
-    load(file); 
-  
+  require: function(file, options){
+    load(file);
+
     options = options || {};
     if(options['onload']) {
       options['onload'].call();
@@ -18,7 +18,7 @@ var BlueRidge = {
   debug: function(message){
     print(message);
   },
-  
+
   get fixtureFile(){
     return "fixtures/" + this.specFile.replace(/^(.*?)_spec\.js$/, "$1.html");
   }

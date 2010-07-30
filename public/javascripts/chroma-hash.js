@@ -9,7 +9,7 @@
 (function($){
   $.fn.extend({
     chromaHash: function(options) {
-    
+
       var defaults = {
           number: 3
       };
@@ -17,10 +17,10 @@
       var options = $.extend(defaults, options);
 
       return this.each(function() {
-        
+
         var o     = options;
         var obj   = $(this);
-      
+
 
         if(o.number < 1 || o.number > 4) {
           console.log("[Warning] Chroma-Hash expects a number parameter between 1 and 4, given " + o.number);
@@ -28,7 +28,7 @@
 
         var colors = ["primary", "secondary", "tertiary", "quaternary"].slice(0, o.number);
 
-        var chromaHashesForElement = function(e) {     
+        var chromaHashesForElement = function(e) {
           id = $(e).attr('id');
           return $("label.chroma-hash").filter(function(l) {
                       return $(this).attr('for') == id;
@@ -60,7 +60,7 @@
                           }
                     );
               });
-          
+
               var id     = $(this).attr('id');
               var md5    = hex_md5($(this).val());
               var colors = md5.match(/([\dABCDEF]{6})/ig);
@@ -71,7 +71,7 @@
               });
             });
           });
-        
+
           /*
            * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
            * Digest Algorithm, as defined in RFC 1321.
