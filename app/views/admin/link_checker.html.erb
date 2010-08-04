@@ -1,0 +1,90 @@
+<% content_for :title do %>
+  Link Checking Dashboard
+<% end %>
+
+<% content_for :body_class do %>admin<% end %>
+  <div id = "broken_link_sets">
+  <h3> Broken Link Source and Organization Sets </h3>
+  <table class = "linkTable">
+    <tr id = "titles">
+      <th class = "left">URL</th>
+      <th class = "right sort">Broken Links</th>
+      <th class = "right">Last Checked</th>
+    </tr>
+    <tr>
+      <td>/data/residential-parking-permit-blocks</td>
+      <td>3</td>
+      <td>2010-07-01</td>
+    </tr>
+    <tr>
+      <td>/data/weigh-in-motion-station</td>
+      <td>2</td>
+      <td>2010-07-12</td>
+    </tr>
+    <tr>
+      <td>/organizations/governors-office-of-planning-and-budget</td>
+      <td>1</td>
+      <td>2010-06-23</td>
+    </tr>
+    <tr>
+      <td><%= text_field :search_url, :search_url%>
+      <td><%= text_field :search_top_links, :search_top_links, :size=> 10%>
+      <td><%= text_field :search_top_last_checked, :search_top_last_checked%>
+    </tr>
+  </table>
+  <p>
+  <%= submit_tag 'Clear Filters' %>
+  </p>
+</div>
+
+
+<div id = "specific_broken_links">
+  <h3> Specific Broken Links </h3>
+  <table class = "linkTable">
+    <tr id = "titles">
+      <th class = "left">Source URL</th>
+      <th class = "left">Broken Link</th>
+      <th class = "left">Destination URL</th>
+      <th class = "right">Last Checked</th>
+      <th class = "right">Time Broken</th>
+      <th class = "right">Error Code</th>
+    </tr>
+    <tr>
+      <td>/data/residential-parking-permit-blocks</td>
+      <td>field_1</td>
+      <td>http://broken.us</td>
+      <td>2010-07-01</td>
+      <td>2 days</td>
+      <td>404</td>
+    </tr>
+    <tr>
+      <td>/data/weigh-in-motion-station</td>
+      <td>XML</td>
+      <td>http://broken.us</td>
+      <td>2010-07-12</td>
+      <td>5 days</td>
+      <td>401</td>
+    </tr>
+    <tr>
+      <td>/data/structures-lines</td>
+      <td>KMZ</td>
+      <td>http://broken.us</td>
+      <td>2010-06-23</td>
+      <td>3 days</td>
+      <td>500</td>
+    </tr>
+    <tr>
+      <td><%= text_field :search_source_url, :search_source_url%>
+      <td><%= text_field :search_bot_links, :search_bot_links, :size=> 10%>
+      <td><%= text_field :search_dest_url, :search_dest_url, :size=> 15%>
+      <td><%= text_field :search_bot_last_checked, :search_bot_last_checked, 
+              :size=> 15%>
+      <td><%= text_field :search_time_broken, :search_time_broken, :size=> 10%>
+      <td><%= text_field :search_error_code, :search_error_code, :size=> 10%>
+    </tr>
+  </table>
+  <p>
+  <%= submit_tag 'Clear Filters' %>
+  </p>
+</div>
+
