@@ -31,6 +31,9 @@ class BrowseController < ApplicationController
     if @filters[:source_type]
       conditions[:source_type] = @filters[:source_type]
     end
+    if @filters[:source_category]
+      conditions[:source_categories] = @filters[:source_category]
+    end
     if @filters[:release_year]
       conditions['released.year'] = @filters[:release_year].to_i
     end
@@ -48,11 +51,12 @@ class BrowseController < ApplicationController
 
   def filter_form_setup
     @filters = get_filters([
-      :jurisdiction_id, :organization_id, :source_type, :release_year])
-    @jurisdictions = get_jurisdictions
-    @organizations = get_organizations
-    @source_types  = get_source_types
-    @release_years = get_release_years
+      :jurisdiction_id, :organization_id, :source_type, :source_category, :release_year])
+    @jurisdictions     = get_jurisdictions
+    @organizations     = get_organizations
+    @source_types      = get_source_types
+    @source_categories = get_categories
+    @release_years     = get_release_years
   end
 
   def get_jurisdictions
@@ -75,6 +79,15 @@ class BrowseController < ApplicationController
 
   def get_source_types
     %w(All Dataset API Interactive).map { |s| [s, s.downcase] }
+  end
+  
+  def get_categories
+    categories = DataCatalog::Category.all.map { |s| [s["name"], s["name"].downcase]}.uniq
+    if categories
+      [['All', 'all']].concat(categories)
+    else
+      [['Data is loading...', 0]]
+    end    
   end
 
   def get_release_years

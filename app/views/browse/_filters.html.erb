@@ -32,6 +32,12 @@
           options_for_select(@source_types, @filters[:source_type]),
           :id => 'source_type_list' %>
       </li>
+	    <li>
+        <label for="source_category_list">Category</label>
+        <%= select_tag 'source_category',
+          options_for_select(@source_categories, @filters[:source_category]),
+          :id => 'source_category_list' %>
+      </li>
       <li>
         <label for="release_year_list">Release Year</label>
         <%= select_tag 'release_year',
