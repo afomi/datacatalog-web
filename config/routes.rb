@@ -36,6 +36,7 @@ ActionController::Routing::Routes.draw do |map|
   map.suggest            "suggest",                               :controller => "suggest",         :action => "index"
 
   map.resources :users
+  map.resources :categories
   map.resource :profile, :controller => "users" do |profile|
     profile.resources :keys
   end
